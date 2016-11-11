@@ -285,7 +285,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -303,6 +303,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.native.System.IO.Compression/4.1.0": {
@@ -2407,7 +2419,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -2425,6 +2437,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -4690,7 +4714,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -4708,6 +4732,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -7013,7 +7049,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -7031,6 +7067,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -9305,7 +9353,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -9323,6 +9371,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -11634,7 +11694,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -11652,6 +11712,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -13926,7 +13998,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
@@ -13944,6 +14016,18 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Octokit/0.23.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/netcore451/Octokit.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/Octokit.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -16314,11 +16398,11 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
-      "sha512": "Qxe4fblviCn2oFf7C4ahCsZHC0GzRa7Tz5z+L1QUHUljY3Oj/TMoT1O0jJ+ru6RcJ9qS8yFw/jIvstg2dxxpGA==",
+    "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
+      "sha512": "LfzU68PVP33nqsuSlO5xAYuoI/itVKz4VVJSIunrS7iqqxE3sy0Q+VvtoYnFcBAoGnY83ZVn8Mnc9HYqOBiPmg==",
       "type": "package",
       "files": [
-        "Microsoft.Xaml.Behaviors.Uwp.Managed.1.1.0.nupkg.sha512",
+        "Microsoft.Xaml.Behaviors.Uwp.Managed.2.0.0.nupkg.sha512",
         "Microsoft.Xaml.Behaviors.Uwp.Managed.nuspec",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
@@ -16351,6 +16435,36 @@
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
+      ]
+    },
+    "Octokit/0.23.0": {
+      "sha512": "+a0wEp2WhzpFkx7JA8BP2HIbCi/zCE1c1aJ4fqZ6sO9MR+HUZyWsK5MQ6a5iy8b6kkoCFcPntsYLdQIHD01v/Q==",
+      "type": "package",
+      "files": [
+        "LICENSE.txt",
+        "Octokit.0.23.0.nupkg.sha512",
+        "Octokit.nuspec",
+        "README.md",
+        "ReleaseNotes.md",
+        "lib/net45/Octokit.XML",
+        "lib/net45/Octokit.dll",
+        "lib/net45/Octokit.pdb",
+        "lib/netcore451/Octokit.XML",
+        "lib/netcore451/Octokit.dll",
+        "lib/netcore451/Octokit.pdb",
+        "lib/portable-net45+wp80+win+wpa81/Octokit.XML",
+        "lib/portable-net45+wp80+win+wpa81/Octokit.dll",
+        "lib/portable-net45+wp80+win+wpa81/Octokit.pdb",
+        "linqpad-samples/1-introducing-octokit.linq",
+        "linqpad-samples/10-search-issues.linq",
+        "linqpad-samples/2-releases.linq",
+        "linqpad-samples/3-browse-repositories.linq",
+        "linqpad-samples/4-observable-browse-repositories.linq",
+        "linqpad-samples/5-interact-with-git-database.linq",
+        "linqpad-samples/6-create-repository.linq",
+        "linqpad-samples/7-search-for-repos.linq",
+        "linqpad-samples/8-gists.linq",
+        "linqpad-samples/9-issues.linq"
       ]
     },
     "runtime.any.System.Collections/4.0.11": {
@@ -22089,8 +22203,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
-      "Microsoft.Xaml.Behaviors.Uwp.Managed >= 1.1.0",
+      "Microsoft.Xaml.Behaviors.Uwp.Managed >= 2.0.0",
       "Newtonsoft.Json >= 9.0.1",
+      "Octokit >= 0.23.0",
       "Template10 >= 1.1.12"
     ],
     "UAP,Version=v10.0": []

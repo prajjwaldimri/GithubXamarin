@@ -1,1 +1,0 @@
-C:\Users\prajj\Documents\Visual Studio 2015\Projects\GithubUWP\GithubUWP\GithubUWP.csproj;x86
