@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="Template10Library" version="1.0" primary="true">
+		<Qualifiers/>
+		<ResourceMapSubtree name="Files">
+			<ResourceMapSubtree name="Template10Library">
+				<NamedResource name="Template10Library.xr.xml" uri="ms-resource://Template10Library/Files/Template10Library/Template10Library.xr.xml">
+					<Candidate type="Path">
+						<Value>Template10Library\Template10Library.xr.xml</Value>
+					</Candidate>
+				</NamedResource>
+				<ResourceMapSubtree name="Controls">
+					<NamedResource name="HamburgerMenu.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Controls/HamburgerMenu.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Controls\HamburgerMenu.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="HamburgerMenu.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Controls/HamburgerMenu.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+				<ResourceMapSubtree name="Properties">
+					<NamedResource name="Template10Library.rd.xml" uri="ms-resource://Template10Library/Files/Template10Library/Properties/Template10Library.rd.xml">
+						<Candidate type="Path">
+							<Value>Template10Library\Properties\Template10Library.rd.xml</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+				<ResourceMapSubtree name="Themes">
+					<NamedResource name="Generic.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Themes/Generic.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Themes\Generic.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="Generic.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Themes/Generic.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="HamburgerMenu.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Themes/HamburgerMenu.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Themes\HamburgerMenu.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="HamburgerMenu.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Themes/HamburgerMenu.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="ModalDialog.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Themes/ModalDialog.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Themes\ModalDialog.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="ModalDialog.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Themes/ModalDialog.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="PageHeader.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Themes/PageHeader.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Themes\PageHeader.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="PageHeader.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Themes/PageHeader.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="Resizer.xaml" uri="ms-resource://Template10Library/Files/Template10Library/Themes/Resizer.xaml">
+						<Candidate type="Path">
+							<Value>Template10Library\Themes\Resizer.xaml</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="Resizer.xbf" uri="ms-resource://Template10Library/Files/Template10Library/Themes/Resizer.xbf">
+						<Candidate type="EmbeddedData">
+							<Base64Value>[Embedded Binary Data]</Base64Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>
