@@ -9,8 +9,10 @@
       xmlns:local="using:GithubUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:GithubUWP.Views"
+      xmlns:converters="using:Template10.Converters"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
+
 
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
 
@@ -18,38 +20,99 @@
             <!--  mainpage button  -->
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage">
                 <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Width="48"
+                    <FontIcon Width="48"
                                 Height="48"
-                                Symbol="Home" />
+                                Glyph="&#xf38f;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
                                Text="Home" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-        </Controls:HamburgerMenu.PrimaryButtons>
-
-        <Controls:HamburgerMenu.SecondaryButtons>
-            <!--  profile button  -->
-            <Controls:HamburgerButtonInfo ButtonType="Command">
-                <Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="Tapped">
-                        <behaviors:MessageDialogAction Title="Show profile" Content="This is an example of a Command-type hamburger button. It does not navigate, only raises the Tapped event for some custom implementation." />
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+            <Controls:HamburgerButtonInfo ClearHistory="True" >
                 <StackPanel Orientation="Horizontal">
-                    <ToolTipService.ToolTip>
-                        <TextBlock MaxWidth="225"
-                                   Text="This is the tooltip for the Show Profile command button. Remember to localize."
-                                   TextWrapping="Wrap" />
-                    </ToolTipService.ToolTip>
-                    <SymbolIcon Width="48"
+                    <FontIcon Width="48"
                                 Height="48"
-                                Symbol="Contact" />
+                                Glyph="&#xf39b;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="User profile" />
+                               Text="Notifications" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" >
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Width="48"
+                                Height="48"
+                                Glyph="&#xf2c0;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Repositories" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" >
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Width="48"
+                                Height="48"
+                                Glyph="&#xf2be;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Issues" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" >
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Width="48"
+                                Height="48"
+                                Glyph="&#xf345;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Pull Requests" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+        </Controls:HamburgerMenu.PrimaryButtons>
+
+
+        <Controls:HamburgerMenu.SecondaryButtons>
+
+            <!-- login button -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:LoginPage"
+                                          x:Name="LoginButton">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Width="48"
+                                Height="48"
+                                Glyph="&#xf1fe;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Login" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <!--  profile button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserProfilePage"
+                                          x:Name="ProfileButton">
+                <StackPanel Orientation="Horizontal">
+
+                    <StackPanel Width="48" Height="48" HorizontalAlignment="Center"
+                                VerticalAlignment="Stretch">
+                        <Ellipse Width="24" Height="24" VerticalAlignment="Center">
+                            <Ellipse.Fill>
+                                <ImageBrush x:Name="ProfileButtonImage" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </StackPanel>
+
+                    <TextBlock Margin="12,0,0,0"
+                               x:Name="ProfileNameText"
+                               VerticalAlignment="Center"
+                               Text="Profile" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
             <!--  settingspage button  -->
             <Controls:HamburgerButtonInfo x:Name="SettingsButton"
                                           PageParameter="0"
@@ -58,9 +121,10 @@
                     <SuppressNavigationTransitionInfo />
                 </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
                 <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Width="48"
+                    <FontIcon Width="48"
                                 Height="48"
-                                Symbol="Setting" />
+                                Glyph="&#xf13e;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
                                Text="Settings" />

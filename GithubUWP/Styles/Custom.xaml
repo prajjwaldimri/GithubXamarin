@@ -6,9 +6,9 @@
     <x:Double x:Key="NormalMinWidth">521</x:Double>
     <x:Double x:Key="WideMinWidth">1200</x:Double>
 
-    <Color x:Key="CustomColor">SteelBlue</Color>
-    <Color x:Key="ContrastColor">White</Color>
-    <Color x:Key="SystemAccentColor">SteelBlue</Color>
+    <Color x:Key="CustomColor">DarkBlue</Color>
+    <Color x:Key="ContrastColor">NavajoWhite</Color>
+    <Color x:Key="SystemAccentColor">DarkBlue</Color>
 
     <ResourceDictionary.ThemeDictionaries>
 

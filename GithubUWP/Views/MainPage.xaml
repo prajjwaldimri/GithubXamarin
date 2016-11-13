@@ -69,43 +69,7 @@
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
-
-
-            <controls:Resizer x:Name="parameterResizer" Margin="16,16,16,0">
-
-                <TextBox MinWidth="150"
-                         MinHeight="62"
-                         Header="Parameter to pass"
-                         Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         TextWrapping="Wrap">
-                    <Interactivity:Interaction.Behaviors>
-
-                        <!--  enable submit on enter key  -->
-                        <Behaviors:KeyBehavior Key="Enter">
-                            <Core:CallMethodAction MethodName="GotoDetailsPage" TargetObject="{Binding}" />
-                        </Behaviors:KeyBehavior>
-
-                        <!--  focus on textbox when page loads  -->
-                        <Core:EventTriggerBehavior>
-                            <Behaviors:FocusAction />
-                        </Core:EventTriggerBehavior>
-
-                    </Interactivity:Interaction.Behaviors>
-                </TextBox>
-
-            </controls:Resizer>
-
-            <Button x:Name="submitButton"
-                    Click="{x:Bind ViewModel.GotoDetailsPage}"
-                    Content="Submit"
-                    RelativePanel.AlignBottomWith="parameterResizer"
-                    RelativePanel.RightOf="parameterResizer" />
-
-            <TextBlock x:Name="stateTextBox"
-                       Margin="16,16,0,0"
-                       RelativePanel.AlignLeftWith="parameterResizer"
-                       RelativePanel.Below="parameterResizer"
-                       Text="Current Visual State" />
+            
 
         </RelativePanel>
 

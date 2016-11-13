@@ -1,0 +1,86 @@
+﻿<Page
+    x:Class="GithubUWP.Views.UserProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:GithubUWP.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm ="using:GithubUWP.ViewModels"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:UserProfilePageViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" Grid.Row="0" Grid.Column="1"
+                    Name="ProfileStackPanel">
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Height="100" Width="100">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding AvatarImage}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                            Name="ProfileDetails">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock Text="{Binding DisplayName}" FontSize="18" FontWeight="ExtraBold"
+                                   Grid.Row="0" Grid.Column="2"/>
+                        <TextBlock Text="{Binding UserName}" FontSize="14"
+                                   Grid.Row="1" Grid.Column="2"/>
+
+                        <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                   Glyph="&#xf456;" Grid.Row="2" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Location}" FontSize="14"
+                                   Grid.Row="2" Grid.Column="2"/>
+                        
+                        <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                   Glyph="&#xf132;"
+                                  Grid.Row="3" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Email}" FontSize="14"
+                                   Grid.Row="3" Grid.Column="2"/>
+                        
+                        <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                   Glyph="&#xf347;"
+                                  Grid.Row="4" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Bio}" FontSize="14"
+                                   Grid.Row="4" Grid.Column="2"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
