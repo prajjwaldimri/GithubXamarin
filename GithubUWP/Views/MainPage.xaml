@@ -24,13 +24,32 @@
                              Text="Home">
         </controls:PageHeader>
 
-        <RelativePanel EntranceNavigationTransitionInfo.IsTargetElement="True"
+        <Grid EntranceNavigationTransitionInfo.IsTargetElement="True"
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
+            
+            <ListView ItemsSource="{Binding FeedList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xf341;"/>
+                                <TextBlock Text="{Binding CreatedAt.Date}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Actor.Login}"/>
+                                <TextBlock Text="{Binding Type}"/>
+                                <TextBlock Text="{Binding Repo.FullName}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        </RelativePanel>
+        </Grid>
 
     </RelativePanel>
 </Page>
