@@ -29,18 +29,18 @@
                                Text="Home" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" >
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NotificationsPage">
                 <StackPanel Orientation="Horizontal">
-                    <FontIcon Width="48"
+                    <FontIcon Width="48" Name="NotificationIcon"
                                 Height="48"
-                                Glyph="&#xf39b;" 
+                                Glyph="&#xf132;" 
                               FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
                                Text="Notifications" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" >
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:RepositoriesPage" >
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Width="48"
                                 Height="48"
@@ -51,7 +51,7 @@
                                Text="Repositories" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" >
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:IssuesPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Width="48"
                                 Height="48"

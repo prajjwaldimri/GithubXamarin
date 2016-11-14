@@ -41,13 +41,13 @@ namespace GithubUWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Values can be found at https://github.com/settings/applications
-                _clientId = "";
-                _clientSecret = "";
+                _clientId = "5c0821cdb943e8e2fc0c";
+                _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
                 _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
 
                 var loginRequest = new OauthLoginRequest(_clientId)
                 {
-                    Scopes = { "user", "notifications" }
+                    Scopes = { "user", "notifications", "repo", "gist", "read:org" }
                 };
 
                 var oAuthLoginUrl = _client.Oauth.GetGitHubLoginUrl(loginRequest);
@@ -69,6 +69,8 @@ namespace GithubUWP.Views
                 await CodeRetrieverandTokenSaver(args.Uri.ToString());
             }
         }
+        
+        
 
         /// <summary>
         /// Retrieves code value from a given string and uses it to create access token and then saves it.
@@ -97,6 +99,9 @@ namespace GithubUWP.Views
 
             if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
                 ApplicationData.Current.RoamingSettings.Values.Add("IsLoggedIn",true);
+
+            var shell = new Shell();
+            shell.LoginProfileUpdater();
         }
     }
 }

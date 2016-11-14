@@ -6,13 +6,66 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:GithubUWP.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:GithubUWP.Services.Converters"
     mc:Ignorable="d">
-    
+
     <Page.DataContext>
         <vm:IssuesPageViewModel/>
     </Page.DataContext>
+    <RelativePanel>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="PageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="Issues">
+        </controls:PageHeader>
 
-    </Grid>
+
+        <Grid x:Name="MainGrid"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader">
+
+            <ListView ItemsSource="{Binding IssuesList}" SelectionMode="None" 
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf149;" Foreground="Green"/>
+                                <TextBlock Text="{Binding Repository.FullName}" FontSize="16"
+                                           Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding Title}" Margin="10,0,0,0"
+                                           FontSize="16" FontWeight="Bold"/>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,10" 
+                                        VerticalAlignment="Bottom">
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf219;" Margin="10,0,0,0" FontSize="13"/>
+                                <TextBlock Text="{Binding Number}" />
+                                <TextBlock Text="{Binding CreatedAt.Date}" Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding User.Name}" Margin="10,0,0,0"/>
+                                <TextBox Text="{Binding Labels[0].Name}" Margin="10,0,0,0"
+                                         IsReadOnly="True" Background="{Binding Labels[0].Color,
+                                    Converter={StaticResource HexToBrushConverter}}"
+                                         BorderThickness="0" AcceptsReturn="False"
+                                         TextAlignment="Center" 
+                                         SelectionHighlightColor="Transparent"
+                                          IsHoldingEnabled="False" IsDoubleTapEnabled="False"
+                                         IsTapEnabled="False"/>
+                                
+                                <TextBlock Text="{Binding Assignee.Name}" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </RelativePanel>
 </Page>

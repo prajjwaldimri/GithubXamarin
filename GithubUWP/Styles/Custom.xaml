@@ -8,7 +8,6 @@
 
     <Color x:Key="CustomColor">DarkBlue</Color>
     <Color x:Key="ContrastColor">NavajoWhite</Color>
-    <Color x:Key="SystemAccentColor">DarkBlue</Color>
 
     <ResourceDictionary.ThemeDictionaries>
 
@@ -20,14 +19,14 @@
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="{StaticResource ContrastColor}" />
 
             <Style TargetType="controls:HamburgerMenu">
-                <Setter Property="AccentColor" Value="{StaticResource CustomColor}" />
+                <Setter Property="AccentColor" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
                 <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />
                 <Setter Property="VisualStateWideMinWidth" Value="{StaticResource WideMinWidth}" />
             </Style>
 
             <Style TargetType="controls:PageHeader">
-                <Setter Property="Background" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="Background" Value="{ThemeResource SystemAccentColor}" />
                 <Setter Property="Foreground" Value="{ThemeResource ContrastColorBrush}" />
             </Style>
 
@@ -67,14 +66,14 @@
 
                 -->
 
-                <Setter Property="AccentColor" Value="{StaticResource CustomColor}" />
+                <Setter Property="AccentColor" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
                 <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />
                 <Setter Property="VisualStateWideMinWidth" Value="{StaticResource WideMinWidth}" />
             </Style>
 
             <Style TargetType="controls:PageHeader">
-                <Setter Property="Background" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="Background" Value="{ThemeResource SystemAccentColor}" />
                 <Setter Property="Foreground" Value="{ThemeResource ContrastColorBrush}" />
                 <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
                 <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />

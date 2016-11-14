@@ -85,7 +85,7 @@
                                    Grid.Row="2" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                   Glyph="&#xf132;"
+                                   Glyph="&#xf10f;"
                                   Grid.Row="3" Grid.Column="0"/>
                                 <TextBlock Text="{Binding Email}" FontSize="14"
                                    Grid.Row="3" Grid.Column="2"/>

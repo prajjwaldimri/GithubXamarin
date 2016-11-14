@@ -15,11 +15,6 @@ namespace GithubUWP.ViewModels
 {
     public class UserProfilePageViewModel : ViewModelBase
     {
-        public UserProfilePageViewModel()
-        {
-            
-        }
-
         //User-Data Variables
         public string DisplayName { get; set; }
         public string UserName { get; set; }

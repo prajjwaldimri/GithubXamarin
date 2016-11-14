@@ -99,12 +99,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="UserControls\IconAndTextBlocksControl.xaml.cs">
       <DependentUpon>IconAndTextBlocksControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\IssuesPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\NotificationsPageViewModel.cs" />
+    <Compile Include="ViewModels\RepositoriesPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
@@ -118,6 +121,12 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepositoriesPage.xaml.cs">
+      <DependentUpon>RepositoriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -179,6 +188,14 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NotificationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepositoriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>

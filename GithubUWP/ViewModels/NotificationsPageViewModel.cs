@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
@@ -13,22 +12,13 @@ using Template10.Utils;
 
 namespace GithubUWP.ViewModels
 {
-    public class IssuesPageViewModel : ViewModelBase
+    public class NotificationsPageViewModel : ViewModelBase
     {
-
-        public IssuesPageViewModel()
-        {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-
-            }
-        }
-
-
-        public ObservableCollection<Issue> IssuesList { get; set; }
+        public ObservableCollection<Notification> NotificationList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //Initializing Octokit
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
             var passwordCredential = new PasswordCredential();
@@ -38,8 +28,16 @@ namespace GithubUWP.ViewModels
             }
             client.Credentials = new Credentials(passwordCredential.Password);
 
-            var issues = await client.Issue.GetAllForCurrent();
-            IssuesList = issues.ToObservableCollection();
+            var notifications = await client.Activity.Notifications.GetAllForCurrent();
+
+            //If in any case retrieves any unread notification remove it from the List.
+            foreach (var notification in notifications)
+            {
+                if (notification.Unread)
+                {
+                    NotificationList.Add(notification);
+                }
+            }
             RaisePropertyChanged(String.Empty);
         }
     }

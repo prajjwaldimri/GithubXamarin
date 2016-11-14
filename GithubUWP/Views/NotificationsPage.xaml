@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="GithubUWP.Views.NotificationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubUWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:GithubUWP.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:NotificationsPageViewModel/>
+    </Page.DataContext>
+
+    <RelativePanel>
+
+        <controls:PageHeader x:Name="PageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="Notifications">
+        </controls:PageHeader>
+
+        <Grid x:Name="MainGrid"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader">
+
+            <ListView ItemsSource="{Binding NotificationList}" SelectionMode="None" 
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Visibility="{Binding Unread, 
+                            Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="{Binding Subject}"/>
+                            <TextBlock Text="{Binding Reason}"/>
+                            <TextBlock Text="{Binding UpdatedAt}"/>
+                            <TextBlock Text="{Binding Repository.Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <!--TODO: Add image or text that says no unread notifications -->
+
+        </Grid>
+
+    </RelativePanel>
+</Page>
