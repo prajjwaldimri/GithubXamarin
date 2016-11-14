@@ -63,7 +63,7 @@
 
         <!--  header  -->
         <controls:PageHeader x:Name="pageHeader"
-                             Content="Settings Page"
+                             Content="Settings"
                              Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"

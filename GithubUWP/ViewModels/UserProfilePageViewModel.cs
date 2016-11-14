@@ -27,7 +27,20 @@ namespace GithubUWP.ViewModels
         public string Email { get; set; }
         public string ProfileUrl { get; set; }
         public string Bio { get; set; }
+        public string Company { get; set; }
         public ImageSource AvatarImage { get; set; }
+
+        //User Stats
+        public string Followers { get; set; }
+        public string Following { get; set; }
+        public string DiskUsage { get; set; }
+        public string CreatedAt { get; set; }
+        public string Hireable { get; set; }
+        public string TotalGists { get; set; }
+        public string PrivateRepos { get; set; }
+        public string PublicRepos { get; set; }
+        public string AccountPlan { get; set; }
+        public string AccountType { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -46,10 +59,24 @@ namespace GithubUWP.ViewModels
             Location = currentUser.Location;
             Email = currentUser.Email;
             ProfileUrl = currentUser.HtmlUrl;
-            Bio = currentUser.Bio;
+            Bio = currentUser.Bio ?? "No Bio Found";
+            Company = currentUser.Company ?? "No Company Assigned";
             AvatarImage = new BitmapImage(new Uri(currentUser.AvatarUrl, UriKind.RelativeOrAbsolute));
-
             //Raises property changed event for all the properties.
+            RaisePropertyChanged(string.Empty);
+
+            Followers = currentUser.Followers.ToString();
+            Following = currentUser.Following.ToString();
+            DiskUsage = currentUser.DiskUsage.ToString();
+            CreatedAt = currentUser.CreatedAt.ToString();
+            Hireable = currentUser.Hireable.ToString();
+            TotalGists = (currentUser.PrivateGists + currentUser.PublicGists).ToString();
+            PrivateRepos = currentUser.TotalPrivateRepos.ToString();
+            PublicRepos = currentUser.PublicRepos.ToString();
+            AccountPlan = currentUser.Plan.Name;
+            AccountType = currentUser.Type.ToString();
+            
+
             RaisePropertyChanged(string.Empty);
         }
     }

@@ -98,7 +98,7 @@
                 <StackPanel Orientation="Horizontal">
 
                     <StackPanel Width="48" Height="48" HorizontalAlignment="Center"
-                                VerticalAlignment="Stretch">
+                                VerticalAlignment="Bottom" Margin="0,20,0,0">
                         <Ellipse Width="24" Height="24" VerticalAlignment="Center">
                             <Ellipse.Fill>
                                 <ImageBrush x:Name="ProfileButtonImage" />
