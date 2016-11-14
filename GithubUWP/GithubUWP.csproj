@@ -104,6 +104,7 @@
     <Compile Include="UserControls\IconAndTextBlocksControl.xaml.cs">
       <DependentUpon>IconAndTextBlocksControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GistsPageViewModel.cs" />
     <Compile Include="ViewModels\IssuesPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NotificationsPageViewModel.cs" />
@@ -112,6 +113,9 @@
     <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GistsPage.xaml.cs">
+      <DependentUpon>GistsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IssuesPage.xaml.cs">
       <DependentUpon>IssuesPage.xaml</DependentUpon>
@@ -176,6 +180,10 @@
     <Page Include="Views\Busy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GistsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\IssuesPage.xaml">
       <SubType>Designer</SubType>

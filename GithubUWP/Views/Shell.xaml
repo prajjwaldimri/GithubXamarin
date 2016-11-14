@@ -62,15 +62,15 @@
                                Text="Issues" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" >
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:GistsPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Width="48"
                                 Height="48"
-                                Glyph="&#xf345;" 
+                                Glyph="&#xf21a;" 
                               FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="Pull Requests" />
+                               Text="Gists" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
