@@ -45,32 +45,32 @@ namespace GithubUWP.ViewModels
             if (vault.FindAllByResource("GithubAccessToken") != null)
             {
                 passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
+
+                client.Credentials = new Credentials(passwordCredential.Password);
+
+                var currentUser = await client.User.Current();
+                DisplayName = currentUser.Name;
+                UserName = currentUser.Login;
+                Location = currentUser.Location;
+                Email = currentUser.Email;
+                ProfileUrl = currentUser.HtmlUrl;
+                Bio = currentUser.Bio ?? "No Bio Found";
+                Company = currentUser.Company ?? "No Company Assigned";
+                AvatarImage = new BitmapImage(new Uri(currentUser.AvatarUrl, UriKind.RelativeOrAbsolute));
+                //Raises property changed event for all the properties.
+                RaisePropertyChanged(string.Empty);
+
+                Followers = currentUser.Followers.ToString();
+                Following = currentUser.Following.ToString();
+                DiskUsage = currentUser.DiskUsage.ToString();
+                CreatedAt = currentUser.CreatedAt.ToString();
+                Hireable = currentUser.Hireable.ToString();
+                TotalGists = (currentUser.PrivateGists + currentUser.PublicGists).ToString();
+                PrivateRepos = currentUser.TotalPrivateRepos.ToString();
+                PublicRepos = currentUser.PublicRepos.ToString();
+                AccountPlan = currentUser.Plan.Name;
+                AccountType = currentUser.Type.ToString();
             }
-            client.Credentials = new Credentials(passwordCredential.Password);
-
-            var currentUser = await client.User.Current();
-            DisplayName = currentUser.Name;
-            UserName = currentUser.Login;
-            Location = currentUser.Location;
-            Email = currentUser.Email;
-            ProfileUrl = currentUser.HtmlUrl;
-            Bio = currentUser.Bio ?? "No Bio Found";
-            Company = currentUser.Company ?? "No Company Assigned";
-            AvatarImage = new BitmapImage(new Uri(currentUser.AvatarUrl, UriKind.RelativeOrAbsolute));
-            //Raises property changed event for all the properties.
-            RaisePropertyChanged(string.Empty);
-
-            Followers = currentUser.Followers.ToString();
-            Following = currentUser.Following.ToString();
-            DiskUsage = currentUser.DiskUsage.ToString();
-            CreatedAt = currentUser.CreatedAt.ToString();
-            Hireable = currentUser.Hireable.ToString();
-            TotalGists = (currentUser.PrivateGists + currentUser.PublicGists).ToString();
-            PrivateRepos = currentUser.TotalPrivateRepos.ToString();
-            PublicRepos = currentUser.PublicRepos.ToString();
-            AccountPlan = currentUser.Plan.Name;
-            AccountType = currentUser.Type.ToString();
-            
 
             RaisePropertyChanged(string.Empty);
         }

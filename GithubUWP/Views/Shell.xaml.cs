@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
@@ -65,29 +66,31 @@ namespace GithubUWP.Views
         {
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
-            var passwordCredential = new PasswordCredential();
-            if (vault.FindAllByResource("GithubAccessToken") != null)
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
             {
-                passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
-            }
-            client.Credentials = new Credentials(passwordCredential.Password);
+                if (vault.FindAllByResource("GithubAccessToken") != null)
+                {
+                    var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
+                    client.Credentials = new Credentials(passwordCredential.Password);
 
-            var notifications = await client.Activity.Notifications.GetAllForCurrent();
-            NotificationIcon.Glyph = "\uf132";
+                    var notifications = await client.Activity.Notifications.GetAllForCurrent();
+                    NotificationIcon.Glyph = "\uf132";
 
-            foreach (var notification in notifications)
-            {
-                if (!notification.Unread) continue;
-                NotificationIcon.Glyph = "\uf3c3";
-                break;
+                    foreach (var notification in notifications)
+                    {
+                        if (!notification.Unread) continue;
+                        NotificationIcon.Glyph = "\uf3c3";
+                        break;
+                    }
+
+                    var currentUser = await client.User.Current();
+                    ProfileButtonImage.ImageSource = new BitmapImage(new Uri(currentUser.AvatarUrl));
+                    ProfileNameText.Text = currentUser.Name;
+                }
             }
             
-
-            var currentUser = await client.User.Current();
-
             
-            ProfileButtonImage.ImageSource = new BitmapImage(new Uri(currentUser.AvatarUrl));
-            ProfileNameText.Text = currentUser.Name;
+
         }
     }
 }

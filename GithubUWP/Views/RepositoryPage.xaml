@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="GithubUWP.Views.RepositoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubUWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:GithubUWP.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:RepositoryPageViewModel/>
+    </Page.DataContext>
+
+
+    <RelativePanel>
+
+        <controls:PageHeader x:Name="PageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="{Binding RepositoryName}">
+        </controls:PageHeader>
+
+
+        <Grid x:Name="MainGrid"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader">
+
+        </Grid>
+    </RelativePanel>
+</Page>

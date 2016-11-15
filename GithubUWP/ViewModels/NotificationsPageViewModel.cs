@@ -21,23 +21,23 @@ namespace GithubUWP.ViewModels
             //Initializing Octokit
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
-            var passwordCredential = new PasswordCredential();
             if (vault.FindAllByResource("GithubAccessToken") != null)
             {
-                passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
-            }
-            client.Credentials = new Credentials(passwordCredential.Password);
+                var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
+                client.Credentials = new Credentials(passwordCredential.Password);
 
-            var notifications = await client.Activity.Notifications.GetAllForCurrent();
+                var notifications = await client.Activity.Notifications.GetAllForCurrent();
 
-            //If in any case retrieves any unread notification remove it from the List.
-            foreach (var notification in notifications)
-            {
-                if (notification.Unread)
+                //If in any case retrieves any unread notification remove it from the List.
+                foreach (var notification in notifications)
                 {
-                    NotificationList.Add(notification);
+                    if (notification.Unread)
+                    {
+                        NotificationList.Add(notification);
+                    }
                 }
             }
+            
             RaisePropertyChanged(String.Empty);
         }
     }

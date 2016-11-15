@@ -41,8 +41,8 @@ namespace GithubUWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Values can be found at https://github.com/settings/applications
-                _clientId = "5c0821cdb943e8e2fc0c";
-                _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
+                _clientId = "<Client_ID>";
+                _clientSecret = "<Client_Secret>";
                 _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
 
                 var loginRequest = new OauthLoginRequest(_clientId)
