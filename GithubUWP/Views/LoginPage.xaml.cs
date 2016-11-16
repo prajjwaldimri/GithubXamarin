@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Common;
 using Template10.Services.NavigationService;
@@ -41,8 +42,8 @@ namespace GithubUWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Values can be found at https://github.com/settings/applications
-                _clientId = "<Client_ID>";
-                _clientSecret = "<Client_Secret>";
+                _clientId = "5c0821cdb943e8e2fc0c";
+                _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
                 _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
 
                 var loginRequest = new OauthLoginRequest(_clientId)
@@ -83,19 +84,7 @@ namespace GithubUWP.Views
             var code = retrievedUrl.Split(new[] {"code="}, StringSplitOptions.None)[1];
             var tokenRequest = new OauthTokenRequest(_clientId, _clientSecret, code);
             var accessToken = await _client.Oauth.CreateAccessToken(tokenRequest);
-
-            //Storing Access Token in Credential Locker
-            //More details: https://msdn.microsoft.com/en-us/windows/uwp/security/credential-locker
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            if (vault.FindAllByResource("GithubAccessToken") != null)
-            {
-                var vaultItems = vault.RetrieveAll();
-                foreach (var passwordCredential in vaultItems)
-                {
-                    vault.Remove(passwordCredential);
-                }
-            }
-            vault.Add(new PasswordCredential("GithubAccessToken", "Github", accessToken.AccessToken));
+            await HelpingWorker.VaultApiKeyAdder(accessToken);
 
             if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
                 ApplicationData.Current.RoamingSettings.Values.Add("IsLoggedIn",true);

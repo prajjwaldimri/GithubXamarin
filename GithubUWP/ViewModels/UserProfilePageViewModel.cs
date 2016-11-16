@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 
@@ -40,12 +41,10 @@ namespace GithubUWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
-            var vault = new PasswordVault();
-            var passwordCredential = new PasswordCredential();
-            if (vault.FindAllByResource("GithubAccessToken") != null)
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
+            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            if (passwordCredential != null)
             {
-                passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
-
                 client.Credentials = new Credentials(passwordCredential.Password);
 
                 var currentUser = await client.User.Current();

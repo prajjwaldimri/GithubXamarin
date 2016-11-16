@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
@@ -18,26 +19,18 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            //Initializing Octokit
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
-            if (vault.FindAllByResource("GithubAccessToken") != null)
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
+            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            if (passwordCredential != null)
             {
-                var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
                 client.Credentials = new Credentials(passwordCredential.Password);
 
                 var notifications = await client.Activity.Notifications.GetAllForCurrent();
-
-                //If in any case retrieves any unread notification remove it from the List.
-                foreach (var notification in notifications)
-                {
-                    if (notification.Unread)
-                    {
-                        NotificationList.Add(notification);
-                    }
-                }
+                NotificationList = notifications.ToObservableCollection();
             }
-            
+
             RaisePropertyChanged(String.Empty);
         }
     }

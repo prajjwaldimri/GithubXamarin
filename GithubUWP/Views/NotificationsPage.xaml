@@ -33,9 +33,7 @@
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Visibility="{Binding Unread, 
-                            Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    Orientation="Horizontal">
+                        <StackPanel>
                             <TextBlock Text="{Binding Subject}"/>
                             <TextBlock Text="{Binding Reason}"/>
                             <TextBlock Text="{Binding UpdatedAt}"/>

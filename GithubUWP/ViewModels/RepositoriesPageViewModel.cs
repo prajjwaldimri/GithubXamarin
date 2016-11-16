@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
@@ -30,9 +31,10 @@ namespace GithubUWP.ViewModels
         {
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
-            if (vault.FindAllByResource("GithubAccessToken") != null)
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
+            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            if (passwordCredential != null)
             {
-                var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
                 client.Credentials = new Credentials(passwordCredential.Password);
 
                 var repositories = await client.Repository.GetAllForCurrent();

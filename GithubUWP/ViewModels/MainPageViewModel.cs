@@ -2,12 +2,14 @@ using Template10.Mvvm;
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Utils;
 
@@ -22,18 +24,16 @@ namespace GithubUWP.ViewModels
             //Initializing Octokit
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
+            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            if (passwordCredential!=null)
             {
-                if (vault.FindAllByResource("GithubAccessToken") != null)
-                {
-                    var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
-                    client.Credentials = new Credentials(passwordCredential.Password);
+                client.Credentials = new Credentials(passwordCredential.Password);
 
-                    var userEvents = await client.Activity.Events.GetAllUserReceived(client.User.Current().Result.Login);
-                    FeedList = userEvents.ToObservableCollection();
-                    var gists = await client.Gist.GetAllForUser(client.User.Current().Result.Login);
-                    //If in any case retrieves any unread notification remove it from the List.
-                }
+                var userEvents =
+                    await client.Activity.Events.GetAllUserReceived(client.User.Current().Result.Login);
+                FeedList = userEvents.ToObservableCollection();
+                //If in any case retrieves any unread notification remove it from the List.
             }
             RaisePropertyChanged(String.Empty);
         }

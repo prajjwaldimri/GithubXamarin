@@ -12,6 +12,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using Page = Windows.UI.Xaml.Controls.Page;
@@ -34,6 +35,7 @@ namespace GithubUWP.Views
 
         public void LoginProfileUpdater()
         {
+            HelpingWorker.RoamingLoggedInKeyVerifier().Wait();
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
             {
                 LoginButton.Visibility = Visibility.Collapsed;
@@ -66,26 +68,34 @@ namespace GithubUWP.Views
         {
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
             var vault = new PasswordVault();
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
             {
-                if (vault.FindAllByResource("GithubAccessToken") != null)
+                try
                 {
-                    var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
-                    client.Credentials = new Credentials(passwordCredential.Password);
-
-                    var notifications = await client.Activity.Notifications.GetAllForCurrent();
-                    NotificationIcon.Glyph = "\uf132";
-
-                    foreach (var notification in notifications)
+                    if (vault.FindAllByResource("GithubAccessToken") != null)
                     {
-                        if (!notification.Unread) continue;
-                        NotificationIcon.Glyph = "\uf3c3";
-                        break;
-                    }
+                        var passwordCredential = vault.Retrieve("GithubAccessToken", "Github");
+                        client.Credentials = new Credentials(passwordCredential.Password);
 
-                    var currentUser = await client.User.Current();
-                    ProfileButtonImage.ImageSource = new BitmapImage(new Uri(currentUser.AvatarUrl));
-                    ProfileNameText.Text = currentUser.Name;
+                        var notifications = await client.Activity.Notifications.GetAllForCurrent();
+                        NotificationIcon.Glyph = "\uf132";
+
+                        foreach (var notification in notifications)
+                        {
+                            if (!notification.Unread) continue;
+                            NotificationIcon.Glyph = "\uf3c3";
+                            break;
+                        }
+
+                        var currentUser = await client.User.Current();
+                        ProfileButtonImage.ImageSource = new BitmapImage(new Uri(currentUser.AvatarUrl));
+                        ProfileNameText.Text = currentUser.Name;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
                 }
             }
             

@@ -14,12 +14,13 @@ namespace GithubUWP.ViewModels
     {
         public string IssueName { get; set; }
 
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> state)
         {
             var issue = SessionState.Get<Issue>(parameter.ToString());
             IssueName = issue.Title;
             RaisePropertyChanged(string.Empty);
+            return Task.CompletedTask;
         }
     }
 }
