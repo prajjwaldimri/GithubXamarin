@@ -30,12 +30,11 @@ namespace GithubUWP.Views
             Instance = this;
             InitializeComponent();
             _settings = Services.SettingsServices.SettingsService.Instance;
-            LoginProfileUpdater();
         }
 
-        public void LoginProfileUpdater()
+        public async Task LoginProfileUpdater()
         {
-            HelpingWorker.RoamingLoggedInKeyVerifier().Wait();
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
             {
                 LoginButton.Visibility = Visibility.Collapsed;
@@ -60,6 +59,7 @@ namespace GithubUWP.Views
             HamburgerMenu.RefreshStyles(_settings.AppTheme, true);
             HamburgerMenu.IsFullScreen = _settings.IsFullScreen;
             HamburgerMenu.HamburgerButtonVisibility = _settings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
+            await LoginProfileUpdater();
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
                 await ProfileImageandNotificationsSetter();
         }

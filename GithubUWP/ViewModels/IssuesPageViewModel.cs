@@ -25,8 +25,16 @@ namespace GithubUWP.ViewModels
         
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var client = new GitHubClient(new ProductHeaderValue("githubuwp"));
-            var vault = new PasswordVault();
+            GitHubClient client;
+            if (SessionState.Get<GitHubClient>("GitHubClient") != null)
+            {
+                client = SessionState.Get<GitHubClient>("GitHubClient");
+            }
+            else
+            {
+                client = new GitHubClient(new ProductHeaderValue("githubuwp"));
+                SessionState.Add("GitHubClient", client);
+            }
             await HelpingWorker.RoamingLoggedInKeyVerifier();
             var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
             if (passwordCredential != null)
