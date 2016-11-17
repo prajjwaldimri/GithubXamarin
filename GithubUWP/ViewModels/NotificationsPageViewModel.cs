@@ -20,6 +20,7 @@ namespace GithubUWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             GitHubClient client;
+            //Check to see if a client already exists in the session and if not then create a new one and add it to the current session.
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
                 client = SessionState.Get<GitHubClient>("GitHubClient");
@@ -30,7 +31,7 @@ namespace GithubUWP.ViewModels
                 SessionState.Add("GitHubClient", client);
             }
             await HelpingWorker.RoamingLoggedInKeyVerifier();
-            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            var passwordCredential = HelpingWorker.VaultAccessTokenRetriever();
             if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);

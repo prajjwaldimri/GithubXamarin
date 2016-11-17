@@ -40,7 +40,7 @@ namespace GithubUWP.ViewModels
                 SessionState.Add("GitHubClient", client);
             }
             await HelpingWorker.RoamingLoggedInKeyVerifier();
-            var passwordCredential = HelpingWorker.VaultApiKeyRetriever();
+            var passwordCredential = HelpingWorker.VaultAccessTokenRetriever();
             if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);

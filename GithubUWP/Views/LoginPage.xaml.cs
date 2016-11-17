@@ -84,7 +84,7 @@ namespace GithubUWP.Views
             var code = retrievedUrl.Split(new[] {"code="}, StringSplitOptions.None)[1];
             var tokenRequest = new OauthTokenRequest(_clientId, _clientSecret, code);
             var accessToken = await _client.Oauth.CreateAccessToken(tokenRequest);
-            await HelpingWorker.VaultApiKeyAdder(accessToken);
+            await HelpingWorker.VaultAccessTokenAdder(accessToken);
 
             if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
                 ApplicationData.Current.RoamingSettings.Values.Add("IsLoggedIn",true);
