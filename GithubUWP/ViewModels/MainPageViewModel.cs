@@ -23,11 +23,19 @@ namespace GithubUWP.ViewModels
         {
             //Initializing Octokit
             GitHubClient client;
-            if (SessionState.Get<GitHubClient>("GitHubClient") != null)
+            try
             {
-                client = SessionState.Get<GitHubClient>("GitHubClient");
+                if (SessionState.Get<GitHubClient>("GitHubClient") != null)
+                {
+                    client = SessionState.Get<GitHubClient>("GitHubClient");
+                }
+                else
+                {
+                    client = new GitHubClient(new ProductHeaderValue("githubuwp"));
+                    SessionState.Add("GitHubClient", client);
+                }
             }
-            else
+            catch (Exception)
             {
                 client = new GitHubClient(new ProductHeaderValue("githubuwp"));
                 SessionState.Add("GitHubClient", client);
