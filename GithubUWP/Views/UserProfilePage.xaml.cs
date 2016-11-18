@@ -26,5 +26,6 @@ namespace GithubUWP.Views
         {
             this.InitializeComponent();
         }
+
     }
 }
