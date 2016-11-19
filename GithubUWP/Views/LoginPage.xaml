@@ -12,7 +12,24 @@
     xmlns:services="using:GithubUWP.Services"
     mc:Ignorable="d">
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel>
+
+        <controls:PageHeader x:Name="PageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="Login To Github">
+        </controls:PageHeader>
+
+
+        <Grid x:Name="MainGrid"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader">
+
         <WebView Height="500" Width="500" Name="LoginWebView"/>
     </Grid>
+        </RelativePanel>
 </Page>

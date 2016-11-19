@@ -87,7 +87,7 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
-
+            
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="Black" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="White" />
 

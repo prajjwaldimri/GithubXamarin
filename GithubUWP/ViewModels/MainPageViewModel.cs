@@ -11,6 +11,7 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
+using Template10.Common;
 using Template10.Utils;
 
 namespace GithubUWP.ViewModels
