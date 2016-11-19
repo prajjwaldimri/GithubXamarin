@@ -45,7 +45,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <ScrollViewer HorizontalScrollMode="Enabled" Grid.Row="1" Grid.Column="1">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" 
                     Name="ProfileStackPanel">
                     <StackPanel Orientation="Horizontal">
@@ -59,18 +59,18 @@
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1.5*"/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
 
@@ -93,7 +93,7 @@
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                    Glyph="&#xf347;"
                                   Grid.Row="4" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Bio}" FontSize="14"
+                                <TextBlock Text="{Binding Bio}" FontSize="14" TextWrapping="Wrap"
                                    Grid.Row="4" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
