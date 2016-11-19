@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'lane_-_narrowregular';
+    src: url('LANENAR_-webfont.eot');
+    src: url('LANENAR_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('LANENAR_-webfont.woff') format('woff'),
+         url('LANENAR_-webfont.ttf') format('truetype'),
+         url('LANENAR_-webfont.svg#lane_-_narrowregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
