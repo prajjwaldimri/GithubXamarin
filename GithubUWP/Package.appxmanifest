@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="11d0ed84-9ce1-404a-9bb2-2227a4f1f5a4" Publisher="CN=prajj" Version="1.0.0.0" />
+  <Identity Name="34691PrajjwalDimri.GitIt" Publisher="CN=883EF119-9F3F-4348-A873-0DBB7FD085E0" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="11d0ed84-9ce1-404a-9bb2-2227a4f1f5a4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>GitIt</DisplayName>

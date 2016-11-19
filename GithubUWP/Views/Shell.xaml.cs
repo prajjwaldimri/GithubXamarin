@@ -30,9 +30,10 @@ namespace GithubUWP.Views
             Instance = this;
             InitializeComponent();
             _settings = Services.SettingsServices.SettingsService.Instance;
+        }
 
-        
-       
+
+
 
         public Shell(INavigationService navigationService) : this()
         {
