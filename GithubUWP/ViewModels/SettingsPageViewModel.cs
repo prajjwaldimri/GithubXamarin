@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.SettingsService;
+using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace GithubUWP.ViewModels
@@ -51,6 +52,12 @@ namespace GithubUWP.ViewModels
                     ShowHamburgerButton = true;
                 }
             }
+        }
+             
+        public bool IsStatusBar
+        {
+            get;
+            set;
         }
 
         public bool UseShellBackButton
