@@ -20,6 +20,7 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Views.Busy.SetBusy(true,"Gettings Gists");
             //Initializing Octokit
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
@@ -41,6 +42,7 @@ namespace GithubUWP.ViewModels
             }
             //If in any case retrieves any unread notification remove it from the List.
             RaisePropertyChanged(String.Empty);
+            Views.Busy.SetBusy(false);
         }
     }
 }

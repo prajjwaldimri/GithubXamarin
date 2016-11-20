@@ -61,20 +61,22 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+
+                <ListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch"
                       HorizontalContentAlignment="Stretch">
 
-                <!--Listens for ItemClick event-->
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="ItemClick">
-                        <core:InvokeCommandAction Command="{Binding IssueClickDelegateCommand}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+                    <!--Listens for ItemClick event-->
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="ItemClick">
+                            <core:InvokeCommandAction Command="{Binding IssueClickDelegateCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
 
-                <!--UI of an item in List-->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
+                    <!--UI of an item in List-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
                             <Grid x:Name="ItemGrid" Padding="0,10,0,10">
 
                                 <Grid.RowDefinitions>
@@ -112,9 +114,10 @@
                                            Text="{Binding Repository.FullName}" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
         </Grid>
     </RelativePanel>
 </Page>

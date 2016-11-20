@@ -106,6 +106,9 @@
     <Compile Include="Services\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\HelpingWorker.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="UserControls\AlternatingRowListView.xaml.cs">
+      <DependentUpon>AlternatingRowListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\IconAndTextBlocksControl.xaml.cs">
       <DependentUpon>IconAndTextBlocksControl.xaml</DependentUpon>
     </Compile>
@@ -237,6 +240,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="UserControls\AlternatingRowListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\IconAndTextBlocksControl.xaml">
       <SubType>Designer</SubType>

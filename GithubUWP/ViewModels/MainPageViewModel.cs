@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
@@ -18,6 +20,13 @@ namespace GithubUWP.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        private DelegateCommand<TappedRoutedEventArgs> _activityClickDelegateCommand;
+
+        public DelegateCommand<TappedRoutedEventArgs> ActivityDelegateCommand
+            =>
+            _activityClickDelegateCommand ?? (_activityClickDelegateCommand = new DelegateCommand<TappedRoutedEventArgs>(ExecuteNavigation))
+        ;
+
         public ObservableCollection<Activity> FeedList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
@@ -57,6 +66,10 @@ namespace GithubUWP.ViewModels
             Views.Busy.SetBusy(false);
         }
 
+        private void ExecuteNavigation(TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            //Have to handle the navigation based on the type of Object
+        }
     }
 }
 

@@ -3,12 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:Behaviors="using:Template10.Behaviors"
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GithubUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:GithubUWP.ViewModels"
+      xmlns:usercontrols="using:GithubUWP.UserControls"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -30,72 +31,72 @@
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
 
-            <ListView ItemsSource="{Binding FeedList}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,10,0,10">
+            <ScrollViewer  HorizontalScrollBarVisibility="Auto">
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="3*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                <ListView x:Name="ListView" ItemsSource="{Binding FeedList}" SelectionMode="None" 
+                      HorizontalAlignment="Stretch" IsItemClickEnabled="False" IsTapEnabled="False"
+                          IsHitTestVisible="False" 
+                      HorizontalContentAlignment="Stretch">
 
-                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Margin="0,10,0,10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                       Grid.Row="0" Grid.Column="0" FontSize="15"
                                       Glyph="{Binding Type, Converter={StaticResource EventToGlyphConverter}}"
                                       Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
                                        Text="{Binding CreatedAt.Date}"
                                        Margin="5,0,0,0"/>
 
-                            <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
+                                <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
                                        VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{Binding Actor.AvatarUrl}"/>
-                                </Rectangle.Fill>
-                            </Rectangle>
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding Actor.AvatarUrl}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
+                                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
                                 TextTrimming="WordEllipsis"  Text="{Binding Actor.Login}"
-                                       Margin="5,0,0,0" VerticalAlignment="Center"
-                                           Style="{StaticResource BaseTextBlockStyle}"/>
-                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"
+                                       Margin="10,0,0,0" VerticalAlignment="Center" IsTapEnabled="True"
+                                           Style="{StaticResource BaseTextBlockStyle}">
+                                    
+                                    <interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Tapped">
+                                            <Core:InvokeCommandAction 
+                                                Command="{Binding ElementName= ListView, 
+                                                Path=DataContext.ActivityDelegateCommand}"/>
+                                        </Core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"
                                 TextTrimming="WordEllipsis" Text="{Binding Type, Converter={StaticResource EventToSentenceConverter}}"
                                        TextWrapping="NoWrap" VerticalAlignment="Center"
                                        Style="{StaticResource BodyTextBlockStyle}"/>
-                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
+                                <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
                                        TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
                                        Style="{StaticResource BaseTextBlockStyle}"
                                        VerticalAlignment="Center"/>
 
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
         </Grid>
-
     </RelativePanel>
 </Page>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
