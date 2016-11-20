@@ -40,6 +40,7 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Views.Busy.SetBusy(true,"Getting your profile details");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -81,6 +82,7 @@ namespace GithubUWP.ViewModels
             }
 
             RaisePropertyChanged(string.Empty);
+            Views.Busy.SetBusy(false);
         }
     }
 }

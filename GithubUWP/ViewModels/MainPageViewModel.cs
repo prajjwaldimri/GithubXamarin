@@ -23,6 +23,7 @@ namespace GithubUWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             //Initializing Octokit
+            Views.Busy.SetBusy(true,"Getting your activities");
             GitHubClient client;
             try
             {
@@ -53,6 +54,7 @@ namespace GithubUWP.ViewModels
                 //If in any case retrieves any unread notification remove it from the List.
             }
             RaisePropertyChanged(String.Empty);
+            Views.Busy.SetBusy(false);
         }
 
     }

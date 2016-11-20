@@ -21,7 +21,7 @@
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
-                             Text="Home">
+                             Text="Activity Central">
         </controls:PageHeader>
 
         <Grid EntranceNavigationTransitionInfo.IsTargetElement="True"
@@ -29,22 +29,53 @@
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
-            
+
             <ListView ItemsSource="{Binding FeedList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xf341;"/>
-                                <TextBlock Text="{Binding CreatedAt.Date}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Actor.Login}"/>
-                                <TextBlock Text="{Binding Type}"/>
-                                <TextBlock Text="{Binding Repo.FullName}"/>
-                            </StackPanel>
-                        </StackPanel>
-                        
+                        <Grid Margin="0,10,0,10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="3*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Grid.Row="0" Grid.Column="0" FontSize="15"
+                                      Glyph="{Binding Type, Converter={StaticResource EventToGlyphConverter}}"
+                                      Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                                       Text="{Binding CreatedAt.Date}"
+                                       Margin="5,0,0,0"/>
+
+                            <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Actor.AvatarUrl}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
+                                TextTrimming="WordEllipsis"  Text="{Binding Actor.Login}"
+                                       Margin="5,0,0,0" VerticalAlignment="Center"
+                                           Style="{StaticResource BaseTextBlockStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"
+                                TextTrimming="WordEllipsis" Text="{Binding Type, Converter={StaticResource EventToSentenceConverter}}"
+                                       TextWrapping="NoWrap" VerticalAlignment="Center"
+                                       Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
+                                       TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       VerticalAlignment="Center"/>
+
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -53,4 +84,18 @@
 
     </RelativePanel>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

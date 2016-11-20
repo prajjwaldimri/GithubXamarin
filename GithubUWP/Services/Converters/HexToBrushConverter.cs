@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Media;
 
 namespace GithubUWP.Services.Converters
 {
+    /// <summary>
+    /// Converts a hexadecimal color value received from Github To SolidColorBrush
+    /// </summary>
     public class HexToBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -23,7 +26,6 @@ namespace GithubUWP.Services.Converters
 
         public SolidColorBrush GetSolidColorBrush(string hexString)
         {
-
             if (hexString.Length != 7)
             {
                 hexString = "FF" + hexString;
@@ -37,7 +39,6 @@ namespace GithubUWP.Services.Converters
             var myBrush = new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, b));
 
             return myBrush;
-
         }
     }
 }

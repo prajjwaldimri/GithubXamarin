@@ -50,8 +50,7 @@
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
-                             Text="ISSUES"
-                             FontWeight="Bold">
+                             Text="Issues">
         </controls:PageHeader>
 
 
@@ -91,7 +90,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" 
-                                      Glyph="&#xf44d;" Foreground="Firebrick"
+                                      Glyph="&#xf44d;" Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                           x:Name="IssueIcon"
                                       Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                                       VerticalAlignment="Center" FontSize="24"/>
