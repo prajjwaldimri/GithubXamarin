@@ -6,29 +6,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
+using Template10.Services.PopupService;
 using Template10.Utils;
 
 namespace GithubUWP.ViewModels
 {
     public class RepositoriesPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Gets the Clicked Item on ListView
+        /// </summary>
         public object ClickedItem { get; set; }
         private DelegateCommand<ItemClickEventArgs> _repositoryClickDelegateCommand;
 
+        /// <summary>
+        /// Binds to the ItemClick Event on ListView
+        /// </summary>
         public DelegateCommand<ItemClickEventArgs> RepositoryClickDelegateCommand
             =>
             _repositoryClickDelegateCommand ??
             (_repositoryClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ExecuteNavigation));
 
+        /// <summary>
+        /// Binds to the ListView on Repositories Page
+        /// </summary>
         public ObservableCollection<Repository> RepositoriesList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Views.Busy.SetBusy(true,"Getting your repositories");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -50,12 +63,17 @@ namespace GithubUWP.ViewModels
             }
             
             RaisePropertyChanged(String.Empty);
+            Views.Busy.SetBusy(false);
         }
 
+        /// <summary>
+        /// Navigates to the RepositoryPage when an Item is clicked on ListView
+        /// </summary>
+        /// <param name="itemClickEventArgs"></param>
         private void ExecuteNavigation(ItemClickEventArgs itemClickEventArgs)
         {
             var clickedRepository = (Repository) itemClickEventArgs.ClickedItem;
-            var key = nameof(clickedRepository);
+            const string key = nameof(clickedRepository);
             SessionState.Add(key, clickedRepository);
             NavigationService.Navigate(typeof(Views.RepositoryPage), key);
         }

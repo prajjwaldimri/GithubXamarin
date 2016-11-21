@@ -49,7 +49,10 @@ namespace GithubUWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            // TODO: add your long-running task here
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
+            }
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
         }
     }

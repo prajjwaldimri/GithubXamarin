@@ -1,27 +1,34 @@
 <Page x:Class="GithubUWP.Views.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:Behaviors="using:Template10.Behaviors"
-      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:behaviors="using:Template10.Behaviors"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GithubUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:GithubUWP.ViewModels"
+      xmlns:usercontrols="using:GithubUWP.UserControls"
+      xmlns:converters="using:GithubUWP.Services.Converters"
       mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:MainPageViewModel x:Name="ViewModel" />
+        <vm:MainPageViewModel />
     </Page.DataContext>
-
+  
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
-                             Text="Home">
+                             Text="Activity Central">
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton>
+                    <TextBlock Text="About"/>
+                </AppBarButton>
+            </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
         <Grid EntranceNavigationTransitionInfo.IsTargetElement="True"
@@ -29,28 +36,73 @@
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
-            
-            <ListView ItemsSource="{Binding FeedList}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xf341;"/>
-                                <TextBlock Text="{Binding CreatedAt.Date}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Actor.Login}"/>
-                                <TextBlock Text="{Binding Type}"/>
-                                <TextBlock Text="{Binding Repo.FullName}"/>
-                            </StackPanel>
-                        </StackPanel>
-                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
 
+            <ScrollViewer  HorizontalScrollBarVisibility="Auto">
+
+                <ListView x:Name="ListView" ItemsSource="{Binding FeedList}" SelectionMode="None" 
+                      HorizontalAlignment="Stretch" IsItemClickEnabled="False" IsTapEnabled="False"
+                          IsHitTestVisible="False" 
+                      HorizontalContentAlignment="Stretch">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Margin="0,10,0,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Grid.Row="0" Grid.Column="0" FontSize="15"
+                                      Glyph="{Binding Type, Converter={StaticResource EventToGlyphConverter}}"
+                                      Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                                       Text="{Binding CreatedAt.DateTime}"
+                                       Margin="5,0,0,0"/>
+
+                                <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding Actor.AvatarUrl}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
+                                TextTrimming="WordEllipsis"  Text="{Binding Actor.Login}"
+                                       Margin="10,0,0,0" VerticalAlignment="Center" IsTapEnabled="True"
+                                           Style="{StaticResource BaseTextBlockStyle}">
+                                    
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Tapped">
+                                            <core:InvokeCommandAction 
+                                                Command="{Binding ElementName= ListView, 
+                                                Path=DataContext.ActivityDelegateCommand}"/>
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"
+                                TextTrimming="WordEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                           Text="{Binding 
+                                    Converter={StaticResource EventToSentenceConverter}}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
+                                       TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       VerticalAlignment="Center"/>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
         </Grid>
-
     </RelativePanel>
 </Page>
-

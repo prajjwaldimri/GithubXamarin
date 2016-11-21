@@ -7,21 +7,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
+using Template10.Common;
 using Template10.Utils;
 
 namespace GithubUWP.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        private DelegateCommand<TappedRoutedEventArgs> _activityClickDelegateCommand;
+
+        public DelegateCommand<TappedRoutedEventArgs> ActivityDelegateCommand
+            =>
+            _activityClickDelegateCommand ?? (_activityClickDelegateCommand = new DelegateCommand<TappedRoutedEventArgs>(ExecuteNavigation))
+        ;
+
         public ObservableCollection<Activity> FeedList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             //Initializing Octokit
+            Views.Busy.SetBusy(true,"Getting your activities");
             GitHubClient client;
             try
             {
@@ -52,8 +63,13 @@ namespace GithubUWP.ViewModels
                 //If in any case retrieves any unread notification remove it from the List.
             }
             RaisePropertyChanged(String.Empty);
+            Views.Busy.SetBusy(false);
         }
 
+        private void ExecuteNavigation(TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            //Have to handle the navigation based on the type of Object
+        }
     }
 }
 

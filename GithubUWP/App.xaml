@@ -37,6 +37,8 @@
         </converters:ValueWhenConverter>
 
             <userConverters:HexToBrushConverter x:Key="HexToBrushConverter"/>
+            <userConverters:EventToSentenceConverter x:Key="EventToSentenceConverter"/>
+            <userConverters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
 
         </ResourceDictionary>
         

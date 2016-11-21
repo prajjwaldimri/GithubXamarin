@@ -25,6 +25,7 @@ namespace GithubUWP.ViewModels
         
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Views.Busy.SetBusy(true,"Getting your issues");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -46,6 +47,7 @@ namespace GithubUWP.ViewModels
                 
             }
             RaisePropertyChanged(String.Empty);
+            Views.Busy.SetBusy(false);
         }
 
         private async void ExecuteNavigation(ItemClickEventArgs obj)

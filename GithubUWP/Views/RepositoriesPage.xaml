@@ -36,42 +36,46 @@
             <ListView x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch" SelectedItem="{Binding ClickedItem, 
                 UpdateSourceTrigger=PropertyChanged}">
+
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="ItemClick">
                         <core:InvokeCommandAction Command="{Binding RepositoryClickDelegateCommand}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Stretch">
+                        <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0">
                             <Rectangle VerticalAlignment="Stretch" Margin="2"
                                        Width="2" Fill="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
-                                <TextBlock FontSize="20" FontWeight="Bold"
-                                           Text="{Binding Name}"/>
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource  SubtitleTextBlockStyle}"  
+                                           FontWeight="Bold" Text="{Binding Name}"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
-                                <TextBlock FontSize="16" Text="{Binding Description}"/>
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Description}"
+                                           Style="{StaticResource BaseTextBlockStyle}"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
-                                <TextBlock Text="{Binding Language}" Margin="0,0,10,0"/>
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Language}" Margin="0,0,10,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                          Glyph="&#xf24e;" Margin="0,0,1,0"/>
-                                <TextBlock Text="{Binding StargazersCount}"/>
-                                <TextBlock Text="Updated at:" Margin="10,0,2,0"/>
-                                <TextBlock Text="{Binding UpdatedAt.Date}"/>
+                                          Glyph="&#xf24e;" Margin="0,0,1,0"
+                                          FontSize="15"/>
+                                <TextBlock Text="{Binding StargazersCount}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <TextBlock Text="Last Updated at:" Margin="10,0,2,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <TextBlock Text="{Binding UpdatedAt.Date}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
                             </StackPanel>
-
-                            <Rectangle HorizontalAlignment="Stretch" Margin="1" Height="1"
-                                        Stroke="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
 
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </Grid>
     </RelativePanel>
 </Page>

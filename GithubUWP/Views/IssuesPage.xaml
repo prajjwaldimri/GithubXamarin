@@ -17,6 +17,35 @@
     </Page.DataContext>
     <RelativePanel>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <controls:PageHeader x:Name="PageHeader"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
@@ -32,47 +61,63 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="ItemClick">
-                        <core:InvokeCommandAction Command="{Binding IssueClickDelegateCommand}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="0,10,0,10">
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                      Glyph="&#xf149;" Foreground="Green"/>
-                                <TextBlock Text="{Binding Repository.FullName}" FontSize="16"
-                                           Margin="10,0,0,0"/>
-                                <TextBlock Text="{Binding Title}" Margin="10,0,0,0"
-                                           FontSize="16" FontWeight="Bold"/>
-                            </StackPanel>
-                            
-                            <StackPanel Orientation="Horizontal" Margin="0,10,0,10" 
-                                        VerticalAlignment="Bottom">
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                      Glyph="&#xf219;" Margin="10,0,0,0" FontSize="13"/>
-                                <TextBlock Text="{Binding Number}" />
-                                <TextBlock Text="{Binding CreatedAt.Date}" Margin="10,0,0,0"/>
-                                <TextBlock Text="{Binding User.Name}" Margin="10,0,0,0"/>
-                                <TextBox Text="{Binding Labels[0].Name}" Margin="10,0,0,0"
-                                         IsReadOnly="True" Background="{Binding Labels[0].Color,
-                                    Converter={StaticResource HexToBrushConverter}}"
-                                         BorderThickness="0" AcceptsReturn="False"
-                                         TextAlignment="Center" 
-                                         SelectionHighlightColor="Transparent"
-                                          IsHoldingEnabled="False" IsDoubleTapEnabled="False"
-                                         IsTapEnabled="False"/>
-                                
-                                <TextBlock Text="{Binding Assignee.Name}" Margin="10,0,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+
+                <ListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch">
+
+                    <!--Listens for ItemClick event-->
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="ItemClick">
+                            <core:InvokeCommandAction Command="{Binding IssueClickDelegateCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
+                    <!--UI of an item in List-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="ItemGrid" Padding="0,10,0,10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" 
+                                      Glyph="&#xf44d;" Foreground="{StaticResource SystemControlForegroundAccentBrush}"
+                                          x:Name="IssueIcon"
+                                      Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                      VerticalAlignment="Center" FontSize="24"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       TextTrimming="Clip"
+                                       Margin="10,0,0,0" TextWrapping="WrapWholeWords"/>
+
+                                <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                        Orientation="Horizontal" Margin="10,2,0,0">
+                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                           Text="#"/>
+                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                           Text="{Binding Number}" Margin="2,0,0,0"/>
+                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                           Text="in" Margin="10,0,0,0"/>
+                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                           Text="{Binding Repository.FullName}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
         </Grid>
     </RelativePanel>
 </Page>

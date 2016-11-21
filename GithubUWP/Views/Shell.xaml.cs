@@ -32,21 +32,8 @@ namespace GithubUWP.Views
             _settings = Services.SettingsServices.SettingsService.Instance;
         }
 
-        public async Task LoginProfileUpdater()
-        {
-            await HelpingWorker.RoamingLoggedInKeyVerifier();
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
-            {
-                LoginButton.Visibility = Visibility.Collapsed;
-                ProfileButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                LoginButton.Visibility = Visibility.Visible;
-                ProfileButton.Visibility = Visibility.Collapsed;
-            }
-        }
-       
+
+
 
         public Shell(INavigationService navigationService) : this()
         {
@@ -64,6 +51,29 @@ namespace GithubUWP.Views
                 await ProfileImageandNotificationsSetter();
         }
 
+        /// <summary>
+        /// Updates the button on the hamburger menu which shows the user profile if logged in and Login button if logged out
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoginProfileUpdater()
+        {
+            await HelpingWorker.RoamingLoggedInKeyVerifier();
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
+            {
+                LoginButton.Visibility = Visibility.Collapsed;
+                ProfileButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LoginButton.Visibility = Visibility.Visible;
+                ProfileButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        /// <summary>
+        /// Sets the icons on Profile Image and Notifications
+        /// </summary>
+        /// <returns></returns>
         public async Task ProfileImageandNotificationsSetter()
         {
             var client = new GitHubClient(new ProductHeaderValue("githubuwp"));

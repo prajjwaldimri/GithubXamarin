@@ -90,7 +90,8 @@ namespace GithubUWP.Views
                 ApplicationData.Current.RoamingSettings.Values.Add("IsLoggedIn",true);
 
             var shell = new Shell();
-            shell.LoginProfileUpdater();
+            await shell.LoginProfileUpdater();
+            await NavigationService.GetForFrame(Frame).NavigateAsync(typeof(Views.UserProfilePage));
         }
     }
 }
