@@ -53,12 +53,6 @@ namespace GithubUWP.ViewModels
                 }
             }
         }
-             
-        public bool IsStatusBar
-        {
-            get;
-            set;
-        }
 
         public bool UseShellBackButton
         {
