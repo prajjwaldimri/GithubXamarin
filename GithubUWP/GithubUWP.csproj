@@ -104,6 +104,7 @@
     <Compile Include="Services\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Services\Converters\EventToSentenceConverter.cs" />
     <Compile Include="Services\Converters\HexToBrushConverter.cs" />
+    <Compile Include="Services\Converters\StatusBarToBoolConverter.cs" />
     <Compile Include="Services\HelpingWorker.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="UserControls\AlternatingRowListView.xaml.cs">
