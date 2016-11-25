@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Template10.Mvvm;
@@ -63,7 +64,21 @@ namespace GithubUWP.ViewModels
         public bool UseLightThemeButton
         {
             get { return _settings.AppTheme.Equals(ApplicationTheme.Light); }
-            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; base.RaisePropertyChanged(); }
+            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; base.RaisePropertyChanged("UseLightThemeButton"); }
+        }
+
+        private bool _isStatusBar = false;
+        public bool IsStatusBar
+        {
+            get
+            {
+                return _isStatusBar;
+            }
+            set
+            {
+                _isStatusBar = value;
+                base.RaisePropertyChanged("IsStatusBar");
+            }
         }
     }
 
@@ -86,5 +101,6 @@ namespace GithubUWP.ViewModels
 
         public Uri RateMe => new Uri("http://aka.ms/template10");
     }
+
 }
 

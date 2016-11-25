@@ -10,6 +10,7 @@
       xmlns:local="using:GithubUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:GithubUWP.ViewModels"
+      xmlns:Converter="using:GithubUWP.Services.Converters"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -28,6 +29,7 @@
                 <x:Boolean>True</x:Boolean>
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
+        <Converter:StatusBarToBoolConverter x:Key="StatusBarToBool"/>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -117,6 +119,14 @@
                                       OnContent="Hamburger Menu is hidden"
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.Below="ShowHamburgerButtonToggleSwitch" />
+
+                        <ToggleSwitch x:Name="IsStatusBarToogleSwitch"
+                                      Header="StatusBar is hidden"
+                                      OffContent="StatusBar is hidden"
+                                      OnContent="StatusBar is visible"
+                                      IsOn="{Binding IsStatusBar, Converter={StaticResource StatusBarToBool}, Mode=TwoWay}"
+                                      RelativePanel.AlignLeftWithPanel="True"
+                                      RelativePanel.Below="IsFullScreenToggleSwitch"/>
 
                     </RelativePanel>
 
