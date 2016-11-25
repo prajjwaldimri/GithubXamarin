@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Template10.Mvvm;
 using Template10.Services.SettingsService;
 using Windows.UI;
@@ -64,8 +65,42 @@ namespace GithubUWP.ViewModels
         public bool UseLightThemeButton
         {
             get { return _settings.AppTheme.Equals(ApplicationTheme.Light); }
-            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; base.RaisePropertyChanged("UseLightThemeButton"); }
+            set
+            {
+                if (value)
+                {
+                    _settings.AppTheme = ApplicationTheme.Light;
+                    //Can't switch RequestedTheme on RunTime
+                    //Application.Current.RequestedTheme = ApplicationTheme.Light;
+                    if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("CurrentThemeApplied"))
+                    {
+                        ApplicationData.Current.RoamingSettings.Values.Add("CurrentThemeApplied", "Light");
+                    }
+                    else
+                    {
+                        ApplicationData.Current.RoamingSettings.Values.Remove("CurrentThemeApplied");
+                        ApplicationData.Current.RoamingSettings.Values.Add("CurrentThemeApplied", "Light");
+                    }
+                }
+                else
+                {
+                    _settings.AppTheme = ApplicationTheme.Dark;
+                    if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("CurrentThemeApplied"))
+                    {
+                        ApplicationData.Current.RoamingSettings.Values.Add("CurrentThemeApplied", "Dark");
+                    }
+                    else
+                    {
+                        ApplicationData.Current.RoamingSettings.Values.Remove("CurrentThemeApplied");
+                        ApplicationData.Current.RoamingSettings.Values.Add("CurrentThemeApplied", "Dark");
+                    }
+                }
+                IsStatusBar = false;
+                RaisePropertyChanged("UseLightThemeButton");
+                RaisePropertyChanged("IsStatusBar");
+            }
         }
+
 
         private bool _isStatusBar = false;
         public bool IsStatusBar

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -53,24 +54,34 @@ namespace GithubUWP.Services.Converters
 
         private async void ShowAsync()
         {
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) return;
+            var statusBar = StatusBar.GetForCurrentView();
+            if (statusBar != null)
             {
-                var statusBar = StatusBar.GetForCurrentView();
-                if (statusBar != null)
+                switch (Application.Current.RequestedTheme)
                 {
-                    if (Application.Current.RequestedTheme == ApplicationTheme.Light)
-                    {
+                    case ApplicationTheme.Light:
                         statusBar.BackgroundColor = Windows.UI.Colors.White;
                         statusBar.ForegroundColor = Windows.UI.Colors.Black;
-                    }
-                    if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
-                    {
+                        break;
+                    case ApplicationTheme.Dark:
                         statusBar.BackgroundColor = Windows.UI.Colors.Black;
                         statusBar.ForegroundColor = Windows.UI.Colors.White;
-                    }
+                        break;
                 }
-                await statusBar.ShowAsync();
+                switch ((string) ApplicationData.Current.RoamingSettings.Values["CurrentThemeApplied"])
+                {
+                    case "Light":
+                        statusBar.BackgroundColor = Windows.UI.Colors.White;
+                        statusBar.ForegroundColor = Windows.UI.Colors.Black;
+                        break;
+                    case "Dark":
+                        statusBar.BackgroundColor = Windows.UI.Colors.Black;
+                        statusBar.ForegroundColor = Windows.UI.Colors.White;
+                        break;
+                }
             }
+            await statusBar.ShowAsync();
         }
 
         private async void HideAsync()
