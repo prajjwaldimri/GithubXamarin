@@ -1,0 +1,110 @@
+/*######################################*/
+/*Colors for the template */
+/*######################################*/
+
+body {
+    background-color: white;
+}
+
+#home, #footer {
+    background-color: #1f9bc9;
+}
+
+.cta1 {
+    background-color:#1c8bb5;
+}
+
+
+
+
+
+.subscribe-submit, 
+.subscribe-submit:active, 
+.spinner > div,
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span,
+.cta2 {
+    background-color: #a7cb00;
+}
+
+
+
+
+
+
+#fb_icon:hover,
+#tw_icon:hover, 
+#in_icon:hover, 
+#g_icon:hover, 
+#pin_icon:hover, 
+#fli_icon:hover,
+.services_icon {
+    fill:#a7cb00;
+}
+
+
+
+
+
+#fb_icon, 
+#tw_icon, 
+#in_icon, 
+#g_icon, 
+#pin_icon, 
+#fli_icon {
+    fill: rgba(255,255,255,0.5);
+}
+
+
+
+
+
+#preview {
+    background-color:#fffcd2;
+}
+
+h3 {
+    color:black;
+}
+
+h4 {
+    color:#a7cb00;
+}
+
+.feature_icon {
+    fill:#d8d8d8;
+}
+
+.arrow_up,
+.arrow_down {
+    fill:#f0f0f0;
+}
+
+.arrow_down:hover,
+.arrow_up:hover {
+    fill:#dddddd;
+}
+
+#features_3, .arrows_box_bg {
+    background-color:#f7f8fa;
+}
+
+.owl-theme .owl-controls .owl-page span{
+	background-color: #d8d8d8;
+}
+
+
+
+
+
+#blog_header{
+    background-color: #1f9bc9;
+}
+
+#pagination a.active h3, .dev_blog_post a, .comment a  {
+    color:#a7cb00
+}
+
+.comment {
+    background-color: #f7f8fa;
+}
