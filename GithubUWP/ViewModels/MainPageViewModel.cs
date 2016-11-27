@@ -15,7 +15,6 @@ using GithubUWP.Services;
 using Octokit;
 using Template10.Common;
 using Template10.Utils;
-using GithubUWP.ButtonCommands;
 
 namespace GithubUWP.ViewModels
 {
@@ -29,28 +28,6 @@ namespace GithubUWP.ViewModels
         ;
 
         public ObservableCollection<Activity> FeedList { get; set; }
-        public ButtonCommand ShowDetailsButtonCommand { get; set; }
-
-        public MainPageViewModel()
-        {
-            ShowDetailsButtonCommand = new ButtonCommand(ShowDetails);
-        }
-
-        private bool _showDetailControl = false;
-        public bool ShowDetailControl
-        {
-            get { return _showDetailControl; }
-            set
-            {
-                _showDetailControl = value;
-                base.RaisePropertyChanged("ShowDetailControl");
-            }
-        }
-
-        private void ShowDetails(object parameter)
-        {
-            ShowDetailControl = true;
-        }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
