@@ -33,16 +33,35 @@
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Subject}"/>
-                            <TextBlock Text="{Binding Reason}"/>
-                            <TextBlock Text="{Binding UpdatedAt}"/>
-                            <TextBlock Text="{Binding Repository.Name}"/>
-                        </StackPanel>
+                        <Grid Margin="10,0,0,0">
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <FontIcon Grid.Row="0" Grid.Column="0"
+                                      Grid.RowSpan="2" Glyph="&#xf101;"
+                                      FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"/>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Subject.Title}"
+                                       Margin="10,0,0,0"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                       Text="{Binding Reason}"
+                                       Margin="10,0,0,0"/>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <!--TODO: Add image or text that says no unread notifications -->
 
         </Grid>
