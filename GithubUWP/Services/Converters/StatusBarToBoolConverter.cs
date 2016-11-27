@@ -86,8 +86,13 @@ namespace GithubUWP.Services.Converters
 
         private async void HideAsync()
         {
-            var statusBar = StatusBar.GetForCurrentView();
-            await statusBar.HideAsync();
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                return;
+            else
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                await statusBar.HideAsync();
+            }
         }
     }
 }

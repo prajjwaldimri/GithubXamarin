@@ -7,10 +7,13 @@ using System.Collections.ObjectModel;
 using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using GithubUWP.UserControls;
+using System.Threading.Tasks;
+using Octokit;
 
 namespace GithubUWP.Views
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
     {
         public MainPage()
         {
