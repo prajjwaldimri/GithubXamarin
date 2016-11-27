@@ -16,7 +16,11 @@
     <Page.DataContext>
         <vm:MainPageViewModel />
     </Page.DataContext>
-  
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Page.Resources>
+    
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader"
@@ -39,10 +43,14 @@
 
             <ScrollViewer  HorizontalScrollBarVisibility="Auto">
 
-                <ListView x:Name="ListView" ItemsSource="{Binding FeedList}" SelectionMode="None" 
-                      HorizontalAlignment="Stretch" IsItemClickEnabled="False" IsTapEnabled="False"
-                          IsHitTestVisible="False" 
+                <ListView xmlns:uwp="using:AmazingPullToRefresh.Controls" x:Name="ListView" 
+                          ItemsSource="{Binding FeedList}" HorizontalAlignment="Stretch" 
+                          IsItemClickEnabled="True" IsTapEnabled="True"
                       HorizontalContentAlignment="Stretch">
+
+                    <uwp:PullToRefreshAdorner.Extender>
+                        <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+                    </uwp:PullToRefreshAdorner.Extender>
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -51,6 +59,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition Height="3*"/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -98,11 +107,19 @@
                                        Style="{StaticResource BaseTextBlockStyle}"
                                        VerticalAlignment="Center"/>
 
+                                <Button Grid.Row="2" Grid.Column="3" Margin="5" Content="Show"
+                                        Command="{Binding ShowDetailsButtonCommand,
+                                    ElementName=ListView}"/>
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
+
+            <usercontrols:ShowDetailsControl x:Name="DetailsControl" 
+                                             Visibility="{Binding ShowDetailControl, 
+                Converter={StaticResource BoolToVisibility}, Mode=TwoWay}"/>
         </Grid>
     </RelativePanel>
 </Page>
