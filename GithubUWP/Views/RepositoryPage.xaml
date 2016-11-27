@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:universalMarkdown="using:UniversalMarkdown"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -23,14 +24,177 @@
                              Text="{Binding RepositoryName}">
         </controls:PageHeader>
 
-
-        <Grid x:Name="MainGrid"
+        <ScrollViewer RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader" Padding="5">
+            <Grid x:Name="MainGrid"
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-        </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Margin="0,0,5,20"
+                        HorizontalAlignment="Stretch">
+                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf24e;"/>
+                                <TextBlock Text="Star" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                           Text="{Binding StarCount}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,0,0,20">
+                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf2c0;"/>
+                                <TextBlock Text="Fork" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding ForkCount}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                </StackPanel>
+
+                <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+                    ClickMode="Press">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Owner:" Opacity="0.7" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                            <TextBlock Text="{Binding RepositoryOwner}" Margin="10,0,0,0"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                        Margin="0,10,0,0"
+                    VerticalAlignment="Stretch" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="Website:" Opacity="0.7" />
+                            <TextBlock Text="{Binding RepositoryWebsite}" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <TextBlock  HorizontalAlignment="Stretch" Margin="10,0,0,0" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                       VerticalAlignment="Center" Text="{Binding RepositoryDescription}"
+                       TextAlignment="Center" TextWrapping="Wrap" TextTrimming="Clip"/>
+
+                <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf2c0;"/>
+                            <TextBlock Text="Forks" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf220;"/>
+                            <TextBlock Text="Releases" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf14b;"/>
+                            <TextBlock Text="Recent Activity" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf341;"/>
+                            <TextBlock Text="Contributors" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf3ae;"/>
+                            <TextBlock Text="Stargazers" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf345;"/>
+                            <TextBlock Text="Pull Requests" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                    Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                      Glyph="&#xf44c;"/>
+                            <TextBlock Text="Issues" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            </Grid>
+        </ScrollViewer>
     </RelativePanel>
 </Page>
