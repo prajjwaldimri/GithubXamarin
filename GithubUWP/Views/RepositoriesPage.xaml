@@ -33,10 +33,14 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ListView x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch" 
-                      SelectedItem="{Binding ClickedItem, 
-                UpdateSourceTrigger=PropertyChanged}">
+            <ListView xmlns:uwp="using:AmazingPullToRefresh.Controls" x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch" SelectedItem="{Binding ClickedItem}">
+
+
+                <uwp:PullToRefreshAdorner.Extender>
+                    <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+                </uwp:PullToRefreshAdorner.Extender>
+
 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="ItemClick">
