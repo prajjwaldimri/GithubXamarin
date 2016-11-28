@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,6 +27,13 @@ namespace GithubUWP.Views
         public RepositoriesPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void PullToRefreshExtender_RefreshRequested(object sender, AmazingPullToRefresh.Controls.RefreshRequestedEventArgs e)
+        {
+            var deferral = e.GetDeferral();
+            await Task.Delay(2500); // something
+            deferral.Complete();
         }
     }
 }

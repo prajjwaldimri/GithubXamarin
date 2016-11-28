@@ -16,7 +16,12 @@
     <Page.DataContext>
         <vm:MainPageViewModel />
     </Page.DataContext>
-  
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+        <converters:EventToGlyphConverter x:Key="EventToGlyph"/>
+    </Page.Resources>
+    
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader"
@@ -39,18 +44,18 @@
 
             <ScrollViewer  HorizontalScrollBarVisibility="Auto">
 
-                <ListView x:Name="ListView" ItemsSource="{Binding FeedList}" SelectionMode="None" 
-                      HorizontalAlignment="Stretch" IsItemClickEnabled="False" IsTapEnabled="False"
-                          IsHitTestVisible="False" 
+                <ListView x:Name="ListView" 
+                          ItemsSource="{Binding FeedList}" HorizontalAlignment="Stretch" 
+                          IsItemClickEnabled="True" IsTapEnabled="True"
                       HorizontalContentAlignment="Stretch">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-
                             <Grid Margin="0,10,0,10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition Height="3*"/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -61,7 +66,7 @@
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                       Grid.Row="0" Grid.Column="0" FontSize="15"
-                                      Glyph="{Binding Type, Converter={StaticResource EventToGlyphConverter}}"
+                                      Glyph="{Binding Type, Converter={StaticResource EventToGlyph}}"
                                       Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
 
                                 <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
@@ -97,12 +102,15 @@
                                        TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
                                        Style="{StaticResource BaseTextBlockStyle}"
                                        VerticalAlignment="Center"/>
-
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
+
+            <usercontrols:ShowDetailsControl x:Name="DetailsControl" 
+                                             Visibility="{Binding ShowDetailControl, 
+                Converter={StaticResource BoolToVisibility}, Mode=TwoWay}"/>
         </Grid>
     </RelativePanel>
 </Page>
