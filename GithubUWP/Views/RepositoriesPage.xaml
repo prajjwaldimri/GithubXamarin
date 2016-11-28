@@ -34,7 +34,8 @@
               RelativePanel.Below="PageHeader">
 
             <ListView x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch" SelectedItem="{Binding ClickedItem, 
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch" 
+                      SelectedItem="{Binding ClickedItem, 
                 UpdateSourceTrigger=PropertyChanged}">
 
                 <interactivity:Interaction.Behaviors>
