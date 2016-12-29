@@ -20,15 +20,9 @@ namespace GithubUWP.ViewModels
 {
     public class RepositoriesPageViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Gets the Clicked Item on ListView
-        /// </summary>
-        public object ClickedItem { get; set; }
         private DelegateCommand<ItemClickEventArgs> _repositoryClickDelegateCommand;
 
-        /// <summary>
-        /// Binds to the ItemClick Event on ListView
-        /// </summary>
+        public string RepositoriesPageHeader { get; set; }
         public DelegateCommand<ItemClickEventArgs> RepositoryClickDelegateCommand
             =>
             _repositoryClickDelegateCommand ??
@@ -41,7 +35,7 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Views.Busy.SetBusy(true,"Getting your repositories");
+            Views.Busy.SetBusy(true, "Getting your repositories");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -58,10 +52,24 @@ namespace GithubUWP.ViewModels
             {
                 client.Credentials = new Credentials(passwordCredential.Password);
 
-                var repositories = await client.Repository.GetAllForCurrent();
+                IReadOnlyList<Repository> repositories;
+                if (parameter != null && SessionState.Get<Repository>(parameter.ToString()) != null)
+                {
+                    var repository= SessionState.Get<Repository>(parameter.ToString());
+                    var repoClient = new RepositoriesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+                    repositories = await repoClient.Forks.GetAll(repository.Id);
+                    SessionState.Remove(parameter.ToString());
+                    RepositoriesPageHeader = $"Forks for {repository.FullName}";
+                }
+                else
+                {
+                    repositories = await client.Repository.GetAllForCurrent();
+                    RepositoriesPageHeader = "Your Repositories";
+                }
                 RepositoriesList = repositories.ToObservableCollection();
             }
-            
+
+
             RaisePropertyChanged(String.Empty);
             Views.Busy.SetBusy(false);
         }
@@ -72,7 +80,7 @@ namespace GithubUWP.ViewModels
         /// <param name="itemClickEventArgs"></param>
         private void ExecuteNavigation(ItemClickEventArgs itemClickEventArgs)
         {
-            var clickedRepository = (Repository) itemClickEventArgs.ClickedItem;
+            var clickedRepository = (Repository)itemClickEventArgs.ClickedItem;
             const string key = nameof(clickedRepository);
             SessionState.Add(key, clickedRepository);
             NavigationService.Navigate(typeof(Views.RepositoryPage), key);

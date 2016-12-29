@@ -112,6 +112,7 @@
 
                 <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                        Command="{Binding ForksClickDelegateCommand}"
                     Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">

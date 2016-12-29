@@ -51,6 +51,7 @@ namespace GithubUWP.ViewModels
                     var issuesClient = new IssuesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
                     issues = await issuesClient.GetAllForRepository(repository.Id);
                     IssuesHeader = $"Issues in {repository.Name}";
+                    SessionState.Remove(parameter.ToString());
                 }
                 else
                 {

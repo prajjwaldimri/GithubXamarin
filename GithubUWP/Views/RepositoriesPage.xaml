@@ -22,7 +22,7 @@
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
-                             Text="Repositories">
+                             Text="{Binding RepositoriesPageHeader}">
         </controls:PageHeader>
 
 
@@ -34,7 +34,7 @@
               RelativePanel.Below="PageHeader">
 
             <ListView xmlns:uwp="using:AmazingPullToRefresh.Controls" x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch" SelectedItem="{Binding ClickedItem}">
+                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
 
 
                 <uwp:PullToRefreshAdorner.Extender>

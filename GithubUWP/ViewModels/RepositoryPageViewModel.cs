@@ -27,11 +27,17 @@ namespace GithubUWP.ViewModels
 
         //Commands
         private DelegateCommand<ItemClickEventArgs> _issuesClickDelegateCommand;
+        private DelegateCommand<ItemClickEventArgs> _forksClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _collaboratorsClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _stargazersClickDelegateCommand;
 
         public DelegateCommand<ItemClickEventArgs> IssuesClickDelegateCommand
             => _issuesClickDelegateCommand ?? (_issuesClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToIssues));
+
+        public DelegateCommand<ItemClickEventArgs> ForksClickDelegateCommand
+            =>
+                _forksClickDelegateCommand ??
+                (_forksClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToForks));
 
         public DelegateCommand<ItemClickEventArgs> CollaboratorsClickDelegateCommand
             =>
@@ -67,6 +73,7 @@ namespace GithubUWP.ViewModels
             ForkCount = Repository.ForksCount;
             RaisePropertyChanged(String.Empty);
             Busy.SetBusy(false);
+            SessionState.Remove(parameter.ToString());
         }
 
         /// <summary>
@@ -78,6 +85,13 @@ namespace GithubUWP.ViewModels
             const string key = nameof(Repository);
             SessionState.Add(key, Repository);
             await NavigationService.NavigateAsync(typeof(Views.IssuesPage), key);
+        }
+
+        private async void GoToForks(ItemClickEventArgs obj)
+        {
+            const string key = nameof(Repository);
+            SessionState.Add(key, Repository);
+            await NavigationService.NavigateAsync(typeof(Views.RepositoriesPage), key);
         }
 
         private async void GoToStarGazers(ItemClickEventArgs obj)

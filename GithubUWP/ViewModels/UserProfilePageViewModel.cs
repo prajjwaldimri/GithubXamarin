@@ -62,6 +62,7 @@ namespace GithubUWP.ViewModels
                     var passedUser = SessionState.Get<User>(parameter.ToString());
                     var usersClient = new UsersClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
                     currentUser = await usersClient.Get(passedUser.Login);
+                    SessionState.Remove(parameter.ToString());
                 }
                 else
                 {
