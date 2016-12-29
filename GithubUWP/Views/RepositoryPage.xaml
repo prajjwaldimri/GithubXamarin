@@ -184,6 +184,7 @@
 
                 <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                        Command="{Binding IssuesClickDelegateCommand}"
                     Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">

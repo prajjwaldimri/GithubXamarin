@@ -22,10 +22,10 @@ namespace GithubUWP.ViewModels
 
         public DelegateCommand<ItemClickEventArgs> IssueClickDelegateCommand
             => _issueClickDelegateCommand ?? (_issueClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ExecuteNavigation));
-        
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Views.Busy.SetBusy(true,"Getting your issues");
+            Views.Busy.SetBusy(true, "Getting your issues");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -41,21 +41,30 @@ namespace GithubUWP.ViewModels
             if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);
-
-                var issues = await client.Issue.GetAllForCurrent();
+                IReadOnlyList<Issue> issues; 
+                //Checks if the request for Issues page came from hamburger menu or from other page.
+                if (parameter!=null && SessionState.Get<Repository>(parameter.ToString()) != null)
+                {
+                    var issuesClient = new IssuesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+                    issues = await issuesClient.GetAllForRepository(SessionState.Get<Repository>(parameter.ToString()).Id);
+                }
+                else
+                {
+                    issues = await client.Issue.GetAllForCurrent();
+                }
                 IssuesList = issues.ToObservableCollection();
-                
             }
+
             RaisePropertyChanged(String.Empty);
             Views.Busy.SetBusy(false);
         }
 
         private async void ExecuteNavigation(ItemClickEventArgs obj)
         {
-            var issue = (Issue) obj.ClickedItem;
+            var issue = (Issue)obj.ClickedItem;
             const string key = nameof(issue);
             SessionState.Add(key, issue);
-            await NavigationService.NavigateAsync(typeof(Views.IssuePage),key);
+            await NavigationService.NavigateAsync(typeof(Views.IssuePage), key);
         }
 
     }
