@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Windows.Security.Credentials;
 using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
+using Template10.Utils;
 
 namespace GithubUWP.ViewModels
 {
@@ -24,6 +26,7 @@ namespace GithubUWP.ViewModels
         public User ClosedBy { get; set; }
         public int CommentsCount { get; set; }
         public IssueComment IssueComments { get; set; }
+        public ObservableCollection<Label> Labels { get; set; }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> state)
@@ -42,6 +45,7 @@ namespace GithubUWP.ViewModels
                 ClosedAt = issue.ClosedAt.Value.DateTime;
                 ClosedBy = issue.ClosedBy;
             }
+            Labels = issue.Labels.ToObservableCollection();
             IssueCreatedAt = issue.CreatedAt.DateTime;
             IssueCreator = issue.User;
             CommentsCount = issue.Comments;

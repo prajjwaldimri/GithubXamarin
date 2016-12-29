@@ -27,10 +27,10 @@
             RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
-              RelativePanel.Below="PageHeader">
-
-            <Grid x:Name="MainGrid"
+              RelativePanel.Below="PageHeader"
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+            <Grid x:Name="MainGrid" Margin="5,5,0,0">
 
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -52,29 +52,58 @@
 
                 <TextBlock Text="{Binding IssueState}" VerticalAlignment="Center
                            " Grid.Row="0" Grid.Column="0"/>
-                <TextBlock Text="{Binding IssueTitle}" Grid.Row="1" Grid.Column="0" 
-                           VerticalAlignment="Center"
+                
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <TextBlock Text="{Binding IssueTitle}" VerticalAlignment="Center"
+                               FontWeight="SemiBold"
                            TextWrapping="WrapWholeWords"/>
+                    <TextBlock Text="#" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding IssueNumber}" VerticalAlignment="Center"/>
+                </StackPanel>
+                
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0"
                             VerticalAlignment="Stretch">
                     <Rectangle Height="40" Width="40">
                         <Rectangle.Fill>
-                           <ImageBrush ImageSource="{Binding IssueCreator.AvatarUrl}"/>
+                            <ImageBrush ImageSource="{Binding IssueCreator.AvatarUrl}"/>
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Text="{Binding IssueCreator.Name}" Margin="5,0,0,0"
                            VerticalAlignment="Center"/>
-                    <TextBlock Text="opened this issue at"/>
-                    <TextBlock Text="{Binding IssueCreatedAt}"/>
+                    <TextBlock Text=" opened this issue at" Margin="0,0,5,0"
+                                VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding IssueCreatedAt}" VerticalAlignment="Center"/>
                 </StackPanel>
+
+                <!--Labels -->
                 
-                <!--TODO: Add labels here -->
+                <ListView Grid.Row="3" ItemsSource="{Binding Labels}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" IsHitTestVisible="False"
+                                        IsTapEnabled="False" MinWidth="5" MinHeight="5"
+                                        HorizontalAlignment="Left" Padding="0">
+                                <TextBox Background="{Binding Color, 
+                                    Converter={StaticResource HexToBrushConverter}}"
+                                         Text="{Binding Name}" FontSize="12"
+                                         BorderThickness="0" SelectionHighlightColor="Transparent"
+                                         MinWidth="2" MinHeight="2"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                                          IsReadOnly="True" TextAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <my:MarkdownTextBlock Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" 
+                                      Markdown="{Binding IssueBody}"/>
                 
-                <my:MarkdownTextBlock Grid.Row="3" Grid.Column="0" Markdown="{Binding IssueBody}"/>
-                <TextBlock Text="{Binding AssignedUser}" Grid.Row="4" Grid.Column="0"
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding}" Grid.Row="5" Grid.Column="0"
-                           VerticalAlignment="Center"/>
+                <!-- TODO: Add usercontrol for comments here -->
 
 
             </Grid>
