@@ -50,7 +50,7 @@
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
-                             Text="Issues">
+                             Text="{Binding IssuesHeader}">
         </controls:PageHeader>
 
 

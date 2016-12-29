@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Navigation;
 using GithubUWP.Views;
 using Octokit;
 using Template10.Mvvm;
+using Template10.Utils;
 
 namespace GithubUWP.ViewModels
 {
@@ -22,19 +23,32 @@ namespace GithubUWP.ViewModels
         public int ForkCount { get; set; }
 
         private Repository Repository { get; set; }
+        private long _repositoryId;
 
         //Commands
         private DelegateCommand<ItemClickEventArgs> _issuesClickDelegateCommand;
+        private DelegateCommand<ItemClickEventArgs> _collaboratorsClickDelegateCommand;
+        private DelegateCommand<ItemClickEventArgs> _stargazersClickDelegateCommand;
 
         public DelegateCommand<ItemClickEventArgs> IssuesClickDelegateCommand
             => _issuesClickDelegateCommand ?? (_issuesClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToIssues));
+
+        public DelegateCommand<ItemClickEventArgs> CollaboratorsClickDelegateCommand
+            =>
+                _collaboratorsClickDelegateCommand ??
+                (_collaboratorsClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToCollaborators));
+
+        public DelegateCommand<ItemClickEventArgs> StargazersClickDelegateCommand
+            =>
+                _stargazersClickDelegateCommand ??
+                (_stargazersClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToStarGazers));
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             Busy.SetBusy(true,"Getting Details of Repository");
             Repository = SessionState.Get<Repository>(parameter.ToString());
-            SessionState.Remove(parameter.ToString());
             RepositoryId = Repository.Id;
+            _repositoryId = Repository.Id;
             RepositoryName = Repository.FullName;
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
@@ -64,6 +78,24 @@ namespace GithubUWP.ViewModels
             const string key = nameof(Repository);
             SessionState.Add(key, Repository);
             await NavigationService.NavigateAsync(typeof(Views.IssuesPage), key);
+        }
+
+        private async void GoToStarGazers(ItemClickEventArgs obj)
+        {
+            var starredClient = new StarredClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+            var starredUsers = await starredClient.GetAllStargazers(_repositoryId);
+            const string key = nameof(starredUsers);
+            SessionState.Add(key, starredUsers.ToObservableCollection());
+            await NavigationService.NavigateAsync(typeof(Views.UsersPage), key);
+        }
+
+        private async void GoToCollaborators(ItemClickEventArgs obj)
+        {
+            var collaboratorsClient = new RepoCollaboratorsClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+            var collaborators = await collaboratorsClient.GetAll(_repositoryId);
+            const string key = nameof(collaborators);
+            SessionState.Add(key, collaborators.ToObservableCollection());
+            await NavigationService.NavigateAsync(typeof(Views.UsersPage), key);
         }
     }
 }

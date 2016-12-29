@@ -56,8 +56,19 @@ namespace GithubUWP.ViewModels
             if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);
-
-                var currentUser = await client.User.Current();
+                User currentUser;
+                if (parameter != null && SessionState.Get<User>(parameter.ToString()) != null)
+                {
+                    var passedUser = SessionState.Get<User>(parameter.ToString());
+                    var usersClient = new UsersClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+                    currentUser = await usersClient.Get(passedUser.Login);
+                }
+                else
+                {
+                    currentUser = await client.User.Current();
+                    AccountPlan = currentUser.Plan.Name;
+                    AccountType = currentUser.Type.ToString();
+                }
                 DisplayName = currentUser.Name;
                 UserName = currentUser.Login;
                 Location = currentUser.Location;
@@ -77,8 +88,6 @@ namespace GithubUWP.ViewModels
                 TotalGists = (currentUser.PrivateGists + currentUser.PublicGists).ToString();
                 PrivateRepos = currentUser.TotalPrivateRepos.ToString();
                 PublicRepos = currentUser.PublicRepos.ToString();
-                AccountPlan = currentUser.Plan.Name;
-                AccountType = currentUser.Type.ToString();
             }
 
             RaisePropertyChanged(string.Empty);

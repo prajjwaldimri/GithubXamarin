@@ -148,18 +148,20 @@
 
                 <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" 
                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                        Command="{Binding CollaboratorsClickDelegateCommand}"
                     Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                       Glyph="&#xf341;"/>
-                            <TextBlock Text="Contributors" Margin="10,0,0,0" />
+                            <TextBlock Text="Collaborators" Margin="10,0,0,0" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
 
                 <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                        Command="{Binding StargazersClickDelegateCommand}"
                     Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">

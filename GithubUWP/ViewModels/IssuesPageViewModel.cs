@@ -16,6 +16,8 @@ namespace GithubUWP.ViewModels
 {
     public class IssuesPageViewModel : ViewModelBase
     {
+        public string IssuesHeader { get; set; }
+
         public ObservableCollection<Issue> IssuesList { get; set; }
 
         private DelegateCommand<ItemClickEventArgs> _issueClickDelegateCommand;
@@ -45,12 +47,15 @@ namespace GithubUWP.ViewModels
                 //Checks if the request for Issues page came from hamburger menu or from other page.
                 if (parameter!=null && SessionState.Get<Repository>(parameter.ToString()) != null)
                 {
+                    var repository = SessionState.Get<Repository>(parameter.ToString());
                     var issuesClient = new IssuesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
-                    issues = await issuesClient.GetAllForRepository(SessionState.Get<Repository>(parameter.ToString()).Id);
+                    issues = await issuesClient.GetAllForRepository(repository.Id);
+                    IssuesHeader = $"Issues in {repository.Name}";
                 }
                 else
                 {
                     issues = await client.Issue.GetAllForCurrent();
+                    IssuesHeader = "Issues";
                 }
                 IssuesList = issues.ToObservableCollection();
             }
