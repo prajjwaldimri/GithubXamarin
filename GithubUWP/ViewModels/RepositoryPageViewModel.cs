@@ -30,6 +30,11 @@ namespace GithubUWP.ViewModels
         private DelegateCommand<ItemClickEventArgs> _forksClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _collaboratorsClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _stargazersClickDelegateCommand;
+        private DelegateCommand<ItemClickEventArgs> _starredToggledDelegateCommand;
+
+        //Toggle Button States
+        public bool IsStarred { get; set; }
+        
 
         public DelegateCommand<ItemClickEventArgs> IssuesClickDelegateCommand
             => _issuesClickDelegateCommand ?? (_issuesClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToIssues));
@@ -49,13 +54,21 @@ namespace GithubUWP.ViewModels
                 _stargazersClickDelegateCommand ??
                 (_stargazersClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToStarGazers));
 
+        public DelegateCommand<ItemClickEventArgs> StarredToggledDelegateCommand
+            =>
+                _starredToggledDelegateCommand ??
+                (_starredToggledDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ToggleStarredStatus));
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             Busy.SetBusy(true,"Getting Details of Repository");
-            Repository = SessionState.Get<Repository>(parameter.ToString());
-            RepositoryId = Repository.Id;
-            _repositoryId = Repository.Id;
-            RepositoryName = Repository.FullName;
+            await RepositoryDetailsRefresher(SessionState.Get<Repository>(parameter.ToString()));
+            Busy.SetBusy(false);
+            SessionState.Remove(parameter.ToString());
+        }
+
+        private async Task RepositoryDetailsRefresher(Repository repository)
+        {
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -66,20 +79,25 @@ namespace GithubUWP.ViewModels
                 client = new GitHubClient(new ProductHeaderValue("githubuwp"));
                 SessionState.Add("GitHubClient", client);
             }
+            var repoClient = new RepositoriesClient(new ApiConnection(client.Connection));
+            Repository = repoClient.Get(repository.Id).Result;
+            RepositoryId = Repository.Id;
+            _repositoryId = Repository.Id;
+            RepositoryName = Repository.FullName;
             RepositoryOwner = Repository.Owner.Login;
             RepositoryWebsite = Repository.Homepage;
             RepositoryDescription = Repository.Description;
             StarCount = Repository.StargazersCount;
             ForkCount = Repository.ForksCount;
-            RaisePropertyChanged(String.Empty);
-            Busy.SetBusy(false);
-            SessionState.Remove(parameter.ToString());
-        }
 
-        /// <summary>
-        /// Goes To the issue page
-        /// </summary>
-        /// <param name="obj"></param>
+            /* StarredClient requires authorized request hence the client.Connection part.
+            https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository */
+
+            var starClient = new StarredClient(new ApiConnection(client.Connection));
+            IsStarred = await starClient.CheckStarred(RepositoryOwner, Repository.Name);
+            RaisePropertyChanged(String.Empty);
+        }
+        
         private async void GoToIssues(ItemClickEventArgs obj)
         {
             const string key = nameof(Repository);
@@ -110,6 +128,37 @@ namespace GithubUWP.ViewModels
             const string key = nameof(collaborators);
             SessionState.Add(key, collaborators.ToObservableCollection());
             await NavigationService.NavigateAsync(typeof(Views.UsersPage), key);
+        }
+
+        private async void ToggleStarredStatus(ItemClickEventArgs obj)
+        {
+            //TODO: Get Authenticated client in cases where no client is present instead of returning
+            if (!(SessionState.Get<GitHubClient>("GitHubClient") != null)) return;
+            GitHubClient client;
+            client = SessionState.Get<GitHubClient>("GitHubClient");
+            var starredClient = new StarredClient(new ApiConnection(client.Connection));
+            if (IsStarred == false)
+            {
+                await starredClient.StarRepo(RepositoryOwner, Repository.Name);
+            }
+            else
+            {
+                await starredClient.RemoveStarFromRepo(RepositoryOwner, Repository.Name);
+            }
+            IsStarred = await starredClient.CheckStarred(RepositoryOwner, Repository.Name);
+            await RepositoryDetailsRefresher(Repository);
+        }
+
+        private async void ForkRepository(ItemClickEventArgs obj)
+        {
+            //TODO: Get Authenticated client in cases where no client is present instead of returning
+            if (!(SessionState.Get<GitHubClient>("GitHubClient") != null)) return;
+            GitHubClient client;
+            client = SessionState.Get<GitHubClient>("GitHubClient");
+            var forksClient = new RepositoryForksClient(new ApiConnection(client.Connection));
+            //TODO: Give option to create fork for organization
+            await forksClient.Create(Repository.Id, new NewRepositoryFork());
+            await RepositoryDetailsRefresher(Repository);
         }
     }
 }

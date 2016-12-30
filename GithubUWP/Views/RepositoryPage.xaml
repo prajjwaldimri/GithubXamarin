@@ -8,6 +8,8 @@
     xmlns:vm="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
     xmlns:universalMarkdown="using:UniversalMarkdown"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -56,29 +58,30 @@
 
                 <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Margin="0,0,5,20"
                         HorizontalAlignment="Stretch">
-                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Button.Content>
+                    <ToggleButton HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  IsChecked="{Binding IsStarred}" Command="{Binding StarredToggledDelegateCommand}">
+                        <ToggleButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                       Glyph="&#xf24e;"/>
                                 <TextBlock Text="Star" Margin="5,0,0,0"/>
                             </StackPanel>
-                        </Button.Content>
-                    </Button>
+                        </ToggleButton.Content>
+                    </ToggleButton>
                     <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Center"
                            Text="{Binding StarCount}" Style="{StaticResource SubtitleTextBlockStyle}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,0,0,20">
-                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Button.Content>
+                    <ToggleButton HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ToggleButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                       Glyph="&#xf2c0;"/>
                                 <TextBlock Text="Fork" Margin="5,0,0,0"/>
                             </StackPanel>
-                        </Button.Content>
-                    </Button>
+                        </ToggleButton.Content>
+                    </ToggleButton>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                            Text="{Binding ForkCount}" Style="{StaticResource SubtitleTextBlockStyle}"/>
                 </StackPanel>
