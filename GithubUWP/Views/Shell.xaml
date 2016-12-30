@@ -29,6 +29,21 @@
                                Text="Home" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+            
+            <!-- Search Button -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:SearchResultsPage">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Width="48"
+                                Height="48"
+                                Glyph="&#xf21f;" 
+                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Search" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            
+            
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NotificationsPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Width="48" Name="NotificationIcon"
@@ -73,17 +88,7 @@
                                Text="Gists" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Width="48"
-                                Height="48"
-                                Glyph="&#xf21f;" 
-                              FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Search" />
-                </StackPanel>
-            </Controls:HamburgerButtonInfo>
+            
         </Controls:HamburgerMenu.PrimaryButtons>
 
 

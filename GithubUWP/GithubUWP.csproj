@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\READMEPageViewModel.cs" />
     <Compile Include="ViewModels\ReleasesPageViewModel.cs" />
     <Compile Include="ViewModels\RepositoriesPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\RepositoryPageViewModel.cs" />
     <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
@@ -162,6 +163,9 @@
     </Compile>
     <Compile Include="Views\RepositoryPage.xaml.cs">
       <DependentUpon>RepositoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResultsPage.xaml.cs">
+      <DependentUpon>SearchResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -308,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RepositoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchResultsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

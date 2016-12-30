@@ -42,7 +42,6 @@
 
         </ResourceDictionary>
         
-        
     </Application.Resources>
 
 </common:BootStrapper>

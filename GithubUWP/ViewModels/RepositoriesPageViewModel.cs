@@ -78,12 +78,12 @@ namespace GithubUWP.ViewModels
         /// Navigates to the RepositoryPage when an Item is clicked on ListView
         /// </summary>
         /// <param name="itemClickEventArgs"></param>
-        private void ExecuteNavigation(ItemClickEventArgs itemClickEventArgs)
+        private async void ExecuteNavigation(ItemClickEventArgs itemClickEventArgs)
         {
             var clickedRepository = (Repository)itemClickEventArgs.ClickedItem;
             const string key = nameof(clickedRepository);
             SessionState.Add(key, clickedRepository);
-            NavigationService.Navigate(typeof(Views.RepositoryPage), key);
+            await NavigationService.NavigateAsync(typeof(Views.RepositoryPage), key);
         }
     }
 }
