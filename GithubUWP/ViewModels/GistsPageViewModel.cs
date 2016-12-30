@@ -20,7 +20,7 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Views.Busy.SetBusy(true,"Gettings Gists");
+            Views.Busy.SetBusy(true, "Gettings Gists");
             //Initializing Octokit
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)

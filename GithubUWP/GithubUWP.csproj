@@ -118,6 +118,7 @@
     <Compile Include="UserControls\ShowDetailsControl.xaml.cs">
       <DependentUpon>ShowDetailsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FilePageViewModel.cs" />
     <Compile Include="ViewModels\GistsPageViewModel.cs" />
     <Compile Include="ViewModels\IssuePageViewModel.cs" />
     <Compile Include="ViewModels\IssuesPageViewModel.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModels\UsersPageViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilePage.xaml.cs">
+      <DependentUpon>FilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GistsPage.xaml.cs">
       <DependentUpon>GistsPage.xaml</DependentUpon>
@@ -274,6 +278,10 @@
     <Page Include="Views\Busy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GistsPage.xaml">
       <SubType>Designer</SubType>

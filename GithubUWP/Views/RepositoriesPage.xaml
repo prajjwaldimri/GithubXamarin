@@ -50,18 +50,16 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0">
-                            <Rectangle VerticalAlignment="Stretch" Margin="2"
-                                       Width="2" Fill="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
-                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource  SubtitleTextBlockStyle}"  
-                                           FontWeight="Bold" Text="{Binding Name}"/>
+                        <StackPanel HorizontalAlignment="Stretch" Padding="15"
+                                    VerticalAlignment="Center">
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"  
+                                           Text="{Binding Name}"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                                <TextBlock Text="{Binding Description}"
+                            <TextBlock Text="{Binding Description}" Margin="0,5,0,0"
                                            Style="{StaticResource BaseTextBlockStyle}"/>
-                            </StackPanel>
+                            
 
                             <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                                 <TextBlock Text="{Binding Language}" Margin="0,0,10,0"
@@ -73,7 +71,7 @@
                                            Style="{StaticResource CaptionTextBlockStyle}"/>
                                 <TextBlock Text="Last Updated at:" Margin="10,0,2,0"
                                            Style="{StaticResource CaptionTextBlockStyle}"/>
-                                <TextBlock Text="{Binding UpdatedAt.Date}"
+                                <TextBlock Text="{Binding UpdatedAt.DateTime}"
                                            Style="{StaticResource CaptionTextBlockStyle}"/>
                             </StackPanel>
 

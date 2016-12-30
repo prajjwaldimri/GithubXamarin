@@ -11,6 +11,14 @@
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
         }
       },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2089,6 +2097,14 @@
         },
         "runtime": {
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
+        }
+      },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -4249,6 +4265,14 @@
         },
         "runtime": {
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
+        }
+      },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -6450,6 +6474,14 @@
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
         }
       },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -8617,6 +8649,14 @@
         },
         "runtime": {
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
+        }
+      },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -10827,6 +10867,14 @@
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
         }
       },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -12994,6 +13042,14 @@
         },
         "runtime": {
           "lib/uap10.0/AmazingPullToRefresh.dll": {}
+        }
+      },
+      "ColorCode.Portable/1.0.3": {
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -15208,6 +15264,15 @@
         "lib/uap10.0/AmazingPulltoRefresh/AmazingPullToRefresh.xr.xml",
         "lib/uap10.0/AmazingPulltoRefresh/Properties/AmazingPullToRefresh.rd.xml",
         "lib/uap10.0/AmazingPulltoRefresh/Themes/Generic.xbf"
+      ]
+    },
+    "ColorCode.Portable/1.0.3": {
+      "sha512": "GYX9N87XT7L2+/SL3OFSxFn2tKnnsmhBkCXrn3o+R2mKTLD2R/PuSasBnsfa0tSSiXNjs8pxVPxI13kU0j28qA==",
+      "type": "package",
+      "files": [
+        "ColorCode.Portable.1.0.3.nupkg.sha512",
+        "ColorCode.Portable.nuspec",
+        "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll"
       ]
     },
     "Microsoft.CSharp/4.0.1": {
@@ -21471,6 +21536,7 @@
   "projectFileDependencyGroups": {
     "": [
       "AmazingPullToRefresh >= 0.9.0",
+      "ColorCode.Portable >= 1.0.3",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
       "Microsoft.Xaml.Behaviors.Uwp.Managed >= 2.0.0",
       "Newtonsoft.Json >= 9.0.1",

@@ -52,7 +52,7 @@
 
                 <TextBlock Text="{Binding IssueState}" VerticalAlignment="Center
                            " Grid.Row="0" Grid.Column="0"/>
-                
+
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="{Binding IssueTitle}" VerticalAlignment="Center"
                                FontWeight="SemiBold"
@@ -60,7 +60,7 @@
                     <TextBlock Text="#" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding IssueNumber}" VerticalAlignment="Center"/>
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0"
                             VerticalAlignment="Stretch">
                     <Rectangle Height="40" Width="40">
@@ -76,33 +76,30 @@
                 </StackPanel>
 
                 <!--Labels -->
-                
+
                 <ListView Grid.Row="3" ItemsSource="{Binding Labels}">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"></StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                                        IsTapEnabled="False" IsHitTestVisible="False"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" IsHitTestVisible="False"
-                                        IsTapEnabled="False" MinWidth="5" MinHeight="5"
-                                        HorizontalAlignment="Left" Padding="0">
-                                <TextBox Background="{Binding Color, 
-                                    Converter={StaticResource HexToBrushConverter}}"
-                                         Text="{Binding Name}" FontSize="12"
-                                         BorderThickness="0" SelectionHighlightColor="Transparent"
-                                         MinWidth="2" MinHeight="2"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center"
-                                          IsReadOnly="True" TextAlignment="Center"/>
-                            </StackPanel>
+                                <TextBox Text="{Binding Name}" FontSize="14" IsReadOnly="True"
+                                         SelectionHighlightColor="Transparent" AcceptsReturn="False"
+                                         IsHitTestVisible="False" IsTapEnabled="False"
+                                         MinWidth="0" MinHeight="0" TextAlignment="Center" 
+                                         Background="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
+                                         BorderBrush="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
+                                         VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <my:MarkdownTextBlock Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" 
                                       Markdown="{Binding IssueBody}"/>
-                
+
                 <!-- TODO: Add usercontrol for comments here -->
 
 

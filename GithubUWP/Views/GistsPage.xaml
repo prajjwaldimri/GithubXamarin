@@ -8,7 +8,7 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:GithubUWP.ViewModels"
     mc:Ignorable="d">
-    
+
     <Page.DataContext>
         <vm:GistsPageViewModel/>
     </Page.DataContext>
@@ -27,38 +27,35 @@
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
-            
+
             <ListView ItemsSource="{Binding GistList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Stretch">
-                            <Rectangle VerticalAlignment="Stretch" Margin="2"
-                                       Width="2" Fill="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Stretch" Padding="10">
+
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                                 <TextBlock/>
-                                <TextBlock FontSize="20" FontWeight="Bold"
+                                <TextBlock Style="{StaticResource BaseTextBlockStyle}" 
                                            Text="{Binding Id}"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
-                                <TextBlock FontSize="16" Text="{Binding Description}"/>
-                            </StackPanel>
+                            <TextBlock Text="{Binding Description}" Margin="0,5,0,0"
+                                       Style="{StaticResource CaptionTextBlockStyle}"/>
 
-                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                          Glyph="&#xf134;" Margin="0,0,1,0"/>
-                                <TextBlock Text="{Binding Files.Count}" Margin="0,0,10,0"/>
+                                          Glyph="&#xf134;" Margin="0,0,1,0" FontSize="14"/>
+                                <TextBlock Text="{Binding Files.Count}" Margin="0,0,10,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                          Glyph="&#xf11c;" Margin="0,0,1,0"/>
-                                <TextBlock Text="{Binding Comments}" Margin="0,0,10,0"/>
+                                          Glyph="&#xf11c;" Margin="0,0,1,0" FontSize="14"/>
+                                <TextBlock Text="{Binding Comments}" Margin="3,0,10,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                          Glyph="&#xf2c0;" Margin="0,0,1,0"/>
-                                <TextBlock Text="{Binding Forks.Count}"/>
+                                          Glyph="&#xf2c0;" Margin="0,0,1,0" FontSize="14"/>
+                                <TextBlock Text="{Binding Forks.Count}" Margin="3,0,0,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
                             </StackPanel>
-                            
-                            <Rectangle HorizontalAlignment="Stretch" Margin="1" Height="1"
-                                        Stroke="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
-
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

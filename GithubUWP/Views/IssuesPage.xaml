@@ -113,6 +113,7 @@
                                     <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
                                            Text="{Binding Repository.FullName}" Margin="5,0,0,0"/>
                                 </StackPanel>
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
