@@ -123,6 +123,8 @@
     <Compile Include="ViewModels\IssuesPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NotificationsPageViewModel.cs" />
+    <Compile Include="ViewModels\READMEPageViewModel.cs" />
+    <Compile Include="ViewModels\ReleasesPageViewModel.cs" />
     <Compile Include="ViewModels\RepositoriesPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\RepositoryPageViewModel.cs" />
@@ -148,6 +150,12 @@
     </Compile>
     <Compile Include="Views\NotificationsPage.xaml.cs">
       <DependentUpon>NotificationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\READMEPage.xaml.cs">
+      <DependentUpon>READMEPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReleasesPage.xaml.cs">
+      <DependentUpon>ReleasesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RepositoriesPage.xaml.cs">
       <DependentUpon>RepositoriesPage.xaml</DependentUpon>
@@ -284,6 +292,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NotificationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\READMEPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReleasesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

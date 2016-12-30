@@ -31,11 +31,12 @@ namespace GithubUWP.ViewModels
         private DelegateCommand<ItemClickEventArgs> _collaboratorsClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _stargazersClickDelegateCommand;
         private DelegateCommand<ItemClickEventArgs> _starredToggledDelegateCommand;
+        private DelegateCommand<ItemClickEventArgs> _goToReadmeDelegateCommand;
 
         //Toggle Button States
         public bool IsStarred { get; set; }
-        
 
+        #region PublicCommands
         public DelegateCommand<ItemClickEventArgs> IssuesClickDelegateCommand
             => _issuesClickDelegateCommand ?? (_issuesClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToIssues));
 
@@ -58,6 +59,13 @@ namespace GithubUWP.ViewModels
             =>
                 _starredToggledDelegateCommand ??
                 (_starredToggledDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ToggleStarredStatus));
+
+        public DelegateCommand<ItemClickEventArgs> GoToReadmeDelegateCommand
+            =>
+                _goToReadmeDelegateCommand ??
+                (_goToReadmeDelegateCommand = new DelegateCommand<ItemClickEventArgs>(GoToReadme));
+
+        #endregion
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -159,6 +167,13 @@ namespace GithubUWP.ViewModels
             //TODO: Give option to create fork for organization
             await forksClient.Create(Repository.Id, new NewRepositoryFork());
             await RepositoryDetailsRefresher(Repository);
+        }
+
+        private async void GoToReadme(ItemClickEventArgs obj)
+        {
+            const string key = nameof(Repository);
+            SessionState.Add(key, Repository);
+            await NavigationService.NavigateAsync(typeof(Views.READMEPage), key);
         }
     }
 }
