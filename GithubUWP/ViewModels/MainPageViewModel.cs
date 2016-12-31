@@ -4,9 +4,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Template10.Services.NavigationService;
@@ -31,6 +33,13 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
+            //Check for internet connectivity
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                var messageDialog = new MessageDialog("No Internet Connection!");
+                await messageDialog.ShowAsync();
+                return;
+            }
             //Initializing Octokit
             Views.Busy.SetBusy(true,"Getting your activities");
             GitHubClient client;

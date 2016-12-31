@@ -10,6 +10,8 @@ using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
+using System.Net.NetworkInformation;
+using Windows.UI.Popups;
 
 namespace GithubUWP.ViewModels
 {
@@ -20,6 +22,13 @@ namespace GithubUWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //Check for internet connectivity
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                var messageDialog = new MessageDialog("No Internet Connection!");
+                await messageDialog.ShowAsync();
+                return;
+            }
             Views.Busy.SetBusy(true, "Gettings Gists");
             //Initializing Octokit
             GitHubClient client;

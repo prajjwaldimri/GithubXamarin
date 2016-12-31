@@ -10,6 +10,8 @@ using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
+using System.Net.NetworkInformation;
+using Windows.UI.Popups;
 
 namespace GithubUWP.ViewModels
 {
@@ -69,6 +71,13 @@ namespace GithubUWP.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //Check for internet connectivity
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                var messageDialog = new MessageDialog("No Internet Connection!");
+                await messageDialog.ShowAsync();
+                return;
+            }
             SearchIndex = 0;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -116,6 +125,13 @@ namespace GithubUWP.ViewModels
 
         private async void GoSearch()
         {
+            //Check for internet connectivity
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                var messageDialog = new MessageDialog("No Internet Connection!");
+                await messageDialog.ShowAsync();
+                return;
+            }
             Views.Busy.SetBusy(true,"Searching...");
             if (string.IsNullOrWhiteSpace(SearchText)) return;
             var searchClient = new SearchClient(new ApiConnection(_client.Connection));

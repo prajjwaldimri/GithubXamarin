@@ -8,6 +8,8 @@ using ColorCode;
 using ColorCode.Compilation.Languages;
 using Template10.Mvvm;
 using Octokit;
+using System.Net.NetworkInformation;
+using Windows.UI.Popups;
 
 namespace GithubUWP.ViewModels
 {
@@ -18,6 +20,13 @@ namespace GithubUWP.ViewModels
         
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //Check for internet connectivity
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                var messageDialog = new MessageDialog("No Internet Connection!");
+                await messageDialog.ShowAsync();
+                return;
+            }
             Views.Busy.SetBusy(true, "Getting Content of File");
             
             GitHubClient client;
