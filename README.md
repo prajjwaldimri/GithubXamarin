@@ -1,5 +1,5 @@
-# GithubUWP
-An UWP application for https://github.com
+# GithubXamarin
+GithubXamarin is a cross platform application for https://github.com which is built with Xamarin.
 
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/GithubUWP/Lobby)
 [![Build status](https://ci.appveyor.com/api/projects/status/ud7on9hsorejkbys?svg=true)](https://ci.appveyor.com/project/prajjwaldimri/githubuwp)
