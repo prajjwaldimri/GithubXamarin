@@ -50,7 +50,6 @@ namespace GithubUWP.ViewModels
             IssueCreator = issue.User;
             CommentsCount = issue.Comments;
             RaisePropertyChanged(string.Empty);
-            SessionState.Remove(parameter.ToString());
             return Task.CompletedTask;
         }
     }

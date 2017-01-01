@@ -62,7 +62,6 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
                 <uwptoolkit:PullToRefreshListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch"
@@ -119,7 +118,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </uwptoolkit:PullToRefreshListView>
-            </ScrollViewer>
         </Grid>
     </RelativePanel>
 </Page>

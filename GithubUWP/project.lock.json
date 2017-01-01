@@ -11,6 +11,14 @@
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2324,6 +2332,14 @@
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -4616,6 +4632,14 @@
         },
         "runtime": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -6951,6 +6975,14 @@
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -9252,6 +9284,14 @@
         },
         "runtime": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -11596,6 +11636,14 @@
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
         }
       },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -13897,6 +13945,14 @@
         },
         "runtime": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
+        }
+      },
+      "Conditions/2.1.0": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.1": {
@@ -16241,6 +16297,15 @@
         "ColorCode.Portable.1.0.3.nupkg.sha512",
         "ColorCode.Portable.nuspec",
         "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll"
+      ]
+    },
+    "Conditions/2.1.0": {
+      "sha512": "G+3ICZRoP74arXejCSXVmsBkZLAMsY6WXRyAhwo03pwncS5sYRJiXhCeern1LUsZjicMvW6RjouzHdrpWo0Tgw==",
+      "type": "package",
+      "files": [
+        "Conditions.2.1.0.nupkg.sha512",
+        "Conditions.nuspec",
+        "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10/Conditions.dll"
       ]
     },
     "Microsoft.CSharp/4.0.1": {
@@ -22718,6 +22783,7 @@
   "projectFileDependencyGroups": {
     "": [
       "ColorCode.Portable >= 1.0.3",
+      "Conditions >= 2.1.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
       "Microsoft.Toolkit.Uwp >= 1.2.0",
       "Microsoft.Toolkit.Uwp.Notifications >= 1.2.0",

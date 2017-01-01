@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "ColorCode.Portable": "1.0.3",
+    "Conditions": "2.1.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Microsoft.Toolkit.Uwp": "1.2.0",
     "Microsoft.Toolkit.Uwp.Notifications": "1.2.0",

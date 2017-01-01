@@ -38,7 +38,6 @@
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
                 <uwptoolkit:PullToRefreshListView x:Name="ListView" 
                           ItemsSource="{Binding FeedList}" HorizontalAlignment="Stretch" 
@@ -76,25 +75,24 @@
                                     </Rectangle.Fill>
                                 </Rectangle>
 
-                                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
-                                TextTrimming="WordEllipsis"  Text="{Binding Actor.Login}"
+                                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                           TextWrapping="NoWrap" Text="{Binding Actor.Login}"
                                        Margin="10,0,0,0" VerticalAlignment="Center" IsTapEnabled="True"
                                            Style="{StaticResource BaseTextBlockStyle}"/>
                                 
                                 <TextBlock Grid.Row="1" Grid.Column="2" Margin="3,0,0,0"
-                                TextTrimming="WordEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"
+                                           TextWrapping="NoWrap" VerticalAlignment="Center"
                                        Style="{StaticResource BaseTextBlockStyle}"
                                        Text="{Binding Converter={StaticResource EventToSentenceConverter}}"/>
                                 
-                                <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
-                                       TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
+                                <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" 
+                                           TextWrapping="NoWrap" Text="{Binding Repo.Name}"
                                        Style="{StaticResource BaseTextBlockStyle}"
                                        VerticalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </uwptoolkit:PullToRefreshListView>
-            </ScrollViewer>
 
             <usercontrols:ShowDetailsControl x:Name="DetailsControl" 
                                              Visibility="{Binding ShowDetailControl, 
