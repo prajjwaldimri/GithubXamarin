@@ -69,7 +69,7 @@ namespace GithubUWP.ViewModels
         #endregion
 
 
-        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //Check for internet connectivity
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -88,7 +88,6 @@ namespace GithubUWP.ViewModels
                 _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
                 SessionState.Add("GitHubClient", _client);
             }
-            return Task.CompletedTask;
         }
 
         private Task VisibilityUpdater()

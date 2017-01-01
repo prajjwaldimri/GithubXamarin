@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -32,13 +33,15 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ListView ItemsSource="{Binding Users}" IsItemClickEnabled="True" SelectionMode="None">
-                
-                <Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="ItemClick">
-                        <Core:InvokeCommandAction Command="{Binding OnUserClickDelegateCommand}"/>
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+            <uwptoolkit:PullToRefreshListView ItemsSource="{Binding Users}" IsItemClickEnabled="True"
+                                   SelectionMode="Single" RefreshCommand="{Binding PullToRefreshDelegateCommand}">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="ItemClick">
+                        <core:InvokeCommandAction Command="{Binding OnUserClickDelegateCommand}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" 
@@ -55,7 +58,7 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </uwptoolkit:PullToRefreshListView>
 
         </Grid>
     </RelativePanel>

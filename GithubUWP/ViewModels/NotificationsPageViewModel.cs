@@ -17,7 +17,12 @@ namespace GithubUWP.ViewModels
 {
     public class NotificationsPageViewModel : ViewModelBase
     {
+        private DelegateCommand _pullToReDelegateCommand;
+
         public ObservableCollection<Notification> NotificationList { get; set; }
+
+        public DelegateCommand PullToRefreshDelegateCommand
+            => _pullToReDelegateCommand ?? (_pullToReDelegateCommand = new DelegateCommand(Refresh));
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -28,6 +33,13 @@ namespace GithubUWP.ViewModels
                 await messageDialog.ShowAsync();
                 return;
             }
+            Views.Busy.SetBusy(true,"Getting your notifications...");
+            await GetNotifications();
+            Views.Busy.SetBusy(false);
+        }
+
+        private async Task GetNotifications()
+        {
             GitHubClient client;
             //Check to see if a client already exists in the session and if not then create a new one and add it to the current session.
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
@@ -48,8 +60,12 @@ namespace GithubUWP.ViewModels
                 var notifications = await client.Activity.Notifications.GetAllForCurrent();
                 NotificationList = notifications.ToObservableCollection();
             }
-
             RaisePropertyChanged(String.Empty);
+        }
+
+        private async void Refresh()
+        {
+            await GetNotifications();
         }
     }
 }

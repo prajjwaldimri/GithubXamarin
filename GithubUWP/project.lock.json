@@ -3,14 +3,6 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -43,6 +35,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -252,6 +277,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2088,17 +2185,137 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/winsdkfb.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb.pri": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/Controls/FacebookLoginButton.xbf": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/FacebookDialog.xbf": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/FacebookProfilePictureControl.xbf": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/Images/fb_blank_profile_portrait.png": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/Themes/Generic.xbf": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/winsdkfb/Themes/Styles.xbf": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/winsdkfb.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb.pri": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/Controls/FacebookLoginButton.xbf": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/FacebookDialog.xbf": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/FacebookProfilePictureControl.xbf": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/Images/fb_blank_profile_portrait.png": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/Themes/Generic.xbf": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/winsdkfb/Themes/Styles.xbf": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/winsdkfb.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb.pri": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/Controls/FacebookLoginButton.xbf": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/FacebookDialog.xbf": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/FacebookProfilePictureControl.xbf": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/Images/fb_blank_profile_portrait.png": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/Themes/Generic.xbf": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/winsdkfb/Themes/Styles.xbf": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -2131,6 +2348,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -2287,6 +2537,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -4256,17 +4578,38 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/winsdkfb.dll": {},
+          "runtimes/win10-arm/native/winsdkfb.pri": {},
+          "runtimes/win10-arm/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-arm/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -4299,6 +4642,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -4456,6 +4832,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -6463,17 +6911,38 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/winsdkfb.dll": {},
+          "runtimes/win10-arm/native/winsdkfb.pri": {},
+          "runtimes/win10-arm/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-arm/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-arm/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -6506,6 +6975,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -6666,6 +7168,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -8640,17 +9214,38 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/winsdkfb.dll": {},
+          "runtimes/win10-x64/native/winsdkfb.pri": {},
+          "runtimes/win10-x64/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-x64/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -8683,6 +9278,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -8844,6 +9472,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -10856,17 +11556,38 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/winsdkfb.dll": {},
+          "runtimes/win10-x64/native/winsdkfb.pri": {},
+          "runtimes/win10-x64/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-x64/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-x64/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -10899,6 +11620,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -11059,6 +11813,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -13033,17 +13859,38 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/winsdkfb.dll": {},
+          "runtimes/win10-x86/native/winsdkfb.pri": {},
+          "runtimes/win10-x86/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-x86/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "AmazingPullToRefresh/0.9.0": {
-        "compile": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        },
-        "runtime": {
-          "lib/uap10.0/AmazingPullToRefresh.dll": {}
-        }
-      },
       "ColorCode.Portable/1.0.3": {
         "compile": {
           "lib/portable45-net45+win8+wp8+wpa81/ColorCode.dll": {}
@@ -13076,6 +13923,39 @@
         },
         "runtime": {
           "lib/netcore50/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Graph/1.1.1": {
+        "dependencies": {
+          "Microsoft.Graph.Core": "1.2.1",
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll": {}
+        }
+      },
+      "Microsoft.Graph.Core/1.2.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "[6.0.1, 10.0.0)"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+        "compile": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
+          "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
       "Microsoft.NETCore/5.0.2": {
@@ -13237,6 +14117,78 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+        "dependencies": {
+          "Microsoft.Graph": "1.1.1",
+          "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.13.7",
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Newtonsoft.Json": "9.0.1",
+          "winsdkfb": "0.12.20161020.4"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -15249,23 +16201,39 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "winsdkfb/0.12.20161020.4": {
+        "compile": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "runtime": {
+          "lib/win10/winsdkfb.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/winsdkfb.dll": {},
+          "runtimes/win10-x86/native/winsdkfb.pri": {},
+          "runtimes/win10-x86/native/winsdkfb/Controls/FacebookLoginButton.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/FacebookDialog.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/FacebookProfilePictureControl.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/Images/fb_blank_profile_portrait.png": {},
+          "runtimes/win10-x86/native/winsdkfb/Themes/Generic.xbf": {},
+          "runtimes/win10-x86/native/winsdkfb/Themes/Styles.xbf": {}
+        }
       }
     }
   },
   "libraries": {
-    "AmazingPullToRefresh/0.9.0": {
-      "sha512": "9lbbpLSEFRzlMCVgRh9uBGlyHKAIp0ZRKUSuRC2I3LHMd8AM+qR4ec3vJ/XgfTXVxm4LmnNZjWEpMetZJF6gEw==",
-      "type": "package",
-      "files": [
-        "AmazingPullToRefresh.0.9.0.nupkg.sha512",
-        "AmazingPullToRefresh.nuspec",
-        "lib/uap10.0/AmazingPullToRefresh.dll",
-        "lib/uap10.0/AmazingPullToRefresh.pri",
-        "lib/uap10.0/AmazingPulltoRefresh/AmazingPullToRefresh.xr.xml",
-        "lib/uap10.0/AmazingPulltoRefresh/Properties/AmazingPullToRefresh.rd.xml",
-        "lib/uap10.0/AmazingPulltoRefresh/Themes/Generic.xbf"
-      ]
-    },
     "ColorCode.Portable/1.0.3": {
       "sha512": "GYX9N87XT7L2+/SL3OFSxFn2tKnnsmhBkCXrn3o+R2mKTLD2R/PuSasBnsfa0tSSiXNjs8pxVPxI13kU0j28qA==",
       "type": "package",
@@ -15330,6 +16298,62 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
+      ]
+    },
+    "Microsoft.Graph/1.1.1": {
+      "sha512": "AhVlAzDTo8qikv5kjpveYj8N+B6gWgcGJcfba5mJDDqJsE4GdzfybbD8FzXR075AvKyIhTKLPsGjPPevySLCJg==",
+      "type": "package",
+      "files": [
+        "Microsoft.Graph.1.1.1.nupkg.sha512",
+        "Microsoft.Graph.nuspec",
+        "lib/MonoAndroid10/Microsoft.Graph.dll",
+        "lib/MonoTouch10/Microsoft.Graph.dll",
+        "lib/Xamarin.Mac20/Microsoft.Graph.dll",
+        "lib/Xamarin.iOS10/Microsoft.Graph.dll",
+        "lib/portable45-net45+win8+wpa81/Microsoft.Graph.dll"
+      ]
+    },
+    "Microsoft.Graph.Core/1.2.1": {
+      "sha512": "ZVfBio42uIrKT7P2AmUDb5FQiY27hayaeJ1aSj3eocRojkqs15dcjk6+iuVb2qxgK2Re3raJHE31BZUK/+mB/A==",
+      "type": "package",
+      "files": [
+        "Microsoft.Graph.Core.1.2.1.nupkg.sha512",
+        "Microsoft.Graph.Core.nuspec",
+        "lib/MonoAndroid10/Microsoft.Graph.Core.dll",
+        "lib/MonoTouch10/Microsoft.Graph.Core.dll",
+        "lib/Xamarin.Mac20/Microsoft.Graph.Core.dll",
+        "lib/Xamarin.iOS10/Microsoft.Graph.Core.dll",
+        "lib/portable45-net45+win8+wpa81/Microsoft.Graph.Core.dll"
+      ]
+    },
+    "Microsoft.IdentityModel.Clients.ActiveDirectory/3.13.7": {
+      "sha512": "XGiN0mBDFMCETSh3A9g00qz75uBQmnqbTpRjue7ljxsEACruTLiyNcvH+jWsX1CbR6NMogblHxcLQa/KMFqjDg==",
+      "type": "package",
+      "files": [
+        "Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.7.nupkg.sha512",
+        "Microsoft.IdentityModel.Clients.ActiveDirectory.nuspec",
+        "lib/MonoAndroid10/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.XML",
+        "lib/MonoAndroid10/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll",
+        "lib/MonoAndroid10/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/MonoAndroid10/Microsoft.IdentityModel.Clients.ActiveDirectory.dll",
+        "lib/Xamarin.iOS10/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.XML",
+        "lib/Xamarin.iOS10/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll",
+        "lib/Xamarin.iOS10/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/Xamarin.iOS10/Microsoft.IdentityModel.Clients.ActiveDirectory.dll",
+        "lib/net45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.XML",
+        "lib/net45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll",
+        "lib/net45/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/net45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll",
+        "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.XML",
+        "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll",
+        "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.dll",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.XML",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Clients.ActiveDirectory.dll",
+        "lib/portable-net45+win/Microsoft.IdentityModel.Clients.ActiveDirectory.XML",
+        "lib/portable-net45+win/Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
       ]
     },
     "Microsoft.NETCore/5.0.2": {
@@ -15496,6 +16520,103 @@
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.json"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp/1.2.0": {
+      "sha512": "YZZTfjWNLV3PZ770PtgxxcPRE0ej4S1lLrdOZbCs62OA9Gt0EJOowvwXElPDTBNozn9JtgVZZKn4aBrAlWZ7og==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.Notifications/1.2.0": {
+      "sha512": "YbCSSxNytBG+WWHsvyvnPupE2W2r4IiXogpy0HJ9yhF5qoC1SpgGnYR772fg25ny2fqG1q13NIy8ULYx8Y7zBg==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.Notifications.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.Notifications.nuspec",
+        "build/native/Microsoft.Toolkit.Uwp.Notifications.targets",
+        "lib/dotnet/Microsoft.Toolkit.Uwp.Notifications.dll",
+        "lib/dotnet/Microsoft.Toolkit.Uwp.Notifications.pdb",
+        "lib/dotnet/Microsoft.Toolkit.Uwp.Notifications.xml",
+        "lib/native/Microsoft.Toolkit.Uwp.Notifications.pdb",
+        "lib/native/Microsoft.Toolkit.Uwp.Notifications.pri",
+        "lib/native/Microsoft.Toolkit.Uwp.Notifications.winmd",
+        "lib/native/Microsoft.Toolkit.Uwp.Notifications.winmd.xml",
+        "lib/native/Microsoft.Toolkit.Uwp.Notifications.xml",
+        "lib/portable-net40+sl50+win+wpa81+wp80/Microsoft.Toolkit.Uwp.Notifications.dll",
+        "lib/portable-net40+sl50+win+wpa81+wp80/Microsoft.Toolkit.Uwp.Notifications.pdb",
+        "lib/portable-net40+sl50+win+wpa81+wp80/Microsoft.Toolkit.Uwp.Notifications.xml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.Services/1.2.0": {
+      "sha512": "MLC4NvyssHQ2jR3Re9BEqHaOzAQwHW8S+zF722dTEOxeMpkwIPj7+SbaGPP5zfc+lbT/NAoe+d9lQ0YBpTpLsw==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.Services.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.Services.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.Services.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "sha512": "G534s6yLmM8T18uSghrte0MuHrde84wEajhwsfocBZYZ88VvLuJRoPVcgpB8RwSst9pLv2nqSBbN82PThXyYGA==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "sha512": "uitHw6qNyo7z28FrGV5a+LDBxLBt39gZEyUQpYdelhO6hzHKzbjEO2FJWSLQohFH04DkMv4hT9DcZOFXLFg0bQ==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.Animations.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.Animations.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "sha512": "MrDNHZm3Dfq6pWikiRLE9tJESb/jZMrnkCALNySLoxATdOTiQNaK1GOMBawvv6pWIaPwqevYpIO2v2JjqS12WA==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.Controls.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.Controls.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.xml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/BladeView/BladeView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/DropShadowPanel/DropShadowPanel.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/GridSplitter/GridSplitter.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HamburgerMenu/HamburgerMenu.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HeaderedTextBlock/HeaderedTextBlock.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/ImageEx/ImageEx.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/MasterDetailsView/MasterDetailsView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Microsoft.Toolkit.Uwp.UI.Controls.xr.xml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/PullToRefreshListView/PullToRefreshListView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RadialGauge/RadialGauge.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RangeSelector/RangeSelector.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RotatorTile/RotatorTile.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/SlidableListItem/SlidableListItem.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Themes/Generic.xaml"
       ]
     },
     "Microsoft.VisualBasic/10.0.1": {
@@ -21531,13 +22652,79 @@
         "lib/uap10.0/Template10Library/Themes/PageHeader.xaml",
         "lib/uap10.0/Template10Library/Themes/Resizer.xaml"
       ]
+    },
+    "Win2D.uwp/1.18.0": {
+      "sha512": "qPRgHJF9l7vKLyM/adOjUHE9OE90nYFCpa3/IOaBu1lMyiMwcfXyV2JEri+beNir0eo7luzz8dRBpyBIkjK9qw==",
+      "type": "package",
+      "files": [
+        "Win2D.uwp.1.18.0.nupkg.sha512",
+        "Win2D.uwp.nuspec",
+        "Win2d.githash.txt",
+        "build/native/Win2D.uwp.targets",
+        "include/Microsoft.Graphics.Canvas.h",
+        "include/Microsoft.Graphics.Canvas.native.h",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
+        "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
+      ]
+    },
+    "winsdkfb/0.12.20161020.4": {
+      "sha512": "0R+Hl3eVI3jMxrE5IIj0sMomH4/dYsaeLlGkHKDnakNsSBlvtoteC876XfJK+XZ/l5Sc554LmtdBfyBdlCFzZQ==",
+      "type": "package",
+      "files": [
+        "build/native/winsdkfb.targets",
+        "lib/win10/design/winsdkfb.dll",
+        "lib/win10/design/winsdkfb.pri",
+        "lib/win10/winsdkfb.pri",
+        "lib/win10/winsdkfb.winmd",
+        "lib/win10/winsdkfb/Controls/FacebookLoginButton.xbf",
+        "lib/win10/winsdkfb/FacebookDialog.xbf",
+        "lib/win10/winsdkfb/FacebookProfilePictureControl.xbf",
+        "lib/win10/winsdkfb/Images/fb_blank_profile_portrait.png",
+        "lib/win10/winsdkfb/Themes/Generic.xbf",
+        "lib/win10/winsdkfb/Themes/Styles.xbf",
+        "runtimes/win10-arm/native/winsdkfb.dll",
+        "runtimes/win10-arm/native/winsdkfb.pri",
+        "runtimes/win10-arm/native/winsdkfb/Controls/FacebookLoginButton.xbf",
+        "runtimes/win10-arm/native/winsdkfb/FacebookDialog.xbf",
+        "runtimes/win10-arm/native/winsdkfb/FacebookProfilePictureControl.xbf",
+        "runtimes/win10-arm/native/winsdkfb/Images/fb_blank_profile_portrait.png",
+        "runtimes/win10-arm/native/winsdkfb/Themes/Generic.xbf",
+        "runtimes/win10-arm/native/winsdkfb/Themes/Styles.xbf",
+        "runtimes/win10-x64/native/winsdkfb.dll",
+        "runtimes/win10-x64/native/winsdkfb.pri",
+        "runtimes/win10-x64/native/winsdkfb/Controls/FacebookLoginButton.xbf",
+        "runtimes/win10-x64/native/winsdkfb/FacebookDialog.xbf",
+        "runtimes/win10-x64/native/winsdkfb/FacebookProfilePictureControl.xbf",
+        "runtimes/win10-x64/native/winsdkfb/Images/fb_blank_profile_portrait.png",
+        "runtimes/win10-x64/native/winsdkfb/Themes/Generic.xbf",
+        "runtimes/win10-x64/native/winsdkfb/Themes/Styles.xbf",
+        "runtimes/win10-x86/native/winsdkfb.dll",
+        "runtimes/win10-x86/native/winsdkfb.pri",
+        "runtimes/win10-x86/native/winsdkfb/Controls/FacebookLoginButton.xbf",
+        "runtimes/win10-x86/native/winsdkfb/FacebookDialog.xbf",
+        "runtimes/win10-x86/native/winsdkfb/FacebookProfilePictureControl.xbf",
+        "runtimes/win10-x86/native/winsdkfb/Images/fb_blank_profile_portrait.png",
+        "runtimes/win10-x86/native/winsdkfb/Themes/Generic.xbf",
+        "runtimes/win10-x86/native/winsdkfb/Themes/Styles.xbf",
+        "winsdkfb.0.12.20161020.4.nupkg.sha512",
+        "winsdkfb.githash.txt",
+        "winsdkfb.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "AmazingPullToRefresh >= 0.9.0",
       "ColorCode.Portable >= 1.0.3",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
+      "Microsoft.Toolkit.Uwp >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.Notifications >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.Services >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.UI >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.UI.Animations >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.UI.Controls >= 1.2.0",
       "Microsoft.Xaml.Behaviors.Uwp.Managed >= 2.0.0",
       "Newtonsoft.Json >= 9.0.1",
       "Octokit >= 0.23.0",

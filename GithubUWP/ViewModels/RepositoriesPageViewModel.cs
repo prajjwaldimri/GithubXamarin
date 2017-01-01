@@ -17,12 +17,14 @@ using Template10.Services.PopupService;
 using Template10.Utils;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
+using Template10.Services.NavigationService;
 
 namespace GithubUWP.ViewModels
 {
     public class RepositoriesPageViewModel : ViewModelBase
     {
         private DelegateCommand<ItemClickEventArgs> _repositoryClickDelegateCommand;
+        private DelegateCommand _pullToRefreshDelegateCommand;
 
         public string RepositoriesPageHeader { get; set; }
         public DelegateCommand<ItemClickEventArgs> RepositoryClickDelegateCommand
@@ -30,12 +32,26 @@ namespace GithubUWP.ViewModels
             _repositoryClickDelegateCommand ??
             (_repositoryClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ExecuteNavigation));
 
+        //PullToRefresh Command
+        public DelegateCommand PullToRefreshDelegateCommand
+            =>
+                _pullToRefreshDelegateCommand ??
+                (_pullToRefreshDelegateCommand = new DelegateCommand(RefreshList));
+
+        
         /// <summary>
         /// Binds to the ListView on Repositories Page
         /// </summary>
         public ObservableCollection<Repository> RepositoriesList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            Views.Busy.SetBusy(true, "Getting your repositories");
+            await GetRepositories(parameter);
+            Views.Busy.SetBusy(false, string.Empty);
+        }
+
+        private async Task GetRepositories(object parameter = null)
         {
             //Check for internet connectivity
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -44,7 +60,7 @@ namespace GithubUWP.ViewModels
                 await messageDialog.ShowAsync();
                 return;
             }
-            Views.Busy.SetBusy(true, "Getting your repositories");
+            
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -64,10 +80,9 @@ namespace GithubUWP.ViewModels
                 IReadOnlyList<Repository> repositories;
                 if (parameter != null && SessionState.Get<Repository>(parameter.ToString()) != null)
                 {
-                    var repository= SessionState.Get<Repository>(parameter.ToString());
+                    var repository = SessionState.Get<Repository>(parameter.ToString());
                     var repoClient = new RepositoriesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
                     repositories = await repoClient.Forks.GetAll(repository.Id);
-                    SessionState.Remove(parameter.ToString());
                     RepositoriesPageHeader = $"Forks for {repository.FullName}";
                 }
                 else
@@ -77,12 +92,10 @@ namespace GithubUWP.ViewModels
                 }
                 RepositoriesList = repositories.ToObservableCollection();
             }
-
-
             RaisePropertyChanged(String.Empty);
-            Views.Busy.SetBusy(false);
         }
 
+        
         /// <summary>
         /// Navigates to the RepositoryPage when an Item is clicked on ListView
         /// </summary>
@@ -91,8 +104,19 @@ namespace GithubUWP.ViewModels
         {
             var clickedRepository = (Repository)itemClickEventArgs.ClickedItem;
             const string key = nameof(clickedRepository);
+            if (SessionState.ContainsKey(key) == true)
+            {
+                SessionState.Remove(key);
+            }
             SessionState.Add(key, clickedRepository);
             await NavigationService.NavigateAsync(typeof(Views.RepositoryPage), key);
+        }
+
+        private async void RefreshList()
+        {
+            Views.Busy.SetBusy(true,"Refreshing");
+            await GetRepositories();
+            Views.Busy.SetBusy(false,string.Empty);
         }
     }
 }

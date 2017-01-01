@@ -12,19 +12,25 @@ using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
 using Windows.UI.Popups;
+using System.Net.NetworkInformation;
 
 namespace GithubUWP.ViewModels
 {
     public class IssuesPageViewModel : ViewModelBase
     {
-        public string IssuesHeader { get; set; }
-
-        public ObservableCollection<Issue> IssuesList { get; set; }
-
+        private object _parameter;
         private DelegateCommand<ItemClickEventArgs> _issueClickDelegateCommand;
+        private DelegateCommand _pullToRefreshDelegateCommand;
 
         public DelegateCommand<ItemClickEventArgs> IssueClickDelegateCommand
             => _issueClickDelegateCommand ?? (_issueClickDelegateCommand = new DelegateCommand<ItemClickEventArgs>(ExecuteNavigation));
+
+        public DelegateCommand PullToRefreshDelegateCommand
+            => _pullToRefreshDelegateCommand ?? (_pullToRefreshDelegateCommand = new DelegateCommand(Refresh));
+
+        public string IssuesHeader { get; set; }
+
+        public ObservableCollection<Issue> IssuesList { get; set; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -36,6 +42,25 @@ namespace GithubUWP.ViewModels
                 return;
             }
             Views.Busy.SetBusy(true, "Getting your issues");
+            _parameter = parameter;
+            await GetIssues();
+            Views.Busy.SetBusy(false);
+        }
+
+        private async void ExecuteNavigation(ItemClickEventArgs obj)
+        {
+            var issue = (Issue)obj.ClickedItem;
+            const string key = nameof(issue);
+            if (SessionState.ContainsKey(key) == true)
+            {
+                SessionState.Remove(key);
+            }
+            SessionState.Add(key, issue);
+            await NavigationService.NavigateAsync(typeof(Views.IssuePage), key);
+        }
+
+        private async Task GetIssues()
+        {
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -51,15 +76,15 @@ namespace GithubUWP.ViewModels
             if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);
-                IReadOnlyList<Issue> issues; 
+                IReadOnlyList<Issue> issues;
                 //Checks if the request for Issues page came from hamburger menu or from other page.
-                if (parameter!=null && SessionState.Get<Repository>(parameter.ToString()) != null)
+                if (_parameter != null && SessionState.Get<Repository>(_parameter.ToString()) != null)
                 {
-                    var repository = SessionState.Get<Repository>(parameter.ToString());
-                    var issuesClient = new IssuesClient(new ApiConnection(new Connection(new ProductHeaderValue("githubuwp"))));
+                    var repository = SessionState.Get<Repository>(_parameter.ToString());
+                    var issuesClient = new IssuesClient(new ApiConnection(client.Connection));
                     issues = await issuesClient.GetAllForRepository(repository.Id);
                     IssuesHeader = $"Issues in {repository.Name}";
-                    SessionState.Remove(parameter.ToString());
+                    SessionState.Remove(_parameter.ToString());
                 }
                 else
                 {
@@ -70,15 +95,11 @@ namespace GithubUWP.ViewModels
             }
 
             RaisePropertyChanged(String.Empty);
-            Views.Busy.SetBusy(false);
         }
 
-        private async void ExecuteNavigation(ItemClickEventArgs obj)
+        private async void Refresh()
         {
-            var issue = (Issue)obj.ClickedItem;
-            const string key = nameof(issue);
-            SessionState.Add(key, issue);
-            await NavigationService.NavigateAsync(typeof(Views.IssuePage), key);
+            await GetIssues();
         }
 
     }

@@ -5,6 +5,7 @@
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GithubUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,11 +30,6 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
                              Text="Activity Central">
-            <controls:PageHeader.SecondaryCommands>
-                <AppBarButton>
-                    <TextBlock Text="About"/>
-                </AppBarButton>
-            </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
         <Grid EntranceNavigationTransitionInfo.IsTargetElement="True"
@@ -42,9 +38,9 @@
                        RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.Below="pageHeader">
 
-            <ScrollViewer  HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
-                <ListView x:Name="ListView" 
+                <uwptoolkit:PullToRefreshListView x:Name="ListView" 
                           ItemsSource="{Binding FeedList}" HorizontalAlignment="Stretch" 
                           IsItemClickEnabled="True" IsTapEnabled="True"
                       HorizontalContentAlignment="Stretch">
@@ -58,10 +54,10 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
@@ -83,21 +79,13 @@
                                 <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap"
                                 TextTrimming="WordEllipsis"  Text="{Binding Actor.Login}"
                                        Margin="10,0,0,0" VerticalAlignment="Center" IsTapEnabled="True"
-                                           Style="{StaticResource BaseTextBlockStyle}">
-                                    
-                                    <interactivity:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="Tapped">
-                                            <core:InvokeCommandAction 
-                                                Command="{Binding ElementName= ListView, 
-                                                Path=DataContext.ActivityDelegateCommand}"/>
-                                        </core:EventTriggerBehavior>
-                                    </interactivity:Interaction.Behaviors>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"
+                                           Style="{StaticResource BaseTextBlockStyle}"/>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="2" Margin="3,0,0,0"
                                 TextTrimming="WordEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                           Text="{Binding 
-                                    Converter={StaticResource EventToSentenceConverter}}"/>
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       Text="{Binding Converter={StaticResource EventToSentenceConverter}}"/>
+                                
                                 <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" TextWrapping="NoWrap"
                                        TextTrimming="WordEllipsis" Text="{Binding Repo.Name}"
                                        Style="{StaticResource BaseTextBlockStyle}"
@@ -105,7 +93,7 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                </uwptoolkit:PullToRefreshListView>
             </ScrollViewer>
 
             <usercontrols:ShowDetailsControl x:Name="DetailsControl" 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
+using GithubUWP.Views;
 
 namespace GithubUWP.ViewModels
 {
@@ -14,6 +15,7 @@ namespace GithubUWP.ViewModels
         public string READMEContent { get; set; }
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Busy.SetBusy(true,"Downloading...");
             GitHubClient client;
             if (SessionState.Get<GitHubClient>("GitHubClient") != null)
             {
@@ -28,7 +30,7 @@ namespace GithubUWP.ViewModels
             var repoContent = new RepositoryContentsClient(new ApiConnection(client.Connection));
             READMEContent = (await repoContent.GetReadme(repository.Id)).Content; 
             RaisePropertyChanged(string.Empty);
-            SessionState.Remove(parameter.ToString());
+            Busy.SetBusy(false);
         }
     }
 }

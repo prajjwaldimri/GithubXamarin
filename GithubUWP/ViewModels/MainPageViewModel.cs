@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
 using Template10.Common;
+using Template10.Controls;
 using Template10.Utils;
 
 namespace GithubUWP.ViewModels
@@ -23,11 +24,14 @@ namespace GithubUWP.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private DelegateCommand<TappedRoutedEventArgs> _activityClickDelegateCommand;
+        private DelegateCommand _pullToRefreshDelegateCommand;
 
         public DelegateCommand<TappedRoutedEventArgs> ActivityDelegateCommand
             =>
-            _activityClickDelegateCommand ?? (_activityClickDelegateCommand = new DelegateCommand<TappedRoutedEventArgs>(ExecuteNavigation))
-        ;
+            _activityClickDelegateCommand ?? (_activityClickDelegateCommand = new DelegateCommand<TappedRoutedEventArgs>(ExecuteNavigation));
+
+        public DelegateCommand PullToRefreshDelegateCommand
+            => _pullToRefreshDelegateCommand ?? (_pullToRefreshDelegateCommand = new DelegateCommand(Refresh));
 
         public ObservableCollection<Activity> FeedList { get; set; }
 
@@ -42,6 +46,12 @@ namespace GithubUWP.ViewModels
             }
             //Initializing Octokit
             Views.Busy.SetBusy(true,"Getting your activities");
+            await GetActivities();
+            Views.Busy.SetBusy(false);
+        }
+
+        private async Task GetActivities()
+        {
             GitHubClient client;
             try
             {
@@ -62,7 +72,7 @@ namespace GithubUWP.ViewModels
             }
             await HelpingWorker.RoamingLoggedInKeyVerifier();
             var passwordCredential = HelpingWorker.VaultAccessTokenRetriever();
-            if (passwordCredential!=null)
+            if (passwordCredential != null)
             {
                 client.Credentials = new Credentials(passwordCredential.Password);
 
@@ -72,12 +82,17 @@ namespace GithubUWP.ViewModels
                 //If in any case retrieves any unread notification remove it from the List.
             }
             RaisePropertyChanged(String.Empty);
-            Views.Busy.SetBusy(false);
         }
-
         private void ExecuteNavigation(TappedRoutedEventArgs tappedRoutedEventArgs)
         {
             //Have to handle the navigation based on the type of Object
+        }
+
+        private async void Refresh()
+        {
+            Views.Busy.SetBusy(true,"Refreshing");
+            await GetActivities();
+            Views.Busy.SetBusy(false);
         }
     }
 }

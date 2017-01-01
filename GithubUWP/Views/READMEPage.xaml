@@ -11,12 +11,26 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
-    
+
     <Page.DataContext>
         <vm:READMEPageViewModel/>
     </Page.DataContext>
 
-    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <universalMarkdown:MarkdownTextBlock Markdown="{Binding READMEContent}" Padding="10"/>
-    </ScrollViewer>
+    <RelativePanel>
+
+        <controls:PageHeader x:Name="PageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="README">
+        </controls:PageHeader>
+
+        <ScrollViewer RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.Below="PageHeader" Padding="10">
+
+            <universalMarkdown:MarkdownTextBlock Markdown="{Binding READMEContent}" Padding="10"/>
+        </ScrollViewer>
+    </RelativePanel>
 </Page>

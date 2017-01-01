@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:GithubUWP.Services.Converters"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -63,7 +64,7 @@
 
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
-                <ListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
+                <uwptoolkit:PullToRefreshListView ItemsSource="{Binding IssuesList}" SelectionMode="Single" 
                       IsItemClickEnabled="True" HorizontalAlignment="Stretch"
                       HorizontalContentAlignment="Stretch">
 
@@ -117,7 +118,7 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                </uwptoolkit:PullToRefreshListView>
             </ScrollViewer>
         </Grid>
     </RelativePanel>

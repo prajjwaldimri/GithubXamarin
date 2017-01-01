@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -28,9 +29,12 @@
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
-
-            <ListView ItemsSource="{Binding NotificationList}" SelectionMode="None" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
+            
+            <uwptoolkit:PullToRefreshListView ItemsSource="{Binding NotificationList}" 
+                                              SelectionMode="None" IsItemClickEnabled="True" 
+                                              HorizontalAlignment="Stretch" 
+                                              Padding="5"
+                                              RefreshCommand="{Binding PullToRefreshDelegateCommand}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10,0,0,0">
@@ -60,7 +64,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </uwptoolkit:PullToRefreshListView>
 
             <!--TODO: Add image or text that says no unread notifications -->
 

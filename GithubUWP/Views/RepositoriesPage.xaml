@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:GithubUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
@@ -33,21 +34,16 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.Below="PageHeader">
 
-            <ListView xmlns:uwp="using:AmazingPullToRefresh.Controls" x:Name="MainListView" ItemsSource="{Binding RepositoriesList}" SelectionMode="None" 
-                      IsItemClickEnabled="True" HorizontalAlignment="Stretch">
-
-
-                <uwp:PullToRefreshAdorner.Extender>
-                    <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
-                </uwp:PullToRefreshAdorner.Extender>
-
+            <uwptoolkit:PullToRefreshListView x:Name="MainListView" ItemsSource="{Binding RepositoriesList}"
+                          SelectionMode="Single" IsItemClickEnabled="True" HorizontalAlignment="Stretch"
+                                              RefreshCommand="{Binding PullToRefreshDelegateCommand}">
 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="ItemClick">
                         <core:InvokeCommandAction Command="{Binding RepositoryClickDelegateCommand}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-
+                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel HorizontalAlignment="Stretch" Padding="15"
@@ -56,10 +52,10 @@
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"  
                                            Text="{Binding Name}"/>
                             </StackPanel>
-
+                            
                             <TextBlock Text="{Binding Description}" Margin="0,5,0,0"
                                            Style="{StaticResource BaseTextBlockStyle}"/>
-                            
+
 
                             <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                                 <TextBlock Text="{Binding Language}" Margin="0,0,10,0"
@@ -78,7 +74,8 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </uwptoolkit:PullToRefreshListView>
         </Grid>
     </RelativePanel>
 </Page>
+

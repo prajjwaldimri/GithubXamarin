@@ -28,12 +28,5 @@ namespace GithubUWP.Views
         {
             this.InitializeComponent();
         }
-
-        private async void PullToRefreshExtender_RefreshRequested(object sender, AmazingPullToRefresh.Controls.RefreshRequestedEventArgs e)
-        {
-            var deferral = e.GetDeferral();
-            await Task.Delay(2500); // something
-            deferral.Complete();
-        }
     }
 }

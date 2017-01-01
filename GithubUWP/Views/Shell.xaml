@@ -117,7 +117,11 @@
                                 VerticalAlignment="Bottom" Margin="0,20,0,0">
                         <Ellipse Width="24" Height="24" VerticalAlignment="Center">
                             <Ellipse.Fill>
-                                <ImageBrush x:Name="ProfileButtonImage" />
+                                <ImageBrush x:Name="ProfileButtonImage">
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage DecodePixelHeight="24" DecodePixelWidth="24"/>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
                             </Ellipse.Fill>
                         </Ellipse>
                     </StackPanel>
