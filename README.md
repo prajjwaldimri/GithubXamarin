@@ -1,5 +1,8 @@
-# GithubXamarin
-GithubXamarin is a cross platform application for https://github.com which is built with Xamarin.
+<img src="https://cdn.rawgit.com/prajjwaldimri/GithubXamarin/master/GithubUWP/Assets/GitItLogoBl.svg" height="150" width="150"/>
+
+# GithubXamarin a.k.a. GitIt 
+
+GithubXamarin(or GitIt) is a cross platform application for https://github.com which is built with Xamarin.
 
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/GithubUWP/Lobby)
 [![Build status](https://ci.appveyor.com/api/projects/status/ud7on9hsorejkbys?svg=true)](https://ci.appveyor.com/project/prajjwaldimri/githubuwp)
