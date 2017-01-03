@@ -1,4 +1,6 @@
-# GithubXamarin a.k.a. GitIt <img src="https://cdn.rawgit.com/prajjwaldimri/GithubXamarin/master/GithubUWP/Assets/GitItLogoBl.svg" height="50" width="50"/>
+<img src="https://cdn.rawgit.com/prajjwaldimri/GithubXamarin/master/GithubUWP/Assets/GitItLogoBl.svg" height="150" width="150"/>
+
+# GithubXamarin a.k.a. GitIt 
 
 GithubXamarin(or GitIt) is a cross platform application for https://github.com which is built with Xamarin.
 
