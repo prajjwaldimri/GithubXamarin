@@ -10,6 +10,7 @@
     "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0",
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.2.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
+    "MvvmCross": "4.4.0",
     "Newtonsoft.Json": "9.0.1",
     "Octokit": "0.23.0",
     "Template10": "1.1.12"

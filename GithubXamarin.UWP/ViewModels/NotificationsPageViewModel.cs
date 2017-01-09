@@ -12,10 +12,11 @@ using Template10.Mvvm;
 using Template10.Utils;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
+using Template10.Services.NavigationService;
 
 namespace GithubUWP.ViewModels
 {
-    public class NotificationsPageViewModel : ViewModelBase
+    public class NotificationsPageViewModel :  ViewModelBase
     {
         private DelegateCommand _pullToReDelegateCommand;
 
