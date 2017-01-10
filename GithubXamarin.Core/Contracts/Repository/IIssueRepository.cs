@@ -10,9 +10,9 @@ namespace GithubXamarin.Core.Contracts.Repository
 {
     public interface IIssueRepository
     {
-        Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient);
-        Task<IEnumerable<Issue>> GetAllIssuesOfRepository(long repositoryId, GitHubClient authorizedGitHubClient);
-        Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient autohrizedGitHubClient);
         Task<Issue> GetIssueOfRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient);
+        Task<IEnumerable<Issue>> GetAllIssuesOfRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+        Task<IEnumerable<Issue>> GetAllIssuesOfCurrentUser(GitHubClient autohrizedGitHubClient);
+        Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient);
     }
 }

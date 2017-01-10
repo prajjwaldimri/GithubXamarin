@@ -10,6 +10,7 @@ namespace GithubXamarin.Core.Repositories
 {
     public class IssuesRepository : BaseRepository, IIssueRepository
     {
+
         /// <summary>
         /// Gets a single issue in a repository.
         /// </summary>
@@ -28,7 +29,7 @@ namespace GithubXamarin.Core.Repositories
         /// </summary>
         /// <param name="autohrizedGitHubClient"> GithubClient object that contains credentials.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient autohrizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllIssuesOfCurrentUser(GitHubClient autohrizedGitHubClient)
         {
             return await autohrizedGitHubClient.Issue.GetAllForCurrent();
         }
@@ -54,8 +55,9 @@ namespace GithubXamarin.Core.Repositories
         public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
         {
             var searchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
-            var searchResult =  await searchClient.SearchIssues(new SearchIssuesRequest(searchTerm));
+            var searchResult = await searchClient.SearchIssues(new SearchIssuesRequest(searchTerm));
             return searchResult.Items;
         }
+
     }
 }
