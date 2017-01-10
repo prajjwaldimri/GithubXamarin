@@ -10,24 +10,52 @@ namespace GithubXamarin.Core.Repositories
 {
     public class IssuesRepository : BaseRepository, IIssueRepository
     {
-        public async Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient gitHubClient)
+        /// <summary>
+        /// Gets a single issue in a repository.
+        /// </summary>
+        /// <param name="repositoryId"></param>
+        /// <param name="issueNumber"></param>
+        /// <param name="authorizedGitHubClient"></param>
+        /// <returns></returns>
+        public async Task<Issue> GetIssueOfRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
         {
-            throw new NotImplementedException();
+            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            return await issuesClient.Get(repositoryId, issueNumber);
         }
 
-        public async Task<IEnumerable<Issue>> GetIssuesForCurrentUser(GitHubClient gitHubClient)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="autohrizedGitHubClient"> GithubClient object that contains credentials.</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient autohrizedGitHubClient)
         {
-            throw new NotImplementedException();
+            return await autohrizedGitHubClient.Issue.GetAllForCurrent();
         }
 
-        public async Task<IEnumerable<Issue>> GetIssuesForRepository(long repositoryId, GitHubClient gitHubClient)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repositoryId"></param>
+        /// <param name="authorizedGitHubClient"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Issue>> GetAllIssuesOfRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
-            throw new NotImplementedException();
+            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            return await issuesClient.GetAllForRepository(repositoryId);
         }
 
+        /// <summary>
+        /// Searches for issues in the whole git database.
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <param name="gitHubClient">Authorized Clients can also search private and org repos too.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
         {
-            throw new NotImplementedException();
+            var searchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
+            var searchResult =  await searchClient.SearchIssues(new SearchIssuesRequest(searchTerm));
+            return searchResult.Items;
         }
     }
 }
