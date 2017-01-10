@@ -10,9 +10,6 @@ namespace GithubXamarin.Core.Repositories
 {
     public class BaseRepository
     {
-        private GitHubClient GetGithubClient()
-        {
-            
-        }
+        
     }
 }
