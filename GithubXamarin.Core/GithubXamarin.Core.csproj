@@ -38,6 +38,7 @@
     <Compile Include="AppStart.cs" />
     <Compile Include="Contracts\Repository\IIssueRepository.cs" />
     <Compile Include="Contracts\Repository\IRepoRepository.cs" />
+    <Compile Include="Contracts\Repository\IUserRepository.cs" />
     <Compile Include="Contracts\Service\IGithubClientService.cs" />
     <Compile Include="Contracts\Service\IIssueDataService.cs" />
     <Compile Include="Model\DeviceOperatingSystemType.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\IssuesRepository.cs" />
     <Compile Include="Repositories\RepoRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\Data\IssueDataService.cs" />
     <Compile Include="Services\General\GithubClientService.cs" />
   </ItemGroup>
