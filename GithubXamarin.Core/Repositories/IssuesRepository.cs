@@ -8,6 +8,9 @@ using Octokit;
 
 namespace GithubXamarin.Core.Repositories
 {
+    /// <summary>
+    /// https://developer.github.com/v3/issues/
+    /// </summary>
     public class IssuesRepository : BaseRepository, IIssueRepository
     {
 
@@ -18,7 +21,7 @@ namespace GithubXamarin.Core.Repositories
         /// <param name="issueNumber"></param>
         /// <param name="authorizedGitHubClient"></param>
         /// <returns></returns>
-        public async Task<Issue> GetIssueOfRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
+        public async Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
         {
             var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
             return await issuesClient.Get(repositoryId, issueNumber);
@@ -29,7 +32,7 @@ namespace GithubXamarin.Core.Repositories
         /// </summary>
         /// <param name="autohrizedGitHubClient"> GithubClient object that contains credentials.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Issue>> GetAllIssuesOfCurrentUser(GitHubClient autohrizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient autohrizedGitHubClient)
         {
             return await autohrizedGitHubClient.Issue.GetAllForCurrent();
         }
@@ -40,7 +43,7 @@ namespace GithubXamarin.Core.Repositories
         /// <param name="repositoryId"></param>
         /// <param name="authorizedGitHubClient"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<Issue>> GetAllIssuesOfRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
             var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
             return await issuesClient.GetAllForRepository(repositoryId);

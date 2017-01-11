@@ -6,7 +6,7 @@ using Octokit;
 namespace GithubXamarin.Core.Repositories
 {
     /// <summary>
-    /// Note: The name is very ambiguous.
+    /// https://developer.github.com/v3/repos/
     /// </summary>
     public class RepoRepository : IRepoRepository
     {
@@ -16,12 +16,12 @@ namespace GithubXamarin.Core.Repositories
             return await githubClient.Repository.Get(repositoryId);
         }
 
-        public async Task<IEnumerable<Repository>> GetAllRepositoriesOfCurrentUser(GitHubClient authorizedGitHubClient)
+        public async Task<IEnumerable<Repository>> GetAllRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient)
         {
             return await authorizedGitHubClient.Repository.GetAllForCurrent();
         }
 
-        public async Task<IEnumerable<Repository>> GetAllRepositoriesOfUser(string login, GitHubClient gitHubClient)
+        public async Task<IEnumerable<Repository>> GetAllRepositoriesForUser(string login, GitHubClient gitHubClient)
         {
             return await gitHubClient.Repository.GetAllForUser(login);
         }

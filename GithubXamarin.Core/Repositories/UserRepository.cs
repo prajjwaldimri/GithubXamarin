@@ -6,6 +6,9 @@ using Octokit;
 
 namespace GithubXamarin.Core.Repositories
 {
+    /// <summary>
+    /// https://developer.github.com/v3/users/
+    /// </summary>
     public class UserRepository : IUserRepository
     {
         public async Task<User> GetUser(string userLoginId, GitHubClient gitHubClient)
@@ -31,13 +34,13 @@ namespace GithubXamarin.Core.Repositories
             return searchResult.Items;
         }
 
-        public async Task<IEnumerable<User>> GetCollaboratorsOfRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<IEnumerable<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient)
         {
             var repoCollaboratorsClient = new RepoCollaboratorsClient(new ApiConnection(gitHubClient.Connection));
             return await repoCollaboratorsClient.GetAll(repositoryId);
         }
 
-        public async Task<IEnumerable<User>> GetStargazersOfRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<IEnumerable<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient)
         {
             var starredClient = new StarredClient(new ApiConnection(gitHubClient.Connection));
             return await starredClient.GetAllStargazers(repositoryId);
