@@ -42,8 +42,13 @@
     <Compile Include="Contracts\Repository\INotificationRepository.cs" />
     <Compile Include="Contracts\Repository\IRepoRepository.cs" />
     <Compile Include="Contracts\Repository\IUserRepository.cs" />
+    <Compile Include="Contracts\Service\IEventDataService.cs" />
+    <Compile Include="Contracts\Service\IFeedDataService.cs" />
     <Compile Include="Contracts\Service\IGithubClientService.cs" />
     <Compile Include="Contracts\Service\IIssueDataService.cs" />
+    <Compile Include="Contracts\Service\INotificationDataService.cs" />
+    <Compile Include="Contracts\Service\IRepoDataService.cs" />
+    <Compile Include="Contracts\Service\IUserDataService.cs" />
     <Compile Include="Model\DeviceOperatingSystemType.cs" />
     <Compile Include="Model\ModifiedOctokitActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,7 +59,12 @@
     <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\RepoRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\Data\EventDataService.cs" />
+    <Compile Include="Services\Data\FeedDataService.cs" />
     <Compile Include="Services\Data\IssueDataService.cs" />
+    <Compile Include="Services\Data\NotificationDataService.cs" />
+    <Compile Include="Services\Data\RepoDataService.cs" />
+    <Compile Include="Services\Data\UserDataService.cs" />
     <Compile Include="Services\General\GithubClientService.cs" />
   </ItemGroup>
   <ItemGroup>
