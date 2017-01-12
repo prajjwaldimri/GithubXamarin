@@ -1,20 +1,14 @@
-using System.ComponentModel;
-using System.Linq;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
-using Template10.Common;
 using Template10.Controls;
 using Template10.Services.NavigationService;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
-using Template10.Mvvm;
 using Page = Windows.UI.Xaml.Controls.Page;
 
 namespace GithubUWP.Views

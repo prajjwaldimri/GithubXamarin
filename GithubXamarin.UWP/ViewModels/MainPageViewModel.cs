@@ -2,21 +2,13 @@ using Template10.Mvvm;
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
-using Windows.Security.Credentials;
-using Windows.Storage;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
-using Template10.Common;
-using Template10.Controls;
 using Template10.Utils;
 
 namespace GithubUWP.ViewModels

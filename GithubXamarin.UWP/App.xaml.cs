@@ -5,7 +5,6 @@ using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
 using System;
-using System.Linq;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 

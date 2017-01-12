@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Security.Credentials;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
-using Template10.Services.PopupService;
 using Template10.Utils;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
-using Template10.Services.NavigationService;
 
 namespace GithubUWP.ViewModels
 {

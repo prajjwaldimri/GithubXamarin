@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Windows.Security.Credentials;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using GithubUWP.Views;

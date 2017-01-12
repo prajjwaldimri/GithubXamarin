@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GithubXamarin.Core.Contracts.Service;
+﻿using GithubXamarin.Core.Contracts.Service;
 using Octokit;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.Services.General
 {
@@ -20,11 +16,26 @@ namespace GithubXamarin.Core.Services.General
 
         private void RefreshGithubClients()
         {
-            //TODO: Get OAuth using secure mechanisms
-
             UnAuthorizedGitHubClient = new GitHubClient(new ProductHeaderValue("githubuwp"));
-            AuthorizedGithubClient = UnAuthorizedGitHubClient;
-            AuthorizedGithubClient.Credentials = new Credentials("OAuth token");
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                //Uses https://github.com/sameerkapps/SecureStorage
+                var oAuthToken = CrossSecureStorage.Current.GetValue("OAuthToken");
+                AuthorizedGithubClient = UnAuthorizedGitHubClient;
+                AuthorizedGithubClient.Credentials = new Credentials(oAuthToken);
+                return;
+            }
+            AuthorizedGithubClient = null;
+        }
+
+        public GitHubClient GetAuthorizedGithubClient()
+        {
+            return AuthorizedGithubClient;
+        }
+
+        public GitHubClient GetUnAuthorizedGithubClient()
+        {
+            return UnAuthorizedGitHubClient;
         }
     }
 }

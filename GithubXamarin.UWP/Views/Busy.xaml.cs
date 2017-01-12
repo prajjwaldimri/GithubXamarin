@@ -1,11 +1,7 @@
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Template10.Common;
 using Template10.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace GithubUWP.Views
 {
