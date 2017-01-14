@@ -1,4 +1,4 @@
-<img src="https://cdn.rawgit.com/prajjwaldimri/GithubXamarin/master/GithubUWP/Assets/GitItLogoBl.svg" height="150" width="150"/>
+<img src="https://cdn.rawgit.com/prajjwaldimri/GithubXamarin/d955bac0/GithubXamarin.UWP/Assets/GitItLogoBl.svg" height="150" width="150"/>
 
 # GithubXamarin a.k.a. GitIt 
 
