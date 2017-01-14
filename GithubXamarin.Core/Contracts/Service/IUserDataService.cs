@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Octokit;
 using System.Threading.Tasks;
 
@@ -6,10 +7,10 @@ namespace GithubXamarin.Core.Contracts.Service
 {
     public interface IUserDataService
     {
-        Task<User> GetUser(string userLoginId, GitHubClient gitHubClient);
+        Task<User> GetUser(string userLogin, GitHubClient gitHubClient);
         Task<User> GetCurrentUser(GitHubClient authorizedGitHubClient);
-        Task<IEnumerable<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient);
-        Task<IEnumerable<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient);
-        Task<IEnumerable<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient);
+        Task<ObservableCollection<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient);
+        Task<ObservableCollection<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient);
+        Task<ObservableCollection<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient);
     }
 }

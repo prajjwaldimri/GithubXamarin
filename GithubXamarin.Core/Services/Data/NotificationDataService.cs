@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -16,14 +16,14 @@ namespace GithubXamarin.Core.Services.Data
             _notificationRepository = notificationRepository;
         }
 
-        public async Task<IEnumerable<Notification>> GetAllNotificationsForCurrentUser(GitHubClient authorizedGitHubClient)
+        public async Task<ObservableCollection<Notification>> GetAllNotificationsForCurrentUser(GitHubClient authorizedGitHubClient)
         {
-            return await _notificationRepository.GetAllNotificationsForCurrentUser(authorizedGitHubClient);
+            return new ObservableCollection<Notification>(await _notificationRepository.GetAllNotificationsForCurrentUser(authorizedGitHubClient));
         }
 
-        public async Task<IEnumerable<Notification>> GetAllNotificationsForRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<Notification>> GetAllNotificationsForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            return await _notificationRepository.GetAllNotificationsForRepository(repositoryId, gitHubClient);
+            return new ObservableCollection<Notification>(await _notificationRepository.GetAllNotificationsForRepository(repositoryId, gitHubClient));
         }
 
         public async Task<Notification> GetNotificationById(int notificationId, GitHubClient gitHubClient)

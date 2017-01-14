@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -16,24 +16,24 @@ namespace GithubXamarin.Core.Services.Data
             _eventRepository = eventRepository;
         }
 
-        public async Task<IEnumerable<Activity>> GetAllEventsForCurrentUser(GitHubClient authorizedGitHubClient)
+        public async Task<ObservableCollection<Activity>> GetAllEventsForCurrentUser(GitHubClient authorizedGitHubClient)
         {
-            return await _eventRepository.GetAllEventsForCurrentUser(authorizedGitHubClient);
+            return new ObservableCollection<Activity>(await _eventRepository.GetAllEventsForCurrentUser(authorizedGitHubClient));
         }
 
-        public async Task<IEnumerable<Activity>> GetAllEventsOfRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<Activity>> GetAllEventsOfRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            return await _eventRepository.GetAllEventsOfRepository(repositoryId, gitHubClient);
+            return new ObservableCollection<Activity>(await _eventRepository.GetAllEventsOfRepository(repositoryId, gitHubClient));
         }
 
-        public async Task<IEnumerable<Activity>> GetAllPublicEvents(GitHubClient gitHubClient)
+        public async Task<ObservableCollection<Activity>> GetAllPublicEvents(GitHubClient gitHubClient)
         {
-            return await _eventRepository.GetAllPublicEvents(gitHubClient);
+            return new ObservableCollection<Activity>(await _eventRepository.GetAllPublicEvents(gitHubClient));
         }
 
-        public async Task<IEnumerable<Activity>> GetAllPublicEventsForUser(string userLogin, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<Activity>> GetAllPublicEventsForUser(string userLogin, GitHubClient gitHubClient)
         {
-            return await _eventRepository.GetAllPublicEventsForUser(userLogin, gitHubClient);
+            return new ObservableCollection<Activity>(await _eventRepository.GetAllPublicEventsForUser(userLogin, gitHubClient));
         }
     }
 }

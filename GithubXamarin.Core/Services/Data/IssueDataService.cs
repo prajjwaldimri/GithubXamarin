@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -15,14 +15,14 @@ namespace GithubXamarin.Core.Services.Data
             _issueRepository = issueRepository;
         }
 
-        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGithubClient)
+        public async Task<ObservableCollection<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGithubClient)
         {
-            return await _issueRepository.GetAllIssuesForCurrentUser(authorizedGithubClient);
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllIssuesForCurrentUser(authorizedGithubClient));
         }
 
-        public async Task<IEnumerable<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        public async Task<ObservableCollection<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
-            return await _issueRepository.GetAllIssuesForRepository(repositoryId, authorizedGitHubClient);
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllIssuesForRepository(repositoryId, authorizedGitHubClient));
         }
 
         public async Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
@@ -30,9 +30,9 @@ namespace GithubXamarin.Core.Services.Data
             return await _issueRepository.GetIssueForRepository(repositoryId, issueNumber, authorizedGitHubClient);
         }
 
-        public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
         {
-            return await _issueRepository.SearchIssues(searchTerm, gitHubClient);
+            return new ObservableCollection<Issue>(await _issueRepository.SearchIssues(searchTerm, gitHubClient));
         }
     }
 }

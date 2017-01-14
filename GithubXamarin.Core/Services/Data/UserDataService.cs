@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -15,9 +15,9 @@ namespace GithubXamarin.Core.Services.Data
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            return await _userRepository.GetCollaboratorsForRepository(repositoryId, gitHubClient);
+            return new ObservableCollection<User>(await _userRepository.GetCollaboratorsForRepository(repositoryId, gitHubClient));
         }
 
         public async Task<User> GetCurrentUser(GitHubClient authorizedGitHubClient)
@@ -25,19 +25,19 @@ namespace GithubXamarin.Core.Services.Data
             return await _userRepository.GetCurrentUser(authorizedGitHubClient);
         }
 
-        public async Task<IEnumerable<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            return await _userRepository.GetStargazersForRepository(repositoryId, gitHubClient);
+            return new ObservableCollection<User>(await _userRepository.GetStargazersForRepository(repositoryId, gitHubClient));
         }
 
-        public async Task<User> GetUser(string userLoginId, GitHubClient gitHubClient)
+        public async Task<User> GetUser(string userLogin, GitHubClient gitHubClient)
         {
-            return await _userRepository.GetUser(userLoginId, gitHubClient);
+            return await _userRepository.GetUser(userLogin, gitHubClient);
         }
 
-        public async Task<IEnumerable<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient)
+        public async Task<ObservableCollection<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient)
         {
-            return await _userRepository.SearchUsers(searchTerm, gitHubClient);
+            return new ObservableCollection<User>(await _userRepository.SearchUsers(searchTerm, gitHubClient));
         }
     }
 }

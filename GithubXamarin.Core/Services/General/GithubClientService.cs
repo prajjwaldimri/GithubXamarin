@@ -30,11 +30,15 @@ namespace GithubXamarin.Core.Services.General
 
         public GitHubClient GetAuthorizedGithubClient()
         {
+            if (AuthorizedGithubClient == null)
+                RefreshGithubClients();
             return AuthorizedGithubClient;
         }
 
         public GitHubClient GetUnAuthorizedGithubClient()
         {
+            if (UnAuthorizedGitHubClient == null)
+                RefreshGithubClients();
             return UnAuthorizedGitHubClient;
         }
     }

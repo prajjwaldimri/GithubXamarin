@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Octokit;
 
@@ -6,9 +7,9 @@ namespace GithubXamarin.Core.Contracts.Service
 {
     public interface IEventDataService
     {
-        Task<IEnumerable<Activity>> GetAllPublicEvents(GitHubClient gitHubClient);
-        Task<IEnumerable<Activity>> GetAllEventsOfRepository(long repositoryId, GitHubClient gitHubClient);
-        Task<IEnumerable<Activity>> GetAllEventsForCurrentUser(GitHubClient authorizedGitHubClient);
-        Task<IEnumerable<Activity>> GetAllPublicEventsForUser(string userLogin, GitHubClient gitHubClient);
+        Task<ObservableCollection<Activity>> GetAllPublicEvents(GitHubClient gitHubClient);
+        Task<ObservableCollection<Activity>> GetAllEventsOfRepository(long repositoryId, GitHubClient gitHubClient);
+        Task<ObservableCollection<Activity>> GetAllEventsForCurrentUser(GitHubClient authorizedGitHubClient);
+        Task<ObservableCollection<Activity>> GetAllPublicEventsForUser(string userLogin, GitHubClient gitHubClient);
     }
 }
