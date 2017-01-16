@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="Auth0Client">
+  <name>Auth0 SDK</name>
+  <publisher>Auth0</publisher>
+  <publisher-url>http://auth0.com</publisher-url>
+  <version>0.5.0</version>
+  <summary>Add authentication with different sources, either social like Google, Facebook, Twitter, or enterprise like WAAD, Google Apps, AD, ADFS or any SAML Provider.</summary>
+  <samples>
+    <sample id="Xamarin.Auth0Client.iOS.Sample-Classic">
+      <name>iOS Sample (Classic).</name>
+      <summary>Demonstrates Auth0 authentication on iOS (Classic).</summary>
+    </sample>
+    <sample id="Xamarin.Auth0Client.iOS.Sample">
+      <name>iOS Sample (Unified API).</name>
+      <summary>Demonstrates Auth0 authentication on iOS (Unified API).</summary>
+    </sample>
+    <sample id="Xamarin.Auth0Client.Android.Sample">
+      <name>Android Sample.</name>
+      <summary>Demonstrates Auth0 authentication on Android.</summary>
+    </sample>
+  </samples>
+</component>

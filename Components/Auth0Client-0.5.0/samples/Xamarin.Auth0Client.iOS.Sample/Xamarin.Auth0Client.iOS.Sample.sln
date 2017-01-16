@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth0Client.iOS.Sample", "samples\Auth0Client.iOS.Sample\Auth0Client.iOS.Sample.csproj", "{AEABCA29-E9F7-4C17-B25F-3C207827C144}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Release|iPhone.Build.0 = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{6D7BCBB4-FA0D-44E6-BFA3-89D166F4DDCB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Debug|iPhone.Build.0 = Debug|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Release|iPhone.ActiveCfg = Release|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Release|iPhone.Build.0 = Release|iPhone
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{AEABCA29-E9F7-4C17-B25F-3C207827C144}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.TabsToSpaces = False
+		$3.inheritsSet = VisualStudio
+		$3.inheritsScope = text/plain
+		$3.scope = text/plain
+	EndGlobalSection
+EndGlobal

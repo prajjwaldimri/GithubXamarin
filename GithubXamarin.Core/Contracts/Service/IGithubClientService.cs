@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using System.Threading.Tasks;
+using Octokit;
 
 namespace GithubXamarin.Core.Contracts.Service
 {
@@ -6,5 +7,7 @@ namespace GithubXamarin.Core.Contracts.Service
     {
         GitHubClient GetAuthorizedGithubClient();
         GitHubClient GetUnAuthorizedGithubClient();
+        bool LoggedIn();
+        void SaveGithubOAuthToken(string token);
     }
 }

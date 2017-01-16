@@ -1,4 +1,6 @@
 ﻿using System;
+using GithubXamarin.Core.Contracts.Service;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 
 namespace GithubXamarin.Core
@@ -7,8 +9,7 @@ namespace GithubXamarin.Core
     {
         public void Start(object hint = null)
         {
-            //Application setup code
-            throw new NotImplementedException();
+            ShowViewModel<EventsViewModel>();
         }
     }
 }

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="xamandroidsupportv13-18" is-shell="true">
+  <name>Android Support Library v13</name>
+  <publisher>Xamarin Inc.</publisher>
+  <publisher-url>http://xamarin.com</publisher-url>
+  <src-url>https://github.com/xamarin/AndroidSupportComponents</src-url>
+  <version>24.2.1.0</version>
+  <summary>Provide backward-compatible versions of Android framework APIs.</summary>
+  <packages>
+    <package id="Xamarin.Android.Support.v13" version="24.2.1" framework="android" />
+  </packages>
+  <samples>
+    <sample id="AndroidSupportSample">
+      <name>Android Support Sample</name>
+      <summary>Android Support Sample</summary>
+    </sample>
+  </samples>
+</component>

@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.Contracts.Service;
+﻿using System.Threading.Tasks;
+using GithubXamarin.Core.Contracts.Service;
 using Octokit;
 using Plugin.SecureStorage;
 
@@ -11,13 +12,13 @@ namespace GithubXamarin.Core.Services.General
 
         public GithubClientService()
         {
-            RefreshGithubClients();
+            //RefreshGithubClients();
         }
 
         private void RefreshGithubClients()
         {
             UnAuthorizedGitHubClient = new GitHubClient(new ProductHeaderValue("githubuwp"));
-            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            if (LoggedIn())
             {
                 //Uses https://github.com/sameerkapps/SecureStorage
                 var oAuthToken = CrossSecureStorage.Current.GetValue("OAuthToken");
@@ -40,6 +41,21 @@ namespace GithubXamarin.Core.Services.General
             if (UnAuthorizedGitHubClient == null)
                 RefreshGithubClients();
             return UnAuthorizedGitHubClient;
+        }
+
+        public bool LoggedIn()
+        {
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void SaveGithubOAuthToken(string token)
+        {
+            if (!LoggedIn())
+                CrossSecureStorage.Current.SetValue("OAuthToken", token);
         }
     }
 }

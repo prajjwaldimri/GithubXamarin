@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="GithubXamarin.Droid.GithubXamarin.Droid" android:versionCode="1" android:versionName="1.0">
   <uses-sdk android:minSdkVersion="16" />
-  <application android:label="GithubXamarin.Droid"></application>
+  <application android:label="GithubXamarin.Droid" android:icon="@drawable/icon" android:theme="@style/AppTheme"></application>
 </manifest>

@@ -52,6 +52,8 @@
     <Compile Include="Contracts\ViewModel\IEventsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IIssuesViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IIssueViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\ILoginViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IMainViewModel.cs" />
     <Compile Include="Contracts\ViewModel\INotificationsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IRepositoriesViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IRepositoryViewModel.cs" />
@@ -80,6 +82,8 @@
     <Compile Include="ViewModels\EventsViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\IssueViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\RepositoriesViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />
@@ -88,6 +92,18 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Auth0.AuthenticationApi, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Auth0.AuthenticationApi.3.6.0\lib\portable-net45+win8+wpa81\Auth0.AuthenticationApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Auth0.Core, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Auth0.Core.3.6.0\lib\portable-net45+win8+wpa81\Auth0.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Auth0.ManagementApi, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Auth0.ManagementApi.3.6.0\lib\portable-net45+win8+wpa81\Auth0.ManagementApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Binding.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
       <Private>True</Private>
@@ -102,6 +118,10 @@
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Platform.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.WebBrowser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.WebBrowser.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.WebBrowser.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
