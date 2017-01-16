@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GithubXamarin.Core.Contracts.Service;
+﻿using GithubXamarin.Core.Contracts.Service;
 using Octokit;
 using Plugin.SecureStorage;
 

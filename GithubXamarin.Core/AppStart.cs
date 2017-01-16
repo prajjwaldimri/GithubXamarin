@@ -1,6 +1,4 @@
-﻿using System;
-using GithubXamarin.Core.Contracts.Service;
-using GithubXamarin.Core.ViewModels;
+﻿using GithubXamarin.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 
 namespace GithubXamarin.Core

@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<android.support.v4.widget.DrawerLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-  <FrameLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
+  android:fitsSystemWindows="true">
+  
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+    <!-- Actual content of the screen -->
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/content_frame"/>
-</LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/toolbar" />
+  </RelativeLayout>
+  <!-- The menu placeholder -->
+  <android.support.design.widget.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:id="@+id/nav_view"
+            app:headerLayout="@layout/drawer_header"
+            app:menu="@menu/nav_menu"/>
+</android.support.v4.widget.DrawerLayout>

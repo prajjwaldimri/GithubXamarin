@@ -61,6 +61,7 @@
     <Compile Include="Contracts\ViewModel\IUsersViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUserViewModel.cs" />
     <Compile Include="Model\DeviceOperatingSystemType.cs" />
+    <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\ModifiedOctokitActivity.cs" />
     <Compile Include="Model\UsersTypeEnumeration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

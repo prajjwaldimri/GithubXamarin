@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Octokit;
+﻿using Octokit;
 
 namespace GithubXamarin.Core.Contracts.Service
 {

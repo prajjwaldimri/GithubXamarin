@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="xamandroidsupportdesign" is-shell="true">
+  <name>Android Support Design Library</name>
+  <publisher>Xamarin Inc.</publisher>
+  <publisher-url>http://xamarin.com</publisher-url>
+  <src-url>https://github.com/xamarin/AndroidSupportComponents</src-url>
+  <version>24.2.1.0</version>
+  <summary>Provide backward-compatible versions of Android framework APIs.</summary>
+  <packages>
+    <package id="Xamarin.Android.Support.Design" version="24.2.1" framework="android" />
+  </packages>
+  <samples>
+    <sample id="Cheesesquare">
+      <name>Cheesesquare</name>
+      <summary>Cheesesquare</summary>
+    </sample>
+  </samples>
+</component>

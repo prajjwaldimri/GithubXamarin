@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
+using Android.Support.Design.Widget;
+using Android.Support.V4.Widget;
 using Android.Views;
-using Android.Widget;
-using GithubXamarin.Core.ViewModels;
-using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Plugin.SecureStorage;
-
+using GithubXamarin.Core.ViewModels;
+using Android.Widget;
 
 namespace GithubXamarin.Droid.Activities
 {
@@ -22,27 +16,64 @@ namespace GithubXamarin.Droid.Activities
         Label = "@string/ApplicationName",
         Icon = "@drawable/Icon",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        Theme="@style/MyTheme",
         Name ="github.droid.activities.MainActivity")]
     public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
     {
-        private FragmentManager _fragmentManager;
+        
+        private NavigationView _navigationView;
+        private DrawerLayout _drawerLayout;
 
-        static MainActivity instance = new MainActivity();
-        public static MainActivity CurrentActivity => instance;
-
-        public new MainViewModel ViewModel
-        {
-            get { return (MainViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
+        internal DrawerLayout DrawerLayout { get { return _drawerLayout; } }
 
         protected override void OnCreate(Bundle bundle)
         {
             SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
-            _fragmentManager = FragmentManager;
             SetContentView(Resource.Layout.Main);
-            ViewModel.ShowLogin();
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            toolbar.SetTitle(Resource.String.Empty);
+            SetSupportActionBar(toolbar);
+
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+
+            _navigationView.NavigationItemSelected += (sender, e) =>
+            {
+                e.MenuItem.SetChecked(true);
+                //react to click here and swap fragments or navigate
+                _drawerLayout.CloseDrawers();
+            };
+
+                if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                ViewModel.ShowEvents();
+            }
+            else
+            {
+                ViewModel.ShowLogin();
+                SetHeader("Login");
+            }
+        }
+
+        public void SetHeader(string text)
+        {
+            var toolbarHeader = FindViewById<TextView>(Resource.Id.toolbar_title);
+            toolbarHeader.Text = text;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    _drawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

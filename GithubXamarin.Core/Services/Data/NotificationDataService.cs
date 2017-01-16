@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;

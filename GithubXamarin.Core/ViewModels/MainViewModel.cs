@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 
@@ -10,7 +6,9 @@ namespace GithubXamarin.Core.ViewModels
 {
     public class MainViewModel : BaseViewModel, IMainViewModel
     {
-        public MainViewModel(IGithubClientService githubClientService) : base(githubClientService)
+        public IEnumerable<string> MenuItems { get; private set; } = new[] {"Option1", "Option2"};
+
+    public MainViewModel(IGithubClientService githubClientService) : base(githubClientService)
         {
         }
 

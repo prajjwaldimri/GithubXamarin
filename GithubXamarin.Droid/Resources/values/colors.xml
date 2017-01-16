@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <item name="colorPrimary" type="color">#3F51B5</item>
-  <item name="colorPrimaryDark" type="color">#303F9F</item>
-  <item name="colorAccent" type="color">#00BCD4</item>
+  <color name="colorPrimary" type="color">#3F51B5</color>
+  <color name="colorPrimaryDark" type="color">#303F9F</color>
+  <color name="colorPrimaryLight">#C5CAE9</color>
+  <color name="colorAccent" type="color">#00BCD4</color>
+  <color name="primaryText" type="color">#212121</color>
+  <color name="white" type="color">#FFFFFF</color>
  
 </resources> 
