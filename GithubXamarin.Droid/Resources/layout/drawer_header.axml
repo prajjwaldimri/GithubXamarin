@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="190dp"
     android:background="@color/colorPrimaryDark"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
-    android:gravity="bottom">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
+  <refractored.controls.CircleImageView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_image"
+    android:layout_width="76dp"
+    android:layout_height="76dp"
+    app:civ_border_width="2dp"
+    android:src="@drawable/Icon"
+    app:civ_border_color="#FF000000"
+    android:layout_marginLeft="24dp"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="24dp"/>
+
+  <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Header"
-        android:textColor="@android:color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:text="UserName"
+        android:textSize="14sp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:gravity="left"
+        android:paddingBottom="4dp"
+        android:id="@+id/username"
+        android:layout_above="@+id/email"
+        android:layout_alignLeft="@+id/profile_image"
+        android:layout_alignStart="@+id/profile_image" />
+ 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/email"
+        android:gravity="left"
+        android:layout_marginBottom="8dp"
+        android:textSize="14sp"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignStart="@+id/username" />
 
-</LinearLayout>
+</RelativeLayout>

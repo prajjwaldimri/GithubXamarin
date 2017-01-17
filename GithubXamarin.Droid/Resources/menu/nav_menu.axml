@@ -3,24 +3,29 @@
   <group android:checkableBehavior="single">
     <item
       android:id="@+id/nav_home"
-      android:title="Home" 
+      android:title="Home"
       android:checked="true"/>
     <item
-      android:id="@+id/nav_messages"
-      android:title="Messages" />
+      android:id="@+id/nav_notifications"
+      android:title="Notifications" />
     <item
-      android:id="@+id/nav_friends"
-      android:title="Friends" />
+      android:id="@+id/nav_repositories"
+      android:title="Repositories" />
     <item
-      android:id="@+id/nav_discussion"
-      android:title="Discussion" />
+      android:id="@+id/nav_issues"
+      android:title="Issues" />
+    <item
+      android:id="@+id/nav_gists"
+      android:title="Gists" />
+
+    <item
+      android:id="@+id/nav_settings"
+      android:title="Settings" />
+    
+    <item
+      android:id="@+id/nav_about"
+      android:title="About" />
+
   </group>
-  <item android:title="Sub items">
-    <menu>
-      <item
-        android:title="Sub item 1" />
-      <item
-        android:title="Sub item 2" />
-     </menu>
-  </item>
+
 </menu>
