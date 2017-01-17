@@ -2985,12 +2985,6 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f08014d
 			public const int Animation_Design_BottomSheetDialog = 2131231053;
 			
-			// aapt resource value: 0x7f080165
-			public const int AppTheme = 2131231077;
-			
-			// aapt resource value: 0x7f080166
-			public const int AppTheme_Base = 2131231078;
-			
 			// aapt resource value: 0x7f08008e
 			public const int Base_AlertDialog_AppCompat = 2131230862;
 			
@@ -3447,11 +3441,11 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f08014f
 			public const int Base_Widget_Design_TabLayout = 2131231055;
 			
-			// aapt resource value: 0x7f080167
-			public const int MyTheme = 2131231079;
+			// aapt resource value: 0x7f080165
+			public const int MyTheme = 2131231077;
 			
-			// aapt resource value: 0x7f080168
-			public const int MyTheme_Base = 2131231080;
+			// aapt resource value: 0x7f080166
+			public const int MyTheme_Base = 2131231078;
 			
 			// aapt resource value: 0x7f080019
 			public const int Platform_AppCompat = 2131230745;

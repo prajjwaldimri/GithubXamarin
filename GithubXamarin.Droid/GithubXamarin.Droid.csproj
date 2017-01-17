@@ -222,7 +222,6 @@
     <XamarinComponentReference Include="xamandroidsupportdesign">
       <Visible>False</Visible>
       <Version>24.2.1.0</Version>
-      <InstallationInProgress>True</InstallationInProgress>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv13-18">
       <Visible>False</Visible>

@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="AppTheme" parent="AppTheme.Base"/>
-  <style name="AppTheme.Base" parent="Theme.AppCompat"/>
-  
   <style name="MyTheme" parent="MyTheme.Base"/>
   <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
