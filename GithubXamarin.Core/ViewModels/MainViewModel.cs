@@ -21,5 +21,27 @@ namespace GithubXamarin.Core.ViewModels
         {
             ShowViewModel<LoginViewModel>();
         }
+
+        public void ShowViewModelByNavigationDrawerMenuItem(int itemId)
+        {
+            switch (itemId)
+            {
+                case 0:
+                    ShowViewModel<MainViewModel>();
+                    break;
+                case 1:
+                    ShowViewModel<NotificationsViewModel>();
+                    break;
+                case 2:
+                    ShowViewModel<RepositoriesViewModel>();
+                    break;
+                case 3:
+                    ShowViewModel<IssuesViewModel>();
+                    break;
+                case 4:
+                    //TODO: Gists ViewModel
+                    break;
+            }
+        }
     }
 }

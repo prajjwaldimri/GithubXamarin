@@ -12,6 +12,7 @@ using Plugin.SecureStorage;
 using GithubXamarin.Core.ViewModels;
 using Android.Widget;
 
+
 namespace GithubXamarin.Droid.Activities
 {
     [Activity(MainLauncher = true,
@@ -26,6 +27,7 @@ namespace GithubXamarin.Droid.Activities
         private NavigationView _navigationView;
         private DrawerLayout _drawerLayout;
         private Toolbar toolbar;
+        private NavigationView.IOnNavigationItemSelectedListener selectDrawerItem;
 
         internal DrawerLayout DrawerLayout { get { return _drawerLayout; } }
 
@@ -35,25 +37,21 @@ namespace GithubXamarin.Droid.Activities
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            //Coupling Toolbar and Drawer
             toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+
+            //Coupling Toolbar and Drawer
             toolbar.SetTitle(Resource.String.Empty);
             SetSupportActionBar(toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayShowHomeEnabled(true);
 
-            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            _navigationView.NavigationItemSelected += _navigationView_NavigationItemSelected;
+
             //Animating Hamburger Icon. 
             drawerToggle = setupDrawerToggle();
             _drawerLayout.AddDrawerListener(drawerToggle);
-
-            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-
-            _navigationView.NavigationItemSelected += (sender, e) =>
-            {
-                e.MenuItem.SetChecked(true);
-                //react to click here and swap fragments or navigate
-                _drawerLayout.CloseDrawers();
-            };
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
@@ -64,6 +62,46 @@ namespace GithubXamarin.Droid.Activities
                 ViewModel.ShowLogin();
                 SetToolBarHeader("Login");
             }
+        }
+
+        private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+        {
+            e.MenuItem.SetChecked(true);
+            int itemId = 0;
+            switch (e.MenuItem.ItemId)
+            {
+                case (Resource.Id.nav_home):
+                    break;
+                case (Resource.Id.nav_notifications):
+                    itemId = 1;
+                    break;
+                case (Resource.Id.nav_repositories):
+                    itemId = 2;
+                    break;
+                case (Resource.Id.nav_issues):
+                    itemId = 3;
+                    break;
+                case (Resource.Id.nav_gists):
+                    itemId = 4;
+                    break;
+            }
+
+            _drawerLayout.CloseDrawers();
+            ViewModel.ShowViewModelByNavigationDrawerMenuItem(itemId);
+        }
+
+        public void SetToolBarHeader(string text)
+        {
+            var toolbarHeader = FindViewById<TextView>(Resource.Id.toolbar_title);
+            toolbarHeader.Text = text;
+        }
+
+        //Reference: https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer#animate-the-hamburger-icon
+        private ActionBarDrawerToggle setupDrawerToggle()
+        {
+            // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+            // and will not render the hamburger icon without it.  
+            return new ActionBarDrawerToggle(this, _drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -88,20 +126,6 @@ namespace GithubXamarin.Droid.Activities
             base.OnConfigurationChanged(newConfig);
             //Pass any configuration change to drawer toggles
             drawerToggle.OnConfigurationChanged(newConfig);
-        }
-
-        public void SetToolBarHeader(string text)
-        {
-            var toolbarHeader = FindViewById<TextView>(Resource.Id.toolbar_title);
-            toolbarHeader.Text = text;
-        }
-
-        //Reference: https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer#animate-the-hamburger-icon
-        private ActionBarDrawerToggle setupDrawerToggle()
-        {
-            // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
-            // and will not render the hamburger icon without it.  
-            return new ActionBarDrawerToggle(this, _drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
         }
     }
 }
