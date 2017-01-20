@@ -179,8 +179,15 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\EventsFragment.cs" />
+    <Compile Include="Views\IssueFragment.cs" />
+    <Compile Include="Views\IssuesFragment.cs" />
     <Compile Include="Views\LoginFragment.cs" />
     <Compile Include="Views\NotificationsFragment.cs" />
+    <Compile Include="Views\RepositoriesFragment.cs" />
+    <Compile Include="Views\RepositoryFragment.cs" />
+    <Compile Include="Views\UserFragment.cs" />
+    <Compile Include="Views\UsersFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -201,6 +208,27 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\drawer_header.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventsView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RepositoryView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RepositoriesView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UsersView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\IssueView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\IssuesView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

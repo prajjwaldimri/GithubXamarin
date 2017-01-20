@@ -16,7 +16,7 @@ namespace GithubXamarin.Core.Services.General
 
         private void RefreshGithubClients()
         {
-            UnAuthorizedGitHubClient = new GitHubClient(new ProductHeaderValue("githubuwp"));
+            UnAuthorizedGitHubClient = new GitHubClient(new ProductHeaderValue("gitit"));
             if (LoggedIn())
             {
                 //Uses https://github.com/sameerkapps/SecureStorage

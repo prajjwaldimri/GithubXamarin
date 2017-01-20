@@ -11,7 +11,9 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Plugin.SecureStorage;
 using GithubXamarin.Core.ViewModels;
 using Android.Widget;
-
+using Auth0.SDK;
+using System.Threading.Tasks;
+using System;
 
 namespace GithubXamarin.Droid.Activities
 {
@@ -23,6 +25,9 @@ namespace GithubXamarin.Droid.Activities
         Name = "github.droid.activities.MainActivity")]
     public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
     {
+        //**Auth0**
+        private Auth0Client auth0Client = new Auth0Client("prajjwaldimri.auth0.com", "YPkuBnH4kb09eqTYOa9Enz2FPqzULiLZ");
+
         private ActionBarDrawerToggle drawerToggle;
         private NavigationView _navigationView;
         private DrawerLayout _drawerLayout;
@@ -31,7 +36,7 @@ namespace GithubXamarin.Droid.Activities
 
         internal DrawerLayout DrawerLayout { get { return _drawerLayout; } }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
@@ -53,15 +58,13 @@ namespace GithubXamarin.Droid.Activities
             drawerToggle = setupDrawerToggle();
             _drawerLayout.AddDrawerListener(drawerToggle);
 
-            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            //CrossSecureStorage.Current.DeleteKey("OAuthToken");
+
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
-                ViewModel.ShowEvents();
+                await LoginUsingAuth0ASync();
             }
-            else
-            {
-                ViewModel.ShowLogin();
-                SetToolBarHeader("Login");
-            }
+            ViewModel.ShowEvents();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -102,6 +105,26 @@ namespace GithubXamarin.Droid.Activities
             // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
             // and will not render the hamburger icon without it.  
             return new ActionBarDrawerToggle(this, _drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
+        }
+
+        private async Task LoginUsingAuth0ASync()
+        {
+            try
+            {
+                var user = await this.auth0Client.LoginAsync(this, withRefreshToken:true);
+                this.ShowResult(user);
+            }
+            catch (AggregateException e)
+            {
+                //TODO: Handle this using Dialog
+            }
+        }
+
+        private void ShowResult(Auth0User user)
+        {
+            var oauthToken = user.Auth0AccessToken;
+            
+            CrossSecureStorage.Current.SetValue("OAuthToken", oauthToken);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
