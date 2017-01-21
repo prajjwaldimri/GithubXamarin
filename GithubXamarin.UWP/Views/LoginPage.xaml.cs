@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using GithubUWP.Services;
+using GithubXamarin.UWP.Services;
 using Octokit;
 using Template10.Services.NavigationService;
 using Page = Windows.UI.Xaml.Controls.Page;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace GithubUWP.Views
+namespace GithubXamarin.UWP.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

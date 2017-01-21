@@ -3,7 +3,7 @@ using Windows.Storage;
 using Template10.Mvvm;
 using Windows.UI.Xaml;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {

@@ -1,9 +1,9 @@
-<common:BootStrapper x:Class="GithubUWP.App"
+<common:BootStrapper x:Class="GithubXamarin.UWP.App"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:common="using:Template10.Common"
                      xmlns:converters="using:Template10.Converters"
-                     xmlns:userConverters="using:GithubUWP.Services.Converters">
+                     xmlns:userConverters="using:GithubXamarin.UWP.Services.Converters">
 
     <Application.Resources>
         

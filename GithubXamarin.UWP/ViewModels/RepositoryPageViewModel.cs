@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using GithubUWP.Views;
+using GithubXamarin.UWP.Views;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class RepositoryPageViewModel : ViewModelBase
     {

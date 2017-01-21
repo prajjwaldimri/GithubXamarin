@@ -7,11 +7,11 @@ using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
-using GithubUWP.Services;
+using GithubXamarin.UWP.Services;
 using Octokit;
 using Page = Windows.UI.Xaml.Controls.Page;
 
-namespace GithubUWP.Views
+namespace GithubXamarin.UWP.Views
 {
     public sealed partial class Shell : Page
     {

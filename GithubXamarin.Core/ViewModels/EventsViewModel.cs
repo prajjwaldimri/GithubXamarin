@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Core.ViewModels;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels

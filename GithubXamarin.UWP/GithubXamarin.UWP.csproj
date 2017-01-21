@@ -101,6 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Services\Converters\EventToGlyphConverter.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Services\Converters\StatusBarToBoolConverter.cs" />
     <Compile Include="Services\HelpingWorker.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="UserControls\AlternatingRowListView.xaml.cs">
       <DependentUpon>AlternatingRowListView.xaml</DependentUpon>
     </Compile>

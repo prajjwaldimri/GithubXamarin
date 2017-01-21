@@ -3,7 +3,7 @@ using Template10.Common;
 using Template10.Utils;
 using Windows.UI.Xaml;
 
-namespace GithubUWP.Services.SettingsServices
+namespace GithubXamarin.UWP.Services.SettingsServices
 {
     public class SettingsService
     {

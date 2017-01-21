@@ -1,4 +1,4 @@
-namespace GithubUWP.Views
+namespace GithubXamarin.UWP.Views
 {
     public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
     {

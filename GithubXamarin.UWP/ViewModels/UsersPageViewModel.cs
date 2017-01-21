@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class UsersPageViewModel : ViewModelBase
     {

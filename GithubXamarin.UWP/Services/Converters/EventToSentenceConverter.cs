@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Octokit;
 
-namespace GithubUWP.Services.Converters
+namespace GithubXamarin.UWP.Services.Converters
 {
     public class EventToSentenceConverter : DependencyObject,IValueConverter
     {

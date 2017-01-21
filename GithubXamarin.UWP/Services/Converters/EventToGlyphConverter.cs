@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace GithubUWP.Services.Converters
+namespace GithubXamarin.UWP.Services.Converters
 {
     public class EventToGlyphConverter : IValueConverter
     {

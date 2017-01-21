@@ -2,7 +2,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace GithubUWP.Views
+namespace GithubXamarin.UWP.Views
 {
     public sealed partial class Splash : UserControl
     {

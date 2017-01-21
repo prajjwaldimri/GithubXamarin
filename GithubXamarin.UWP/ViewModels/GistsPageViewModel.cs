@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
+using GithubXamarin.UWP.Services;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class GistsPageViewModel : ViewModelBase
     {

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Octokit;
 using Template10.Mvvm;
-using GithubUWP.Views;
+using GithubXamarin.UWP.Views;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class READMEPageViewModel : ViewModelBase
     {

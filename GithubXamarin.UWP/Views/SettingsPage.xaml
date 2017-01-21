@@ -1,4 +1,4 @@
-<Page x:Class="GithubUWP.Views.SettingsPage"
+<Page x:Class="GithubXamarin.UWP.Views.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:Behaviors="using:Template10.Behaviors"
@@ -7,10 +7,10 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:converter="using:Template10.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:GithubUWP.Views"
+      xmlns:local="using:GithubXamarin.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:GithubUWP.ViewModels"
-      xmlns:Converter="using:GithubUWP.Services.Converters"
+      xmlns:vm="using:GithubXamarin.UWP.ViewModels"
+      xmlns:Converter="using:GithubXamarin.UWP.Services.Converters"
       mc:Ignorable="d">
 
     <Page.DataContext>

@@ -1,14 +1,16 @@
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
-using GithubUWP.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
 using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
+using GithubXamarin.UWP.Services.SettingsServices;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
-namespace GithubUWP
+namespace GithubXamarin.UWP
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
@@ -54,6 +56,35 @@ namespace GithubUWP
                 await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
             }
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
+        }
+
+        public override async Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            if (rootFrame.Content == null)
+            {
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
+
+                var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+                start.Start();
+            }
+            await Task.CompletedTask;
         }
 
         private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)

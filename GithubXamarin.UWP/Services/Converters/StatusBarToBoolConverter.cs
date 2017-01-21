@@ -5,7 +5,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace GithubUWP.Services.Converters
+namespace GithubXamarin.UWP.Services.Converters
 {
     public class StatusBarToBoolConverter : IValueConverter
     {

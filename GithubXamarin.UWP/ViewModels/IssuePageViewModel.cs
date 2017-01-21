@@ -7,7 +7,7 @@ using Octokit;
 using Template10.Mvvm;
 using Template10.Utils;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class IssuePageViewModel : ViewModelBase
     {

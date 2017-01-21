@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace GithubUWP.Services.Converters
+namespace GithubXamarin.UWP.Services.Converters
 {
     /// <summary>
     /// Converts a hexadecimal color value received from Github To SolidColorBrush

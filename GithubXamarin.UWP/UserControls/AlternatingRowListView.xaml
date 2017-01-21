@@ -1,8 +1,8 @@
 ﻿<ListView
-    x:Class="GithubUWP.UserControls.AlternatingRowListView"
+    x:Class="GithubXamarin.UWP.UserControls.AlternatingRowListView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GithubUWP.UserControls"
+    xmlns:local="using:GithubXamarin.UWP.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"

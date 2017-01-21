@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using GithubUWP.Services;
 using Octokit;
 using Template10.Mvvm;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
+using GithubXamarin.UWP.Services;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class UserProfilePageViewModel : ViewModelBase
     {

@@ -10,7 +10,7 @@ using Template10.Utils;
 using System.Net.NetworkInformation;
 using Windows.UI.Popups;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class SearchResultsPageViewModel : ViewModelBase
     {

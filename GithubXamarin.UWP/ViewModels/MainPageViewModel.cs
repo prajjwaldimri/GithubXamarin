@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using GithubUWP.Services;
+using GithubXamarin.UWP.Services;
 using Octokit;
 using Template10.Utils;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {

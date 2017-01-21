@@ -4,7 +4,7 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Octokit;
 
-namespace GithubUWP.Services
+namespace GithubXamarin.UWP.Services
 {
     public static class HelpingWorker
     {

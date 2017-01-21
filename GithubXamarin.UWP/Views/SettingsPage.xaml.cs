@@ -1,7 +1,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace GithubUWP.Views
+namespace GithubXamarin.UWP.Views
 {
     public sealed partial class SettingsPage : Page
     {

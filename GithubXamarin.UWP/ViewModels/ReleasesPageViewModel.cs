@@ -1,6 +1,6 @@
 ﻿using Template10.Mvvm;
 
-namespace GithubUWP.ViewModels
+namespace GithubXamarin.UWP.ViewModels
 {
     public class ReleasesPageViewModel : ViewModelBase
     {
