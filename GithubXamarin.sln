@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{83ACC643
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubXamarin.Core.UnitTests", "GithubXamarin.Core.UnitTests\GithubXamarin.Core.UnitTests.csproj", "{B69CCF83-8FC7-4E1C-A4D7-177BF09B8F15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubXamarin.UWP.Background", "GithubXamarin.UWP.Background\GithubXamarin.UWP.Background.csproj", "{183833DD-36A9-4126-9D99-D9531581877C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,22 @@ Global
 		{B69CCF83-8FC7-4E1C-A4D7-177BF09B8F15}.Release|x64.Build.0 = Release|Any CPU
 		{B69CCF83-8FC7-4E1C-A4D7-177BF09B8F15}.Release|x86.ActiveCfg = Release|Any CPU
 		{B69CCF83-8FC7-4E1C-A4D7-177BF09B8F15}.Release|x86.Build.0 = Release|Any CPU
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|ARM.Build.0 = Debug|ARM
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|x64.ActiveCfg = Debug|x64
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|x64.Build.0 = Debug|x64
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|x86.ActiveCfg = Debug|x86
+		{183833DD-36A9-4126-9D99-D9531581877C}.Debug|x86.Build.0 = Debug|x86
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|ARM.ActiveCfg = Release|ARM
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|ARM.Build.0 = Release|ARM
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|x64.ActiveCfg = Release|x64
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|x64.Build.0 = Release|x64
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|x86.ActiveCfg = Release|x86
+		{183833DD-36A9-4126-9D99-D9531581877C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

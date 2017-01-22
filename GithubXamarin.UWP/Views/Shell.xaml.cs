@@ -1,15 +1,20 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
+using Auth0.LoginClient;
 using GithubXamarin.UWP.Services;
 using Octokit;
+using RestSharp.Portable.HttpClient;
 using Page = Windows.UI.Xaml.Controls.Page;
+using RestSharp.Portable;
 
 namespace GithubXamarin.UWP.Views
 {
@@ -99,10 +104,8 @@ namespace GithubXamarin.UWP.Views
                     Debug.WriteLine(e);
                 }
             }
-            
-            
-
         }
+
     }
 }
 

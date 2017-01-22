@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -101,7 +101,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Services\Converters\EventToGlyphConverter.cs" />
@@ -110,7 +109,6 @@
     <Compile Include="Services\Converters\StatusBarToBoolConverter.cs" />
     <Compile Include="Services\HelpingWorker.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="UserControls\AlternatingRowListView.xaml.cs">
       <DependentUpon>AlternatingRowListView.xaml</DependentUpon>
     </Compile>
@@ -363,9 +361,9 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GithubXamarin.Core\GithubXamarin.Core.csproj">
-      <Project>{baaf5045-38ba-4697-8ee0-4291ae2d88ac}</Project>
-      <Name>GithubXamarin.Core</Name>
+    <ProjectReference Include="..\GithubXamarin.UWP.Background\GithubXamarin.UWP.Background.csproj">
+      <Project>{183833dd-36a9-4126-9d99-d9531581877c}</Project>
+      <Name>GithubXamarin.UWP.Background</Name>
     </ProjectReference>
     <ProjectReference Include="..\UniversalMarkdown\UniversalMarkdown.csproj">
       <Project>{9ffc3b68-696a-4342-a2b8-2eadddef7ff9}</Project>

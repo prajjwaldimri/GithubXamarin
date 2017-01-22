@@ -6,6 +6,6 @@ namespace GithubXamarin.UWP.Views
         {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-        }
+        } 
     }
 }

@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using GithubXamarin.UWP.Services;
 using Octokit;
 using Template10.Utils;
+using Windows.Security.Credentials;
 
 namespace GithubXamarin.UWP.ViewModels
 {

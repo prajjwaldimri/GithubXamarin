@@ -10,7 +10,6 @@
       xmlns:local="using:GithubXamarin.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:GithubXamarin.UWP.ViewModels"
-      xmlns:usercontrols="using:GithubXamarin.UWP.UserControls"
       xmlns:converters="using:GithubXamarin.UWP.Services.Converters"
       mc:Ignorable="d">
 
@@ -93,10 +92,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </uwptoolkit:PullToRefreshListView>
-
-            <usercontrols:ShowDetailsControl x:Name="DetailsControl" 
-                                             Visibility="{Binding ShowDetailControl, 
-                Converter={StaticResource BoolToVisibility}, Mode=TwoWay}"/>
         </Grid>
     </RelativePanel>
 </Page>

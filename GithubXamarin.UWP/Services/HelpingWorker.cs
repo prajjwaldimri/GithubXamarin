@@ -10,12 +10,12 @@ namespace GithubXamarin.UWP.Services
     {
         /// <summary>
         /// Checks the validity of Roaming Key with PasswordVault. 
-        /// PasswordVault uses higher resources than querying keys so it is better to check for it once in a while
+        /// PasswordVault uses higher resources in querying keys so it is better to check for it once in a while
         /// </summary>
         /// <returns>A Completed Task</returns>
         public static Task RoamingLoggedInKeyVerifier()
         {
-            var vault = new Windows.Security.Credentials.PasswordVault();
+            var vault = new PasswordVault();
             try
             {
                 if (vault.FindAllByResource("GithubAccessToken") != null)
@@ -35,8 +35,6 @@ namespace GithubXamarin.UWP.Services
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
                     ApplicationData.Current.RoamingSettings.Values.Remove("IsLoggedIn");
             }
-
-
             return Task.CompletedTask;
         }
 
