@@ -20,6 +20,14 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="GithubXamarin.UWP.Background.GithubNotificationsBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+            <Task Type="pushNotification" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
