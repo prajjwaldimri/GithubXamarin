@@ -55,7 +55,7 @@ namespace GithubXamarin.UWP
             }
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
 
-            }
+        }
 
         private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
         {

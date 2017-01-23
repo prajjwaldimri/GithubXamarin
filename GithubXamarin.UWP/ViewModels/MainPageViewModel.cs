@@ -38,10 +38,9 @@ namespace GithubXamarin.UWP.ViewModels
                 await messageDialog.ShowAsync();
                 return;
             }
-            //Initializing Octokit
+            await RegisterBackgroundTask();
             Views.Busy.SetBusy(true,"Getting your activities");
             await GetActivities();
-            await RegisterBackgroundTask();
             Views.Busy.SetBusy(false);
         }
 
@@ -101,7 +100,6 @@ namespace GithubXamarin.UWP.ViewModels
             {
                 if (task.Value.Name == taskName)
                 {
-                    task.Value.Unregister(true);
                     taskRegistered = true;
                     break;
                 }
@@ -128,14 +126,6 @@ namespace GithubXamarin.UWP.ViewModels
                             typeof(Background.GithubNotificationsBackgroundTask).FullName;
                         var task = builder.Register();
                         break;
-                }
-                foreach (var task in BackgroundTaskRegistration.AllTasks)
-                {
-                    if (task.Value.Name == taskName)
-                    {
-                        taskRegistered = true;
-                        break;
-                    }
                 }
             }
         }
