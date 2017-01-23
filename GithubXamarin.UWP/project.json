@@ -1,7 +1,6 @@
 ﻿{
   "dependencies": {
     "Auth0.Windows.UWP": "1.1.0",
-    "ColorCode.Portable": "1.0.3",
     "Conditions": "2.1.0",
     "FubarCoder.RestSharp.Portable": "3.3.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
@@ -13,7 +12,8 @@
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.2.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "Octokit": "0.23.0",
+    "Octokit": "0.24.0",
+    "QueryString.NET": "1.0.0",
     "Template10": "1.1.12"
   },
   "frameworks": {

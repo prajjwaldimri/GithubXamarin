@@ -1,6 +1,5 @@
 ﻿using Octokit;
 using System;
-using System.Net.NetworkInformation;
 using Windows.ApplicationModel.Background;
 using Windows.Security.Credentials;
 using Windows.Storage;
@@ -16,14 +15,12 @@ namespace GithubXamarin.UWP.Background
         private string _toastTitle;
         private string _toastContent;
         private string _toastLogo;
-        private Octokit.Credentials _passwordCredential;
+        private Credentials _passwordCredential;
 
         public void Run(IBackgroundTaskInstance taskInstance)   
         {
             //_deferral = taskInstance.GetDeferral();
 
-            if (NetworkInterface.GetIsNetworkAvailable())
-            {
                 #region Toast-Notification Payload
                 //Reference: https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/07/08/quickstart-sending-a-local-toast-notification-and-handling-activations-from-it-windows-10/
 
@@ -83,8 +80,6 @@ namespace GithubXamarin.UWP.Background
                         ToastNotificationManager.CreateToastNotifier().Show(toast);
                     }
                 }
-            }
-
             //_deferral.Complete();
         }
 

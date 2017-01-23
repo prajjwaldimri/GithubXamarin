@@ -148,6 +148,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GithubXamarin.UWP.Background\GithubXamarin.UWP.Background.csproj">
+      <Project>{183833dd-36a9-4126-9d99-d9531581877c}</Project>
+      <Name>GithubXamarin.UWP.Background</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

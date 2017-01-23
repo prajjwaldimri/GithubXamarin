@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ColorCode;
-using ColorCode.Compilation.Languages;
 using Template10.Mvvm;
 using Octokit;
 using System.Net.NetworkInformation;
@@ -41,7 +39,6 @@ namespace GithubXamarin.UWP.ViewModels
             var repoContentClient = new RepositoryContentsClient(new ApiConnection(client.Connection));
             var content = await repoContentClient.GetAllContentsByRef(fid.RepositoryId,fid.Path,fid.Reference);
             //TODO: Cannot display html content except for a webview and the below method returns html content
-            FileContent = new CodeColorizer().Colorize(content[0].Content, new CSharp());
             RaisePropertyChanged(String.Empty);
             Views.Busy.SetBusy(false);
         }

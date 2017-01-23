@@ -23,10 +23,10 @@
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="GithubXamarin.UWP.Background.GithubNotificationsBackgroundTask">
           <BackgroundTasks>
-            <Task Type="general" />
             <Task Type="systemEvent" />
             <Task Type="timer" />
             <Task Type="pushNotification" />
+            <Task Type="deviceUse" />
           </BackgroundTasks>
         </Extension>
       </Extensions>
