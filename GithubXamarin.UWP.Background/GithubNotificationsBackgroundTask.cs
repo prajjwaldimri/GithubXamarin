@@ -20,7 +20,7 @@ namespace GithubXamarin.UWP.Background
 
         public void Run(IBackgroundTaskInstance taskInstance)   
         {
-            _deferral = taskInstance.GetDeferral();
+            //_deferral = taskInstance.GetDeferral();
 
             if (NetworkInterface.GetIsNetworkAvailable())
             {
@@ -61,7 +61,7 @@ namespace GithubXamarin.UWP.Background
                     Actions = toastActions
                 };
 
-                #endregion 
+                #endregion  
 
                 //Octokit
                 GitHubClient client;
@@ -85,14 +85,14 @@ namespace GithubXamarin.UWP.Background
                 }
             }
 
-            _deferral.Complete();
+            //_deferral.Complete();
         }
 
         //<summary>
         //Retrieves the OAuth AccessToken from the PasswordVault
         //</summary>
         //<returns>A Credentials object</returns>
-        public void VaultAccessTokenRetriever()
+        private void VaultAccessTokenRetriever()
         {
             var vault = new PasswordVault();
             if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
@@ -109,6 +109,5 @@ namespace GithubXamarin.UWP.Background
                 _passwordCredential = null;
             }
         }
-
     }
 }

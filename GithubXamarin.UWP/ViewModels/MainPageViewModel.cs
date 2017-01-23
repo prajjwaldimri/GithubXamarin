@@ -11,6 +11,7 @@ using GithubXamarin.UWP.Services;
 using Octokit;
 using Template10.Utils;
 using Windows.Security.Credentials;
+using Windows.ApplicationModel.Background;
 
 namespace GithubXamarin.UWP.ViewModels
 {
@@ -40,6 +41,7 @@ namespace GithubXamarin.UWP.ViewModels
             //Initializing Octokit
             Views.Busy.SetBusy(true,"Getting your activities");
             await GetActivities();
+            await RegisterBackgroundTask();
             Views.Busy.SetBusy(false);
         }
 
@@ -76,6 +78,7 @@ namespace GithubXamarin.UWP.ViewModels
             }
             RaisePropertyChanged(String.Empty);
         }
+
         private void ExecuteNavigation(TappedRoutedEventArgs tappedRoutedEventArgs)
         {
             //Have to handle the navigation based on the type of Object
@@ -86,6 +89,55 @@ namespace GithubXamarin.UWP.ViewModels
             Views.Busy.SetBusy(true,"Refreshing");
             await GetActivities();
             Views.Busy.SetBusy(false);
+        }
+
+        private async Task RegisterBackgroundTask()
+        {
+            //Register GithubNotificationsBackgroundTask
+            var taskRegistered = false;
+            var taskName = "GithubNotificationsBackgroundTask";
+
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
+            {
+                if (task.Value.Name == taskName)
+                {
+                    task.Value.Unregister(true);
+                    taskRegistered = true;
+                    break;
+                }
+            }
+
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder();
+
+                var access = await BackgroundExecutionManager.RequestAccessAsync();
+                switch (access)
+                {
+                    case BackgroundAccessStatus.DeniedByUser:
+                        break;
+                    case BackgroundAccessStatus.DeniedBySystemPolicy:
+                        break;
+                    case BackgroundAccessStatus.Unspecified:
+                        break;
+                    default:
+                        builder.Name = taskName;
+                        builder.SetTrigger(new TimeTrigger(15, false));
+                        builder.IsNetworkRequested = true;
+                        builder.TaskEntryPoint =
+                            typeof(Background.GithubNotificationsBackgroundTask).FullName;
+                        var task = builder.Register();
+                        break;
+                }
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        taskRegistered = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

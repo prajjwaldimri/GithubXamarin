@@ -7,7 +7,6 @@ using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using GithubXamarin.UWP.Services.SettingsServices;
-using Windows.ApplicationModel.Background;
 
 namespace GithubXamarin.UWP
 {
@@ -54,47 +53,9 @@ namespace GithubXamarin.UWP
             {
                 await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
             }
-
-            //Register GithubNotificationsBackgroundTask
-            var taskRegistered = false;
-            var taskName = "GithubNotificationsBackgroundTask";
-
-            foreach (var task in BackgroundTaskRegistration.AllTasks)
-            {
-                if (task.Value.Name == taskName)
-                {
-                    task.Value.Unregister(true);
-                    taskRegistered = true;
-                    break;
-                }
-            }
-
-            if (!taskRegistered)
-            {
-                var builder = new BackgroundTaskBuilder();
-
-                var access = await BackgroundExecutionManager.RequestAccessAsync();
-                switch (access)
-                {
-                    case BackgroundAccessStatus.DeniedByUser:
-                        break;
-                    case BackgroundAccessStatus.DeniedBySystemPolicy:
-                        break;
-                    case BackgroundAccessStatus.Unspecified:
-                        break;
-                    case BackgroundAccessStatus.AllowedSubjectToSystemPolicy:
-                        builder.Name = taskName;
-                        builder.TaskEntryPoint =
-                            typeof(GithubXamarin.UWP.Background.GithubNotificationsBackgroundTask).FullName;
-                        builder.SetTrigger(new TimeTrigger(15,false));
-                        var task = builder.Register();
-                        break;
-                }
-
-            }
-
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
-        }
+
+            }
 
         private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
         {
