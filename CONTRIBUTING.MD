@@ -9,7 +9,6 @@ today! As a contributor, here are the guidelines we would like you to follow:
 - [Feature Requests](#missing-a-feature)
 - [Submission Guidelines](#submission-guidelines)
 - [Programming Guidelines](#progamming-guidelines)
-- [Commit Message Guidelines](#commit)
 - [Git-Flow](git-flow)
 
 
@@ -54,3 +53,7 @@ that relates to your submission to avoid duplicate effort. Also, you have to fol
  while writing code.
 
 * Try to avoid writing ambiguous names for variables, methods or classes.
+
+## Git Flow
+
+Will be added after the first public release of the app.
