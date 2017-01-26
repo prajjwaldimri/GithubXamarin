@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  android:fitsSystemWindows="true">
-  
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    
-    <!-- ToolBar -->
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-    
-    <!-- Actual content of the screen -->
-    <FrameLayout
-        android:id="@+id/content_frame"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/toolbar" />
-  </RelativeLayout>
-  
-  <!-- The menu placeholder -->
-  <android.support.design.widget.NavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white"
-            android:id="@+id/nav_view"
-            app:headerLayout="@layout/drawer_header"
-            app:menu="@menu/nav_menu"/>
+        android:layout_height="match_parent">
+    <!-- ToolBar -->
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+    <!-- Actual content of the screen -->
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/toolbar" />
+    </RelativeLayout>
+<!-- The menu placeholder -->
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/nav_menu" />
 </android.support.v4.widget.DrawerLayout>

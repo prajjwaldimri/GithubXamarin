@@ -52,7 +52,7 @@ namespace GithubXamarin.Core.Services.General
 
         public bool LoggedIn()
         {
-            if (CrossSecureStorage.Current.HasKey("OauthToken"))
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 return true;
             }

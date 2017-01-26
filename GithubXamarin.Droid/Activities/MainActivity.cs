@@ -36,7 +36,7 @@ namespace GithubXamarin.Droid.Activities
 
         internal DrawerLayout DrawerLayout { get { return _drawerLayout; } }
 
-        protected async override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
@@ -58,13 +58,17 @@ namespace GithubXamarin.Droid.Activities
             drawerToggle = setupDrawerToggle();
             _drawerLayout.AddDrawerListener(drawerToggle);
 
-            //CrossSecureStorage.Current.DeleteKey("OAuthToken");
-
-            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+            CrossSecureStorage.Current.DeleteKey("OAuthToken");
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
-                await LoginUsingAuth0ASync();
+                SetToolBarHeader("Your Events");
+                ViewModel.ShowEvents();
             }
-            ViewModel.ShowEvents();
+            else
+            {
+                SetToolBarHeader("Login To Github");
+                ViewModel.ShowLogin();
+            }
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -107,27 +111,7 @@ namespace GithubXamarin.Droid.Activities
             return new ActionBarDrawerToggle(this, _drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
         }
 
-        private async Task LoginUsingAuth0ASync()
-        {
-            try
-            {
-                var user = await this.auth0Client.LoginAsync(this, withRefreshToken:true);
-                this.ShowResult(user);
-            }
-            catch (AggregateException e)
-            {
-                //TODO: Handle this using Dialog
-            }
-        }
-
-        private void ShowResult(Auth0User user)
-        {
-            var oauthToken = user.Auth0AccessToken;
-            
-            CrossSecureStorage.Current.SetValue("OAuthToken", oauthToken);
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
+       public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {

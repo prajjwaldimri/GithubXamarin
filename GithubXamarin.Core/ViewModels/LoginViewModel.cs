@@ -8,5 +8,10 @@ namespace GithubXamarin.Core.ViewModels
         public LoginViewModel(IGithubClientService githubClientService) : base(githubClientService)
         {
         }
+
+        public void GoToEvents()
+        {
+            ShowViewModel<EventsViewModel>();
+        }
     }
 }
