@@ -6,9 +6,9 @@ GithubXamarin(or GitIt) is a cross platform application for https://github.com w
 
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/GithubUWP/Lobby)
 [![Build status](https://ci.appveyor.com/api/projects/status/ud7on9hsorejkbys?svg=true)](https://ci.appveyor.com/project/prajjwaldimri/githubuwp)
-[![GitHub issues](https://img.shields.io/github/issues/prajjwaldimri/GithubUWP.svg?maxAge=2592000?style=flat-square)](https://github.com/prajjwaldimri/GithubUWP/issues)
-[![license](https://img.shields.io/badge/license-GNU%20GPL%20v3-blue.svg?maxAge=2592000?style=flat-square)](https://github.com/prajjwaldimri/GithubUWP/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-@prajjwaldimri-642C90.svg?style=flat-square)](https://twitter.com/prajjwaldimri)
+[![GitHub issues](https://img.shields.io/github/issues/prajjwaldimri/GithubUWP.svg?maxAge=2592000?style=flat-square)](https://github.com/prajjwaldimri/GithubXamarin/issues)
+[![license](https://img.shields.io/badge/license-GNU--GPLv3-blue.svg)](https://github.com/prajjwaldimri/GithubUWP/blob/master/LICENSE)
+[![Twitter URL](https://img.shields.io/badge/tweet-%40prajjwaldimri-blue.svg?style=social&style=flat-square)](https://www.twitter.com/prajjwaldimri)
 
 This project adheres to the Contributor Covenant [code of conduct](https://github.com/prajjwaldimri/GithubXamarin/blob/master/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. 
