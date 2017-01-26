@@ -18,6 +18,7 @@ Please report unacceptable behavior to prajjwaldimri@outlook.com
 
 * [Visual Studio 2015](visualstudio.com) (Required)
 * [Supercharger](supercharger.tools) (Optional)
+* [Pencil](https://github.com/evolus/pencil/) (Optional)
 
 # License
 
