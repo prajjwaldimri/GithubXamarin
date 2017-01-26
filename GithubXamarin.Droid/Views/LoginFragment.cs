@@ -73,12 +73,6 @@ namespace GithubXamarin.Droid.Views
             _webView = webview;
         }
 
-        public override bool ShouldOverrideUrlLoading(WebView view, IWebResourceRequest request)
-        {
-            view.LoadUrl(request.Url.ToString());
-            return true;
-        }
-
         /// <summary>
         /// Gets Fired whenever a page in the WebView finishes loading.
         /// </summary>
