@@ -1,77 +1,100 @@
-using Windows.UI.Xaml;
-using System.Threading.Tasks;
+﻿using System;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Template10.Controls;
-using Template10.Common;
-using System;
-using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using GithubXamarin.UWP.Services.SettingsServices;
+using Windows.UI.Xaml.Navigation;
+using MvvmCross.Platform;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.UWP
 {
-    /// Documentation on APIs used in this page:
-    /// https://github.com/Windows-XAML/Template10/wiki
-
-    [Bindable]
-    sealed partial class App : BootStrapper
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
+    sealed partial class App : Application
     {
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
         public App()
         {
-            InitializeComponent();
-            SplashFactory = (e) => new Views.Splash(e);
-
-            #region app settings
-
-            // some settings must be set in app.constructor
-            var settings = SettingsService.Instance;
-            RequestedTheme = settings.AppTheme;
-            CacheMaxDuration = settings.CacheMaxDuration;
-            ShowShellBackButton = settings.UseShellBackButton;
-            AutoSuspendAllFrames = true;
-            AutoRestoreAfterTerminated = true;
-            AutoExtendExecutionSession = true;
-
-            #endregion
+            this.InitializeComponent();
+            this.Suspending += OnSuspending;
         }
 
-
-        public override UIElement CreateRootElement(IActivatedEventArgs e)
+        /// <summary>
+        /// Invoked when the application is launched normally by the end user.  Other entry points
+        /// will be used such as when the application is launched to open a specific file.
+        /// </summary>
+        /// <param name="e">Details about the launch request and process.</param>
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var service = NavigationServiceFactory(BackButton.Attach, ExistingContent.Exclude);
-            return new ModalDialog
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
             {
-                DisableBackButtonWhenModal = true,
-                Content = new Views.Shell(service),
-                ModalContent = new Views.Busy(),
-            };
-        }
-
-        public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
-        {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
+                //this.DebugSettings.EnableFrameRateCounter = true;
             }
-            await NavigationService.NavigateAsync(typeof(Views.MainPage));
-
-        }
-
-        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
+#endif
             Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame == null)
-                return;
+            WinSecureStorageBase.StoragePassword = "12345";
 
-            // Navigate back if possible, and if the event has not 
-            // already been handled .
-            if (rootFrame.CanGoBack && e.Handled == false)
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
             {
-                e.Handled = true;
-                rootFrame.GoBack();
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            if (e.PrelaunchActivated == false)
+            {
+                if (rootFrame.Content == null)
+                {
+                    var setup = new Setup(rootFrame);
+                    setup.Initialize();
+
+                    var start = Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+                    start.Start();
+                }
+                // Ensure the current window is active
+                Window.Current.Activate();
             }
         }
 
+        /// <summary>
+        /// Invoked when Navigation to a certain page fails
+        /// </summary>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        /// <summary>
+        /// Invoked when application execution is being suspended.  Application state is saved
+        /// without knowing whether the application will be terminated or resumed with the contents
+        /// of memory still intact.
+        /// </summary>
+        /// <param name="sender">The source of the suspend request.</param>
+        /// <param name="e">Details about the suspend request.</param>
+        private void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            //TODO: Save application state and stop any background activity
+            deferral.Complete();
+        }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
-using MvvmCross.Core.ViewModels;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -30,12 +29,7 @@ namespace GithubXamarin.Core.ViewModels
             _eventDataService = eventDataService;
         }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
-        public async void Init(long? repositoryId=null, string userLogin=null)
+        public async void Init(long? repositoryId = null, string userLogin = null)
         {
             if (repositoryId.HasValue)
             {

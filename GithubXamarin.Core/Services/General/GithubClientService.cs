@@ -1,11 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GithubXamarin.Core.Contracts.Service;
+﻿using GithubXamarin.Core.Contracts.Service;
 using Octokit;
 using Plugin.SecureStorage;
-using RestSharp.Portable;
-using RestSharp.Portable.HttpClient;
 
 
 namespace GithubXamarin.Core.Services.General

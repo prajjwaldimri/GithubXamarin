@@ -8,7 +8,6 @@ using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
 using Octokit;
 using System;
-using MvvmCross.Core.ViewModels;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.Droid.Views

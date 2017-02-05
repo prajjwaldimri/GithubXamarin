@@ -1,0 +1,272 @@
+﻿<views:MvxWindowsPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:userControls="using:GithubXamarin.UWP.UserControls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    x:Class="GithubXamarin.UWP.MainPage"
+    TabNavigation="Cycle"
+    mc:Ignorable="d">
+
+    <views:MvxWindowsPage.Resources>
+        <!-- https://github.com/Microsoft/Windows-universal-samples/blob/master/Samples/XamlNavigation/shared/AppShell.xaml -->
+        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="userControls:NavMenuItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle
+                    x:Name="Selected"
+                    Width="6"
+                    Height="24"
+                    Margin="-2,0,0,0"
+                    Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                    Visibility="{x:Bind SelectedVis, Mode=TwoWay}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"/>
+
+                <FontIcon
+                    x:Name="Glyph"
+                    FontSize="16"
+                    Glyph="{x:Bind Glyph}"
+                    FontFamily="{x:Bind FontFamily}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    ToolTipService.ToolTip="{x:Bind Label}"/>
+
+                <TextBlock
+                    x:Name="Text"
+                    Grid.Column="1"
+                    Text="{x:Bind Label}"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    TextWrapping="NoWrap"
+                    VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </views:MvxWindowsPage.Resources>
+
+    <Grid x:Name="RootGrid">
+
+        <!-- Adaptive Triggers -->
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource LargeWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HamburgerMenu.DisplayMode" Value="CompactInline"/>
+                        <Setter Target="HamburgerMenu.IsPaneOpen" Value="True"/>
+                        <Setter Target="NavPaneDivider.Visibility" Value="Visible"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="HeaderTextBlock.Margin" Value="15,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HamburgerMenu.DisplayMode" Value="CompactOverlay"/>
+                        <Setter Target="HamburgerMenu.IsPaneOpen" Value="False"/>
+                        <Setter Target="NavPaneDivider.Visibility" Value="Collapsed"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="False"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="False"/>
+                        <Setter Target="HeaderTextBlock.Margin" Value="15,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HamburgerMenu.DisplayMode" Value="Overlay"/>
+                        <Setter Target="HamburgerMenu.IsPaneOpen" Value="False"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="HeaderTextBlock.Margin" Value="60,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <ToggleButton 
+            x:Name="TogglePaneButton"
+            Canvas.ZIndex="100"
+            TabIndex="1"
+            Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+            Checked="TogglePaneButton_Toggle"
+            Unchecked="TogglePaneButton_Toggle"
+            AutomationProperties.Name="Navigation"
+            Margin="0,0,0,0"
+            ToolTipService.ToolTip="Navigation"/>
+
+        <SplitView
+            x:Name="HamburgerMenu"
+            DisplayMode="CompactOverlay"
+            OpenPaneLength="320"
+            LightDismissOverlayMode="On"
+            IsTabStop="False"
+            PaneClosed="HamburgerMenu_OnPaneClosed">
+
+            <SplitView.Pane>
+                <Grid x:Name="PaneContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="6"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="48"/>
+                        <ColumnDefinition Width="48"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Menu -->
+                    <userControls:NavMenuListView
+                        x:Name="NavMenuList"
+                        Grid.ColumnSpan="3"
+                        TabIndex="3"
+                        Margin="0,52,0,0"
+                        ContainerContentChanging="NavMenuList_OnContainerContentChanging"
+                        ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                        ItemTemplate="{StaticResource NavMenuItemTemplate}">
+
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="ItemInvoked">
+                                <core:InvokeCommandAction
+                                    Command="{Binding HamburgerMenuNavigationCommand}"
+                                    CommandParameter="{Binding ElementName=NavMenuList, Path=SelectedIndex}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+
+                        <userControls:NavMenuItem
+                            x:Name="EventsNavMenuItem"
+                            Label="Events" 
+                            Glyph="&#xf0a1;"
+                            FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                        <userControls:NavMenuItem 
+                            Label="Notifications" 
+                            Glyph="&#xf0f3;"
+                            FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                        <userControls:NavMenuItem 
+                            Label="Repositories" 
+                            Glyph="&#xf1c0;"
+                            FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                        <userControls:NavMenuItem 
+                            Label="Issues" 
+                            Glyph="&#xf06a;"
+                            FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                        <userControls:NavMenuItem 
+                            Label="Gists" 
+                            Glyph="&#xf1c9;"
+                            FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+
+                    </userControls:NavMenuListView>
+
+                    <Rectangle
+                        x:Name="NavPaneDivider"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Height="1"
+                        Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                        Margin="16,0,16,6"/>
+
+                    <Button
+                        x:Name="FeedbackNavPaneButton"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Style="{StaticResource SplitViewPaneButtonStyle}"
+                        Content="&#xE76E;"
+                        AutomationProperties.Name="Feedback"
+                        ToolTipService.ToolTip="Feedback"/>
+
+                    <Button
+                        x:Name="SettingsNavPaneButton"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Style="{StaticResource SplitViewPaneButtonStyle}"
+                        Content="&#xE713;"
+                        AutomationProperties.Name="Settings"
+                        ToolTipService.ToolTip="Settings"/>
+
+                </Grid>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+
+                <RelativePanel>
+                    <Border
+                        x:Name="AppHeaderTextBlockBackground"
+                        Height="48"
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                        <Border.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+                        </Border.Background>
+
+                        <RelativePanel>
+
+                            <TextBlock
+                                x:Name="HeaderTextBlock"
+                                FontSize="16"
+                                VerticalAlignment="Center"
+                                Text="{Binding PageHeader}"
+                                Margin="15,0,0,0"
+                                FontWeight="SemiBold"
+                                TextAlignment="Left"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"/>
+
+                            <AutoSuggestBox 
+                                VerticalAlignment="Center"
+                                QueryIcon="Find"
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"/>
+
+                        </RelativePanel>
+                    </Border>
+
+                    <Frame
+                        x:Name="MainFrame"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="AppHeaderTextBlockBackground"
+                        RelativePanel.AlignBottomWithPanel="True">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition>
+                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                        <EntranceNavigationTransitionInfo/>
+                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                </NavigationThemeTransition>
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                    </Frame>
+                </RelativePanel>
+
+            </SplitView.Content>
+
+        </SplitView>
+
+    </Grid>
+
+</views:MvxWindowsPage>

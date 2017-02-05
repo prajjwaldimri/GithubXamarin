@@ -1,21 +1,13 @@
 ﻿{
   "dependencies": {
-    "Auth0.Windows.UWP": "1.1.0",
-    "Conditions": "2.1.0",
-    "FubarCoder.RestSharp.Portable": "3.3.0",
-    "Humanizer": "2.1.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.Net.Http": "2.2.29",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.Toolkit.Uwp": "1.2.0",
-    "Microsoft.Toolkit.Uwp.Notifications": "1.2.0",
-    "Microsoft.Toolkit.Uwp.Services": "1.2.0",
     "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-    "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0",
-    "Microsoft.Toolkit.Uwp.UI.Controls": "1.2.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
-    "Newtonsoft.Json": "9.0.1",
+    "MvvmCross": "4.4.0",
     "Octokit": "0.24.0",
-    "QueryString.NET": "1.0.0",
-    "Template10": "1.1.12"
+    "sameerIOTApps.Plugin.SecureStorage": "1.2.1"
   },
   "frameworks": {
     "uap10.0": {}

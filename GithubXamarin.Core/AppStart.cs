@@ -1,5 +1,8 @@
-﻿using GithubXamarin.Core.ViewModels;
+﻿using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core
 {
@@ -7,7 +10,7 @@ namespace GithubXamarin.Core
     {
         public void Start(object hint = null)
         {
-            ShowViewModel<EventsViewModel>();
+            ShowViewModel<MainViewModel>();
         }
     }
 }

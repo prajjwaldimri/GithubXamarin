@@ -12,8 +12,6 @@ using Plugin.SecureStorage;
 using GithubXamarin.Core.ViewModels;
 using Android.Widget;
 using Auth0.SDK;
-using System.Threading.Tasks;
-using System;
 
 namespace GithubXamarin.Droid.Activities
 {
@@ -58,7 +56,6 @@ namespace GithubXamarin.Droid.Activities
             drawerToggle = setupDrawerToggle();
             _drawerLayout.AddDrawerListener(drawerToggle);
 
-            CrossSecureStorage.Current.DeleteKey("OAuthToken");
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 SetToolBarHeader("Your Events");

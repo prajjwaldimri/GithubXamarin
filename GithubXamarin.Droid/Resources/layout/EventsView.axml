@@ -2,18 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
-  
-    <MvvmCross.Binding.Droid.Views.MvxListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mvxListView1"
-        local:MvxItemTemplate="@layout/events_item_template"
-        local:MvxBind="ItemsSource Events" />
+  <Mvx.MvxListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    local:MvxBind="ItemsSource Events"
+    local:MvxItemTemplate="@layout/events_item_template"/>
 
 </LinearLayout>

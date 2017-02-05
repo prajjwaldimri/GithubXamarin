@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AkavacheSqliteLinkerOverride.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AppStart.cs" />
     <Compile Include="Contracts\Repository\IEventRepository.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Contracts\ViewModel\ISearchResultViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUsersViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUserViewModel.cs" />
+    <Compile Include="Converters\EventToStringConverter.cs" />
     <Compile Include="Model\DeviceOperatingSystemType.cs" />
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\ModifiedOctokitActivity.cs" />
@@ -94,6 +96,14 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Akavache, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\akavache.core.5.0.0\lib\Portable-Net45+Win8+WP8+Wpa81\Akavache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Akavache.Sqlite3, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\akavache.sqlite3.5.0.0\lib\Portable-Net45+Win8+WP8+Wpa81\Akavache.Sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Auth0.AuthenticationApi, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Auth0.AuthenticationApi.3.6.0\lib\portable-net45+win8+wpa81\Auth0.AuthenticationApi.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +114,10 @@
     </Reference>
     <Reference Include="Auth0.ManagementApi, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Auth0.ManagementApi.3.6.0\lib\portable-net45+win8+wpa81\Auth0.ManagementApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cheesebaron.MvxPlugins.DeviceInfo, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cheesebaron.MvxPlugins.DeviceInfo.2.2.1\lib\portable-net45+win+wpa81\Cheesebaron.MvxPlugins.DeviceInfo.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -154,6 +168,22 @@
       <HintPath>..\packages\FubarCoder.RestSharp.Portable.HttpClient.3.3.0\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\RestSharp.Portable.HttpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Splat, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.1.6.0\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=17faffbb2a73a73f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.1.1.0\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_e_sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.1.1.0\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.0\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -162,14 +192,28 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="cid.txt" />
     <Content Include="cs.txt" />

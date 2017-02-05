@@ -1,0 +1,69 @@
+﻿<views:MvxWindowsPage
+    x:Class="GithubXamarin.UWP.Views.EventsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PullToRefreshListView x:Name="ListView" 
+                          ItemsSource="{Binding Events}" HorizontalAlignment="Stretch" 
+                          IsItemClickEnabled="True" IsTapEnabled="True"
+                      HorizontalContentAlignment="Stretch">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,10,0,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon 
+                                      Grid.Row="0" Grid.Column="0" FontSize="15"
+                                      Glyph="{Binding Type}"
+                                      Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                                       Text="{Binding CreatedAt.DateTime}"
+                                       Margin="5,0,0,0"/>
+
+                                <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding Actor.AvatarUrl}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                           TextWrapping="NoWrap" Text="{Binding Actor.Login}"
+                                       Margin="10,0,0,0" VerticalAlignment="Center" IsTapEnabled="True"
+                                           Style="{StaticResource BaseTextBlockStyle}"/>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="2" Margin="3,0,0,0"
+                                           TextWrapping="NoWrap" VerticalAlignment="Center"
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" 
+                                           TextWrapping="NoWrap" Text="{Binding Repo.Name}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </controls:PullToRefreshListView>
+    </Grid>
+</views:MvxWindowsPage>
+
+
+
