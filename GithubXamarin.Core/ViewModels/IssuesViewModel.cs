@@ -4,6 +4,8 @@ using MvvmCross.Core.ViewModels;
 using Octokit;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 
 namespace GithubXamarin.Core.ViewModels
 {
@@ -52,15 +54,19 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long? repositoryId = null)
         {
-            if (repositoryId.HasValue)
+            if (IsInternetAvailable())
             {
-                Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
-                    _githubClientService.GetAuthorizedGithubClient());
-            }
-            else
-            {
-                Issues =
-                    await _issueDataService.GetAllIssuesForCurrentUser(_githubClientService.GetAuthorizedGithubClient());
+                if (repositoryId.HasValue)
+                {
+                    Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Issues =
+                        await _issueDataService.GetAllIssuesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
 

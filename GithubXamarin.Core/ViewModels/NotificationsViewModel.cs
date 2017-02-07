@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -30,23 +32,21 @@ namespace GithubXamarin.Core.ViewModels
             _notificationDataService = notificationDataService;
         }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
         public async void Init(long? repositoryId=null)
         {
-            if (repositoryId.HasValue)
+            if (IsInternetAvailable())
             {
-                Notifications = await _notificationDataService.GetAllNotificationsForRepository(repositoryId.Value,
-                    _githubClientService.GetAuthorizedGithubClient());
-            }
-            else
-            {
-                Notifications =
-                    await _notificationDataService.GetAllNotificationsForCurrentUser(
-                        _githubClientService.GetAuthorizedGithubClient());
+                if (repositoryId.HasValue)
+                {
+                    Notifications = await _notificationDataService.GetAllNotificationsForRepository(repositoryId.Value,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Notifications =
+                        await _notificationDataService.GetAllNotificationsForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 ﻿using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -30,14 +32,17 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(string userLogin)
         {
-            if (string.IsNullOrWhiteSpace(userLogin))
+            if (IsInternetAvailable())
             {
-                User = await _userDataService.GetCurrentUser(_githubClientService.GetAuthorizedGithubClient());
-                
-            }
-            else
-            {
-                User = await _userDataService.GetUser(userLogin, _githubClientService.GetAuthorizedGithubClient());
+                if (string.IsNullOrWhiteSpace(userLogin))
+                {
+                    User = await _userDataService.GetCurrentUser(GithubClientService.GetAuthorizedGithubClient());
+
+                }
+                else
+                {
+                    User = await _userDataService.GetUser(userLogin, GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
     }

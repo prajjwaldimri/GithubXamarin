@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using Cheesebaron.MvxPlugins.Connectivity;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -14,11 +17,11 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Activity> _events;
         public ObservableCollection<Activity> Events
         {
-            get { return _events;}
+            get { return _events; }
             set
             {
                 _events = value;
-                RaisePropertyChanged(()=>Events);
+                RaisePropertyChanged(() => Events);
             }
         }
 
@@ -31,19 +34,24 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long? repositoryId = null, string userLogin = null)
         {
-            if (repositoryId.HasValue)
+            if (IsInternetAvailable())
             {
-                Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
-                    _githubClientService.GetAuthorizedGithubClient());
-            }
-            else if (!string.IsNullOrWhiteSpace(userLogin))
-            {
-                Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
-                    _githubClientService.GetAuthorizedGithubClient());
-            }
-            else
-            {
-                Events = await _eventDataService.GetAllEventsForCurrentUser(_githubClientService.GetAuthorizedGithubClient());
+                if (repositoryId.HasValue)
+                {
+                    Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else if (!string.IsNullOrWhiteSpace(userLogin))
+                {
+                    Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Events =
+                        await _eventDataService.GetAllEventsForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
     }

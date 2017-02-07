@@ -5,6 +5,8 @@ using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -47,27 +49,31 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long repositoryId, UsersTypeEnumeration? usersType = null)
         {
-            if (usersType != null)
+            if (IsInternetAvailable())
             {
-                switch (usersType)
+                if (usersType != null)
                 {
-                    case UsersTypeEnumeration.Stargazers:
-                        Users = await _userDataService.GetStargazersForRepository(repositoryId, _githubClientService.GetAuthorizedGithubClient());
-                        break;
-                    case UsersTypeEnumeration.Collaborators:
-                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                            _githubClientService.GetAuthorizedGithubClient());
-                        break;
-                    default:
-                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                            _githubClientService.GetAuthorizedGithubClient());
-                        break;
+                    switch (usersType)
+                    {
+                        case UsersTypeEnumeration.Stargazers:
+                            Users = await _userDataService.GetStargazersForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            break;
+                        case UsersTypeEnumeration.Collaborators:
+                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            break;
+                        default:
+                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Users = await _userDataService.GetCollaboratorsForRepository(repositoryId, 
-                    _githubClientService.GetAuthorizedGithubClient());
+                else
+                {
+                    Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
 

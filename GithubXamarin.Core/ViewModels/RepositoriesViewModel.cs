@@ -3,6 +3,8 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -58,16 +60,19 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(string userLogin)
         {
-            if (string.IsNullOrWhiteSpace(userLogin))
+            if (IsInternetAvailable())
             {
-                Repositories =
-                    await _repoDataService.GetAllRepositoriesForCurrentUser(
-                        _githubClientService.GetAuthorizedGithubClient());
-            }
-            else
-            {
-                Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
-                    _githubClientService.GetAuthorizedGithubClient());
+                if (string.IsNullOrWhiteSpace(userLogin))
+                {
+                    Repositories =
+                        await _repoDataService.GetAllRepositoriesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
             }
         }
     }

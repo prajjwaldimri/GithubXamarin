@@ -4,6 +4,8 @@ using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -95,9 +97,12 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long repositoryId)
         {
-            Repository = await _repoDataService.GetRepository(repositoryId,
-                _githubClientService.GetAuthorizedGithubClient());
-            await CheckRepositoryStats();
+            if (IsInternetAvailable())
+            {
+                Repository = await _repoDataService.GetRepository(repositoryId,
+                    GithubClientService.GetAuthorizedGithubClient());
+                await CheckRepositoryStats();
+            }
         }
 
         /// <summary>
@@ -107,7 +112,7 @@ namespace GithubXamarin.Core.ViewModels
         private async Task CheckRepositoryStats()
         {
             //Check if repository is starred
-            var starredClient = new StarredClient(new ApiConnection(_githubClientService.GetAuthorizedGithubClient().Connection));
+            var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
             IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Name, Repository.Name);
         }
 
@@ -116,7 +121,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ForkRepository()
         {
-            var forkClient = new RepositoryForksClient(new ApiConnection(_githubClientService.GetAuthorizedGithubClient().Connection));
+            var forkClient = new RepositoryForksClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
             forkClient.Create(Repository.Id, new NewRepositoryFork());
         }
 

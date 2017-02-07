@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Cheesebaron.MvxPlugins.Connectivity;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels

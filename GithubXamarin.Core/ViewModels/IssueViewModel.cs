@@ -1,5 +1,7 @@
 ﻿using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -29,15 +31,13 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
         }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
         public async void Init(long repositoryId, int issueNumber)
         {
-            Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
-                _githubClientService.GetAuthorizedGithubClient());
+            if (IsInternetAvailable())
+            {
+                Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
         }
     }
 }
