@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels

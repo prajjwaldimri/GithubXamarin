@@ -4,8 +4,6 @@ using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels

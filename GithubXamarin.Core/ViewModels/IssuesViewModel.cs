@@ -4,8 +4,6 @@ using MvvmCross.Core.ViewModels;
 using Octokit;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
 
 namespace GithubXamarin.Core.ViewModels
 {

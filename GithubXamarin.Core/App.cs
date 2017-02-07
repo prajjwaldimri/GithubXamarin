@@ -1,11 +1,5 @@
-﻿using System;
-using Cheesebaron.MvxPlugins.Connectivity;
-using GithubXamarin.Core.Services;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
 
 namespace GithubXamarin.Core
 {

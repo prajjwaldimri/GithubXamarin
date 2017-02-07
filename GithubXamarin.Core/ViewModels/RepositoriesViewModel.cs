@@ -3,8 +3,6 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
