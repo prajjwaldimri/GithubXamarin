@@ -6,6 +6,7 @@
     "Microsoft.Toolkit.Uwp.UI": "1.2.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
     "MvvmCross": "4.4.0",
+    "MvvmCross.Plugin.Messenger": "4.4.0",
     "MvvmCross.Plugin.Network": "4.4.0",
     "Octokit": "0.24.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1",

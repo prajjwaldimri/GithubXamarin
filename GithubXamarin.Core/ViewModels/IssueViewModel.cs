@@ -1,5 +1,6 @@
 ﻿using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Messenger;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -24,7 +25,7 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
 
-        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService) : base(githubClientService)
+        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
         {
             _issueDataService = issueDataService;
         }

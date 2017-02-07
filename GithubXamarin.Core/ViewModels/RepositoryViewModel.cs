@@ -4,6 +4,7 @@ using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -88,7 +89,7 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService) : base(githubClientService)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
         {
             _repoDataService = repoDataService;
         }

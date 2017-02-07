@@ -4,6 +4,7 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels
@@ -25,7 +26,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public ICommand HamburgerMenuNavigationCommand { get; set; }
 
-        public MainViewModel(IGithubClientService githubClientService) : base(githubClientService)
+        public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger) : base(githubClientService, messenger)
         {
             PageHeader = "Main Page";
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);

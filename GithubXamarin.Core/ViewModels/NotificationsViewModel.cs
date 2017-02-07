@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Plugins.Messenger;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -25,7 +26,7 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
 
-        public NotificationsViewModel(IGithubClientService githubClientService, INotificationDataService notificationDataService) : base(githubClientService)
+        public NotificationsViewModel(IGithubClientService githubClientService, INotificationDataService notificationDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
         {
             _notificationDataService = notificationDataService;
         }
