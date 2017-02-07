@@ -12,27 +12,39 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:PullToRefreshListView ItemsSource="{Binding Users}" IsItemClickEnabled="True"
-                                   SelectionMode="Single" RefreshCommand="{Binding PullToRefreshDelegateCommand}">
+        
+        <controls:PullToRefreshListView 
+            ItemsSource="{Binding Users}"
+            SelectionMode="Single" 
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}">
 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="ItemClick">
-                        <core:InvokeCommandAction Command="{Binding OnUserClickDelegateCommand}"/>
+                        <core:InvokeCommandAction Command="{Binding UserClickCommand}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" 
-                                    Padding="0,5,0,5">
-                            <Rectangle Grid.Row="1" Grid.Column="0" Height="32" Width="32"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center">
+                        
+                        <StackPanel
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal"
+                            Padding="0,5,0,5">
+                            <Rectangle 
+                                Height="32" 
+                                Width="32"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="{Binding AvatarUrl}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <TextBlock Margin="10,0,0,0" Text="{Binding Login}"
-                                           VerticalAlignment="Center"/>
+                            <TextBlock 
+                                Margin="10,0,0,0"
+                                Text="{Binding Login}"
+                                VerticalAlignment="Center"/>
 
                         </StackPanel>
                     </DataTemplate>

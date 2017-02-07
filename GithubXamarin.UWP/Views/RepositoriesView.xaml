@@ -18,15 +18,17 @@
             SelectionMode="Single"
             IsItemClickEnabled="True"
             HorizontalAlignment="Stretch"
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
             RefreshCommand="{Binding PullToRefreshDelegateCommand}">
 
             <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="ItemClick">
-                    <core:InvokeCommandAction Command="{Binding RepositoryClickDelegateCommand}"/>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding RepositoryClickCommand, Mode=TwoWay}" 
+                                              CommandParameter="{Binding ElementName=MainListView, Path=SelectedItem}"/>
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-            <ListView.ItemTemplate>
+                <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel 
                         HorizontalAlignment="Stretch"

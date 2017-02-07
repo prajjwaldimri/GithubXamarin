@@ -40,7 +40,7 @@
                 <ToggleButton
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    IsChecked="{Binding Repository.IsStarred}" 
+                    IsChecked="{Binding IsRepositoryStarred}" 
                     Command="{Binding StarredToggledDelegateCommand}">
                     
                     <ToggleButton.Content>
@@ -58,7 +58,7 @@
                 <TextBlock 
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Center"
-                    Text="{Binding Repository.Star.Count}"
+                    Text="{Binding Repository.StargazersCount}"
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
             </StackPanel>
 
@@ -82,7 +82,7 @@
                 <TextBlock 
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Text="{Binding Repository.Fork.Count}" 
+                    Text="{Binding Repository.ForksCount}" 
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
                 
             </StackPanel>
@@ -103,7 +103,7 @@
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
                         
                         <TextBlock 
-                            Text="{Binding Repository.Owner}"
+                            Text="{Binding Repository.Owner.Name}"
                             Margin="10,0,0,0"
                             Style="{StaticResource SubtitleTextBlockStyle}"/>
                         
@@ -125,7 +125,7 @@
                             Text="Website:"
                             Opacity="0.7" />
                         <HyperlinkButton
-                            NavigateUri="{Binding Repository.Website}" 
+                            NavigateUri="{Binding Repository.HomePage}" 
                             Margin="10,0,0,0"/>
                     </StackPanel>
                 </Button.Content>
@@ -150,7 +150,7 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
-                Command="{Binding GoToReadmeDelegateCommand}"
+                Command="{Binding ReadmeClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -169,7 +169,7 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
-                Command="{Binding ForksClickDelegateCommand}"
+                Command="{Binding ForkClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -224,7 +224,7 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
-                Command="{Binding CollaboratorsClickDelegateCommand}"
+                Command="{Binding CollaboratorsClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -243,7 +243,7 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
-                Command="{Binding StargazersClickDelegateCommand}"
+                Command="{Binding StargazersClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -280,7 +280,7 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
-                Command="{Binding IssuesClickDelegateCommand}"
+                Command="{Binding IssuesClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -293,4 +293,3 @@
         </Grid>
     </ScrollViewer>
 </views:MvxWindowsPage>
-

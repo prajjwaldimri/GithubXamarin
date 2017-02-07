@@ -28,7 +28,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Height="100" Width="100">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding AvatarImage}"/>
+                                <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
                             </Rectangle.Fill>
                         </Rectangle>
                         <StackPanel Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
@@ -51,32 +51,32 @@
                                 </Grid.ColumnDefinitions>
 
 
-                                <TextBlock Text="{Binding DisplayName}" FontSize="18" FontWeight="ExtraBold"
+                                <TextBlock Text="{Binding User.Name}" FontSize="18" FontWeight="ExtraBold"
                                    Grid.Row="0" Grid.Column="2"/>
-                                <TextBlock Text="{Binding UserName}" FontSize="14"
+                                <TextBlock Text="{Binding User.Login}" FontSize="14"
                                    Grid.Row="1" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                    Glyph="&#xf456;" Grid.Row="2" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Location}" FontSize="14"
+                                <TextBlock Text="{Binding User.Location}" FontSize="14"
                                    Grid.Row="2" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                    Glyph="&#xf10f;"
                                   Grid.Row="3" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Email}" FontSize="14"
+                                <TextBlock Text="{Binding User.Email}" FontSize="14"
                                    Grid.Row="3" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                    Glyph="&#xf347;"
                                   Grid.Row="4" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Bio}" FontSize="14" TextWrapping="Wrap"
+                                <TextBlock Text="{Binding User.Bio}" FontSize="14" TextWrapping="Wrap"
                                    Grid.Row="4" Grid.Column="2"/>
 
                                 <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
                                    Glyph="&#xf316;"
                                   Grid.Row="5" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Company}" FontSize="14"
+                                <TextBlock Text="{Binding User.Company}" FontSize="14"
                                    Grid.Row="5" Grid.Column="2"/>
                             </Grid>
                         </StackPanel>
@@ -106,52 +106,52 @@
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf262;"
                                                            MiddleTextBlockProperty="Followers:"
-                                                           LastTextBlockProperty="{Binding Followers}"
+                                                           LastTextBlockProperty="{Binding User.Followers}"
                                                            Grid.Row="1" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf260;"
                                                            MiddleTextBlockProperty="Following:"
-                                                           LastTextBlockProperty="{Binding Following}"
+                                                           LastTextBlockProperty="{Binding User.Following}"
                                                            Grid.Row="2" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf2aa;"
                                                            MiddleTextBlockProperty="Plan:"
-                                                           LastTextBlockProperty="{Binding AccountPlan}"
+                                                           LastTextBlockProperty="{Binding User.AccountPlan}"
                                                            Grid.Row="3" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf13f;"
                                                            MiddleTextBlockProperty="Type:"
-                                                           LastTextBlockProperty="{Binding AccountType}"
+                                                           LastTextBlockProperty="{Binding User.AccountType}"
                                                            Grid.Row="4" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf213;"
                                                            MiddleTextBlockProperty="Total Private Repos:"
-                                                           LastTextBlockProperty="{Binding PrivateRepos}"
+                                                           LastTextBlockProperty="{Binding User.PrivateRepos}"
                                                            Grid.Row="5" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf212;"
                                                            MiddleTextBlockProperty="Total Public Repos:"
-                                                           LastTextBlockProperty="{Binding PublicRepos}"
+                                                           LastTextBlockProperty="{Binding User.PublicRepos}"
                                                            Grid.Row="6" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf484;"
                                                            MiddleTextBlockProperty="Disk Usage:"
-                                                           LastTextBlockProperty="{Binding DiskUsage}"
+                                                           LastTextBlockProperty="{Binding User.DiskUsage}"
                                                            Grid.Row="7" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf2d1;"
                                                            MiddleTextBlockProperty="Created At:"
-                                                           LastTextBlockProperty="{Binding CreatedAt}"
+                                                           LastTextBlockProperty="{Binding User.CreatedAt}"
                                                            Grid.Row="8" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf272;"
                                                            MiddleTextBlockProperty="Hireable?:"
-                                                           LastTextBlockProperty="{Binding Hireable}"
+                                                           LastTextBlockProperty="{Binding User.Hireable}"
                                                            Grid.Row="9" Grid.Column="0"/>
 
                         <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf491;"
                                                            MiddleTextBlockProperty="Total Gists:"
-                                                           LastTextBlockProperty="{Binding TotalGists}"
+                                                           LastTextBlockProperty="{Binding User.TotalGists}"
                                                            Grid.Row="10" Grid.Column="0"/>
 
                     </Grid>

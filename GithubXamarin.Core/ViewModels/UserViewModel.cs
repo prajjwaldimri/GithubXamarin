@@ -28,16 +28,12 @@ namespace GithubXamarin.Core.ViewModels
             _userDataService = userDataService;
         }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
         public async void Init(string userLogin)
         {
             if (string.IsNullOrWhiteSpace(userLogin))
             {
                 User = await _userDataService.GetCurrentUser(_githubClientService.GetAuthorizedGithubClient());
+                
             }
             else
             {

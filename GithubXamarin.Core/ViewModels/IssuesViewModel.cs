@@ -3,6 +3,7 @@ using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
 using Octokit;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace GithubXamarin.Core.ViewModels
 {
@@ -14,22 +15,22 @@ namespace GithubXamarin.Core.ViewModels
         #region Properties and Commands
 
         //Commands
-        public MvxCommand<Issue> NavigateToIssueCommand { get; set; }
+        private ICommand _issueClickCommand;
+
+        public ICommand IssueClickCommand
+        {
+            get
+            {
+                _issueClickCommand = _issueClickCommand ?? new MvxCommand(NavigateToIssueView);
+                return _issueClickCommand;
+            }
+        }
 
         //DataServices
         private readonly IIssueDataService _issueDataService;
 
         //View Properties
-        private Issue _selectedIssue;
-        public Issue SelectedIssue
-        {
-            get { return _selectedIssue; }
-            set
-            {
-                _selectedIssue = value;
-                RaisePropertyChanged(() => SelectedIssue);
-            }
-        }
+        public int SelectedIssue { get; set; }
 
         private ObservableCollection<Issue> _issues;
         public ObservableCollection<Issue> Issues
@@ -49,13 +50,6 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
         }
 
-        public override void Start()
-        {
-            base.Start();
-            NavigateToIssueCommand = new MvxCommand<Issue>(_selectedIssue => ShowViewModel<IssueViewModel>(
-                new {issueId = _selectedIssue.Id}));
-        }
-
         public async void Init(long? repositoryId = null)
         {
             if (repositoryId.HasValue)
@@ -68,6 +62,11 @@ namespace GithubXamarin.Core.ViewModels
                 Issues =
                     await _issueDataService.GetAllIssuesForCurrentUser(_githubClientService.GetAuthorizedGithubClient());
             }
+        }
+
+        private void NavigateToIssueView()
+        {
+            ShowViewModel<IssueViewModel>(new {issueId = Issues[SelectedIssue].Id});
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using MvvmCross.Core.ViewModels;
 using Octokit;
 
 namespace GithubXamarin.Core.ViewModels
@@ -22,6 +24,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _repositoryClickCommand;
+        public ICommand RepositoryClickCommand
+        {
+            get
+            {
+                _repositoryClickCommand = _repositoryClickCommand ?? new MvxCommand(NavigateToRepositoryView);
+                return _repositoryClickCommand;
+            }
+        }
+
+        public int SelectedIndex { get; set; }
+
         #endregion
 
 
@@ -30,9 +44,16 @@ namespace GithubXamarin.Core.ViewModels
             _repoDataService = repoDataService;
         }
 
-        public override void Start()
+        /// <summary>
+        /// Navigates To the repository ViewModel
+        /// </summary>
+        private void NavigateToRepositoryView()
         {
-            base.Start();
+            var repository = Repositories?[SelectedIndex];
+            if (repository != null)
+            {
+                ShowViewModel<RepositoryViewModel>(new {repositoryId= repository.Id});
+            }
         }
 
         public async void Init(string userLogin)

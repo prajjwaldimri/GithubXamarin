@@ -15,14 +15,14 @@
         <controls:PullToRefreshListView 
             ItemsSource="{Binding Issues}"
             SelectionMode="Single" 
-            IsItemClickEnabled="True"
+            SelectedIndex="{Binding SelectedIssue, Mode=TwoWay}"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Stretch">
 
                     <!--Listens for ItemClick event-->
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="ItemClick">
-                            <core:InvokeCommandAction Command="{Binding IssueClickDelegateCommand}"/>
+                            <core:InvokeCommandAction Command="{Binding IssueClickCommand}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
 
