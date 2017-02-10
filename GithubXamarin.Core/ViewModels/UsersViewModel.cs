@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
@@ -18,7 +19,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<User> _users;
         public ObservableCollection<User> Users
         {
-            get { return _users;}
+            get { return _users; }
             set
             {
                 _users = value;
@@ -40,46 +41,50 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public UsersViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public UsersViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _userDataService = userDataService;
         }
 
         public async void Init(long repositoryId, UsersTypeEnumeration? usersType = null)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable())
             {
-                if (usersType != null)
+                await DialogService.ShowDialogASync("So for the time being, here is an interesting fact: If each dead person became a ghost, there’d be more than 100 billion of them haunting us all. Creepy, but cool!", "No Internet Connection!");
+                return;
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            if (usersType != null)
+            {
+                switch (usersType)
                 {
-                    switch (usersType)
-                    {
-                        case UsersTypeEnumeration.Stargazers:
-                            Users = await _userDataService.GetStargazersForRepository(repositoryId,
-                                GithubClientService.GetAuthorizedGithubClient());
-                            break;
-                        case UsersTypeEnumeration.Collaborators:
-                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                                GithubClientService.GetAuthorizedGithubClient());
-                            break;
-                        default:
-                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                                GithubClientService.GetAuthorizedGithubClient());
-                            break;
-                    }
-                }
-                else
-                {
-                    Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                        GithubClientService.GetAuthorizedGithubClient());
+                    case UsersTypeEnumeration.Stargazers:
+                        Users = await _userDataService.GetStargazersForRepository(repositoryId,
+                            GithubClientService.GetAuthorizedGithubClient());
+                        break;
+                    case UsersTypeEnumeration.Collaborators:
+                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                            GithubClientService.GetAuthorizedGithubClient());
+                        break;
+                    default:
+                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                            GithubClientService.GetAuthorizedGithubClient());
+                        break;
                 }
             }
+            else
+            {
+                Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
         public void NavigateToUserView()
         {
             var user = Users?[SelectedIndex];
             if (user != null)
-                ShowViewModel<UserViewModel>(new {userLogin = user.Login});
+                ShowViewModel<UserViewModel>(new { userLogin = user.Login });
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.Contracts.Service;
+using GithubXamarin.UWP.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
@@ -28,6 +30,11 @@ namespace GithubXamarin.UWP
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+
+        protected override void InitializeLastChance()
+        {
+            Mvx.ConstructAndRegisterSingleton<IDialogService, DialogService>();
         }
     }
 }

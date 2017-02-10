@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
@@ -89,7 +90,7 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
         }
@@ -98,9 +99,11 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (IsInternetAvailable())
             {
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
                 Repository = await _repoDataService.GetRepository(repositoryId,
                     GithubClientService.GetAuthorizedGithubClient());
                 await CheckRepositoryStats();
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             }
         }
 
@@ -112,7 +115,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             //Check if repository is starred
             var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Name, Repository.Name);
+            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.ToString(), Repository.Name);
         }
 
         /// <summary>

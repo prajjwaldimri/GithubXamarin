@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 
@@ -25,32 +26,39 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public EventsViewModel(IGithubClientService githubClientService, IEventDataService eventDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public EventsViewModel(IGithubClientService githubClientService, IEventDataService eventDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _eventDataService = eventDataService;
         }
 
         public async void Init(long? repositoryId = null, string userLogin = null)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable())
             {
-                if (repositoryId.HasValue)
-                {
-                    Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
-                        GithubClientService.GetAuthorizedGithubClient());
-                }
-                else if (!string.IsNullOrWhiteSpace(userLogin))
-                {
-                    Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
-                        GithubClientService.GetAuthorizedGithubClient());
-                }
-                else
-                {
-                    Events =
-                        await _eventDataService.GetAllEventsForCurrentUser(
-                            GithubClientService.GetAuthorizedGithubClient());
-                }
+                await DialogService.ShowDialogASync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
+                return;
             }
+
+            Messenger.Publish(new LoadingStatusMessage(this) {IsLoadingIndicatorActive = true});
+
+            if (repositoryId.HasValue)
+            {
+                Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else if (!string.IsNullOrWhiteSpace(userLogin))
+            {
+                Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                Events =
+                    await _eventDataService.GetAllEventsForCurrentUser(
+                        GithubClientService.GetAuthorizedGithubClient());
+            }
+
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }
 }

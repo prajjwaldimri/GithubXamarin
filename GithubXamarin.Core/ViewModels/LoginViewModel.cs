@@ -6,7 +6,7 @@ namespace GithubXamarin.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel, ILoginViewModel
     {
-        public LoginViewModel(IGithubClientService githubClientService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public LoginViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
         }
 

@@ -4,6 +4,7 @@ using MvvmCross.Core.ViewModels;
 using Octokit;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
 
 namespace GithubXamarin.Core.ViewModels
@@ -46,32 +47,36 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public IssuesViewModel(IIssueDataService issueDataService, IGithubClientService githubClientService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public IssuesViewModel(IIssueDataService issueDataService, IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _issueDataService = issueDataService;
         }
 
         public async void Init(long? repositoryId = null)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable())
             {
-                if (repositoryId.HasValue)
-                {
-                    Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
-                        GithubClientService.GetAuthorizedGithubClient());
-                }
-                else
-                {
-                    Issues =
-                        await _issueDataService.GetAllIssuesForCurrentUser(
-                            GithubClientService.GetAuthorizedGithubClient());
-                }
+                await DialogService.ShowDialogASync("Or is it?", "Internet is not available");
+                return;
             }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            if (repositoryId.HasValue)
+            {
+                Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                Issues =
+                    await _issueDataService.GetAllIssuesForCurrentUser(
+                        GithubClientService.GetAuthorizedGithubClient());
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
         private void NavigateToIssueView()
         {
-            ShowViewModel<IssueViewModel>(new {issueId = Issues[SelectedIssue].Id});
+            ShowViewModel<IssueViewModel>(new { issueId = Issues[SelectedIssue].Id });
         }
     }
 }

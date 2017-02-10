@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -40,7 +41,7 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
 
-        public RepositoriesViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public RepositoriesViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
         }
@@ -53,26 +54,30 @@ namespace GithubXamarin.Core.ViewModels
             var repository = Repositories?[SelectedIndex];
             if (repository != null)
             {
-                ShowViewModel<RepositoryViewModel>(new {repositoryId= repository.Id});
+                ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
             }
         }
 
         public async void Init(string userLogin)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable())
             {
-                if (string.IsNullOrWhiteSpace(userLogin))
-                {
-                    Repositories =
-                        await _repoDataService.GetAllRepositoriesForCurrentUser(
-                            GithubClientService.GetAuthorizedGithubClient());
-                }
-                else
-                {
-                    Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
-                        GithubClientService.GetAuthorizedGithubClient());
-                }
+                await DialogService.ShowDialogASync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
+                return;
             }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            if (string.IsNullOrWhiteSpace(userLogin))
+            {
+                Repositories =
+                    await _repoDataService.GetAllRepositoriesForCurrentUser(
+                        GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }
 }

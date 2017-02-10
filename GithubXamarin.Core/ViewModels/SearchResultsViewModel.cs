@@ -6,7 +6,7 @@ namespace GithubXamarin.Core.ViewModels
 {
     public class SearchResultsViewModel : BaseViewModel, ISearchResultViewModel
     {
-        public SearchResultsViewModel(IGithubClientService githubClientService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public SearchResultsViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
         }
     }

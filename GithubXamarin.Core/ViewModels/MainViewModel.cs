@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.UI;
 using MvvmCross.Plugins.Messenger;
 using Plugin.SecureStorage;
 
@@ -26,10 +28,24 @@ namespace GithubXamarin.Core.ViewModels
 
         public ICommand HamburgerMenuNavigationCommand { get; set; }
 
-        public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                RaisePropertyChanged(() => IsLoading);
+            }
+        }
+
+        private readonly MvxSubscriptionToken _token;
+
+        public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             PageHeader = "Main Page";
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);
+            _token = Messenger.Subscribe<LoadingStatusMessage>(message => IsLoading = message.IsLoadingIndicatorActive);
         }
 
         public override async void Start()

@@ -10,11 +10,13 @@ namespace GithubXamarin.Core.ViewModels
     {
         protected IGithubClientService GithubClientService;
         protected IMvxMessenger Messenger;
+        protected IDialogService DialogService;
 
-        protected BaseViewModel(IGithubClientService githubClientService, IMvxMessenger messenger)
+        protected BaseViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService)
         {
             GithubClientService = githubClientService;
             Messenger = messenger;
+            DialogService = dialogService;
         }
 
         protected static bool IsInternetAvailable()

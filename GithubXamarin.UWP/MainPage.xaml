@@ -55,7 +55,6 @@
     <Grid x:Name="RootGrid">
 
         <!-- Adaptive Triggers -->
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -245,22 +244,31 @@
                         </RelativePanel>
                     </Border>
 
-                    <Frame
-                        x:Name="MainFrame"
+                    <Grid
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True"
                         RelativePanel.Below="AppHeaderTextBlockBackground"
                         RelativePanel.AlignBottomWithPanel="True">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition>
-                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                        <EntranceNavigationTransitionInfo/>
-                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                </NavigationThemeTransition>
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
+
+                        <Frame x:Name="MainFrame">
+                            <Frame.ContentTransitions>
+                                <TransitionCollection>
+                                    <NavigationThemeTransition>
+                                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                            <EntranceNavigationTransitionInfo/>
+                                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    </NavigationThemeTransition>
+                                </TransitionCollection>
+                            </Frame.ContentTransitions>
+                        </Frame>
+                        
+                        <ProgressRing 
+                            x:Name="LoadingRing"
+                            IsActive="{Binding IsLoading}"
+                            Width="48" 
+                            Height="48"/>
+
+                    </Grid>
                 </RelativePanel>
 
             </SplitView.Content>
@@ -269,4 +277,4 @@
 
     </Grid>
 
-</views:MvxWindowsPage>
+</views:MvxWindowsPage> 

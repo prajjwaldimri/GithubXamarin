@@ -1,5 +1,6 @@
 ﻿using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 
@@ -24,7 +25,7 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public UserViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger) : base(githubClientService, messenger)
+        public UserViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _userDataService = userDataService;
         }
@@ -33,6 +34,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (IsInternetAvailable())
             {
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
                 if (string.IsNullOrWhiteSpace(userLogin))
                 {
                     User = await _userDataService.GetCurrentUser(GithubClientService.GetAuthorizedGithubClient());
@@ -42,6 +44,7 @@ namespace GithubXamarin.Core.ViewModels
                 {
                     User = await _userDataService.GetUser(userLogin, GithubClientService.GetAuthorizedGithubClient());
                 }
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             }
         }
     }

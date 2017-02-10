@@ -99,11 +99,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="UserControls\IconAndTextBlocksControl.xaml.cs">
       <DependentUpon>IconAndTextBlocksControl.xaml</DependentUpon>
     </Compile>

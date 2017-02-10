@@ -131,6 +131,8 @@ namespace GithubXamarin.Droid
 			global::MvvmCross.Droid.Support.V7.RecyclerView.Resource.Styleable.RecyclerView_reverseLayout = global::GithubXamarin.Droid.Resource.Styleable.RecyclerView_reverseLayout;
 			global::MvvmCross.Droid.Support.V7.RecyclerView.Resource.Styleable.RecyclerView_spanCount = global::GithubXamarin.Droid.Resource.Styleable.RecyclerView_spanCount;
 			global::MvvmCross.Droid.Support.V7.RecyclerView.Resource.Styleable.RecyclerView_stackFromEnd = global::GithubXamarin.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
+			global::MvvmCross.Plugins.Network.Droid.Resource.String.ApplicationName = global::GithubXamarin.Droid.Resource.String.ApplicationName;
+			global::MvvmCross.Plugins.Network.Droid.Resource.String.Hello = global::GithubXamarin.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
@@ -2981,14 +2983,14 @@ namespace GithubXamarin.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f090026
-			public const int ApplicationName = 2131296294;
+			// aapt resource value: 0x7f090025
+			public const int ApplicationName = 2131296293;
 			
 			// aapt resource value: 0x7f090029
 			public const int Empty = 2131296297;
 			
-			// aapt resource value: 0x7f090025
-			public const int Hello = 2131296293;
+			// aapt resource value: 0x7f090024
+			public const int Hello = 2131296292;
 			
 			// aapt resource value: 0x7f090000
 			public const int abc_action_bar_home_description = 2131296256;
@@ -3098,8 +3100,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f090027
 			public const int drawer_open = 2131296295;
 			
-			// aapt resource value: 0x7f090024
-			public const int library_name = 2131296292;
+			// aapt resource value: 0x7f090026
+			public const int library_name = 2131296294;
 			
 			// aapt resource value: 0x7f090013
 			public const int search_menu_title = 2131296275;
