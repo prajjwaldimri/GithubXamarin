@@ -68,5 +68,13 @@ namespace GithubXamarin.UWP
             FeedbackNavPaneButton.IsTabStop = false;
             SettingsNavPaneButton.IsTabStop = false;
         }
+
+        private void SettingsNavPaneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (HamburgerMenu.IsPaneOpen)
+            {
+                HamburgerMenu.IsPaneOpen = false;
+            }
+        }
     }
 }

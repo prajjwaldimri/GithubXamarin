@@ -64,9 +64,11 @@ namespace GithubXamarin.Core.ViewModels
             {
                 Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
                     GithubClientService.GetAuthorizedGithubClient());
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Issues for {Issues[0]?.Repository.FullName}" });
             }
             else
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Issues" });
                 Issues =
                     await _issueDataService.GetAllIssuesForCurrentUser(
                         GithubClientService.GetAuthorizedGithubClient());
@@ -76,7 +78,11 @@ namespace GithubXamarin.Core.ViewModels
 
         private void NavigateToIssueView()
         {
-            ShowViewModel<IssueViewModel>(new { issueId = Issues[SelectedIssue].Id });
+            ShowViewModel<IssueViewModel>(new
+            {
+                repositoryId = Issues[SelectedIssue].Repository.Id,
+                issueNumber = Issues[SelectedIssue].Number
+            });
         }
     }
 }

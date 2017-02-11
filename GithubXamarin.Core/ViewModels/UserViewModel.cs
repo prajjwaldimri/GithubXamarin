@@ -37,11 +37,12 @@ namespace GithubXamarin.Core.ViewModels
                 Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
                 if (string.IsNullOrWhiteSpace(userLogin))
                 {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Profile" });
                     User = await _userDataService.GetCurrentUser(GithubClientService.GetAuthorizedGithubClient());
-
                 }
                 else
                 {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Profile of {userLogin}" });
                     User = await _userDataService.GetUser(userLogin, GithubClientService.GetAuthorizedGithubClient());
                 }
                 Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });

@@ -202,6 +202,9 @@
                         Grid.Column="2"
                         Style="{StaticResource SplitViewPaneButtonStyle}"
                         Content="&#xE713;"
+                        Command="{Binding GoToSettingsCommand,
+                        ConverterParameter=5}"
+                        Click="SettingsNavPaneButton_OnClick"
                         AutomationProperties.Name="Settings"
                         ToolTipService.ToolTip="Settings"/>
 
@@ -237,9 +240,19 @@
                             <AutoSuggestBox 
                                 VerticalAlignment="Center"
                                 QueryIcon="Find"
+                                Visibility="Collapsed"
                                 RelativePanel.AlignRightWithPanel="True"
                                 RelativePanel.AlignTopWithPanel="True"
-                                RelativePanel.AlignBottomWithPanel="True"/>
+                                RelativePanel.AlignBottomWithPanel="True"
+                                Margin="0,0,5,0"/>
+                            
+                            <FontIcon 
+                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf002;"
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                Margin="0,0,10,0"/>
 
                         </RelativePanel>
                     </Border>

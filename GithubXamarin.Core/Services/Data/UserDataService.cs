@@ -19,6 +19,12 @@ namespace GithubXamarin.Core.Services.Data
             return new ObservableCollection<User>(await _userRepository.GetCollaboratorsForRepository(repositoryId, gitHubClient));
         }
 
+        public async Task<ObservableCollection<RepositoryContributor>> GetContributorsForRepository(long repositoryId,
+            GitHubClient gitHubClient)
+        {
+            return new ObservableCollection<RepositoryContributor>(await _userRepository.GetContributorsForRepository(repositoryId, gitHubClient));
+        }
+
         public async Task<User> GetCurrentUser(GitHubClient authorizedGitHubClient)
         {
             return await _userRepository.GetCurrentUser(authorizedGitHubClient);

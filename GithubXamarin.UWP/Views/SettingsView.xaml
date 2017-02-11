@@ -1,0 +1,335 @@
+﻿<views:MvxWindowsPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    xmlns:UniversalMarkdown="using:UniversalMarkdown"
+    x:Class="GithubXamarin.UWP.Views.SettingsView"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Pivot>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Margin="0,0,-10,0"
+                        Text="{Binding}"
+                        Style="{ThemeResource BaseTextBlockStyle}"
+                        FontWeight="SemiBold"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
+
+            <PivotItem Header="SETTINGS">
+                <Grid/>
+            </PivotItem>
+
+
+            <PivotItem Header="ABOUT">
+                <StackPanel 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+                    <Image 
+                        Width="128" 
+                        Height="128"
+                        Source="https://camo.githubusercontent.com/77c5caf9c1ea9d78d4972cf5ddf862be9e3d27d3/68747470733a2f2f63646e2e7261776769742e636f6d2f7072616a6a77616c64696d72692f47697468756258616d6172696e2f64393535626163302f47697468756258616d6172696e2e5557502f4173736574732f47697449744c6f676f426c2e737667"/>
+
+                    <TextBlock 
+                        Text="GitIt"
+                        HorizontalAlignment="Center"
+                        Style="{ThemeResource SubtitleTextBlockStyle}"/>
+
+                    <TextBlock 
+                        x:Name="VersionNumberTextBlock"
+                        HorizontalAlignment="Center"
+                        Style="{ThemeResource BaseTextBlockStyle}"/>
+
+                    <TextBlock Text="Developer: Prajjwal Dimri"/>
+
+                    <HyperlinkButton>
+                        <FontIcon 
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                Glyph=""/>
+                    </HyperlinkButton>
+
+                    <HyperlinkButton>
+                        <FontIcon 
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                Glyph=""/>
+                    </HyperlinkButton>
+
+                    <HyperlinkButton>
+                        <FontIcon 
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                Glyph=""/>
+                    </HyperlinkButton>
+                </StackPanel>
+            </PivotItem>
+
+            <PivotItem Header="CONTRIBUTORS">
+
+                <ScrollViewer>
+                    <ListView ItemsSource="{Binding Contributors}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <StackPanel 
+                                    Orientation="Horizontal"
+                                    Margin="10,10,10,10">
+
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Margin="0,0,10,0"
+                                        Source="{Binding AvatarUrl}"/>
+
+                                    <HyperlinkButton
+                                        Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                        Content="{Binding Login}"
+                                        NavigateUri="{Binding HtmlUrl}"/>
+
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Header="LICENSE">
+
+                <ScrollViewer>
+
+                    <UniversalMarkdown:MarkdownTextBlock
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Markdown="{Binding License}"
+                        Margin="10,10,10,10"/>
+
+                </ScrollViewer>
+
+            </PivotItem>
+
+            <PivotItem Header="ACKNOWLEDGMENTS">
+                <ScrollViewer>
+                    <Grid Padding="10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image 
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/xamarin">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Xamarin"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="1" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://i.imgur.com/BvdAtgT.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/MvvmCross/MvvmCross/">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Mvvm-Cross"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="2" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://github.com/octokit/octokit.net/raw/master/octokit-dotnet_2.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/octokit/octokit.net">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Octokit"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="3" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://camo.githubusercontent.com/d5d087374d99b03125c5f64ae7af67ab95d79a84/68747470733a2f2f7261772e6769746875622e636f6d2f48756d616e697a722f48756d616e697a65722f6d61737465722f6c6f676f2e706e67"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/Humanizr/Humanizer">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Humanizer"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="4" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://c.s-microsoft.com/en-us/CMSImages/imgTwo.jpg?version=0ba03bb5-4d3e-f063-c625-e3d2e477745f"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/Microsoft/UWPCommunityToolkit">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="UWP Community Toolkit"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="5" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://i.imgur.com/BvdAtgT.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/Cheesebaron/Cheesebaron.MvxPlugins">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="CheeseBaron Mvx Plugins"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="6" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/sameerkapps/SecureStorage">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Secure Storage"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="7" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="http://devstickers.com/assets/img/pro/2p4i.png"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/restsharp/RestSharp">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="RestSharp"/>
+                        </HyperlinkButton>
+
+                        <Image 
+                        Grid.Row="8" 
+                        Grid.Column="0"
+                        Margin="0,10,0,10"
+                        Source="https://c.s-microsoft.com/en-us/CMSImages/imgTwo.jpg?version=0ba03bb5-4d3e-f063-c625-e3d2e477745f"
+                        Width="32"
+                        Height="32"/>
+
+                        <HyperlinkButton 
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        Margin="20,10,0,10"
+                        NavigateUri="https://github.com/Microsoft/XamlBehaviors">
+                            <TextBlock
+                                Foreground="{StaticResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Text="Xaml Behaviors"/>
+                        </HyperlinkButton>
+
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+</views:MvxWindowsPage>
+

@@ -42,11 +42,13 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             if (repositoryId.HasValue)
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Notifications" });
                 Notifications = await _notificationDataService.GetAllNotificationsForRepository(repositoryId.Value,
                     GithubClientService.GetAuthorizedGithubClient());
             }
             else
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Notifications" });
                 Notifications =
                     await _notificationDataService.GetAllNotificationsForCurrentUser(
                         GithubClientService.GetAuthorizedGithubClient());

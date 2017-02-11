@@ -61,8 +61,10 @@ namespace GithubXamarin.Core.ViewModels
                     case UsersTypeEnumeration.Stargazers:
                         Users = await _userDataService.GetStargazersForRepository(repositoryId,
                             GithubClientService.GetAuthorizedGithubClient());
+                        Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Stargazers"});
                         break;
                     case UsersTypeEnumeration.Collaborators:
+                        Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Collaborators" });
                         Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
                             GithubClientService.GetAuthorizedGithubClient());
                         break;
@@ -74,6 +76,7 @@ namespace GithubXamarin.Core.ViewModels
             }
             else
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Collaborators" });
                 Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
                     GithubClientService.GetAuthorizedGithubClient());
             }

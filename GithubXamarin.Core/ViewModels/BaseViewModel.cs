@@ -22,7 +22,7 @@ namespace GithubXamarin.Core.ViewModels
         protected static bool IsInternetAvailable()
         {
             //https://github.com/jamesmontemagno/ConnectivityPlugin
-            return CrossConnectivity.Current.IsConnected;
+            return CrossConnectivity.Current.IsReachable("https://google.com").Result || CrossConnectivity.Current.IsConnected;
         }
 
         public void Dispose()

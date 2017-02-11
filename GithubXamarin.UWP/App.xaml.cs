@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -29,7 +32,7 @@ namespace GithubXamarin.UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -62,6 +65,7 @@ namespace GithubXamarin.UWP
             {
                 if (rootFrame.Content == null)
                 {
+                    await RegisterBackgroundTask();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 
@@ -95,6 +99,38 @@ namespace GithubXamarin.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private async Task RegisterBackgroundTask()
+        {
+            // Register GithubNotificationsBackgroundTask
+            const string taskName = "GithubNotificationsBackgroundTask";
+
+            var taskRegistered = BackgroundTaskRegistration.AllTasks.Any(task => task.Value.Name == taskName);
+
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder();
+
+                var access = await BackgroundExecutionManager.RequestAccessAsync();
+                switch (access)
+                {
+                    case BackgroundAccessStatus.DeniedByUser:
+                    case BackgroundAccessStatus.DeniedBySystemPolicy:
+                    case BackgroundAccessStatus.Unspecified:
+                    case BackgroundAccessStatus.Denied:
+                        //TODO: DO something about rejection 
+                        break;
+                    default:
+                        builder.Name = taskName;
+                        builder.SetTrigger(new TimeTrigger(15, false));
+                        builder.IsNetworkRequested = true;
+                        builder.TaskEntryPoint =
+                            typeof(Background.GithubNotificationsBackgroundTask).FullName;
+                        var task = builder.Register();
+                        break;
+                }
+            }
         }
     }
 }

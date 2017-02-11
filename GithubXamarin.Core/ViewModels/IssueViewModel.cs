@@ -41,6 +41,7 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
                     GithubClientService.GetAuthorizedGithubClient());
+            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }

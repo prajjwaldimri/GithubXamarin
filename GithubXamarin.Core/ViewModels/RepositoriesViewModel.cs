@@ -68,12 +68,14 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             if (string.IsNullOrWhiteSpace(userLogin))
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Your Repositories" });
                 Repositories =
                     await _repoDataService.GetAllRepositoriesForCurrentUser(
                         GithubClientService.GetAuthorizedGithubClient());
             }
             else
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Repositories of {userLogin}" });
                 Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
                     GithubClientService.GetAuthorizedGithubClient());
             }

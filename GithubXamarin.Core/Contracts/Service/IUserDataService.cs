@@ -10,6 +10,7 @@ namespace GithubXamarin.Core.Contracts.Service
         Task<User> GetCurrentUser(GitHubClient authorizedGitHubClient);
         Task<ObservableCollection<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient);
         Task<ObservableCollection<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient);
+        Task<ObservableCollection<RepositoryContributor>> GetContributorsForRepository(long repositoryId, GitHubClient gitHubClient);
         Task<ObservableCollection<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient);
     }
 }

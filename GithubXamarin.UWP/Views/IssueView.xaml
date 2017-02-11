@@ -8,10 +8,11 @@
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     xmlns:universalMarkdown="using:UniversalMarkdown"
     mc:Ignorable="d">
-
+    
     <ScrollViewer>
 
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              Padding="10">
 
             <Grid.RowDefinitions>
                 <RowDefinition/>

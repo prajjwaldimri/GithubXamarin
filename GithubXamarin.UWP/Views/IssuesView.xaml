@@ -16,12 +16,13 @@
             ItemsSource="{Binding Issues}"
             SelectionMode="Single" 
             SelectedIndex="{Binding SelectedIssue, Mode=TwoWay}"
+            IsItemClickEnabled="True"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Stretch">
 
                     <!--Listens for ItemClick event-->
                     <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="ItemClick">
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
                             <core:InvokeCommandAction Command="{Binding IssueClickCommand}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>

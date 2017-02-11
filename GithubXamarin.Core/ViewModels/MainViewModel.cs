@@ -27,6 +27,7 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         public ICommand HamburgerMenuNavigationCommand { get; set; }
+        public ICommand GoToSettingsCommand { get; set; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -39,13 +40,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private readonly MvxSubscriptionToken _token;
+        private readonly MvxSubscriptionToken _loadingStatusMessageToken;
+        private readonly MvxSubscriptionToken _appBarHeaderChangeMessageToken;
 
         public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
-            PageHeader = "Main Page";
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);
-            _token = Messenger.Subscribe<LoadingStatusMessage>(message => IsLoading = message.IsLoadingIndicatorActive);
+            GoToSettingsCommand = new MvxCommand(ShowSettings);
+
+            _loadingStatusMessageToken = Messenger.Subscribe<LoadingStatusMessage>
+                (message => IsLoading = message.IsLoadingIndicatorActive);
+            _appBarHeaderChangeMessageToken = Messenger.Subscribe<AppBarHeaderChangeMessage>
+                (message => PageHeader = message.HeaderTitle);
         }
 
         public override async void Start()
@@ -99,6 +105,11 @@ namespace GithubXamarin.Core.ViewModels
         public void ShowLogin()
         {
             ShowViewModel<LoginViewModel>();
+        }
+
+        public void ShowSettings()
+        {
+            ShowViewModel<SettingsViewModel>();
         }
 
         //Android Navigation Drawer

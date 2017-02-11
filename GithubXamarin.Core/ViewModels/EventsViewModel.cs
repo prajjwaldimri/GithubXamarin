@@ -45,14 +45,17 @@ namespace GithubXamarin.Core.ViewModels
             {
                 Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
                     GithubClientService.GetAuthorizedGithubClient());
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Events for {Events[0]?.Repo.FullName}" });
             }
             else if (!string.IsNullOrWhiteSpace(userLogin))
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Public Events for {userLogin}" });
                 Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
                     GithubClientService.GetAuthorizedGithubClient());
             }
             else
             {
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Events" });
                 Events =
                     await _eventDataService.GetAllEventsForCurrentUser(
                         GithubClientService.GetAuthorizedGithubClient());

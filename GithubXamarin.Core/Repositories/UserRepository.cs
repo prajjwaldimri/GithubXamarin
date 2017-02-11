@@ -44,6 +44,12 @@ namespace GithubXamarin.Core.Repositories
             var starredClient = new StarredClient(new ApiConnection(gitHubClient.Connection));
             return await starredClient.GetAllStargazers(repositoryId);
         }
+
+        public async Task<IEnumerable<RepositoryContributor>> GetContributorsForRepository(long repositoryId, GitHubClient gitHubClient)
+        {
+            var repoClient = new RepositoriesClient(new ApiConnection(gitHubClient.Connection));
+            return await repoClient.GetAllContributors(repositoryId);
+        }
         
     }
 }

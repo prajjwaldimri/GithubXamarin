@@ -31,7 +31,7 @@ namespace GithubXamarin.UWP.Background
             {
                 client.Credentials = new Credentials(_passwordCredential.Password);
                 var notificationRequest = new NotificationsRequest();
-                notificationRequest.Since = DateTimeOffset.Now.Subtract(new TimeSpan(0, 20, 0));
+                notificationRequest.Since = DateTimeOffset.Now.Subtract(new TimeSpan(0, 15, 0));
                 var notifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
                 foreach (var notification in notifications)
                 {
