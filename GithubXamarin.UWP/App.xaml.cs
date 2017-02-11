@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,6 +26,7 @@ namespace GithubXamarin.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            SetTheme();
         }
 
         /// <summary>
@@ -131,6 +133,31 @@ namespace GithubXamarin.UWP
                         break;
                 }
             }
+        }
+
+        private void SetTheme()
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (localSettingsValues == null) return;
+
+            if (localSettingsValues.ContainsKey("RequestedTheme"))
+            {
+                switch (localSettingsValues["RequestedTheme"].ToString())
+                {
+                    case "Dark":
+                        Application.Current.RequestedTheme = ApplicationTheme.Dark;
+                        break;
+                    case "Light":
+                        Application.Current.RequestedTheme = ApplicationTheme.Light;
+                        break;
+                }
+            }
+            else
+            {
+                localSettingsValues.Add("RequestedTheme", "Dark");
+                Application.Current.RequestedTheme = ApplicationTheme.Dark;
+            }
+            return;
         }
     }
 }

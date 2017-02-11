@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
+using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels
 {
-    public class SettingsViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel, ISettingsViewModel
     {
         #region Properties and Commands
 
         private readonly IUserDataService _userDataService;
         private readonly IFileDataService _fileDataService;
 
-        //TODO: Get Correct Repo ID
         private const long GithubXamarinRepositoryId = 73414278;
+
+        private ICommand _loginOutButtonClickCommand;
+        public ICommand LoginOutButtonClickCommand
+        {
+            get
+            {
+                _loginOutButtonClickCommand = _loginOutButtonClickCommand ?? new MvxCommand(LoginOrLogout);
+                return _loginOutButtonClickCommand;
+            }
+        }
 
         private ObservableCollection<RepositoryContributor> _contributors;
         public ObservableCollection<RepositoryContributor> Contributors
@@ -37,6 +43,62 @@ namespace GithubXamarin.Core.ViewModels
             set { _license = value; RaisePropertyChanged(() => License); }
         }
 
+        private string _loginButtonContent;
+        public string LoginButtonContent
+        {
+            get { return _loginButtonContent;}
+            set { _loginButtonContent = value; RaisePropertyChanged(() => LoginButtonContent); }
+        }
+
+        private string _coreLimit;
+        public string CoreLimit
+        {
+            get { return _coreLimit;}
+            set { _coreLimit = value; RaisePropertyChanged(() => CoreLimit); }
+        }
+
+        private string _coreRemaining;
+        public string CoreRemaining
+        {
+            get { return _coreRemaining;}
+            set { _coreRemaining = value; RaisePropertyChanged(() => CoreRemaining); }
+        }
+
+        private string _coreReset;
+        public string CoreReset
+        {
+            get { return _coreReset;}
+            set
+            {
+                _coreReset = value;
+                RaisePropertyChanged(() => CoreReset);
+            }
+        }
+
+        private string _searchLimit;
+        public string SearchLimit
+        {
+            get { return _searchLimit; }
+            set { _searchLimit = value; RaisePropertyChanged(() => SearchLimit); }
+        }
+
+        private string _searchRemaining;
+        public string SearchRemaining
+        {
+            get { return _searchRemaining; }
+            set { _searchRemaining = value; RaisePropertyChanged(() => SearchRemaining); }
+        }
+
+        private string _searchReset;
+        public string SearchReset
+        {
+            get { return _searchReset; }
+            set
+            {
+                _searchReset = value;
+                RaisePropertyChanged(() => SearchReset);
+            }
+        }
         #endregion
 
 
@@ -62,7 +124,38 @@ namespace GithubXamarin.Core.ViewModels
             License = (await _fileDataService.GetFile(GithubXamarinRepositoryId, "LICENSE",
                 GithubClientService.GetAuthorizedGithubClient())).Content;
 
+            //https://developer.github.com/v3/rate_limit/
+            var rateLimits = await GithubClientService.GetAuthorizedGithubClient().Miscellaneous.GetRateLimits();
+            CoreLimit = $"Limit:  {rateLimits.Resources.Core.Limit}";
+            CoreRemaining = $"Remaining: {rateLimits.Resources.Core.Remaining}";
+            CoreReset = $"Reset:  {rateLimits.Resources.Core.Reset}";
+            SearchLimit = $"Limit:  {rateLimits.Resources.Search.Limit}";
+            SearchRemaining = $"Remaining:  {rateLimits.Resources.Search.Remaining}";
+            SearchReset = $"Reset:  {rateLimits.Resources.Search.Reset}";
+
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                LoginButtonContent = "LogOut";
+            }
+        }
+
+        private void LoginOrLogout()
+        {
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                CrossSecureStorage.Current.DeleteKey("OAuthToken");
+                LoginButtonContent = "Login";
+            }
+            else
+            {
+                ShowViewModel<LoginViewModel>();
+            }
         }
     }
 }

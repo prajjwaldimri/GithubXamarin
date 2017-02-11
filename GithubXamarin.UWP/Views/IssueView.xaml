@@ -64,11 +64,11 @@
                     Width="40">
                     <Rectangle.Fill>
                         <ImageBrush 
-                            ImageSource="{Binding Issue.Creator.AvatarUrl}"/>
+                            ImageSource="{Binding Issue.User.AvatarUrl}"/>
                     </Rectangle.Fill>
                 </Rectangle>
                 <TextBlock 
-                    Text="{Binding Issue.Creator.Name}"
+                    Text="{Binding Issue.User.Name}"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"/>
                 

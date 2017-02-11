@@ -61,6 +61,7 @@
     <Compile Include="Contracts\ViewModel\IRepositoriesViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IRepositoryViewModel.cs" />
     <Compile Include="Contracts\ViewModel\ISearchResultViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\ISettingsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUsersViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUserViewModel.cs" />
     <Compile Include="Converters\EventToStringConverter.cs" />

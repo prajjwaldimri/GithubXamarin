@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using MvvmCross.WindowsUWP.Views;
@@ -16,14 +17,6 @@ namespace GithubXamarin.UWP.Views
         public LoginView()
         {
             this.InitializeComponent();
-        }
-
-        private GitHubClient _client;
-        private string _clientId;
-        private string _clientSecret;
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
             //Values can be found at https://github.com/settings/applications
             _clientId = "5c0821cdb943e8e2fc0c";
             _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
@@ -37,8 +30,11 @@ namespace GithubXamarin.UWP.Views
             var oAuthLoginUrl = _client.Oauth.GetGitHubLoginUrl(loginRequest);
             LoginWebView.Navigate(oAuthLoginUrl);
             LoginWebView.NavigationCompleted += LoginWebViewOnNavigationCompleted;
-
         }
+
+        private GitHubClient _client;
+        private string _clientId;
+        private string _clientSecret;
 
         /// <summary>
         /// Method attached to navigation of the web-browser. It must return void
@@ -66,6 +62,8 @@ namespace GithubXamarin.UWP.Views
             var tokenRequest = new OauthTokenRequest(_clientId, _clientSecret, code);
             var accessToken = await _client.Oauth.CreateAccessToken(tokenRequest);
             CrossSecureStorage.Current.SetValue("OAuthToken",accessToken.AccessToken);
+            var msgDialog = new MessageDialog("Choose any page you want to go from the menu on the left or you can just stare at this page. Your choice!","Login Successful!");
+            await msgDialog.ShowAsync();
         }
     }
 }

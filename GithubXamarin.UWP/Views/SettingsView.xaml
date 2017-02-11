@@ -24,7 +24,71 @@
 
 
             <PivotItem Header="SETTINGS">
-                <Grid/>
+                <StackPanel Padding="10">
+                    
+                    <StackPanel
+                        x:Name="Theme">
+                        <TextBlock
+                            Text="Theme"
+                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        <ToggleSwitch
+                            x:Name="ThemeToggleSwitch"
+                            OnContent="Dark"
+                            OffContent="Light"
+                            Toggled="ThemeToggleSwitch_OnToggled"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        x:Name="Account"
+                        Margin="0,10,0,10">
+                        <TextBlock
+                            Text="Account"
+                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        <Button
+                            x:Name="LogInOrOutButton"
+                            Margin="0,5,0,0"
+                            Content="{Binding LoginButtonContent}"
+                            Command="{Binding LoginOutButtonClickCommand}"/>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        x:Name="DeveloperInformation"
+                        Margin="0,10,0,10">
+                        <TextBlock
+                            Text="Rate Limit Information"
+                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            Text="Core:"
+                            Style="{ThemeResource BaseTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding CoreLimit}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding CoreRemaining}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding CoreReset}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                        
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            Text="Search:"
+                            Style="{ThemeResource BaseTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding SearchLimit}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding SearchRemaining}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock
+                            Text="{Binding SearchReset}"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>
+                    </StackPanel>
+
+                </StackPanel>
             </PivotItem>
 
 

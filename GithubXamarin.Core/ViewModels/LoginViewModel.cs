@@ -15,16 +15,11 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Login"});
         }
 
-        public void GoToEvents()
-        {
-            ShowViewModel<EventsViewModel>();
-        }
-
         public override async void Start()
         {
             while (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
-                await Task.Delay(500);
+                await Task.Delay(5000);
             }
             ShowViewModel<EventsViewModel>();
         }
