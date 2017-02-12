@@ -80,8 +80,8 @@ namespace GithubXamarin.Core.ViewModels
         {
             ShowViewModel<IssueViewModel>(new
             {
+                issueNumber = Issues[SelectedIssue].Number,
                 repositoryId = Issues[SelectedIssue].Repository.Id,
-                issueNumber = Issues[SelectedIssue].Number
             });
         }
     }

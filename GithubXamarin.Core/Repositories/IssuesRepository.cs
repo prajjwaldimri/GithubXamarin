@@ -10,7 +10,6 @@ namespace GithubXamarin.Core.Repositories
     /// </summary>
     public class IssuesRepository : BaseRepository, IIssueRepository
     {
-
         /// <summary>
         /// Gets a single issue in a repository.
         /// </summary>
@@ -24,14 +23,21 @@ namespace GithubXamarin.Core.Repositories
             return await issuesClient.Get(repositoryId, issueNumber);
         }
 
+        public async Task<Issue> GetIssueForRepository(string owner, string repoName, int issueNumber,
+            GitHubClient authorizedGitHubClient)
+        {
+            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            return await issuesClient.Get(owner, repoName, issueNumber);
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="autohrizedGitHubClient"> GithubClient object that contains credentials.</param>
+        /// <param name="authorizedGitHubClient"> GithubClient object that contains credentials.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient autohrizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGitHubClient)
         {
-            return await autohrizedGitHubClient.Issue.GetAllForCurrent();
+            return await authorizedGitHubClient.Issue.GetAllForCurrent();
         }
 
         /// <summary>

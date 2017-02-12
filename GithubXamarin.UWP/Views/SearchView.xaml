@@ -6,10 +6,244 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
 
-    </Grid>
+            <StackPanel 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center">
+                
+                <AutoSuggestBox
+                    IsSuggestionListOpen="False"
+                    PlaceholderText="Enter Search Query..."
+                    QueryIcon="Find"
+                    Width="200" 
+                    Text="{Binding SearchBoxText, Mode=TwoWay}">
+                    
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="QuerySubmitted">
+                            <core:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </AutoSuggestBox>
+
+                <ComboBox
+                    x:Name="FilterComboBox"
+                    Margin="10,0,0,0" 
+                    SelectedIndex="{Binding FilterSelectedIndex, Mode=TwoWay}"
+                    SelectionChanged="FilterComboBox_OnSelectionChanged">
+                    <ComboBoxItem>Issues</ComboBoxItem>
+                    <ComboBoxItem>Repos</ComboBoxItem>
+                    <ComboBoxItem>Users</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Repositories -->
+            <ListView 
+                x:Name="RepositoriesListView"
+                Grid.Row="1" 
+                ItemsSource="{Binding Repositories}"
+                IsItemClickEnabled="True" 
+                SelectionMode="Single"
+                SelectedIndex="{Binding RepositoriesSelectedIndex, Mode=TwoWay}"
+                Visibility="Collapsed"
+                IsHitTestVisible="False">
+                
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding RepositoryClickCommand, Mode=TwoWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel 
+                            HorizontalAlignment="Stretch" 
+                            Margin="0,0,0,0">
+                            
+                            <Rectangle 
+                                VerticalAlignment="Stretch"
+                                Margin="2"
+                                Width="2" 
+                                Fill="{StaticResource AppBarSeparatorForegroundThemeBrush}"/>
+                            
+                            <StackPanel
+                                Margin="0,5,0,0"
+                                Orientation="Horizontal">
+                                
+                                <TextBlock 
+                                    Style="{StaticResource SubtitleTextBlockStyle}"  
+                                    FontWeight="Bold"
+                                    Text="{Binding Name}"/>
+                            </StackPanel>
+
+                            <StackPanel 
+                                Margin="0,5,0,0"
+                                Orientation="Horizontal">
+                                <TextBlock 
+                                    Text="{Binding Description}"
+                                    Style="{StaticResource BaseTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <StackPanel 
+                                Margin="0,5,0,0"
+                                Orientation="Horizontal">
+                                <TextBlock Text="{Binding Language}" Margin="0,0,10,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
+                                          Glyph="&#xf24e;" Margin="0,0,1,0"
+                                          FontSize="15"/>
+                                <TextBlock Text="{Binding StargazersCount}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <TextBlock Text="Last Updated at:" Margin="10,0,2,0"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <TextBlock Text="{Binding UpdatedAt.Date}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Users -->
+            <ListView
+                x:Name="UsersListView"
+                Grid.Row="1" 
+                ItemsSource="{Binding Users}"
+                IsItemClickEnabled="True" 
+                SelectionMode="Single"
+                IsHitTestVisible="False"
+                Visibility="Collapsed"
+                SelectedIndex="{Binding UsersSelectedIndex, Mode=TwoWay}">
+                
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding UserClickCommand, Mode=TwoWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal" 
+                            Padding="0,5,0,5">
+                            <Rectangle 
+                                Grid.Row="1" 
+                                Grid.Column="0" 
+                                Height="32"
+                                Width="32"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding AvatarUrl}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock Margin="10,0,0,0" Text="{Binding Login}"
+                                           VerticalAlignment="Center"/>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <!-- Issues -->
+            <ListView 
+                x:Name="IssuesListView"
+                Grid.Row="1" 
+                ItemsSource="{Binding Issues}"
+                IsItemClickEnabled="True" 
+                SelectionMode="Single"
+                SelectedIndex="{Binding IssuesSelectedIndex, Mode=TwoWay}"
+                Visibility="Visible"
+                IsHitTestVisible="True">
+                
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding IssueClickCommand, Mode=TwoWay}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Stretch"
+                            Margin="0,0,0,0">
+                        <Grid 
+                            x:Name="ItemGrid" 
+                            Padding="0,10,0,10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <FontIcon 
+                                x:Name="IssueIcon"
+                                FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons" 
+                                Glyph="&#xf44d;" 
+                                Foreground="{StaticResource SystemControlForegroundAccentBrush}"
+                                Grid.Row="0"
+                                Grid.Column="0" 
+                                Grid.RowSpan="2"
+                                VerticalAlignment="Center"
+                                FontSize="24"/>
+
+                            <TextBlock 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding Title}"
+                                Style="{StaticResource BaseTextBlockStyle}"
+                                TextTrimming="Clip"
+                                Margin="10,0,0,0" 
+                                TextWrapping="WrapWholeWords"/>
+
+                            <StackPanel
+                                Grid.Row="1" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="2"
+                                Orientation="Horizontal"
+                                Margin="10,2,0,0">
+                                <TextBlock 
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="#"/>
+                                <TextBlock 
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{Binding Number}" 
+                                    Margin="2,0,0,0"/>
+                                <TextBlock 
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="by"
+                                    Margin="10,0,0,0"/>
+                                <TextBlock 
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{Binding User.Login}"
+                                    Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                            </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
 </views:MvxWindowsPage>
 

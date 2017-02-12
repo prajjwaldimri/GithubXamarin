@@ -34,5 +34,10 @@ namespace GithubXamarin.Core.Services.Data
         {
             return new ObservableCollection<Issue>(await _issueRepository.SearchIssues(searchTerm, gitHubClient));
         }
+
+        public async Task<Issue> GetIssueForRepository(string owner, string repoName, int issueNumber, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.GetIssueForRepository(owner, repoName, issueNumber, authorizedGitHubClient);
+        }
     }
 }

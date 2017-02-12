@@ -76,5 +76,20 @@ namespace GithubXamarin.UWP
                 HamburgerMenu.IsPaneOpen = false;
             }
         }
+
+        private void SearchIconButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchIconButton.Visibility = Visibility.Collapsed;
+            SearchBox.Visibility = Visibility.Visible;
+            HeaderTextBlock.Visibility = Visibility.Collapsed;
+            SearchBox.Focus(FocusState.Programmatic);
+        }
+
+        private void SearchBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Visibility = Visibility.Collapsed;
+            SearchIconButton.Visibility = Visibility.Visible;
+            HeaderTextBlock.Visibility = Visibility.Visible;
+        }
     }
 }

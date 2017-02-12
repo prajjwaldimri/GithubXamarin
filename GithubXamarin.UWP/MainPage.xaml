@@ -237,22 +237,42 @@
                                 RelativePanel.AlignTopWithPanel="True"
                                 RelativePanel.AlignBottomWithPanel="True"/>
 
-                            <AutoSuggestBox 
+                            <AutoSuggestBox
+                                x:Name="SearchBox"
                                 VerticalAlignment="Center"
                                 QueryIcon="Find"
                                 Visibility="Collapsed"
+                                PlaceholderText="Enter Search Term.."
+                                Text="{Binding SearchBoxText, Mode=TwoWay}"
+                                LostFocus="SearchBox_OnLostFocus"
+                                RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.AlignRightWithPanel="True"
                                 RelativePanel.AlignTopWithPanel="True"
                                 RelativePanel.AlignBottomWithPanel="True"
-                                Margin="0,0,5,0"/>
+                                Margin="12,0,5,0">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="QuerySubmitted">
+                                        <core:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+                            </AutoSuggestBox>
+
+                            <Button
+                                x:Name="SearchIconButton"
+                                Background="Transparent"
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                Margin="0,0,10,0"
+                                Click="SearchIconButton_OnClick">
+                                <Button.Content>
+                                    <FontIcon 
+                                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                        FontSize="14"
+                                        Glyph="&#xf002;"/>
+                                </Button.Content>
+                            </Button>
                             
-                            <FontIcon 
-                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                                Glyph="&#xf002;"
-                                RelativePanel.AlignRightWithPanel="True"
-                                RelativePanel.AlignTopWithPanel="True"
-                                RelativePanel.AlignBottomWithPanel="True"
-                                Margin="0,0,10,0"/>
 
                         </RelativePanel>
                     </Border>

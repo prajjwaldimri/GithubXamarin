@@ -4,6 +4,7 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.UI;
 using MvvmCross.Plugins.Messenger;
@@ -28,6 +29,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public ICommand HamburgerMenuNavigationCommand { get; set; }
         public ICommand GoToSettingsCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -40,6 +42,13 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private string _searchBoxText;
+        public string SearchBoxText
+        {
+            get { return _searchBoxText;}
+            set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
+        }
+
         private readonly MvxSubscriptionToken _loadingStatusMessageToken;
         private readonly MvxSubscriptionToken _appBarHeaderChangeMessageToken;
 
@@ -47,6 +56,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);
             GoToSettingsCommand = new MvxCommand(ShowSettings);
+            SearchCommand = new MvxCommand(ExecuteSearch);
 
             _loadingStatusMessageToken = Messenger.Subscribe<LoadingStatusMessage>
                 (message => IsLoading = message.IsLoadingIndicatorActive);
@@ -110,6 +120,15 @@ namespace GithubXamarin.Core.ViewModels
         public void ShowSettings()
         {
             ShowViewModel<SettingsViewModel>();
+        }
+
+        private void ExecuteSearch()
+        {
+            ShowViewModel<SearchViewModel>(new
+            {
+                searchTerm = SearchBoxText,
+                searchType = SearchTypeEnumeration.Issues
+            });
         }
 
         //Android Navigation Drawer

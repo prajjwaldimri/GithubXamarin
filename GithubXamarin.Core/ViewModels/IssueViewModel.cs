@@ -31,7 +31,7 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
         }
 
-        public async void Init(long repositoryId, int issueNumber)
+        public async void Init(int issueNumber, long repositoryId, string owner = null, string repoName = null)
         {
             if (!IsInternetAvailable())
             {
@@ -39,8 +39,17 @@ namespace GithubXamarin.Core.ViewModels
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
+
+            if (string.IsNullOrWhiteSpace(owner) || string.IsNullOrWhiteSpace(repoName))
+            {
+                Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
                     GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                Issue = await _issueDataService.GetIssueForRepository(owner, repoName, issueNumber,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
