@@ -186,6 +186,32 @@
                         Height="1"
                         Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                         Margin="16,0,16,6"/>
+                    
+                    <Button
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding GoToUserProfileCommand}">
+                        <Button.Content>
+                            <StackPanel 
+                                Orientation="Horizontal">
+                                <Ellipse
+                                    Height="20"
+                                    Width="20"
+                                    Margin="5,0,12,0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                
+                                <TextBlock
+                                    Text="{Binding User.Name}"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
 
                     <Button
                         x:Name="FeedbackNavPaneButton"
@@ -202,8 +228,7 @@
                         Grid.Column="2"
                         Style="{StaticResource SplitViewPaneButtonStyle}"
                         Content="&#xE713;"
-                        Command="{Binding GoToSettingsCommand,
-                        ConverterParameter=5}"
+                        Command="{Binding GoToSettingsCommand}"
                         Click="SettingsNavPaneButton_OnClick"
                         AutomationProperties.Name="Settings"
                         ToolTipService.ToolTip="Settings"/>

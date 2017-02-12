@@ -8,6 +8,7 @@ using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.UI;
 using MvvmCross.Plugins.Messenger;
+using Octokit;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels
@@ -30,6 +31,7 @@ namespace GithubXamarin.Core.ViewModels
         public ICommand HamburgerMenuNavigationCommand { get; set; }
         public ICommand GoToSettingsCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand GoToUserProfileCommand { get; set; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -49,6 +51,13 @@ namespace GithubXamarin.Core.ViewModels
             set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
         }
 
+        private User _user;
+        public User User
+        {
+            get { return _user; }
+            set { _user = value; RaisePropertyChanged(() => User); }
+        }
+
         private readonly MvxSubscriptionToken _loadingStatusMessageToken;
         private readonly MvxSubscriptionToken _appBarHeaderChangeMessageToken;
 
@@ -57,6 +66,7 @@ namespace GithubXamarin.Core.ViewModels
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);
             GoToSettingsCommand = new MvxCommand(ShowSettings);
             SearchCommand = new MvxCommand(ExecuteSearch);
+            GoToUserProfileCommand = new MvxCommand(ShowCurrentUserProfile);
 
             _loadingStatusMessageToken = Messenger.Subscribe<LoadingStatusMessage>
                 (message => IsLoading = message.IsLoadingIndicatorActive);
@@ -64,6 +74,7 @@ namespace GithubXamarin.Core.ViewModels
                 (message => PageHeader = message.HeaderTitle);
         }
 
+        
         public override async void Start()
         {
             //HACK: Delay is added so that the MainViewModel can completely load first before showing other ViewModels.
@@ -73,6 +84,7 @@ namespace GithubXamarin.Core.ViewModels
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 ShowViewModel<EventsViewModel>();
+                User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }
             else
             {
@@ -117,9 +129,21 @@ namespace GithubXamarin.Core.ViewModels
             ShowViewModel<LoginViewModel>();
         }
 
-        public void ShowSettings()
+        private void ShowSettings()
         {
             ShowViewModel<SettingsViewModel>();
+        }
+
+        private void ShowCurrentUserProfile()
+        {
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                ShowViewModel<UserViewModel>();
+            }
+            else
+            {
+                ShowViewModel<LoginViewModel>();
+            }
         }
 
         private void ExecuteSearch()
