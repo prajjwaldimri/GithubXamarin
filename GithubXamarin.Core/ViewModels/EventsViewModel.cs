@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 
@@ -21,6 +23,27 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _events = value;
                 RaisePropertyChanged(() => Events);
+            }
+        }
+
+        private int _selectedEvent;
+        public int SelectedEvent
+        {
+            get { return _selectedEvent;}
+            set
+            {
+                _selectedEvent = value;
+                RaisePropertyChanged(() => SelectedEvent);
+            }
+        }
+
+        private ICommand _eventClickCommand;
+        public ICommand EventClickCommand
+        {
+            get
+            {
+                _eventClickCommand = _eventClickCommand ?? new MvxCommand(NavigateToEventType);
+                return _eventClickCommand;
             }
         }
 
@@ -62,6 +85,56 @@ namespace GithubXamarin.Core.ViewModels
             }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private void NavigateToEventType()
+        {
+            var activity = Events?[SelectedEvent];
+            if (activity == null) return;
+            switch (activity.Type)
+            {
+                case "CommitCommentEvent":
+                    break;
+                case "CreateEvent":
+                    ShowViewModel<RepositoryViewModel>(new {repositoryId = activity.Repo.Id});
+                    break;
+                case "DeleteEvent":
+                    break;
+                case "ForkEvent":
+                    var forkEventPayload = activity.Payload as ForkEventPayload;
+                    ShowViewModel<RepositoryViewModel>(new { repositoryId = forkEventPayload.Forkee.Id });
+                    break;
+                case "GollumEvent":
+                    break;
+                case "IssuesEvent":
+                    var issueEventPayload = activity.Payload as IssueEventPayload;
+                    ShowViewModel<IssueViewModel>(new {issueNumber = issueEventPayload.Issue.Number, repositoryId = issueEventPayload.Repository.Id});
+                    break;
+                case "IssueCommentEvent":
+                    break;
+                case "LabelEvent":
+                    break;
+                case "MemberEvent":
+                    break;
+                case "ProjectCardEvent":
+                    break;
+                case "ProjectEvent":
+                    break;
+                case "PublicEvent":
+                    break;
+                case "PullRequestEvent":
+                    break;
+                case "PushEvent":
+                    ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
+                    break;
+                case "ReleaseEvent":
+                    break;
+                case "WatchEvent":
+                    ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

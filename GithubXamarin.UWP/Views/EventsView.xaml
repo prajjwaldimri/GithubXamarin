@@ -6,16 +6,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:PullToRefreshListView 
+        <ListView
             x:Name="ListView" 
             ItemsSource="{Binding Events}"
+            SelectedIndex="{Binding SelectedEvent, Mode=TwoWay}"
             HorizontalAlignment="Stretch" 
             IsItemClickEnabled="True" 
-            IsTapEnabled="True"
+            SelectionMode="Single"
             HorizontalContentAlignment="Stretch">
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding EventClickCommand, Mode=TwoWay}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -73,6 +82,6 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </controls:PullToRefreshListView>
+        </ListView>
     </Grid>
 </views:MvxWindowsPage>
