@@ -36,9 +36,7 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="6*"/>
                         </Grid.ColumnDefinitions>
 
                         <FontIcon 
@@ -49,9 +47,12 @@
                             Foreground="{StaticResource SystemControlForegroundAccentBrush}" 
                             FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
 
-                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
-                                       Text="{Binding CreatedAt.DateTime}"
-                                       Margin="15,0,0,0"/>
+                        <TextBlock 
+                            Grid.Row="0" 
+                            Grid.Column="1"
+                            Text="{Binding CreatedAt.DateTime}"
+                            Margin="15,0,0,0"
+                            Opacity="0.6"/>
 
 
                         <Rectangle
@@ -70,11 +71,10 @@
                         <TextBlock 
                             Grid.Row="1"
                             Grid.Column="1"
-                            Grid.ColumnSpan="3"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Stretch"
                             Margin="15,10,0,0"
-                            TextWrapping="WrapWholeWords"
-                            TextAlignment="Left"
+                            TextWrapping="Wrap"
+                            TextAlignment="DetectFromContent"
                             Text="{Binding Converter={StaticResource EventToStringConverter}}"/>
 
 

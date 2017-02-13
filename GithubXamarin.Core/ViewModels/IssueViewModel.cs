@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.Contracts.Service;
+﻿using System.Net.Http;
+using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
@@ -40,17 +41,24 @@ namespace GithubXamarin.Core.ViewModels
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
-            if (string.IsNullOrWhiteSpace(owner) || string.IsNullOrWhiteSpace(repoName))
+            try
             {
-                Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
-                    GithubClientService.GetAuthorizedGithubClient());
+                if (string.IsNullOrWhiteSpace(owner) || string.IsNullOrWhiteSpace(repoName))
+                {
+                    Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Issue = await _issueDataService.GetIssueForRepository(owner, repoName, issueNumber,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{Issue.Title}"});
             }
-            else
+            catch (HttpRequestException)
             {
-                Issue = await _issueDataService.GetIssueForRepository(owner, repoName, issueNumber,
-                    GithubClientService.GetAuthorizedGithubClient());
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
-            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }

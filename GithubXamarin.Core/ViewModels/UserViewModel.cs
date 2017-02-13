@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.Contracts.Service;
+﻿using System.Net.Http;
+using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
@@ -32,22 +33,28 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(string userLogin)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable()) return;
+
+            try
             {
-                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+                Messenger.Publish(new LoadingStatusMessage(this) {IsLoadingIndicatorActive = true});
                 if (string.IsNullOrWhiteSpace(userLogin))
                 {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Profile" });
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Your Profile"});
                     User = await _userDataService.GetCurrentUser(GithubClientService.GetAuthorizedGithubClient());
-                    
+
                 }
                 else
                 {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Profile of {userLogin}" });
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Profile of {userLogin}"});
                     User = await _userDataService.GetUser(userLogin, GithubClientService.GetAuthorizedGithubClient());
                 }
-                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }
 }

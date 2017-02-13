@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
@@ -66,18 +67,25 @@ namespace GithubXamarin.Core.ViewModels
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            if (string.IsNullOrWhiteSpace(userLogin))
+            try
             {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Your Repositories" });
-                Repositories =
-                    await _repoDataService.GetAllRepositoriesForCurrentUser(
+                if (string.IsNullOrWhiteSpace(userLogin))
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Your Repositories"});
+                    Repositories =
+                        await _repoDataService.GetAllRepositoriesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Repositories of {userLogin}"});
+                    Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
                         GithubClientService.GetAuthorizedGithubClient());
+                }
             }
-            else
+            catch (HttpRequestException)
             {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Repositories of {userLogin}" });
-                Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
-                    GithubClientService.GetAuthorizedGithubClient());
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }

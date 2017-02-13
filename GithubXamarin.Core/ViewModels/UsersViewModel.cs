@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
@@ -54,31 +55,38 @@ namespace GithubXamarin.Core.ViewModels
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            if (usersType != null)
+            try
             {
-                switch (usersType)
+                if (usersType != null)
                 {
-                    case UsersTypeEnumeration.Stargazers:
-                        Users = await _userDataService.GetStargazersForRepository(repositoryId,
-                            GithubClientService.GetAuthorizedGithubClient());
-                        Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Stargazers"});
-                        break;
-                    case UsersTypeEnumeration.Collaborators:
-                        Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Collaborators" });
-                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                            GithubClientService.GetAuthorizedGithubClient());
-                        break;
-                    default:
-                        Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                            GithubClientService.GetAuthorizedGithubClient());
-                        break;
+                    switch (usersType)
+                    {
+                        case UsersTypeEnumeration.Stargazers:
+                            Users = await _userDataService.GetStargazersForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Stargazers"});
+                            break;
+                        case UsersTypeEnumeration.Collaborators:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Collaborators"});
+                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            break;
+                        default:
+                            Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            break;
+                    }
+                }
+                else
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Collaborators"});
+                    Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
+                        GithubClientService.GetAuthorizedGithubClient());
                 }
             }
-            else
+            catch (HttpRequestException)
             {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Collaborators" });
-                Users = await _userDataService.GetCollaboratorsForRepository(repositoryId,
-                    GithubClientService.GetAuthorizedGithubClient());
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }

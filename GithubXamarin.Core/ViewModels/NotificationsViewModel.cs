@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Net.Http;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
@@ -40,18 +41,25 @@ namespace GithubXamarin.Core.ViewModels
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            if (repositoryId.HasValue)
+            try
             {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Notifications" });
-                Notifications = await _notificationDataService.GetAllNotificationsForRepository(repositoryId.Value,
-                    GithubClientService.GetAuthorizedGithubClient());
-            }
-            else
-            {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Notifications" });
-                Notifications =
-                    await _notificationDataService.GetAllNotificationsForCurrentUser(
+                if (repositoryId.HasValue)
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Notifications"});
+                    Notifications = await _notificationDataService.GetAllNotificationsForRepository(repositoryId.Value,
                         GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Your Notifications"});
+                    Notifications =
+                        await _notificationDataService.GetAllNotificationsForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+            }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }

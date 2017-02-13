@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
@@ -97,15 +98,21 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long repositoryId)
         {
-            if (IsInternetAvailable())
+            if (!IsInternetAvailable()) return;
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+
+            try
             {
-                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
                 Repository = await _repoDataService.GetRepository(repositoryId,
                     GithubClientService.GetAuthorizedGithubClient());
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Repository.FullName}" });
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{Repository.FullName}"});
                 await CheckRepositoryStats();
-                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
         /// <summary>

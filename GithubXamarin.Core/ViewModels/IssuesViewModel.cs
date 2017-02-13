@@ -3,6 +3,7 @@ using GithubXamarin.Core.Contracts.ViewModel;
 using MvvmCross.Core.ViewModels;
 using Octokit;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Input;
 using GithubXamarin.Core.Messages;
 using MvvmCross.Plugins.Messenger;
@@ -60,18 +61,28 @@ namespace GithubXamarin.Core.ViewModels
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            if (repositoryId.HasValue)
+            try
             {
-                Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
-                    GithubClientService.GetAuthorizedGithubClient());
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Issues for {Issues[0]?.Repository.FullName}" });
-            }
-            else
-            {
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Issues" });
-                Issues =
-                    await _issueDataService.GetAllIssuesForCurrentUser(
+                if (repositoryId.HasValue)
+                {
+                    Issues = await _issueDataService.GetAllIssuesForRepository(repositoryId.Value,
                         GithubClientService.GetAuthorizedGithubClient());
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this)
+                    {
+                        HeaderTitle = $"Issues for {Issues[0]?.Repository.FullName}"
+                    });
+                }
+                else
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Your Issues"});
+                    Issues =
+                        await _issueDataService.GetAllIssuesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+            }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
