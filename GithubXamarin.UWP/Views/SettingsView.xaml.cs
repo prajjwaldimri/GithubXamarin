@@ -41,12 +41,13 @@ namespace GithubXamarin.UWP.Views
         
         private async void ThemeToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
         {
-            if (IsFirstTimeOpened)
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (IsFirstTimeOpened && (string) localSettingsValues["RequestedTheme"] == "Dark")
             {
                 IsFirstTimeOpened = false;
                 return;
             }
-            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            IsFirstTimeOpened = false;
             switch (ThemeToggleSwitch.IsOn)
             {
                 //Reverses the value in AppData

@@ -39,6 +39,7 @@ namespace GithubXamarin.Core.ViewModels
                 {
                     Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Profile" });
                     User = await _userDataService.GetCurrentUser(GithubClientService.GetAuthorizedGithubClient());
+                    
                 }
                 else
                 {

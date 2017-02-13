@@ -119,9 +119,7 @@ namespace GithubXamarin.UWP
                 {
                     case BackgroundAccessStatus.DeniedByUser:
                     case BackgroundAccessStatus.DeniedBySystemPolicy:
-                    case BackgroundAccessStatus.Unspecified:
-                    case BackgroundAccessStatus.Denied:
-                        //TODO: DO something about rejection 
+                    
                         break;
                     default:
                         builder.Name = taskName;

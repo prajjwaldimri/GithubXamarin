@@ -10,154 +10,324 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-         <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition/>
-                <RowDefinition Height="1.5*"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <ScrollViewer HorizontalScrollMode="Enabled" Grid.Row="1" Grid.Column="1">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" 
+        <ScrollViewer HorizontalScrollMode="Enabled" Grid.Row="1" Grid.Column="1">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" 
                     Name="ProfileStackPanel">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Height="100" Width="100">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <StackPanel Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Height="100" Width="100">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <StackPanel Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                             Name="ProfileDetails">
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="5"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
 
-                                <TextBlock Text="{Binding User.Name}" FontSize="18" FontWeight="ExtraBold"
-                                   Grid.Row="0" Grid.Column="2"/>
-                                <TextBlock Text="{Binding User.Login}" FontSize="14"
-                                   Grid.Row="1" Grid.Column="2"/>
+                            <TextBlock 
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Name}"
+                                FontSize="18"
+                                FontWeight="ExtraBold"
+                                Grid.Row="0" 
+                                Grid.Column="2"/>
+                            <TextBlock 
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Login}"
+                                FontSize="14"
+                                Grid.Row="1"
+                                Grid.Column="2"/>
 
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                   Glyph="&#xf456;" Grid.Row="2" Grid.Column="0"/>
-                                <TextBlock Text="{Binding User.Location}" FontSize="14"
-                                   Grid.Row="2" Grid.Column="2"/>
+                            <FontIcon 
+                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf041;" 
+                                Grid.Row="2"
+                                Grid.Column="0"/>
+                            <TextBlock
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Location}" 
+                                FontSize="14"
+                                Grid.Row="2" 
+                                Grid.Column="2"/>
 
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                   Glyph="&#xf10f;"
-                                  Grid.Row="3" Grid.Column="0"/>
-                                <TextBlock Text="{Binding User.Email}" FontSize="14"
-                                   Grid.Row="3" Grid.Column="2"/>
+                            <FontIcon 
+                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf0e0;"
+                                Grid.Row="3" 
+                                Grid.Column="0"/>
+                            <TextBlock 
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Email}" 
+                                FontSize="14"
+                                Grid.Row="3" 
+                                Grid.Column="2"/>
 
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                   Glyph="&#xf347;"
-                                  Grid.Row="4" Grid.Column="0"/>
-                                <TextBlock Text="{Binding User.Bio}" FontSize="14" TextWrapping="Wrap"
-                                   Grid.Row="4" Grid.Column="2"/>
+                            <FontIcon
+                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf2bb;"
+                                Grid.Row="4"
+                                Grid.Column="0"/>
+                            <TextBlock 
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Bio}" 
+                                FontSize="14" 
+                                TextWrapping="Wrap"
+                                Grid.Row="4"
+                                Grid.Column="2"/>
 
-                                <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                   Glyph="&#xf316;"
-                                  Grid.Row="5" Grid.Column="0"/>
-                                <TextBlock Text="{Binding User.Company}" FontSize="14"
-                                   Grid.Row="5" Grid.Column="2"/>
-                            </Grid>
-                        </StackPanel>
+                            <FontIcon
+                                FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf1ad;"
+                                Grid.Row="5"
+                                Grid.Column="0"/>
+                            <TextBlock 
+                                Margin="0,5,0,5"
+                                Text="{Binding User.Company}"
+                                FontSize="14"
+                                Grid.Row="5"
+                                Grid.Column="2"/>
+                        </Grid>
                     </StackPanel>
                 </StackPanel>
-            </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
 
-            <ScrollViewer Grid.Row="2" Grid.Column="1">
-                <StackPanel VerticalAlignment="Stretch">
-                    <TextBlock Text="User Stats:" FontSize="24" FontWeight="Bold"/>
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
+            <StackPanel VerticalAlignment="Stretch">
+                <TextBlock Text="User Stats:" FontSize="24" FontWeight="Bold"/>
 
-                    <Grid Margin="0,10,0,0" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        
+                <Grid Margin="0,10,0,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf262;"
-                                                           MiddleTextBlockProperty="Followers:"
-                                                           LastTextBlockProperty="{Binding User.Followers}"
-                                                           Grid.Row="1" Grid.Column="0"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf260;"
-                                                           MiddleTextBlockProperty="Following:"
-                                                           LastTextBlockProperty="{Binding User.Following}"
-                                                           Grid.Row="2" Grid.Column="0"/>
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf0c0;"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Followers:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="0" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.Followers}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="0" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf0c0;"
+                        Grid.Row="1"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Following:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="1" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.Following}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="1" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf0d6;"
+                        Grid.Row="2"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Plan:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="2" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.Plan.Name}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="2" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf11c;"
+                        Grid.Row="3"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Type:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="3" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.Type}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="3" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph=""
+                        Grid.Row="4"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Private Repos:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="4" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.TotalPrivateRepos}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="4" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph=""
+                        Grid.Row="5"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Public Repos:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="5" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.PublicRepos}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="5" 
+                        Grid.Column="2"/>
+                    
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf0a0;"
+                        Grid.Row="6"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Disk Usage:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="6" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.DiskUsage}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="6" 
+                        Grid.Column="2"/>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf2aa;"
-                                                           MiddleTextBlockProperty="Plan:"
-                                                           LastTextBlockProperty="{Binding User.AccountPlan}"
-                                                           Grid.Row="3" Grid.Column="0"/>
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf017;"
+                        Grid.Row="7"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Created At:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="7" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.CreatedAt}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="7" 
+                        Grid.Column="2"/>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf13f;"
-                                                           MiddleTextBlockProperty="Type:"
-                                                           LastTextBlockProperty="{Binding User.AccountType}"
-                                                           Grid.Row="4" Grid.Column="0"/>
+                    <FontIcon 
+                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf234;"
+                        Grid.Row="8"
+                        Grid.Column="0"/>
+                    
+                    <TextBlock 
+                        Text="Hireable?:" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="8" 
+                        Grid.Column="1"/>
+                    
+                    <TextBlock 
+                        Text="{Binding User.Hireable}" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"
+                        Grid.Row="8" 
+                        Grid.Column="2"/>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf213;"
-                                                           MiddleTextBlockProperty="Total Private Repos:"
-                                                           LastTextBlockProperty="{Binding User.PrivateRepos}"
-                                                           Grid.Row="5" Grid.Column="0"/>
+                </Grid>
 
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf212;"
-                                                           MiddleTextBlockProperty="Total Public Repos:"
-                                                           LastTextBlockProperty="{Binding User.PublicRepos}"
-                                                           Grid.Row="6" Grid.Column="0"/>
-
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf484;"
-                                                           MiddleTextBlockProperty="Disk Usage:"
-                                                           LastTextBlockProperty="{Binding User.DiskUsage}"
-                                                           Grid.Row="7" Grid.Column="0"/>
-
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf2d1;"
-                                                           MiddleTextBlockProperty="Created At:"
-                                                           LastTextBlockProperty="{Binding User.CreatedAt}"
-                                                           Grid.Row="8" Grid.Column="0"/>
-
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf272;"
-                                                           MiddleTextBlockProperty="Hireable?:"
-                                                           LastTextBlockProperty="{Binding User.Hireable}"
-                                                           Grid.Row="9" Grid.Column="0"/>
-
-                        <usercontrols:IconAndTextBlocksControl FontIconGlyph="&#xf491;"
-                                                           MiddleTextBlockProperty="Total Gists:"
-                                                           LastTextBlockProperty="{Binding User.TotalGists}"
-                                                           Grid.Row="10" Grid.Column="0"/>
-
-                    </Grid>
-
-                </StackPanel>
-            </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </views:MvxWindowsPage>
 

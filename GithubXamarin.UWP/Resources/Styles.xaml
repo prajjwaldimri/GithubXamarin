@@ -3,10 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GithubXamarin.UWP.Resources"
     xmlns:converters="using:GithubXamarin.UWP.Resources.Converters">
-    
     <!-- Converters -->
     
     <converters:HexToBrushConverter x:Key="HexToBrushConverter"/>
+    <converters:EventToStringConverter x:Key="EventToStringConverter"/>
+    <converters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
     
     
     <!-- Hamburger Menu Resources  

@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using MvvmCross.Platform.Converters;
 using Octokit;
 
 namespace GithubXamarin.Core.Converters
 {
-    /// <summary>
-    /// Takes an event from the binding and return proper description for it.
-    /// </summary>
-    public class EventToStringConverter : MvxValueConverter<Activity,string>
+    public class EventToGlyphConverter : MvxValueConverter<Activity, string>
     {
         protected override string Convert(Activity value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -16,64 +17,63 @@ namespace GithubXamarin.Core.Converters
                 return string.Empty;
 
             //https://developer.github.com/v3/activity/events/types/
-            string eventString = null;
+            string glyph = null;
             switch (value.Type)
             {
                 case "CommitCommentEvent":
-                    eventString = $"commented on a commit in";
+                    glyph = "\uf075";
                     break;
                 case "CreateEvent":
-                    eventString = $"created";
+                    glyph = "\uf0fe";
                     break;
                 case "DeleteEvent":
-                    eventString = $"deleted";
+                    glyph = "\uf1f8";
                     break;
                 case "ForkEvent":
-                    eventString = $"forked";
+                    glyph = "\uf126";
                     break;
                 case "GollumEvent":
-                    eventString = "created/edited a wiki page in";
+                    glyph = "\uf1c9";
                     break;
                 case "IssuesEvent":
-                    eventString = $"edited an issue in";
+                    glyph = "\uf188";
                     break;
                 case "IssueCommentEvent":
-                    eventString = $"commented on #{(value.Payload as IssueCommentPayload).Issue.Number} in";
+                    glyph = "\uf075";
                     break;
                 case "LabelEvent":
-                    eventString = $"created/edited a label in";
+                    glyph = "\uf02c";
                     break;
                 case "MemberEvent":
-                    eventString = $"added collaborator to";
+                    glyph = "\uf0c0";
                     break;
                 case "ProjectCardEvent":
-                    eventString = $"created a project card in";
+                    glyph = "\uf284";
                     break;
                 case "ProjectEvent":
-                    eventString = $"created project in";
+                    glyph = "\uf284";
                     break;
                 case "PublicEvent":
-                    eventString = $"has open-sourced";
+                    glyph = "\uf0c0";
                     break;
                 case "PullRequestEvent":
-                    var pullRequestEventPayload = value.Payload as PullRequestEventPayload;
-                    eventString = $"{pullRequestEventPayload.Action} pull request no. {pullRequestEventPayload.Number} in";
+                    glyph = "\uf126";
                     break;
                 case "PushEvent":
-                    eventString = $"pushed to";
+                    glyph = "\uf0ee";
                     break;
                 case "ReleaseEvent":
-                    eventString = $"published a release in";
+                    glyph = "\uf1fd";
                     break;
                 case "WatchEvent":
-                    eventString = $"starred";
+                    glyph = "\uf06e";
                     break;
                 default:
-                    eventString = "did something on";
+                    glyph = "\uf024";
                     return string.Empty;
             }
-            
-            return $"{value.Actor.Login} {eventString} {value.Repo.Name}";
+
+            return glyph;
         }
     }
 }

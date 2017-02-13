@@ -84,11 +84,15 @@ namespace GithubXamarin.Core.ViewModels
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 ShowViewModel<EventsViewModel>();
-                User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }
             else
             {
                 ShowViewModel<LoginViewModel>();
+            }
+
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }
         }
 
@@ -148,11 +152,14 @@ namespace GithubXamarin.Core.ViewModels
 
         private void ExecuteSearch()
         {
-            ShowViewModel<SearchViewModel>(new
+            if (!string.IsNullOrWhiteSpace(SearchBoxText))
             {
-                searchTerm = SearchBoxText,
-                searchType = SearchTypeEnumeration.Issues
-            });
+                ShowViewModel<SearchViewModel>(new
+                {
+                    searchTerm = SearchBoxText,
+                    searchType = SearchTypeEnumeration.Issues
+                });
+            }
         }
 
         //Android Navigation Drawer

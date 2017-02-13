@@ -64,6 +64,7 @@
     <Compile Include="Contracts\ViewModel\ISettingsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUsersViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUserViewModel.cs" />
+    <Compile Include="Converters\EventToGlyphConverter.cs" />
     <Compile Include="Converters\EventToStringConverter.cs" />
     <Compile Include="Messages\AppBarHeaderChangeMessage.cs" />
     <Compile Include="Messages\LoadingStatusMessage.cs" />
