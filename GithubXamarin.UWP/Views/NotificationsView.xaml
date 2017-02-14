@@ -10,17 +10,16 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <controls:PullToRefreshListView 
+        <ListView 
             ItemsSource="{Binding Notifications}" 
             SelectionMode="None"
             IsItemClickEnabled="True" 
             HorizontalAlignment="Stretch"
-            Padding="5"
-            RefreshCommand="{Binding PullToRefreshDelegateCommand}">
+            Padding="5">
             
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="10,0,0,0">
+                    <Grid Margin="5,10,0,0">
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
@@ -28,32 +27,34 @@
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="10*"/>
                         </Grid.ColumnDefinitions>
 
                         <FontIcon
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.RowSpan="2"
-                            Glyph="&#xf101;"/>
+                            Glyph="&#xf12a;" 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
 
                         <TextBlock 
                             Grid.Row="0"
                             Grid.Column="1"
                             Text="{Binding Subject.Title}"
-                            Margin="10,0,0,0"/>
+                            TextWrapping="Wrap"
+                            Margin="15,0,0,0"/>
 
                         <TextBlock 
                             Grid.Row="1" 
                             Grid.Column="1"
                             Text="{Binding Reason}"
-                            Margin="10,0,0,0"/>
+                            Opacity="0.6"
+                            Margin="15,0,0,0"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </controls:PullToRefreshListView>
+        </ListView>
 
         <!--TODO: Add image or text that says no unread notifications -->
     </Grid>

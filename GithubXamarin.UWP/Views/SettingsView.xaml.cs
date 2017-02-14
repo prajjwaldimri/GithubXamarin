@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using MvvmCross.WindowsUWP.Views;
 using Octokit;
@@ -23,6 +26,25 @@ namespace GithubXamarin.UWP.Views
         {
             this.InitializeComponent();
             ThemeChecker();
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                StatusBarStackPanel.Visibility = Visibility.Visible;
+                StatusBarVisibilityChecker();
+            }
+        }
+
+        private void StatusBarVisibilityChecker()
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            switch (localSettingsValues["StatusBarVisibility"].ToString())
+            {
+                case "Visible":
+                    StatusBarToggleSwitch.IsOn = true;
+                    break;
+                case "Hidden":
+                    StatusBarToggleSwitch.IsOn = false;
+                    break;
+            }
         }
 
         private void ThemeChecker()
@@ -31,34 +53,85 @@ namespace GithubXamarin.UWP.Views
             switch (localSettingsValues["RequestedTheme"].ToString())
             {
                 case "Dark":
-                    ThemeToggleSwitch.IsOn = true;
+                    DarkThemeRadioButton.IsChecked = true;
                     break;
                 case "Light":
-                    ThemeToggleSwitch.IsOn = false;
+                    LightThemeRadioButton.IsChecked = true;
+                    break;
+                case "System":
+                    SystemThemeRadioButton.IsChecked = true;
                     break;
             }
         }
-        
-        private async void ThemeToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+
+        private void StatusBarToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (IsFirstTimeOpened && (string) localSettingsValues["RequestedTheme"] == "Dark")
+            if (IsFirstTimeOpened && (string)localSettingsValues["StatusBarVisibility"] == "Visible")
             {
                 IsFirstTimeOpened = false;
                 return;
             }
             IsFirstTimeOpened = false;
-            switch (ThemeToggleSwitch.IsOn)
+            var statusBar = StatusBar.GetForCurrentView();
+            if (statusBar == null) return;
+
+            switch (StatusBarToggleSwitch.IsOn)
             {
                 //Reverses the value in AppData
                 case false:
-                    localSettingsValues["RequestedTheme"] = "Light";
+                    localSettingsValues["StatusBarVisibility"] = "Hidden";
+                    statusBar.HideAsync();
                     break;
                 case true:
-                    localSettingsValues["RequestedTheme"] = "Dark";
+                    localSettingsValues["StatusBarVisibility"] = "Visible";
+                    statusBar.ShowAsync();
                     break;
             }
-            var msgDialog = new MessageDialog("Please restart the app to change the current theme!");
+        }
+
+        private async void DarkThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (IsFirstTimeOpened)
+            {
+                IsFirstTimeOpened = false;
+                return;
+            }
+            localSettingsValues["RequestedTheme"] = "Dark";
+            await AfterThemeChangedMessageDialog();
+        }
+
+        private async void LightThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (IsFirstTimeOpened)
+            {
+                IsFirstTimeOpened = false;
+                return;
+            }
+            localSettingsValues["RequestedTheme"] = "Light";
+            await AfterThemeChangedMessageDialog();
+        }
+
+        private async void SystemThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (IsFirstTimeOpened)
+            {
+                IsFirstTimeOpened = false;
+                return;
+            }
+            localSettingsValues["RequestedTheme"] = "System";
+            await AfterThemeChangedMessageDialog();
+        }
+
+        private async Task AfterThemeChangedMessageDialog()
+        {
+            var msgDialog = new MessageDialog("The new theme can only be applied after an app restart. Do you want to restart the app?","Theme Changed!");
+            msgDialog.Commands.Add(new UICommand("Yes", command => App.Current.Exit()));
+            msgDialog.Commands.Add(new UICommand("No"));
+            msgDialog.CancelCommandIndex = 1;
             await msgDialog.ShowAsync();
         }
     }

@@ -44,8 +44,10 @@ namespace GithubXamarin.UWP.Views
         /// <param name="args"></param>
         private async void LoginWebViewOnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
+            LoginProgressBar.Value = 25;
             if (args.Uri != null && args.Uri.ToString().Contains("code="))
             {
+                LoginProgressBar.Value = 50;
                 await CodeRetrieverandTokenSaver(args.Uri.ToString());
             }
         }
@@ -64,6 +66,7 @@ namespace GithubXamarin.UWP.Views
             CrossSecureStorage.Current.SetValue("OAuthToken",accessToken.AccessToken);
             var msgDialog = new MessageDialog("Choose any page you want to go from the menu on the left or you can just stare at this page. Your choice!","Login Successful!");
             await msgDialog.ShowAsync();
+            LoginProgressBar.Value = 100;
         }
     }
 }

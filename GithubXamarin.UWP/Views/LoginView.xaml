@@ -9,6 +9,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView Height="500" Width="500" x:Name="LoginWebView"/>
+        <ProgressBar
+            x:Name="LoginProgressBar"
+            VerticalAlignment="Top"
+            Margin="0,5,0,0"
+            Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+        <WebView
+            Height="500" 
+            Width="500"
+            x:Name="LoginWebView"/>
     </Grid>
 </views:MvxWindowsPage>

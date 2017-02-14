@@ -194,6 +194,7 @@
                         Background="Transparent"
                         HorizontalContentAlignment="Left"
                         VerticalAlignment="Stretch"
+                        Click="SettingsNavPaneButton_OnClick"
                         Command="{Binding GoToUserProfileCommand}">
                         <Button.Content>
                             <StackPanel 

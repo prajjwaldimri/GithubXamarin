@@ -15,6 +15,8 @@ namespace GithubXamarin.Core.ViewModels
 {
     public class MainViewModel : BaseViewModel, IMainViewModel
     {
+        #region Properties and Commands
+
         public IEnumerable<string> MenuItems { get; private set; } = new[] { "Option1", "Option2" };
 
         private string _pageHeader;
@@ -47,7 +49,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _searchBoxText;
         public string SearchBoxText
         {
-            get { return _searchBoxText;}
+            get { return _searchBoxText; }
             set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
         }
 
@@ -60,6 +62,8 @@ namespace GithubXamarin.Core.ViewModels
 
         private readonly MvxSubscriptionToken _loadingStatusMessageToken;
         private readonly MvxSubscriptionToken _appBarHeaderChangeMessageToken;
+
+        #endregion
 
         public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
@@ -74,7 +78,7 @@ namespace GithubXamarin.Core.ViewModels
                 (message => PageHeader = message.HeaderTitle);
         }
 
-        
+
         public override async void Start()
         {
             //HACK: Delay is added so that the MainViewModel can completely load first before showing other ViewModels.
@@ -102,6 +106,8 @@ namespace GithubXamarin.Core.ViewModels
         /// <param name="index"></param>
         private void NavigateToViewModel(int index)
         {
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+                return;
             switch (index)
             {
                 case 0:
@@ -135,6 +141,8 @@ namespace GithubXamarin.Core.ViewModels
 
         private void ShowSettings()
         {
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+                return;
             ShowViewModel<SettingsViewModel>();
         }
 
@@ -152,6 +160,8 @@ namespace GithubXamarin.Core.ViewModels
 
         private void ExecuteSearch()
         {
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+                return;
             if (!string.IsNullOrWhiteSpace(SearchBoxText))
             {
                 ShowViewModel<SearchViewModel>(new

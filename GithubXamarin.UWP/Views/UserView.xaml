@@ -150,204 +150,213 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="6*"/>
                     </Grid.ColumnDefinitions>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf0c0;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="0"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Text="Followers:" 
                         Style="{ThemeResource BodyTextBlockStyle}"
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
+                        Opacity="0.6"
                         Grid.Row="0" 
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.Followers}" 
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="0" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf0c0;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="1"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Following:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="1" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.Following}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="1" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf0d6;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="2"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Plan:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="2" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.Plan.Name}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="2" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf11c;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="3"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Type:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="3" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.Type}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="3" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph=""
+                        Margin="10,0,0,5"
                         Grid.Row="4"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Private Repos:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="4" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.TotalPrivateRepos}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="4" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph=""
+                        Margin="10,0,0,5"
                         Grid.Row="5"
                         Grid.Column="0"/>
 
                     <TextBlock
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Public Repos:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="5" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.PublicRepos}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="5" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf0a0;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="6"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Disk Usage:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="6" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.DiskUsage}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="6" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf017;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="7"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Created At:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="7" 
+                        Opacity="0.6"
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.CreatedAt}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="7" 
                         Grid.Column="2"/>
 
                     <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                         Glyph="&#xf234;"
+                        Opacity="0.6"
+                        Margin="10,0,0,5"
                         Grid.Row="8"
                         Grid.Column="0"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="Hireable?:" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
+                        Opacity="0.6"
                         Grid.Row="8" 
                         Grid.Column="1"/>
 
                     <TextBlock 
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{Binding User.Hireable}" 
-                         
-                        Margin="10,0,0,0"
+                        Margin="10,0,0,5"
                         Grid.Row="8" 
                         Grid.Column="2"/>
 

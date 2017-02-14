@@ -24,71 +24,118 @@
 
 
             <PivotItem Header="SETTINGS">
-                <StackPanel Padding="10">
-                    
-                    <StackPanel
-                        x:Name="Theme">
-                        <TextBlock
-                            Text="Theme"
-                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                        <ToggleSwitch
-                            x:Name="ThemeToggleSwitch"
-                            OnContent="Dark"
-                            OffContent="Light"
-                            Toggled="ThemeToggleSwitch_OnToggled"/>
-                    </StackPanel>
+                <ScrollViewer>
+                    <StackPanel>
 
-                    <StackPanel
+                        <StackPanel
+                            x:Name="Theme"
+                            Margin="10,0,0,10">
+                            
+                            <TextBlock
+                            Text="Theme"
+                            Opacity="0.8"
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                            <RadioButton
+                            x:Name="DarkThemeRadioButton"
+                            Margin="0,5,0,0"
+                            GroupName="ThemeRadioButtons"
+                            Content="Dark"
+                            Checked="DarkThemeRadioButton_OnChecked"/>
+
+                            <RadioButton
+                            x:Name="LightThemeRadioButton"
+                            GroupName="ThemeRadioButtons"
+                            Content="Light"
+                            Checked="LightThemeRadioButton_OnChecked"/>
+
+                            <RadioButton
+                            x:Name="SystemThemeRadioButton"
+                            GroupName="ThemeRadioButtons"
+                            Content="System"
+                            Checked="SystemThemeRadioButton_OnChecked"/>
+                        </StackPanel>
+
+
+                        <StackPanel
+                            x:Name="StatusBarStackPanel"
+                            Visibility="Collapsed"
+                            Margin="10,10,0,10">
+                            
+                            <TextBlock
+                            Opacity="0.8"
+                            Text="Status Bar"
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+                            
+                            <ToggleSwitch
+                                x:Name="StatusBarToggleSwitch"
+                                Margin="0,5,0,0"
+                                OnContent="Visible"
+                                OffContent="Hidden"
+                                Toggled="StatusBarToggleSwitch_OnToggled"/>
+                        </StackPanel>
+
+
+                        <StackPanel
                         x:Name="Account"
-                        Margin="0,10,0,10">
-                        <TextBlock
+                        Margin="10,10,0,10">
+                            
+                            <TextBlock
+                            Opacity="0.8"
                             Text="Account"
-                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                        <Button
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+                            
+                            <Button
                             x:Name="LogInOrOutButton"
                             Margin="0,5,0,0"
                             Content="{Binding LoginButtonContent}"
                             Command="{Binding LoginOutButtonClickCommand}"/>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel
+
+                        <StackPanel
                         x:Name="DeveloperInformation"
-                        Margin="0,10,0,10">
-                        <TextBlock
+                        Margin="10,10,0,10">
+                            <TextBlock
+                            Opacity="0.8"
                             Text="Rate Limit Information"
-                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                        
-                        <TextBlock
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                            <TextBlock
                             Margin="0,5,0,0"
                             Text="Core:"
+                            Opacity="0.8"
                             Style="{ThemeResource BaseTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding CoreLimit}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding CoreRemaining}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding CoreReset}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                        
-                        <TextBlock
+
+                            <TextBlock
                             Margin="0,5,0,0"
+                            Opacity="0.8"
                             Text="Search:"
                             Style="{ThemeResource BaseTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding SearchLimit}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding SearchRemaining}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock
+                            <TextBlock
                             Text="{Binding SearchReset}"
                             Style="{ThemeResource BodyTextBlockStyle}"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
 
 

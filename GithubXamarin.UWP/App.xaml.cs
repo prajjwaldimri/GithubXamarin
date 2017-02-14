@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -67,6 +70,7 @@ namespace GithubXamarin.UWP
             {
                 if (rootFrame.Content == null)
                 {
+                    SetStatusBarVisibility();
                     await RegisterBackgroundTask();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
@@ -119,7 +123,7 @@ namespace GithubXamarin.UWP
                 {
                     case BackgroundAccessStatus.DeniedByUser:
                     case BackgroundAccessStatus.DeniedBySystemPolicy:
-                    
+
                         break;
                     default:
                         builder.Name = taskName;
@@ -148,6 +152,8 @@ namespace GithubXamarin.UWP
                     case "Light":
                         Application.Current.RequestedTheme = ApplicationTheme.Light;
                         break;
+                    case "System":
+                        break;
                 }
             }
             else
@@ -155,7 +161,36 @@ namespace GithubXamarin.UWP
                 localSettingsValues.Add("RequestedTheme", "Dark");
                 Application.Current.RequestedTheme = ApplicationTheme.Dark;
             }
-            return;
         }
+
+        private void SetStatusBarVisibility()
+        {
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                return;
+
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (localSettingsValues == null) return;
+            var statusBar = StatusBar.GetForCurrentView();
+            if (statusBar == null) return;
+
+            if (localSettingsValues.ContainsKey("StatusBarVisibility"))
+            {
+                switch (localSettingsValues["StatusBarVisibility"].ToString())
+                {
+                    case "Hidden":
+                        statusBar.HideAsync();
+                        break;
+                    case "Visible":
+                        statusBar.ShowAsync();
+                        break;
+                }
+            }
+            else
+            {
+                localSettingsValues.Add("StatusBarVisibility", "Hidden");
+                statusBar.HideAsync();
+            }
+        }
+
     }
 }
