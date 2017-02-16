@@ -8,86 +8,91 @@
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     mc:Ignorable="d">
 
-    <ScrollViewer>
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              Margin="0,10,0,0">
 
-            <StackPanel
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer>
+            <Grid>
+
+                <StackPanel
                 Grid.Row="0" 
                 Grid.Column="0"
                 VerticalAlignment="Stretch"
                 Margin="0,0,5,20"
                 HorizontalAlignment="Stretch">
-                
-                <ToggleButton
+
+                    <ToggleButton
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     IsChecked="{Binding IsRepositoryStarred}" 
                     Command="{Binding StarredToggledDelegateCommand}">
-                    
-                    <ToggleButton.Content>
-                        <StackPanel Orientation="Horizontal">
-                            
-                            <FontIcon 
-                                FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                Glyph="&#xf24e;"/>
-                            <TextBlock 
+
+                        <ToggleButton.Content>
+                            <StackPanel Orientation="Horizontal">
+
+                                <FontIcon 
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf005;"/>
+                                <TextBlock 
                                 Text="Star"
                                 Margin="5,0,0,0"/>
-                        </StackPanel>
-                    </ToggleButton.Content>
-                </ToggleButton>
-                <TextBlock 
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+                    <TextBlock 
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Center"
                     Text="{Binding Repository.StargazersCount}"
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
-            </StackPanel>
+                </StackPanel>
 
-            <StackPanel 
+                <StackPanel 
                 Grid.Row="0"
                 Grid.Column="1" 
                 Margin="5,0,0,20">
-                
-                <ToggleButton
+
+                    <ToggleButton
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch">
-                    <ToggleButton.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                      Glyph="&#xf2c0;"/>
-                            <TextBlock Text="Fork" Margin="5,0,0,0"/>
-                        </StackPanel>
-                    </ToggleButton.Content>
-                </ToggleButton>
-                
-                <TextBlock 
+                        <ToggleButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                      Glyph="&#xf126;"/>
+                                <TextBlock Text="Fork" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                    <TextBlock 
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Text="{Binding Repository.ForksCount}" 
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
-                
-            </StackPanel>
 
-            <Button 
+                </StackPanel>
+
+                <Button 
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -95,23 +100,23 @@
                 VerticalAlignment="Stretch"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
                 ClickMode="Press">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        
-                        <TextBlock Text="Owner:" 
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="Owner:" 
                                    Opacity="0.7" 
                                    Style="{StaticResource SubtitleTextBlockStyle}"/>
-                        
-                        <TextBlock 
+
+                            <TextBlock 
                             Text="{Binding Repository.Owner.Name}"
                             Margin="10,0,0,0"
                             Style="{StaticResource SubtitleTextBlockStyle}"/>
-                        
-                    </StackPanel>
-                </Button.Content>
-            </Button>
 
-            <Button 
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button 
                 Grid.Row="2" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="2" 
@@ -119,19 +124,19 @@
                 Margin="0,10,0,0"
                 VerticalAlignment="Stretch"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock 
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock 
                             Text="Website:"
                             Opacity="0.7" />
-                        <HyperlinkButton
+                            <HyperlinkButton
                             NavigateUri="{Binding Repository.HomePage}" 
                             Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <TextBlock  
+                <TextBlock  
                 HorizontalAlignment="Stretch"
                 Margin="10,0,0,0" 
                 Grid.Row="3"
@@ -143,7 +148,7 @@
                 TextWrapping="Wrap"
                 TextTrimming="Clip"/>
 
-            <Button 
+                <Button 
                 Grid.Row="4" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="2" 
@@ -152,17 +157,17 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding ReadmeClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf2c0;"/>
-                        <TextBlock Text="README" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf02d;"/>
+                            <TextBlock Text="README" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="5"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -171,17 +176,17 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding ForkClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf2c0;"/>
-                        <TextBlock Text="Forks" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf126;"/>
+                            <TextBlock Text="Forks" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -189,17 +194,17 @@
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf220;"/>
-                        <TextBlock Text="Releases" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf209;"/>
+                            <TextBlock Text="Releases" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="7" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="2" 
@@ -207,17 +212,17 @@
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf14b;"/>
-                        <TextBlock Text="Recent Activity" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf1ea;"/>
+                            <TextBlock Text="Recent Activity" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="8"
                 Grid.Column="0" 
                 Grid.ColumnSpan="2" 
@@ -226,17 +231,17 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding CollaboratorsClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf341;"/>
-                        <TextBlock Text="Collaborators" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf0c0;"/>
+                            <TextBlock Text="Collaborators" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="9"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -245,17 +250,17 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding StargazersClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf3ae;"/>
-                        <TextBlock Text="Stargazers" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf0c0;"/>
+                            <TextBlock Text="Stargazers" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="10"
                 Grid.Column="0" 
                 Grid.ColumnSpan="2"
@@ -263,17 +268,17 @@
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon 
-                            FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                            Glyph="&#xf345;"/>
-                        <TextBlock Text="Pull Requests" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon 
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                            Glyph="&#xf2b5;"/>
+                            <TextBlock Text="Pull Requests" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-            <Button 
+                <Button 
                 Grid.Row="11" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="2"
@@ -282,14 +287,23 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding IssuesClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                      Glyph="&#xf44c;"/>
-                        <TextBlock Text="Issues" Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-        </Grid>
-    </ScrollViewer>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                      Glyph="&#xf06a;"/>
+                            <TextBlock Text="Issues" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </ScrollViewer>
+
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
+    </Grid>
+
 </views:MvxWindowsPage>

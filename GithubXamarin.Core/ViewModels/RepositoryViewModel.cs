@@ -9,6 +9,8 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace GithubXamarin.Core.ViewModels
 {
     public class RepositoryViewModel : BaseViewModel, IRepositoryViewModel
@@ -89,6 +91,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _refreshCommand;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                return _refreshCommand;
+            }
+        }
+
+        private long _repositoryId;
+
         #endregion
 
         public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
@@ -98,21 +112,8 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long repositoryId)
         {
-            if (!IsInternetAvailable()) return;
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-
-            try
-            {
-                Repository = await _repoDataService.GetRepository(repositoryId,
-                    GithubClientService.GetAuthorizedGithubClient());
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{Repository.FullName}"});
-                await CheckRepositoryStats();
-            }
-            catch (HttpRequestException)
-            {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
-            }
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+            _repositoryId = repositoryId;
+            await Refresh();
         }
 
         /// <summary>
@@ -165,6 +166,25 @@ namespace GithubXamarin.Core.ViewModels
         private void NavigateToReadme()
         {
             
+        }
+
+        private async Task Refresh()
+        {
+            if (!IsInternetAvailable()) return;
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+
+            try
+            {
+                Repository = await _repoDataService.GetRepository(_repositoryId,
+                    GithubClientService.GetAuthorizedGithubClient());
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Repository.FullName}" });
+                await CheckRepositoryStats();
+            }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }
 }

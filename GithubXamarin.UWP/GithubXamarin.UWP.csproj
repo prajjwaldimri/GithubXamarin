@@ -158,6 +158,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
@@ -292,10 +293,6 @@
     <ProjectReference Include="..\GithubXamarin.UWP.Background\GithubXamarin.UWP.Background.csproj">
       <Project>{183833dd-36a9-4126-9d99-d9531581877c}</Project>
       <Name>GithubXamarin.UWP.Background</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UniversalMarkdown\UniversalMarkdown.csproj">
-      <Project>{9ffc3b68-696a-4342-a2b8-2eadddef7ff9}</Project>
-      <Name>UniversalMarkdown</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

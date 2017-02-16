@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
@@ -7,6 +8,7 @@ using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace GithubXamarin.Core.ViewModels
 {
@@ -37,7 +39,19 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _refreshCommand;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                return _refreshCommand;
+            }
+        }
+
         public int SelectedIndex { get; set; }
+
+        private string _userLogin;
 
         #endregion
 
@@ -45,6 +59,12 @@ namespace GithubXamarin.Core.ViewModels
         public RepositoriesViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
+        }
+
+        public async void Init(string userLogin)
+        {
+            _userLogin = userLogin;
+            await Refresh();
         }
 
         /// <summary>
@@ -59,7 +79,7 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        public async void Init(string userLogin)
+        private async Task Refresh()
         {
             if (!IsInternetAvailable())
             {
@@ -69,17 +89,17 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             try
             {
-                if (string.IsNullOrWhiteSpace(userLogin))
+                if (string.IsNullOrWhiteSpace(_userLogin))
                 {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Your Repositories"});
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Your Repositories" });
                     Repositories =
                         await _repoDataService.GetAllRepositoriesForCurrentUser(
                             GithubClientService.GetAuthorizedGithubClient());
                 }
                 else
                 {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Repositories of {userLogin}"});
-                    Repositories = await _repoDataService.GetAllRepositoriesForUser(userLogin,
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Repositories of {_userLogin}" });
+                    Repositories = await _repoDataService.GetAllRepositoriesForUser(_userLogin,
                         GithubClientService.GetAuthorizedGithubClient());
                 }
             }

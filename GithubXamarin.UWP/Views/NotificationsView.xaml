@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -23,6 +25,7 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
+                            <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -51,10 +54,25 @@
                             Text="{Binding Reason}"
                             Opacity="0.6"
                             Margin="15,0,0,0"/>
+                        
+                        <HyperlinkButton
+                            Grid.Row="2" 
+                            Grid.Column="1"
+                            Content="{Binding Repository.FullName}"
+                            NavigateUri="{Binding Repository.HtmlUrl}"
+                            Opacity="0.6"
+                            Margin="15,0,0,0"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
 
         <!--TODO: Add image or text that says no unread notifications -->
     </Grid>

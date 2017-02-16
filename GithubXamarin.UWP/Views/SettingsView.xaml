@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
-    xmlns:UniversalMarkdown="using:UniversalMarkdown"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     x:Class="GithubXamarin.UWP.Views.SettingsView"
     mc:Ignorable="d">
 
@@ -215,10 +215,10 @@
 
                 <ScrollViewer>
 
-                    <UniversalMarkdown:MarkdownTextBlock
+                    <controls:MarkdownTextBlock
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
-                        Markdown="{Binding License}"
+                        Text="{Binding License}"
                         Margin="10,10,10,10"/>
 
                 </ScrollViewer>

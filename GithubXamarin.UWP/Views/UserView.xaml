@@ -364,6 +364,13 @@
 
             </StackPanel>
         </ScrollViewer>
+        
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
 

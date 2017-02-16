@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
@@ -48,6 +49,19 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _refreshCommand;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                return _refreshCommand;
+            }
+        }
+
+        private long? _repositoryId;
+        private string _userLogin;
+
         #endregion
 
         public EventsViewModel(IGithubClientService githubClientService, IEventDataService eventDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
@@ -57,48 +71,9 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(long? repositoryId = null, string userLogin = null)
         {
-            if (!IsInternetAvailable())
-            {
-                await DialogService.ShowDialogASync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
-                return;
-            }
-
-            Messenger.Publish(new LoadingStatusMessage(this) {IsLoadingIndicatorActive = true});
-
-            try
-            {
-                if (repositoryId.HasValue)
-                {
-                    Events = await _eventDataService.GetAllEventsOfRepository(repositoryId.Value,
-                        GithubClientService.GetAuthorizedGithubClient());
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this)
-                    {
-                        HeaderTitle = $"Events for {Events[0]?.Repo.FullName}"
-                    });
-                }
-                else if (!string.IsNullOrWhiteSpace(userLogin))
-                {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this)
-                    {
-                        HeaderTitle = $"Public Events for {userLogin}"
-                    });
-                    Events = await _eventDataService.GetAllPublicEventsForUser(userLogin,
-                        GithubClientService.GetAuthorizedGithubClient());
-                }
-                else
-                {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = "Your Events"});
-                    Events =
-                        await _eventDataService.GetAllEventsForCurrentUser(
-                            GithubClientService.GetAuthorizedGithubClient());
-                }
-            }
-            catch (HttpRequestException)
-            {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
-            }
-
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+            _repositoryId = repositoryId;
+            _userLogin = userLogin;
+            await Refresh();
         }
 
         private void NavigateToEventType()
@@ -149,6 +124,52 @@ namespace GithubXamarin.Core.ViewModels
                 default:
                     break;
             }
+        }
+
+        private async Task Refresh()
+        {
+            if (!IsInternetAvailable())
+            {
+                await DialogService.ShowDialogASync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
+                return;
+            }
+
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+
+            try
+            {
+                if (_repositoryId.HasValue)
+                {
+                    Events = await _eventDataService.GetAllEventsOfRepository(_repositoryId.Value,
+                        GithubClientService.GetAuthorizedGithubClient());
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this)
+                    {
+                        HeaderTitle = $"Events for {Events[0]?.Repo.FullName}"
+                    });
+                }
+                else if (!string.IsNullOrWhiteSpace(_userLogin))
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this)
+                    {
+                        HeaderTitle = $"Public Events for {_userLogin}"
+                    });
+                    Events = await _eventDataService.GetAllPublicEventsForUser(_userLogin,
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Your Events" });
+                    Events =
+                        await _eventDataService.GetAllEventsForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+            }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+            }
+
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }
 }

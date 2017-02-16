@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
-    xmlns:universalMarkdown="using:UniversalMarkdown"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
-    
+
     <ScrollViewer>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -43,12 +43,12 @@
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
                     TextWrapping="WrapWholeWords"/>
-                
+
                 <TextBlock
                     Text="#"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"/>
-                
+
                 <TextBlock
                     Text="{Binding Issue.Number}"
                     VerticalAlignment="Center"/>
@@ -71,12 +71,12 @@
                     Text="{Binding Issue.User.Name}"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"/>
-                
+
                 <TextBlock
                     Text=" opened this issue at"
                     Margin="0,0,5,0"
                     VerticalAlignment="Center"/>
-                
+
                 <TextBlock 
                     Text="{Binding Issue.CreatedAt}" 
                     VerticalAlignment="Center"/>
@@ -116,11 +116,28 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <universalMarkdown:MarkdownTextBlock 
+            <controls:MarkdownTextBlock 
                     Grid.Row="4" 
                     Grid.RowSpan="5"
                     Grid.Column="0" 
-                    Markdown="{Binding Issue.Body}"/>
+                    Text="{Binding Issue.Body}"/>
+
+            <CommandBar
+            VerticalAlignment="Bottom">
+
+                <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                
+                <AppBarButton 
+                    x:Name="ShareIssueButton"
+                    Label="Share"
+                    Command="{Binding ShareCommand, Mode=TwoWay}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xe72d;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
 
             <!-- TODO: Add usercontrol for comments here -->
         </Grid>

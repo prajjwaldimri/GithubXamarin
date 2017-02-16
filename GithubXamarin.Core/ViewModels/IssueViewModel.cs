@@ -1,7 +1,10 @@
 ﻿using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 
@@ -24,6 +27,21 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _refreshCommand;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                return _refreshCommand;
+            }
+        }
+
+        private int _issueNumber;
+        private long _repositoryId;
+        private string _owner;
+        private string _repoName;
+
         #endregion
 
 
@@ -34,6 +52,15 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(int issueNumber, long repositoryId, string owner = null, string repoName = null)
         {
+            _issueNumber = issueNumber;
+            _repositoryId = repositoryId;
+            _owner = owner;
+            _repoName = repoName;
+            await Refresh();
+        }
+
+        private async Task Refresh()
+        {
             if (!IsInternetAvailable())
             {
                 await DialogService.ShowDialogASync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
@@ -43,17 +70,17 @@ namespace GithubXamarin.Core.ViewModels
 
             try
             {
-                if (string.IsNullOrWhiteSpace(owner) || string.IsNullOrWhiteSpace(repoName))
+                if (string.IsNullOrWhiteSpace(_owner) || string.IsNullOrWhiteSpace(_repoName))
                 {
-                    Issue = await _issueDataService.GetIssueForRepository(repositoryId, issueNumber,
+                    Issue = await _issueDataService.GetIssueForRepository(_repositoryId, _issueNumber,
                         GithubClientService.GetAuthorizedGithubClient());
                 }
                 else
                 {
-                    Issue = await _issueDataService.GetIssueForRepository(owner, repoName, issueNumber,
+                    Issue = await _issueDataService.GetIssueForRepository(_owner, _repoName, _issueNumber,
                         GithubClientService.GetAuthorizedGithubClient());
                 }
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{Issue.Title}"});
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
             }
             catch (HttpRequestException)
             {

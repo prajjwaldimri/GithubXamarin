@@ -292,10 +292,7 @@
                                 Margin="0,0,10,0"
                                 Click="SearchIconButton_OnClick">
                                 <Button.Content>
-                                    <FontIcon 
-                                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                                        FontSize="14"
-                                        Glyph="&#xf002;"/>
+                                    <SymbolIcon Symbol="Find"/>
                                 </Button.Content>
                             </Button>
                             
@@ -321,11 +318,12 @@
                             </Frame.ContentTransitions>
                         </Frame>
                         
-                        <ProgressRing 
-                            x:Name="LoadingRing"
-                            IsActive="{Binding IsLoading}"
-                            Width="48" 
-                            Height="48"/>
+                        <ProgressBar 
+                            x:Name="LoadingBar"
+                            VerticalAlignment="Top"
+                            IsIndeterminate="True"
+                            Visibility="{Binding IsLoading, 
+                            Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                     </Grid>
                 </RelativePanel>

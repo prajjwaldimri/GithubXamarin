@@ -76,12 +76,16 @@
                             TextWrapping="Wrap"
                             TextAlignment="DetectFromContent"
                             Text="{Binding Converter={StaticResource EventToStringConverter}}"/>
-
-
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
     </Grid>
 </views:MvxWindowsPage>

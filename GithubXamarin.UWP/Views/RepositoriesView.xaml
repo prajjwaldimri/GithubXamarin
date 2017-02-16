@@ -59,8 +59,8 @@
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                             
                             <FontIcon
-                                FontFamily="ms-appx:/Assets/Fonts/ionicons.ttf#Ionicons"
-                                Glyph="&#xf24e;"
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf005;"
                                 Margin="0,0,1,0"
                                 FontSize="15"/>
                             
@@ -82,6 +82,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </controls:PullToRefreshListView>
+        
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
 

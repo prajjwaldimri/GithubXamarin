@@ -50,6 +50,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:PullToRefreshListView>
+        
+        <CommandBar
+            VerticalAlignment="Bottom">
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+        </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
 
