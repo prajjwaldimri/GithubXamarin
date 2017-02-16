@@ -127,12 +127,11 @@
 
                 <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
                 
                 <AppBarButton 
                     x:Name="ShareIssueButton"
-                    Label="Share"
-                    Command="{Binding ShareCommand, Mode=TwoWay}">
+                    Label="Share">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xe72d;"/>
                     </AppBarButton.Icon>

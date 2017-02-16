@@ -11,10 +11,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView
+        
+        <controls:PullToRefreshListView
             x:Name="ListView" 
             ItemsSource="{Binding Events}"
             SelectedIndex="{Binding SelectedEvent, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}"
             HorizontalAlignment="Stretch" 
             IsItemClickEnabled="True" 
             SelectionMode="Single"
@@ -79,13 +81,13 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </controls:PullToRefreshListView>
 
         <CommandBar
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>

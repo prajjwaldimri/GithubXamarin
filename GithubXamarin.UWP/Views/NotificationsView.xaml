@@ -12,8 +12,9 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <ListView 
+        <controls:PullToRefreshListView 
             ItemsSource="{Binding Notifications}" 
+            RefreshCommand="{Binding RefreshCommand}"
             SelectionMode="None"
             IsItemClickEnabled="True" 
             HorizontalAlignment="Stretch"
@@ -65,13 +66,13 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </controls:PullToRefreshListView>
         
         <CommandBar
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
         </CommandBar>
 
         <!--TODO: Add image or text that says no unread notifications -->

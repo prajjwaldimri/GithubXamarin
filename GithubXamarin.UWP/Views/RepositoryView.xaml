@@ -302,7 +302,7 @@
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
         </CommandBar>
     </Grid>
 

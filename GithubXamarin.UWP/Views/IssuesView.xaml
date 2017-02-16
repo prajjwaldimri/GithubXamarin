@@ -18,7 +18,7 @@
             SelectedIndex="{Binding SelectedIssue, Mode=TwoWay}"
             IsItemClickEnabled="True"
             HorizontalAlignment="Stretch"
-            RefreshCommand="{Binding RefreshCommand, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}"
             HorizontalContentAlignment="Stretch">
 
             <!--Listens for ItemClick event-->
@@ -104,7 +104,7 @@
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>

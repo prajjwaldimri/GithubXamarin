@@ -19,7 +19,7 @@
             IsItemClickEnabled="True"
             HorizontalAlignment="Stretch"
             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-            RefreshCommand="{Binding PullToRefreshDelegateCommand}">
+            RefreshCommand="{Binding RefreshCommand}">
 
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
@@ -87,7 +87,7 @@
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
-                          Command="{Binding RefreshCommand, Mode=TwoWay}"/>
+                          Command="{Binding RefreshCommand}"/>
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
