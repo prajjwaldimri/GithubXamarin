@@ -9,6 +9,7 @@
     <converters:EventToStringConverter x:Key="EventToStringConverter"/>
     <converters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:DateTimeHumanizer x:Key="DateTimeHumanizer"/>
     
     
     <!-- Hamburger Menu Resources  

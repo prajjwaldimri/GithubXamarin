@@ -52,7 +52,7 @@
                         <TextBlock 
                             Grid.Row="0" 
                             Grid.Column="1"
-                            Text="{Binding CreatedAt.DateTime}"
+                            Text="{Binding CreatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
                             Margin="15,0,0,0"
                             Opacity="0.6"/>
 

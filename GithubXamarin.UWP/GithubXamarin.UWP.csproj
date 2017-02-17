@@ -159,6 +159,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Resources\Converters\DateTimeHumanizer.cs" />
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="Views\GistsView.xaml.cs">
       <DependentUpon>GistsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GistView.xaml.cs">
+      <DependentUpon>GistView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IssuesView.xaml.cs">
       <DependentUpon>IssuesView.xaml</DependentUpon>
@@ -232,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GistsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

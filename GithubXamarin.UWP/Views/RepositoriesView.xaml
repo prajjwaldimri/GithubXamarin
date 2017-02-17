@@ -23,8 +23,7 @@
 
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding RepositoryClickCommand, Mode=TwoWay}" 
-                                              CommandParameter="{Binding ElementName=MainListView, Path=SelectedItem}"/>
+                    <core:InvokeCommandAction Command="{Binding RepositoryClickCommand, Mode=TwoWay}"/>
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
@@ -45,6 +44,7 @@
                         </StackPanel>
 
                         <TextBlock 
+                            Opacity="0.8"
                             Text="{Binding Description}"
                             Margin="0,5,0,0"
                             Style="{StaticResource BaseTextBlockStyle}"/>
@@ -53,28 +53,34 @@
                             Margin="0,5,0,0" 
                             Orientation="Horizontal">
                             
-                            <TextBlock 
+                            <TextBlock
+                                Opacity="0.6"
+                                Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
                                 Text="{Binding Language}"
                                 Margin="0,0,10,0"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                             
                             <FontIcon
+                                Opacity="0.6"
                                 FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                                 Glyph="&#xf005;"
                                 Margin="0,0,1,0"
                                 FontSize="15"/>
                             
                             <TextBlock
+                                Opacity="0.6"
                                 Text="{Binding StargazersCount}"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                             
                             <TextBlock
-                                Text="Last Updated at:"
+                                Opacity="0.6"
+                                Text="Last Updated:"
                                 Margin="10,0,2,0"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                             
-                            <TextBlock 
-                                Text="{Binding UpdatedAt.DateTime}"
+                            <TextBlock
+                                Opacity="0.6"
+                                Text="{Binding UpdatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                         </StackPanel>
 

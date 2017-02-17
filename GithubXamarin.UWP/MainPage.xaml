@@ -260,7 +260,10 @@
                                 Margin="15,0,0,0"
                                 FontWeight="SemiBold"
                                 TextAlignment="Left"
+                                TextTrimming="WordEllipsis"
                                 RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.LeftOf="SearchIconButton"
+                                RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.AlignBottomWithPanel="True"/>
 
                             <AutoSuggestBox

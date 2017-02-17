@@ -10,7 +10,8 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Margin="0,10,0,0">
 
         <controls:PullToRefreshListView 
             ItemsSource="{Binding Issues}"
@@ -39,67 +40,64 @@
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="8*"/>
                         </Grid.ColumnDefinitions>
 
                         <FontIcon 
-                                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
-                                    Glyph="&#xf06a;"
-                                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"
-                                    x:Name="IssueIcon"
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Grid.RowSpan="2"
-                                    VerticalAlignment="Center"
-                                    FontSize="24"/>
+                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                            Glyph="&#xf06a;"
+                            Foreground="{StaticResource SystemControlForegroundAccentBrush}"
+                            x:Name="IssueIcon"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalAlignment="Center"
+                            FontSize="24"/>
 
                         <TextBlock 
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Text="{Binding Title}"
-                                    Style="{StaticResource BaseTextBlockStyle}"
-                                    TextTrimming="Clip"
-                                    Margin="10,0,0,0" 
-                                    TextWrapping="WrapWholeWords"/>
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding Title}"
+                            Style="{StaticResource BaseTextBlockStyle}"
+                            Margin="10,0,0,0" 
+                            TextWrapping="Wrap"/>
 
                         <StackPanel
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Orientation="Horizontal"
-                                    Margin="10,2,0,0">
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Margin="10,2,0,0">
 
                             <TextBlock 
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Opacity="0.6"
-                                        Text="#"/>
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Opacity="0.6"
+                                Text="#"/>
 
                             <TextBlock
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Opacity="0.6"
-                                        Text="{Binding Number}"
-                                        Margin="2,0,0,0"/>
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Opacity="0.6"
+                                Text="{Binding Number}"
+                                Margin="2,0,0,0"/>
 
                             <TextBlock 
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Opacity="0.6"
-                                        Text="in"
-                                        Margin="5,0,0,0"/>
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Opacity="0.6"
+                                Text="in"
+                                Margin="5,0,0,0"/>
 
                             <TextBlock 
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Opacity="0.6"
-                                        Text="{Binding Repository.FullName}"
-                                        Margin="5,0,0,0"/>
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Opacity="0.6"
+                                Text="{Binding Repository.FullName}"
+                                Margin="5,0,0,0"/>
                         </StackPanel>
 
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </controls:PullToRefreshListView>
-        
+
         <CommandBar
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
@@ -108,6 +106,3 @@
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
-
-
-

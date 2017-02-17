@@ -123,6 +123,7 @@ namespace GithubXamarin.Core.ViewModels
                     ShowViewModel<IssuesViewModel>();
                     break;
                 case 4:
+                    ShowViewModel<GistsViewModel>();
                     break;
                 default:
                     break;

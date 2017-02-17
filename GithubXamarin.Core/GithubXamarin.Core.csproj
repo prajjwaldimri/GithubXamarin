@@ -101,6 +101,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EventsViewModel.cs" />
     <Compile Include="ViewModels\GistsViewModel.cs" />
+    <Compile Include="ViewModels\GistViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\IssueViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
