@@ -94,7 +94,7 @@ namespace GithubXamarin.Core.ViewModels
                 ShowViewModel<LoginViewModel>();
             }
 
-            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            if (CrossSecureStorage.Current.HasKey("OAuthToken") && IsInternetAvailable())
             {
                 User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }
