@@ -16,7 +16,8 @@
             ItemsSource="{Binding Gist.Files}"
             HorizontalAlignment="Stretch"
             SelectionMode="None"
-            IsItemClickEnabled="False">
+            IsItemClickEnabled="False"
+            Margin="0,0,0,48">
             
             <controls:PullToRefreshListView.ItemTemplate>
                 <DataTemplate>

@@ -19,7 +19,8 @@
             IsItemClickEnabled="True"
             HorizontalAlignment="Stretch"
             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-            RefreshCommand="{Binding RefreshCommand}">
+            RefreshCommand="{Binding RefreshCommand}"
+            Margin="0,0,0,48">
 
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">

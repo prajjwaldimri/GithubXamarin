@@ -51,6 +51,16 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _starClickCommand;
+        public ICommand StarClickCommand
+        {
+            get
+            {
+                _starClickCommand = _starClickCommand ?? new MvxAsyncCommand(async () => await StarOrUnstarRepository());
+                return _starClickCommand;
+            }
+        }
+
         private ICommand _readmeClickCommand;
         public ICommand ReadmeClickCommand
         {
@@ -136,6 +146,21 @@ namespace GithubXamarin.Core.ViewModels
             forkClient.Create(Repository.Id, new NewRepositoryFork());
         }
 
+        private async Task StarOrUnstarRepository()
+        {
+            if (IsRepositoryStarred)
+            {
+                await _repoDataService.UnStarRepository(Repository.Owner.Login, Repository.Name,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                await _repoDataService.StarRepository(Repository.Owner.Login, Repository.Name,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            await Refresh();
+        }
+
         /// <summary>
         /// Navigates To UsersView and shows all the collaborators of current Repository
         /// </summary>
@@ -165,7 +190,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void NavigateToReadme()
         {
-            
+            ShowViewModel<FileViewModel>(new {fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id});
         }
 
         private async Task Refresh()
@@ -184,6 +209,7 @@ namespace GithubXamarin.Core.ViewModels
             {
                 await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
+            await CheckRepositoryStats();
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
     }

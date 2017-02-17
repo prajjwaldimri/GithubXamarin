@@ -20,7 +20,8 @@
             HorizontalAlignment="Stretch" 
             IsItemClickEnabled="True" 
             SelectionMode="Single"
-            HorizontalContentAlignment="Stretch">
+            HorizontalContentAlignment="Stretch"
+            Margin="0,0,0,48">
 
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">

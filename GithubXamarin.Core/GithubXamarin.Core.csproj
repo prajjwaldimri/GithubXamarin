@@ -57,6 +57,7 @@
     <Compile Include="Contracts\Service\IRepoDataService.cs" />
     <Compile Include="Contracts\Service\IUserDataService.cs" />
     <Compile Include="Contracts\ViewModel\IEventsViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IFileViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IIssuesViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IIssueViewModel.cs" />
     <Compile Include="Contracts\ViewModel\ILoginViewModel.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Messages\AppBarHeaderChangeMessage.cs" />
     <Compile Include="Messages\LoadingStatusMessage.cs" />
     <Compile Include="Model\DeviceOperatingSystemType.cs" />
+    <Compile Include="Model\FileTypeEnumeration.cs" />
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\ModifiedOctokitActivity.cs" />
     <Compile Include="Model\SearchTypeEnumeration.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Utility\HtmlUrlToRepositoryNameConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EventsViewModel.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\GistsViewModel.cs" />
     <Compile Include="ViewModels\GistViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />

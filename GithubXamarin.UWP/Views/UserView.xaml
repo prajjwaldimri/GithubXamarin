@@ -130,7 +130,10 @@
             </StackPanel>
         </ScrollViewer>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="1">
+        <ScrollViewer 
+            Grid.Row="2" 
+            Grid.Column="1"
+            Margin="0,0,0,48">
             <StackPanel VerticalAlignment="Stretch">
                 <TextBlock Text="User Stats:" FontSize="24" FontWeight="Bold"/>
 
