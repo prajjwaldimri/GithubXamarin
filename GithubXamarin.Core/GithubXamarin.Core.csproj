@@ -41,6 +41,7 @@
     <Compile Include="Contracts\Repository\IEventRepository.cs" />
     <Compile Include="Contracts\Repository\IFeedRepository.cs" />
     <Compile Include="Contracts\Repository\IFileRepository.cs" />
+    <Compile Include="Contracts\Repository\IGistRepository.cs" />
     <Compile Include="Contracts\Repository\IIssueRepository.cs" />
     <Compile Include="Contracts\Repository\INotificationRepository.cs" />
     <Compile Include="Contracts\Repository\IRepoRepository.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Contracts\Service\IEventDataService.cs" />
     <Compile Include="Contracts\Service\IFeedDataService.cs" />
     <Compile Include="Contracts\Service\IFileDataService.cs" />
+    <Compile Include="Contracts\Service\IGistDataService.cs" />
     <Compile Include="Contracts\Service\IGithubClientService.cs" />
     <Compile Include="Contracts\Service\IIssueDataService.cs" />
     <Compile Include="Contracts\Service\INotificationDataService.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\FeedRepository.cs" />
     <Compile Include="Repositories\FileRepository.cs" />
+    <Compile Include="Repositories\GistRepository.cs" />
     <Compile Include="Repositories\IssuesRepository.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\RepoRepository.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Services\Data\EventDataService.cs" />
     <Compile Include="Services\Data\FeedDataService.cs" />
     <Compile Include="Services\Data\FileDataService.cs" />
+    <Compile Include="Services\Data\GistDataService.cs" />
     <Compile Include="Services\Data\IssueDataService.cs" />
     <Compile Include="Services\Data\NotificationDataService.cs" />
     <Compile Include="Services\Data\RepoDataService.cs" />
@@ -96,6 +100,7 @@
     <Compile Include="Utility\HtmlUrlToRepositoryNameConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EventsViewModel.cs" />
+    <Compile Include="ViewModels\GistsViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\IssueViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
