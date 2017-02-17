@@ -8,7 +8,7 @@ namespace GithubXamarin.Core.Repositories
     /// <summary>
     /// https://developer.github.com/v3/activity/events/
     /// </summary>
-    public class EventRepository : IEventRepository
+    public class EventRepository : BaseRepository, IEventRepository
     {
         public async Task<IEnumerable<Activity>> GetAllEventsForCurrentUser(GitHubClient authorizedGitHubClient)
         {

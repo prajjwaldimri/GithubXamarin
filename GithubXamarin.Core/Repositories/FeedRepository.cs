@@ -7,7 +7,7 @@ namespace GithubXamarin.Core.Repositories
     /// <summary>
     /// https://developer.github.com/v3/activity/feeds/
     /// </summary>
-    public class FeedRepository : IFeedRepository
+    public class FeedRepository : BaseRepository, IFeedRepository
     {
         public async Task<Feed> GetFeedsForCurrentUser(GitHubClient authorizedGitHubClient)
         {

@@ -8,12 +8,19 @@ namespace GithubXamarin.Core.Repositories
     /// <summary>
     /// https://developer.github.com/v3/users/
     /// </summary>
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
+        private RepoCollaboratorsClient _repoCollaboratorsClient;
+        private RepositoriesClient _repositoriesClient;
+        private UsersClient _usersClient;
+
         public async Task<User> GetUser(string userLoginId, GitHubClient gitHubClient)
         {
-            var usersClient = new UsersClient(new ApiConnection(gitHubClient.Connection));
-            return await usersClient.Get(userLoginId);
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(gitHubClient.Connection));
+            }
+            return await _usersClient.Get(userLoginId);
         }
 
         /// <summary>
@@ -28,27 +35,39 @@ namespace GithubXamarin.Core.Repositories
 
         public async Task<IEnumerable<User>> SearchUsers(string searchTerm, GitHubClient gitHubClient)
         {
-            var searchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
-            var searchResult = await searchClient.SearchUsers(new SearchUsersRequest(searchTerm));
+            if (_SearchClient == null)
+            {
+                _SearchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
+            }
+            var searchResult = await _SearchClient.SearchUsers(new SearchUsersRequest(searchTerm));
             return searchResult.Items;
         }
 
         public async Task<IEnumerable<User>> GetCollaboratorsForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            var repoCollaboratorsClient = new RepoCollaboratorsClient(new ApiConnection(gitHubClient.Connection));
-            return await repoCollaboratorsClient.GetAll(repositoryId);
+            if (_repoCollaboratorsClient == null)
+            {
+                _repoCollaboratorsClient = new RepoCollaboratorsClient(new ApiConnection(gitHubClient.Connection));
+            }
+            return await _repoCollaboratorsClient.GetAll(repositoryId);
         }
 
         public async Task<IEnumerable<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            var starredClient = new StarredClient(new ApiConnection(gitHubClient.Connection));
-            return await starredClient.GetAllStargazers(repositoryId);
+            if (_StarredClient == null)
+            {
+                _StarredClient = new StarredClient(new ApiConnection(gitHubClient.Connection));
+            }
+            return await _StarredClient.GetAllStargazers(repositoryId);
         }
 
         public async Task<IEnumerable<RepositoryContributor>> GetContributorsForRepository(long repositoryId, GitHubClient gitHubClient)
         {
-            var repoClient = new RepositoriesClient(new ApiConnection(gitHubClient.Connection));
-            return await repoClient.GetAllContributors(repositoryId);
+            if (_repositoriesClient == null)
+            {
+                _repositoriesClient = new RepositoriesClient(new ApiConnection(gitHubClient.Connection));
+            }
+            return await _repositoriesClient.GetAllContributors(repositoryId);
         }
         
     }

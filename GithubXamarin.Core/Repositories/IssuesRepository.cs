@@ -10,6 +10,8 @@ namespace GithubXamarin.Core.Repositories
     /// </summary>
     public class IssuesRepository : BaseRepository, IIssueRepository
     {
+        private IssuesClient _issuesClient;
+
         /// <summary>
         /// Gets a single issue in a repository.
         /// </summary>
@@ -19,15 +21,21 @@ namespace GithubXamarin.Core.Repositories
         /// <returns></returns>
         public async Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
         {
-            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await issuesClient.Get(repositoryId, issueNumber);
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Get(repositoryId, issueNumber);
         }
 
         public async Task<Issue> GetIssueForRepository(string owner, string repoName, int issueNumber,
             GitHubClient authorizedGitHubClient)
         {
-            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await issuesClient.Get(owner, repoName, issueNumber);
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Get(owner, repoName, issueNumber);
         }
 
         /// <summary>
@@ -48,8 +56,11 @@ namespace GithubXamarin.Core.Repositories
         /// <returns></returns>
         public async Task<IEnumerable<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
-            var issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await issuesClient.GetAllForRepository(repositoryId);
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.GetAllForRepository(repositoryId);
         }
 
         /// <summary>
@@ -60,8 +71,11 @@ namespace GithubXamarin.Core.Repositories
         /// <returns></returns>
         public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
         {
-            var searchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
-            var searchResult = await searchClient.SearchIssues(new SearchIssuesRequest(searchTerm));
+            if (_SearchClient == null)
+            {
+                _SearchClient = new SearchClient(new ApiConnection(gitHubClient.Connection));
+            }
+            var searchResult = await _SearchClient.SearchIssues(new SearchIssuesRequest(searchTerm));
             return searchResult.Items;
         }
 

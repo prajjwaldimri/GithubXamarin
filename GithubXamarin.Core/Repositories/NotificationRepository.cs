@@ -8,7 +8,7 @@ namespace GithubXamarin.Core.Repositories
     /// <summary>
     /// https://developer.github.com/v3/activity/notifications/
     /// </summary>
-    public class NotificationRepository : INotificationRepository
+    public class NotificationRepository : BaseRepository, INotificationRepository
     {
         public async Task<IEnumerable<Notification>> GetAllNotificationsForCurrentUser(GitHubClient authorizedGitHubClient)
         {

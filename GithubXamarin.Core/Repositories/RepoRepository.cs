@@ -8,8 +8,9 @@ namespace GithubXamarin.Core.Repositories
     /// <summary>
     /// https://developer.github.com/v3/repos/
     /// </summary>
-    public class RepoRepository : IRepoRepository
+    public class RepoRepository : BaseRepository, IRepoRepository
     {
+        private RepositoryForksClient _repositoryForksClient;
 
         public async Task<Repository> GetRepository(long repositoryId, GitHubClient githubClient)
         {
@@ -28,27 +29,39 @@ namespace GithubXamarin.Core.Repositories
 
         public async Task<IEnumerable<Repository>> SearchRepositories(string searchTerm, GitHubClient githubClient)
         {
-            var searchClient = new SearchClient(new ApiConnection(githubClient.Connection));
-            var searchResult = await searchClient.SearchRepo(new SearchRepositoriesRequest(searchTerm));
+            if (_SearchClient == null)
+            {
+                _SearchClient = new SearchClient(new ApiConnection(githubClient.Connection));
+            }
+            var searchResult = await _SearchClient.SearchRepo(new SearchRepositoriesRequest(searchTerm));
             return searchResult.Items;
         }
 
         public async Task<Repository> ForkRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
-            var repoForkClient = new RepositoryForksClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await repoForkClient.Create(repositoryId, new NewRepositoryFork());
+            if (_repositoryForksClient == null)
+            {
+                _repositoryForksClient = new RepositoryForksClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _repositoryForksClient.Create(repositoryId, new NewRepositoryFork());
         }
 
         public async Task<bool> StarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGitHubClient)
         {
-            var starredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await starredClient.StarRepo(repositoryOwner,repositoryName);
+            if (_StarredClient == null)
+            {
+                _StarredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _StarredClient.StarRepo(repositoryOwner,repositoryName);
         }
 
         public async Task<bool> UnStarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGitHubClient)
         {
-            var starredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
-            return await starredClient.RemoveStarFromRepo(repositoryOwner,repositoryName);
+            if (_StarredClient == null)
+            {
+                _StarredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _StarredClient.RemoveStarFromRepo(repositoryOwner,repositoryName);
         }
     }
 }
