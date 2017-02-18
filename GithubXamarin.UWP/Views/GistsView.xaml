@@ -41,7 +41,7 @@
                             <ColumnDefinition Width="6*"/>
                         </Grid.ColumnDefinitions>
 
-                        <FontIcon 
+                        <FontIcon
                             Grid.Row="0"
                             Grid.Column="0"
                             FontSize="15"
@@ -77,4 +77,3 @@
 
     </Grid>
 </views:MvxWindowsPage>
-

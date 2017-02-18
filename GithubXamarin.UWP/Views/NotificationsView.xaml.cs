@@ -17,6 +17,7 @@ namespace GithubXamarin.UWP.Views
         public NotificationsView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

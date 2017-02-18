@@ -17,6 +17,7 @@ namespace GithubXamarin.UWP.Views
         public RepositoryView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

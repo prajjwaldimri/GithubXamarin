@@ -15,6 +15,7 @@ namespace GithubXamarin.UWP.Views
         public IssuesView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

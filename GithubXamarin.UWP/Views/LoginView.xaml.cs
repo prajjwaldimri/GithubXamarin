@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using MvvmCross.WindowsUWP.Views;
 using Octokit;
@@ -12,13 +13,20 @@ namespace GithubXamarin.UWP.Views
     [MvxRegion("MainFrame")]
     public sealed partial class LoginView : MvxWindowsPage
     {
-        private GitHubClient _client;
-        private string _clientId;
-        private string _clientSecret;
+        private readonly GitHubClient _client;
+        private readonly string _clientId;
+        private readonly string _clientSecret;
+
+        private new LoginViewModel ViewModel
+        {
+            get { return (LoginViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
 
         public LoginView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
             //Values can be found at https://github.com/settings/applications
             
             _clientId = ApiKeysManager.GithubClientId;

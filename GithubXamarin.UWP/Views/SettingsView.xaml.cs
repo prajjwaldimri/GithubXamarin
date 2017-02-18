@@ -10,8 +10,6 @@ using Windows.UI.Xaml.Controls;
 using GithubXamarin.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace GithubXamarin.UWP.Views
 {
     [MvxRegion("MainFrame")]
@@ -33,6 +31,8 @@ namespace GithubXamarin.UWP.Views
         public SettingsView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
+
             ThemeChecker();
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {

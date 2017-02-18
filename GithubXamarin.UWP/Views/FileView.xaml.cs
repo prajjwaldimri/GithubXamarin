@@ -17,6 +17,7 @@ namespace GithubXamarin.UWP.Views
         public FileView()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
         
     }
