@@ -21,6 +21,8 @@ namespace GithubXamarin.UWP
 
         public Frame AppFrame => (Frame)WrappedFrame.UnderlyingControl;
 
+        private bool IsFirstTime = true;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -139,8 +141,12 @@ namespace GithubXamarin.UWP
                     index = 4;
                     break;
             }
-            NavMenuList.SelectedIndex = -1;
-            NavMenuList.SetSelectedItem();
+            if (!IsFirstTime)
+            {
+                NavMenuList.SelectedIndex = -1;
+                NavMenuList.SetSelectedItem();
+            }
+            IsFirstTime = false;
             if (index > -1)
             {
                 NavMenuList.SelectedIndex = index;
