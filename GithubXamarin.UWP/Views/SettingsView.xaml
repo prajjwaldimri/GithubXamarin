@@ -30,7 +30,7 @@
                         <StackPanel
                             x:Name="Theme"
                             Margin="10,0,0,10">
-                            
+
                             <TextBlock
                             Text="Theme"
                             Opacity="0.8"
@@ -61,12 +61,12 @@
                             x:Name="StatusBarStackPanel"
                             Visibility="Collapsed"
                             Margin="10,10,0,10">
-                            
+
                             <TextBlock
                             Opacity="0.8"
                             Text="Status Bar"
                             Style="{ThemeResource TitleTextBlockStyle}"/>
-                            
+
                             <ToggleSwitch
                                 x:Name="StatusBarToggleSwitch"
                                 Margin="0,5,0,0"
@@ -74,17 +74,38 @@
                                 OffContent="Hidden"
                                 Toggled="StatusBarToggleSwitch_OnToggled"/>
                         </StackPanel>
+                        
+                        <StackPanel
+                            x:Name="BackgroundTask"
+                            Margin="10,10,0,10">
 
+                            <TextBlock
+                            Opacity="0.8"
+                            Text="Background Task"
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                            <ComboBox
+                                x:Name="BackgroundTaskComboBox"
+                                Margin="0,10,0,0"
+                                SelectionChanged="BackgroundTaskComboBox_OnSelectionChanged"
+                                Header="Update Frequency">
+                                <ComboBoxItem Content="Every 15 minutes"/>
+                                <ComboBoxItem Content="Every 30 minutes"/>
+                                <ComboBoxItem Content="Every 1 hour"/>
+                                <ComboBoxItem Content="Every 6 hours"/>
+                            </ComboBox>
+
+                        </StackPanel>
 
                         <StackPanel
                         x:Name="Account"
                         Margin="10,10,0,10">
-                            
+
                             <TextBlock
                             Opacity="0.8"
                             Text="Account"
                             Style="{ThemeResource TitleTextBlockStyle}"/>
-                            
+
                             <Button
                             x:Name="LogInOrOutButton"
                             Margin="0,5,0,0"
@@ -215,11 +236,11 @@
 
                 <ScrollViewer>
 
-                    <controls:MarkdownTextBlock
+                    <!--<controls:MarkdownTextBlock
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Text="{Binding License}"
-                        Margin="10,10,10,10"/>
+                        Margin="10,10,10,10"/>-->
 
                 </ScrollViewer>
 

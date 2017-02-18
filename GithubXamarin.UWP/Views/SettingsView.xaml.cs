@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using MvvmCross.WindowsUWP.Views;
 using Octokit;
 using Plugin.SecureStorage;
@@ -20,7 +23,8 @@ namespace GithubXamarin.UWP.Views
         /// Checks if the page is opened for the first time.
         /// Used because the toggled event fires automatically on startup and shows a message.
         /// </summary>
-        private bool IsFirstTimeOpened = true;
+        private bool IsFirstTimeOpenedRadioButton = true;
+        private bool IsFirstTimeOpenedComboBox = true;
 
         public SettingsView()
         {
@@ -31,6 +35,7 @@ namespace GithubXamarin.UWP.Views
                 StatusBarStackPanel.Visibility = Visibility.Visible;
                 StatusBarVisibilityChecker();
             }
+            BackgroundTaskStatusChecker();
         }
 
         private void StatusBarVisibilityChecker()
@@ -64,15 +69,35 @@ namespace GithubXamarin.UWP.Views
             }
         }
 
-        private void StatusBarToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+        private void BackgroundTaskStatusChecker()
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (IsFirstTimeOpened && (string)localSettingsValues["StatusBarVisibility"] == "Visible")
+            switch (int.Parse(localSettingsValues["BackgroundTaskTime"].ToString()))
             {
-                IsFirstTimeOpened = false;
+                case 15:
+                    BackgroundTaskComboBox.SelectedIndex = 0;
+                    break;
+                case 30:
+                    BackgroundTaskComboBox.SelectedIndex = 1;
+                    break;
+                case 60:
+                    BackgroundTaskComboBox.SelectedIndex = 2;
+                    break;
+                case 360:
+                    BackgroundTaskComboBox.SelectedIndex = 3;
+                    break;
+            }
+        }
+
+        private async void StatusBarToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (IsFirstTimeOpenedRadioButton && (string)localSettingsValues["StatusBarVisibility"] == "Visible")
+            {
+                IsFirstTimeOpenedRadioButton = false;
                 return;
             }
-            IsFirstTimeOpened = false;
+            IsFirstTimeOpenedRadioButton = false;
             var statusBar = StatusBar.GetForCurrentView();
             if (statusBar == null) return;
 
@@ -81,11 +106,11 @@ namespace GithubXamarin.UWP.Views
                 //Reverses the value in AppData
                 case false:
                     localSettingsValues["StatusBarVisibility"] = "Hidden";
-                    statusBar.HideAsync();
+                    await statusBar.HideAsync();
                     break;
                 case true:
                     localSettingsValues["StatusBarVisibility"] = "Visible";
-                    statusBar.ShowAsync();
+                    await statusBar.ShowAsync();
                     break;
             }
         }
@@ -93,9 +118,9 @@ namespace GithubXamarin.UWP.Views
         private async void DarkThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (IsFirstTimeOpened)
+            if (IsFirstTimeOpenedRadioButton)
             {
-                IsFirstTimeOpened = false;
+                IsFirstTimeOpenedRadioButton = false;
                 return;
             }
             localSettingsValues["RequestedTheme"] = "Dark";
@@ -105,9 +130,9 @@ namespace GithubXamarin.UWP.Views
         private async void LightThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (IsFirstTimeOpened)
+            if (IsFirstTimeOpenedRadioButton)
             {
-                IsFirstTimeOpened = false;
+                IsFirstTimeOpenedRadioButton = false;
                 return;
             }
             localSettingsValues["RequestedTheme"] = "Light";
@@ -117,9 +142,9 @@ namespace GithubXamarin.UWP.Views
         private async void SystemThemeRadioButton_OnChecked(object sender, RoutedEventArgs e)
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (IsFirstTimeOpened)
+            if (IsFirstTimeOpenedRadioButton)
             {
-                IsFirstTimeOpened = false;
+                IsFirstTimeOpenedRadioButton = false;
                 return;
             }
             localSettingsValues["RequestedTheme"] = "System";
@@ -133,6 +158,61 @@ namespace GithubXamarin.UWP.Views
             msgDialog.Commands.Add(new UICommand("No"));
             msgDialog.CancelCommandIndex = 1;
             await msgDialog.ShowAsync();
+        }
+
+        private async void BackgroundTaskComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsFirstTimeOpenedComboBox)
+            {
+                IsFirstTimeOpenedComboBox = false;
+                return;
+            }
+            var localSettings = ApplicationData.Current.LocalSettings.Values;
+            var builder = new BackgroundTaskBuilder();
+            
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+            switch (access)
+            {
+                case BackgroundAccessStatus.DeniedByUser:
+                case BackgroundAccessStatus.DeniedBySystemPolicy:
+                    return;
+            }
+
+            //UnRegister the previously register task
+            const string taskName = "GithubNotificationsBackgroundTask";
+            foreach (var taskRegistration in BackgroundTaskRegistration.AllTasks.Values)
+            {
+                if (taskRegistration != null && taskRegistration.Name == taskName)
+                {
+                    taskRegistration.Unregister(true);
+                }
+            }
+
+            builder.Name = taskName;
+            builder.IsNetworkRequested = true;
+            builder.TaskEntryPoint =
+                typeof(Background.GithubNotificationsBackgroundTask).FullName;
+
+            switch (BackgroundTaskComboBox.SelectedIndex)
+            {
+                case 0:
+                    localSettings["BackgroundTaskTime"] = 15;
+                    builder.SetTrigger(new TimeTrigger(15, false));
+                    break;
+                case 1:
+                    localSettings["BackgroundTaskTime"] = 30;
+                    builder.SetTrigger(new TimeTrigger(30, false));
+                    break;
+                case 2:
+                    localSettings["BackgroundTaskTime"] = 60;
+                    builder.SetTrigger(new TimeTrigger(60, false));
+                    break;
+                case 3:
+                    localSettings["BackgroundTaskTime"] = 360;
+                    builder.SetTrigger(new TimeTrigger(360, false));
+                    break;
+            }
+            var task = builder.Register();
         }
     }
 }

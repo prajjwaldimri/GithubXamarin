@@ -8,6 +8,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
 using System.Threading.Tasks;
 using Humanizer;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.UWP.Background
 {
@@ -23,15 +24,21 @@ namespace GithubXamarin.UWP.Background
         {
             _deferral = taskInstance.GetDeferral();
 
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            WinSecureStorageBase.StoragePassword = "12345";
+
             //Octokit
-            GitHubClient client;
-            client = new GitHubClient(new ProductHeaderValue("githubuwp"));
-            await VaultAccessTokenRetriever();
+            var client = new GitHubClient(new ProductHeaderValue("gitit"));
+            _passwordCredential = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
             if (_passwordCredential != null)
             {
                 client.Credentials = new Credentials(_passwordCredential.Password);
-                var notificationRequest = new NotificationsRequest();
-                notificationRequest.Since = DateTimeOffset.Now.Subtract(new TimeSpan(0, 15, 0));
+                var notificationRequest = new NotificationsRequest
+                {
+                    Since =
+                        DateTimeOffset.Now.Subtract(new TimeSpan(0,
+                            int.Parse(localSettingsValues["BackgroundTaskTime"].ToString()), 0))
+                };
                 var notifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
                 foreach (var notification in notifications)
                 {
@@ -75,34 +82,12 @@ namespace GithubXamarin.UWP.Background
                     };
 
                     #endregion
-                    var toast = new ToastNotification(toastContent.GetXml());
-                    toast.Tag = "1";
+
+                    var toast = new ToastNotification(toastContent.GetXml()) {Tag = "1"};
                     ToastNotificationManager.CreateToastNotifier().Show(toast);
                 }
             }
             _deferral.Complete();
-        }
-
-        //<summary>
-        //Retrieves the OAuth AccessToken from the PasswordVault
-        //</summary>
-        //<returns>A Credentials object</returns>
-        private async Task VaultAccessTokenRetriever()
-        {
-            var vault = new PasswordVault();
-            if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey("IsLoggedIn"))
-                _passwordCredential = null;
-            try
-            {
-                if (vault.FindAllByResource("GithubAccessToken") != null)
-                {
-                    _passwordCredential = new Credentials(vault.Retrieve("GithubAccessToken", "Github").Password);
-                }
-            }
-            catch (Exception)
-            {
-                _passwordCredential = null;
-            }
         }
     }
 }

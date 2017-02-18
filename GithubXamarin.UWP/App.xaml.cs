@@ -111,6 +111,7 @@ namespace GithubXamarin.UWP
         {
             // Register GithubNotificationsBackgroundTask
             const string taskName = "GithubNotificationsBackgroundTask";
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
 
             var taskRegistered = BackgroundTaskRegistration.AllTasks.Any(task => task.Value.Name == taskName);
 
@@ -123,7 +124,6 @@ namespace GithubXamarin.UWP
                 {
                     case BackgroundAccessStatus.DeniedByUser:
                     case BackgroundAccessStatus.DeniedBySystemPolicy:
-
                         break;
                     default:
                         builder.Name = taskName;
@@ -132,6 +132,7 @@ namespace GithubXamarin.UWP
                         builder.TaskEntryPoint =
                             typeof(Background.GithubNotificationsBackgroundTask).FullName;
                         var task = builder.Register();
+                        localSettingsValues["BackgroundTaskTime"] = 15;
                         break;
                 }
             }
