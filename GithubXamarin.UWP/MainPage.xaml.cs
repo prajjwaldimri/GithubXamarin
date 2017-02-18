@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
@@ -77,6 +78,8 @@ namespace GithubXamarin.UWP
             {
                 HamburgerMenu.IsPaneOpen = false;
             }
+            NavMenuList.SelectedIndex = -1;
+            NavMenuList.SetSelectedItem();
         }
 
         private void SearchIconButton_OnClick(object sender, RoutedEventArgs e)

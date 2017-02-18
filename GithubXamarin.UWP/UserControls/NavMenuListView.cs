@@ -65,7 +65,7 @@ namespace GithubXamarin.UWP.UserControls
         /// Make sure that only the item provided is Selected in the Control.
         /// </summary>
         /// <param name="item"></param>
-        public void SetSelectedItem(ListViewItem item)
+        public void SetSelectedItem(ListViewItem item = null)
         {
             var index = -1;
             if (item != null)
