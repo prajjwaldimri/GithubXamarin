@@ -166,21 +166,32 @@
                     HorizontalAlignment="Center">
 
                     <Image 
-                        Width="128" 
-                        Height="128"
-                        Source="https://camo.githubusercontent.com/77c5caf9c1ea9d78d4972cf5ddf862be9e3d27d3/68747470733a2f2f63646e2e7261776769742e636f6d2f7072616a6a77616c64696d72692f47697468756258616d6172696e2f64393535626163302f47697468756258616d6172696e2e5557502f4173736574732f47697449744c6f676f426c2e737667"/>
+                        Width="256" 
+                        Height="256"
+                        Source="../Assets/Square310x310Logo.scale-200.png"
+                        HorizontalAlignment="Center"/>
 
                     <TextBlock 
                         Text="GitIt"
+                        FontWeight="Bold"
                         HorizontalAlignment="Center"
-                        Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        Style="{ThemeResource TitleTextBlockStyle}"/>
+                    
+                    <HyperlinkButton
+                        NavigateUri="https://twitter.com/prajjwaldimri"
+                        HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock
+                                Text="Developer: Prajjwal Dimri"
+                                Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                                Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
 
                     <TextBlock 
                         x:Name="VersionNumberTextBlock"
                         HorizontalAlignment="Center"
                         Style="{ThemeResource BaseTextBlockStyle}"/>
-
-                    <TextBlock Text="Developer: Prajjwal Dimri"/>
 
                     <HyperlinkButton>
                         <FontIcon 
@@ -236,11 +247,11 @@
 
                 <ScrollViewer>
 
-                    <!--<controls:MarkdownTextBlock
+                    <controls:MarkdownTextBlock
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Text="{Binding License}"
-                        Margin="10,10,10,10"/>-->
+                        Margin="10,10,10,10"/>
 
                 </ScrollViewer>
 
