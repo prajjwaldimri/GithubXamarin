@@ -12,6 +12,7 @@
     "MvvmCross.Plugin.Visibility": "4.4.0",
     "Octokit": "0.24.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1",
+    "UnifiedStorage": "1.0.4",
     "Xam.Plugin.Connectivity": "2.3.0"
   },
   "frameworks": {

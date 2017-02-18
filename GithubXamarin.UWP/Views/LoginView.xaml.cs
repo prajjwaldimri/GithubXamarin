@@ -3,25 +3,29 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GithubXamarin.UWP.Services;
 using MvvmCross.WindowsUWP.Views;
 using Octokit;
 using Plugin.SecureStorage;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace GithubXamarin.UWP.Views
 {
     [MvxRegion("MainFrame")]
     public sealed partial class LoginView : MvxWindowsPage
     {
+        private GitHubClient _client;
+        private string _clientId;
+        private string _clientSecret;
+
         public LoginView()
         {
             this.InitializeComponent();
             //Values can be found at https://github.com/settings/applications
-            _clientId = "5c0821cdb943e8e2fc0c";
-            _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
-            _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
-
+            
+            _clientId = ApiKeysManager.GithubClientId;
+            _clientSecret = ApiKeysManager.GithubClientSecret;
+            _client = new GitHubClient(new ProductHeaderValue("gitit"));
+            while(ApiKeysManager.GithubClientId == null) { }
             var loginRequest = new OauthLoginRequest(_clientId)
             {
                 Scopes = { "user", "notifications", "repo", "gist", "read:org" }
@@ -31,10 +35,6 @@ namespace GithubXamarin.UWP.Views
             LoginWebView.Navigate(oAuthLoginUrl);
             LoginWebView.NavigationCompleted += LoginWebViewOnNavigationCompleted;
         }
-
-        private GitHubClient _client;
-        private string _clientId;
-        private string _clientSecret;
 
         /// <summary>
         /// Method attached to navigation of the web-browser. It must return void
@@ -51,7 +51,7 @@ namespace GithubXamarin.UWP.Views
                 await CodeRetrieverandTokenSaver(args.Uri.ToString());
             }
         }
-        
+
         /// <summary>
         /// Retrieves code value from a given string and uses it to create access token and then saves it.
         /// </summary>
@@ -61,10 +61,12 @@ namespace GithubXamarin.UWP.Views
         {
             //Retrieves code from URL
             var code = retrievedUrl.Split(new[] { "code=" }, StringSplitOptions.None)[1];
+            code = code.Replace("&state=", string.Empty);
             var tokenRequest = new OauthTokenRequest(_clientId, _clientSecret, code);
             var accessToken = await _client.Oauth.CreateAccessToken(tokenRequest);
-            CrossSecureStorage.Current.SetValue("OAuthToken",accessToken.AccessToken);
-            var msgDialog = new MessageDialog("Choose any page you want to go from the menu on the left or you can just stare at this page. Your choice!","Login Successful!");
+            if (CrossSecureStorage.Current != null)
+                CrossSecureStorage.Current.SetValue("OAuthToken", accessToken.AccessToken);
+            var msgDialog = new MessageDialog("Choose any page you want to go from the menu on the left or you can just stare at this page. Your choice!", "Login Successful!");
             await msgDialog.ShowAsync();
             LoginProgressBar.Value = 100;
         }

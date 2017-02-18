@@ -92,6 +92,10 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="GithubXamarin.UWP_StoreKey.pfx" />
     <None Include="project.json" />
+    <Content Include="Assets\ClientId.txt" />
+    <Content Include="Assets\ClientSecret.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\GitItLogo.svg" />
     <Content Include="Assets\GitItLogoBl.svg" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -163,6 +167,7 @@
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
+    <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Views\FileView.xaml.cs">
       <DependentUpon>FileView.xaml</DependentUpon>

@@ -242,3 +242,5 @@ ModelManifest.xml
 .fake/
 /GithubXamarin.Core/cs.txt
 /GithubXamarin.Core/cid.txt
+/GithubXamarin.UWP/Assets/ClientId.txt
+/GithubXamarin.UWP/Assets/ClientSecret.txt

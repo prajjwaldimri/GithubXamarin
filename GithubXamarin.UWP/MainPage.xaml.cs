@@ -2,16 +2,13 @@
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
 using MvvmCross.WindowsUWP.Views;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.UWP
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : MvxWindowsPage
     {
         public MainPage()
@@ -19,7 +16,7 @@ namespace GithubXamarin.UWP
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             NavPaneDivider.Visibility = Visibility.Collapsed;
@@ -27,6 +24,11 @@ namespace GithubXamarin.UWP
             var item = NavMenuList.Items[0] as NavMenuItem;
             NavMenuList.SelectedIndex = 0;
             NavMenuList.SetSelectedItem(item);
+
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                await ApiKeysManager.KeyRetriever();
+            }
         }
 
         public Frame AppFrame { get { return (Frame) this.WrappedFrame.UnderlyingControl; } }

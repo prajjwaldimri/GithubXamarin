@@ -4,7 +4,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.Toolkit.Uwp.Notifications": "1.3.1",
     "Octokit": "0.24.0",
-    "QueryString.NET": "1.0.0"
+    "QueryString.NET": "1.0.0",
+    "UnifiedStorage": "1.0.4"
   },
   "frameworks": {
     "uap10.0": {}
