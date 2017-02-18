@@ -325,6 +325,7 @@
                             x:Name="LoadingBar"
                             VerticalAlignment="Top"
                             IsIndeterminate="True"
+                            
                             Visibility="{Binding IsLoading, 
                             Converter={StaticResource BoolToVisibilityConverter}}"/>
 

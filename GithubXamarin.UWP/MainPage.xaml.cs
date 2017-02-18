@@ -1,8 +1,9 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
+using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
 using MvvmCross.WindowsUWP.Views;
@@ -12,9 +13,26 @@ namespace GithubXamarin.UWP
 {
     public sealed partial class MainPage : MvxWindowsPage
     {
+        public new MainViewModel ViewModel
+        {
+            get { return (MainViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
+        public Frame AppFrame => (Frame)WrappedFrame.UnderlyingControl;
+
         public MainPage()
         {
             this.InitializeComponent();
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            MainFrame.Navigated += (sender, args) =>
+            {
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    ((Frame) sender).CanGoBack
+                        ? AppViewBackButtonVisibility.Visible
+                        : AppViewBackButtonVisibility.Collapsed;
+                SyncMenu();
+            };
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -22,17 +40,12 @@ namespace GithubXamarin.UWP
             base.OnNavigatedTo(e);
             NavPaneDivider.Visibility = Visibility.Collapsed;
             //ViewModel handles the navigation to the 0 index on startup so have to manually set this here.
-            var item = NavMenuList.Items[0] as NavMenuItem;
-            NavMenuList.SelectedIndex = 0;
-            NavMenuList.SetSelectedItem(item);
-
+            
             if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 await ApiKeysManager.KeyRetriever();
             }
         }
-
-        public Frame AppFrame { get { return (Frame) this.WrappedFrame.UnderlyingControl; } }
 
         private void TogglePaneButton_Toggle(object sender, RoutedEventArgs e)
         {
@@ -78,8 +91,6 @@ namespace GithubXamarin.UWP
             {
                 HamburgerMenu.IsPaneOpen = false;
             }
-            NavMenuList.SelectedIndex = -1;
-            NavMenuList.SetSelectedItem();
         }
 
         private void SearchIconButton_OnClick(object sender, RoutedEventArgs e)
@@ -95,6 +106,46 @@ namespace GithubXamarin.UWP
             SearchBox.Visibility = Visibility.Collapsed;
             SearchIconButton.Visibility = Visibility.Visible;
             HeaderTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (!e.Handled && MainFrame.CanGoBack)
+            {
+                e.Handled = true;
+                MainFrame.GoBack();
+            }
+        }
+
+        private void SyncMenu()
+        {
+            var content = MainFrame.Content as MvxWindowsPage;
+            var index = -1;
+            switch (content.BaseUri.Segments[2])
+            {
+                case "EventsView.xaml":
+                    index = 0;
+                    break;
+                case "NotificationsView.xaml":
+                    index = 1;
+                    break;
+                case "RepositoriesView.xaml":
+                    index = 2;
+                    break;
+                case "IssuesView.xaml":
+                    index = 3;
+                    break;
+                case "GistsView.xaml":
+                    index = 4;
+                    break;
+            }
+            NavMenuList.SelectedIndex = -1;
+            NavMenuList.SetSelectedItem();
+            if (index > -1)
+            {
+                NavMenuList.SelectedIndex = index;
+                NavMenuList.SetSelectedItem(NavMenuList.Items[index] as NavMenuItem);
+            }
         }
     }
 }

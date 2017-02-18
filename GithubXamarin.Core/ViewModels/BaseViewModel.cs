@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
@@ -10,7 +11,7 @@ namespace GithubXamarin.Core.ViewModels
     {
         protected IGithubClientService GithubClientService;
         protected IMvxMessenger Messenger;
-        protected IDialogService DialogService;
+        protected readonly IDialogService DialogService;
 
         protected BaseViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService)
         {

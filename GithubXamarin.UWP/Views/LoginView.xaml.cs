@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 using GithubXamarin.UWP.Services;
 using MvvmCross.WindowsUWP.Views;
 using Octokit;

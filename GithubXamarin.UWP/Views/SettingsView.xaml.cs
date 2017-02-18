@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
@@ -8,9 +7,8 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
-using Octokit;
-using Plugin.SecureStorage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +23,12 @@ namespace GithubXamarin.UWP.Views
         /// </summary>
         private bool IsFirstTimeOpenedRadioButton = true;
         private bool IsFirstTimeOpenedComboBox = true;
+
+        public new SettingsViewModel ViewModel
+        {
+            get { return (SettingsViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
 
         public SettingsView()
         {

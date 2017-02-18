@@ -15,14 +15,14 @@
         
         <controls:PullToRefreshListView 
             ItemsSource="{Binding Users}"
-            SelectionMode="Single" 
+            SelectionMode="Single"
             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
             RefreshCommand="{Binding RefreshCommand}"
             Margin="0,0,0,48">
 
                 <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="ItemClick">
-                        <core:InvokeCommandAction Command="{Binding UserClickCommand}"/>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding UserClickCommand, Mode=TwoWay}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
 
