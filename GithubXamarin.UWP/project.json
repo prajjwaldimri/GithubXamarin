@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Microsoft.Bcl": "1.1.10",
     "Microsoft.Net.Http": "2.2.29",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.Toolkit.Uwp": "1.3.1",

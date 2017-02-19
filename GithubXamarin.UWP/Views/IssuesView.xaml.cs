@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.ViewModels;
+﻿using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
 
 namespace GithubXamarin.UWP.Views

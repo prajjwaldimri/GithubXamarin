@@ -309,11 +309,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <HintPath>..\..\..\..\..\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.2.0\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="Microsoft.UniversalCRT.Debug, Version=10.0.14393.0">
       <Name>Microsoft Universal CRT Debug Runtime</Name>
     </SDKReference>
