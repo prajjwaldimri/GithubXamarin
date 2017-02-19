@@ -309,17 +309,8 @@
                         RelativePanel.Below="AppHeaderTextBlockBackground"
                         RelativePanel.AlignBottomWithPanel="True">
 
-                        <Frame x:Name="MainFrame">
-                            <Frame.ContentTransitions>
-                                <TransitionCollection>
-                                    <NavigationThemeTransition>
-                                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                            <EntranceNavigationTransitionInfo/>
-                                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                    </NavigationThemeTransition>
-                                </TransitionCollection>
-                            </Frame.ContentTransitions>
-                        </Frame>
+                        <Frame x:Name="MainFrame"
+                               Navigated="MainFrame_OnNavigated"/>
                         
                         <ProgressBar 
                             x:Name="LoadingBar"

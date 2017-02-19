@@ -14,7 +14,7 @@
 
         <controls:PullToRefreshListView 
             ItemsSource="{Binding Issues}"
-            SelectionMode="Single" 
+            SelectionMode="Single"
             SelectedIndex="{Binding SelectedIssue, Mode=TwoWay}"
             HorizontalAlignment="Stretch"
             RefreshCommand="{Binding RefreshCommand}"
@@ -22,8 +22,8 @@
             Margin="0,0,0,48">
 
             <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding IssueClickCommand, Mode=TwoWay}"/>
+                <core:EventTriggerBehavior EventName="ItemClick">
+                    <core:InvokeCommandAction Command="{Binding IssueClickCommand}"/>
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 

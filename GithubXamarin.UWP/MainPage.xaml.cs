@@ -27,14 +27,8 @@ namespace GithubXamarin.UWP
         {
             this.InitializeComponent();
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            MainFrame.Navigated += (sender, args) =>
-            {
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    ((Frame) sender).CanGoBack
-                        ? AppViewBackButtonVisibility.Visible
-                        : AppViewBackButtonVisibility.Collapsed;
-                SyncMenu();
-            };
+            NavMenuList.SelectedIndex = 0;
+            NavMenuList.SetSelectedItem(NavMenuList.Items[0] as NavMenuItem);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -117,10 +111,12 @@ namespace GithubXamarin.UWP
                 e.Handled = true;
                 MainFrame.GoBack();
             }
+            SyncMenu();
         }
 
         private void SyncMenu()
         {
+            if (MainFrame == null) return;
             var content = MainFrame.Content as MvxWindowsPage;
             var index = -1;
             switch (content.BaseUri.Segments[2])
@@ -152,6 +148,14 @@ namespace GithubXamarin.UWP
                 NavMenuList.SelectedIndex = index;
                 NavMenuList.SetSelectedItem(NavMenuList.Items[index] as NavMenuItem);
             }
+        }
+
+        private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    ((Frame)sender).CanGoBack
+                        ? AppViewBackButtonVisibility.Visible
+                        : AppViewBackButtonVisibility.Collapsed;
         }
     }
 }
