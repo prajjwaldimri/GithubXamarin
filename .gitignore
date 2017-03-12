@@ -244,3 +244,5 @@ ModelManifest.xml
 /GithubXamarin.Core/cid.txt
 /GithubXamarin.UWP/Assets/ClientId.txt
 /GithubXamarin.UWP/Assets/ClientSecret.txt
+/GithubXamarin.Droid/Resources/ClientSecret.txt
+/GithubXamarin.Droid/Resources/ClientId.txt

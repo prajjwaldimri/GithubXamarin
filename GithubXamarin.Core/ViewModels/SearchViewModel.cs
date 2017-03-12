@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace GithubXamarin.Core.ViewModels
         public ICommand IssueClickCommand { get; set; }
         public ICommand RepositoryClickCommand { get; set; }
         public ICommand UserClickCommand { get; set; }
+        public ICommand FilterIndexUpdaterCommand { get; set; }
 
         private int _filterSelectedIndex;
         public int FilterSelectedIndex
@@ -33,7 +35,28 @@ namespace GithubXamarin.Core.ViewModels
             set
             {
                 _filterSelectedIndex = value;
+                switch (value)
+                {
+                    case 0:
+                        IssuesListVisibility = true;
+                        RepositoriesListVisibility = false;
+                        UsersListVisibility = false;
+                        break;
+                    case 1:
+                        IssuesListVisibility = false;
+                        RepositoriesListVisibility = true;
+                        UsersListVisibility = false;
+                        break;
+                    case 2:
+                        IssuesListVisibility = false;
+                        RepositoriesListVisibility = false;
+                        UsersListVisibility = true;
+                        break;
+                }
                 RaisePropertyChanged(() => FilterSelectedIndex);
+                RaisePropertyChanged(() => IssuesListVisibility);
+                RaisePropertyChanged(() => RepositoriesListVisibility);
+                RaisePropertyChanged(() => UsersListVisibility);
             }
         }
 
@@ -86,6 +109,15 @@ namespace GithubXamarin.Core.ViewModels
             set { _usersSelectedIndex = value; RaisePropertyChanged(() => UsersSelectedIndex); }
         }
 
+        public bool IssuesListVisibility { get; set; } = true;
+        public bool RepositoriesListVisibility { get; set; } = false;
+        public bool UsersListVisibility { get; set; } = false;
+
+        public List<string> SearchCategories { get; } = new List<string>()
+        {
+            "Issues", "Repositories", "Users"
+        };
+
         #endregion
 
         public SearchViewModel(IRepoDataService repoDataService, IUserDataService userDataService,
@@ -98,9 +130,11 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
 
             SearchCommand = new MvxCommand(ExecuteSearch);
-            IssueClickCommand = new MvxCommand(GoToIssue);
-            RepositoryClickCommand = new MvxCommand(GoToRepository);
-            UserClickCommand = new MvxCommand(GoToUser);
+            IssueClickCommand = new MvxCommand<Issue>(GoToIssue);
+            RepositoryClickCommand = new MvxCommand<Repository>(GoToRepository);
+            
+            UserClickCommand = new MvxCommand<User>(GoToUser);
+            FilterIndexUpdaterCommand = new MvxCommand<string>(UpdateFilterIndex);
         }
 
         public async void Init(string searchTerm, SearchTypeEnumeration searchType)
@@ -129,9 +163,12 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private void GoToIssue()
+        private void GoToIssue(Issue issue)
         {
-            var issue = Issues[IssuesSelectedIndex];
+            if (issue == null)
+            {
+                issue = Issues[IssuesSelectedIndex];
+            }
             ShowViewModel<IssueViewModel>(new
             {
                 issueNumber = issue.Number,
@@ -141,18 +178,47 @@ namespace GithubXamarin.Core.ViewModels
             });
         }
 
-        private void GoToRepository()
+        private void GoToRepository(Repository repository)
         {
-            ShowViewModel<RepositoryViewModel>(new { repositoryId = Repositories[RepositoriesSelectedIndex].Id });
+            if (repository == null)
+            {
+                repository = Repositories[RepositoriesSelectedIndex];
+            }
+            ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
-        private void GoToUser()
+        private void GoToUser(User user)
         {
-            ShowViewModel<UserViewModel>(new { userLogin = Users[UsersSelectedIndex].Login });
+            if (user == null)
+            {
+                user = Users[UsersSelectedIndex];
+            }
+            ShowViewModel<UserViewModel>(new { userLogin = user.Login });
+        }
+
+        private void UpdateFilterIndex(string obj)
+        {
+            switch (obj)
+            {
+                case "Issues":
+                    FilterSelectedIndex = 0;
+                    break;
+                case "Users":
+                    FilterSelectedIndex = 1;
+                    break;
+                case "Repositories":
+                    FilterSelectedIndex = 2;
+                    break;
+            }
         }
 
         private async Task Search(string searchTerm, SearchTypeEnumeration searchType)
         {
+            if (!IsInternetAvailable())
+            {
+                await DialogService.ShowDialogASync("Or is it?", "Internet is not available");
+                return;
+            }
             switch (searchType)
             {
                 case SearchTypeEnumeration.Issues:

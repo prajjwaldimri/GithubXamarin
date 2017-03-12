@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" 
+        local:MvxBind="Text Issue.State"/>
+    <TextView
+     android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" 
+     local:MvxBind="Text Issue.Title"/>
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/linearLayout1"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:paddingLeft="2dp">
+    <MvxImageView
+    android:layout_height="32dp"
+    android:layout_width="32dp"
+    local:MvxBind="ImageUrl Issue.User.AvatarUrl" />
+    <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView3"
+          local:MvxBind="Text Issue.User.Name"/>
+    <TextView
+        android:text=" opened this issue "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+    <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView3"
+          local:MvxBind="Text DateTimeHumanizer(Issue.CreatedAt.DateTime)"/>
+  </LinearLayout>
 
+  <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView3"
+          local:MvxBind="Text Issue.Body"/>
+  
 </LinearLayout>

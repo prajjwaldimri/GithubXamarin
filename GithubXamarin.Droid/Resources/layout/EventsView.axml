@@ -6,13 +6,10 @@
     android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
-  <Mvx.MvxListView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    local:MvxBind="ItemsSource Events"
-    local:MvxItemTemplate="@layout/events_item_template"/>
-
+    <Mvx.MvxListView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        local:MvxBind="ItemsSource Events; ItemClick EventClickCommand;"
+        local:MvxItemTemplate="@layout/events_item_template" />
 </LinearLayout>

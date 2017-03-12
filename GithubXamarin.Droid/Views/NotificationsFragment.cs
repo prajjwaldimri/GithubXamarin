@@ -18,9 +18,10 @@ namespace GithubXamarin.Droid.Views
             return this.BindingInflate(Resource.Layout.NotificationsView, null);
         }
 
-        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        public override async void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
+            await ViewModel.Refresh();
         }
     }
 }

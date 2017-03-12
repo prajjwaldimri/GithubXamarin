@@ -29,9 +29,9 @@ namespace GithubXamarin.UWP.Background
 
             //Octokit
             var client = new GitHubClient(new ProductHeaderValue("gitit"));
-            _passwordCredential = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
-            if (_passwordCredential != null)
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
+                _passwordCredential = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
                 client.Credentials = new Credentials(_passwordCredential.Password);
                 var notificationRequest = new NotificationsRequest
                 {

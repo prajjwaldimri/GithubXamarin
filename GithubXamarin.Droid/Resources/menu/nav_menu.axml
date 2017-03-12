@@ -17,14 +17,10 @@
     <item
       android:id="@+id/nav_gists"
       android:title="Gists" />
-
+    
     <item
       android:id="@+id/nav_settings"
       android:title="Settings" />
-    
-    <item
-      android:id="@+id/nav_about"
-      android:title="About" />
 
   </group>
 

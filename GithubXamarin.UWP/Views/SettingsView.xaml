@@ -74,7 +74,7 @@
                                 OffContent="Hidden"
                                 Toggled="StatusBarToggleSwitch_OnToggled"/>
                         </StackPanel>
-                        
+
                         <StackPanel
                             x:Name="BackgroundTask"
                             Margin="10,10,0,10">
@@ -161,56 +161,59 @@
 
 
             <PivotItem Header="ABOUT">
-                <StackPanel 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                <RelativePanel>
 
-                    <Image 
+                    <Image
+                        x:Name="GitItLogo"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
                         Width="256" 
                         Height="256"
-                        Source="../Assets/Square310x310Logo.scale-200.png"
-                        HorizontalAlignment="Center"/>
+                        Source="../Assets/Square310x310Logo.scale-200.png" />
 
-                    <TextBlock 
+                    <StackPanel
+                        RelativePanel.Below="GitItLogo"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True">
+
+                        <TextBlock 
                         Text="GitIt"
-                        FontWeight="Bold"
+                        FontWeight="Bold"                        
                         HorizontalAlignment="Center"
                         Style="{ThemeResource TitleTextBlockStyle}"/>
-                    
-                    <HyperlinkButton
-                        NavigateUri="https://twitter.com/prajjwaldimri"
-                        HorizontalAlignment="Center">
-                        <HyperlinkButton.Content>
-                            <TextBlock
-                                Text="Developer: Prajjwal Dimri"
-                                Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
-                                Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                        </HyperlinkButton.Content>
-                    </HyperlinkButton>
 
-                    <TextBlock 
+                        <TextBlock
+                                FontStyle="Italic"
+                                Text="Developer: Prajjwal Dimri"                                
+                                Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                        
+                        <TextBlock
                         x:Name="VersionNumberTextBlock"
                         HorizontalAlignment="Center"
                         Style="{ThemeResource BaseTextBlockStyle}"/>
 
-                    <HyperlinkButton>
-                        <FontIcon 
-                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
-                                Glyph=""/>
-                    </HyperlinkButton>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
 
-                    <HyperlinkButton>
-                        <FontIcon 
-                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
-                                Glyph=""/>
-                    </HyperlinkButton>
+                            <HyperlinkButton
+                                Margin="0,0,10,0"
+                                NavigateUri="https://github.com/prajjwaldimri">
+                                <FontIcon 
+                                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                    Glyph="&#xf092;"
+                                    Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+                            </HyperlinkButton>
 
-                    <HyperlinkButton>
-                        <FontIcon 
-                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
-                                Glyph=""/>
-                    </HyperlinkButton>
-                </StackPanel>
+                            <HyperlinkButton
+                                Margin="0,0,10,0"
+                                NavigateUri="https://twitter.com/prajjwaldimri">
+                                <FontIcon 
+                                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                    Glyph="&#xf081;"
+                                    Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+                            </HyperlinkButton>
+                        </StackPanel>
+                    </StackPanel>
+                </RelativePanel>
             </PivotItem>
 
             <PivotItem Header="CONTRIBUTORS">

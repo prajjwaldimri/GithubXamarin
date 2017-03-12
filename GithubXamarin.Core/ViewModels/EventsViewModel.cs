@@ -28,14 +28,14 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private int _selectedEvent;
-        public int SelectedEvent
+        private int _selectedIndex;
+        public int SelectedIndex
         {
-            get { return _selectedEvent;}
+            get { return _selectedIndex;}
             set
             {
-                _selectedEvent = value;
-                RaisePropertyChanged(() => SelectedEvent);
+                _selectedIndex = value;
+                RaisePropertyChanged(() => SelectedIndex);
             }
         }
 
@@ -44,7 +44,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _eventClickCommand = _eventClickCommand ?? new MvxCommand(NavigateToEventType);
+                _eventClickCommand = _eventClickCommand ?? new MvxCommand<object>(NavigateToEventType);
                 return _eventClickCommand;
             }
         }
@@ -76,9 +76,9 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private void NavigateToEventType()
+        private void NavigateToEventType(object obj)
         {
-            var activity = Events?[SelectedEvent];
+            var activity = obj as Activity ?? Events[SelectedIndex];
             if (activity == null) return;
             switch (activity.Type)
             {
@@ -121,12 +121,10 @@ namespace GithubXamarin.Core.ViewModels
                 case "WatchEvent":
                     ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
                     break;
-                default:
-                    break;
             }
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {

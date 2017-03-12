@@ -8,6 +8,7 @@ using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
 using Octokit;
 using System;
+using GithubXamarin.Droid.Services;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.Droid.Views
@@ -36,12 +37,13 @@ namespace GithubXamarin.Droid.Views
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
+            ApiKeysManager.KeyRetriever();
             _webView = view.FindViewById<WebView>(Resource.Id.login_webview);
             _webView.Settings.JavaScriptEnabled = true;
             //Values can be found at https://github.com/settings/applications
-            _clientId = "5c0821cdb943e8e2fc0c";
-            _clientSecret = "e8e49568f6466fa7039ce49cb493f4aa35efec1d";
-            _client = new GitHubClient(new ProductHeaderValue("githubuwp"));
+            _clientId = ApiKeysManager.GithubClientId;
+            _clientSecret = ApiKeysManager.GithubClientSecret;
+            _client = new GitHubClient(new ProductHeaderValue("gitit"));
 
             _webView.SetWebViewClient(new LoginWebViewClient(_client,_clientId,_clientSecret,_webView));
 
@@ -52,6 +54,7 @@ namespace GithubXamarin.Droid.Views
 
             var oAuthLoginUrl = _client.Oauth.GetGitHubLoginUrl(loginRequest);
             _webView.LoadUrl(oAuthLoginUrl.ToString());
+            
         }
 
         }
@@ -83,6 +86,7 @@ namespace GithubXamarin.Droid.Views
             if (url.Contains("code="))
             {
                 var code = url.Split(new[] { "code=" }, StringSplitOptions.None)[1];
+                code = code.Replace("&state=", string.Empty);
                 var tokenRequest = new OauthTokenRequest(_clientId, _clientSecret, code);
                 var accessToken = _client.Oauth.CreateAccessToken(tokenRequest).Result;
                 CrossSecureStorage.Current.SetValue("OAuthToken", accessToken.AccessToken.ToString());

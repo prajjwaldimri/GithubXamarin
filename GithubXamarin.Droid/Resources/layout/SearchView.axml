@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/linearLayout1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/editText1"
+            android:paddingLeft="5dp"
+            local:MvxBind="Text SearchBoxText, Mode=TwoWay"/>
+        <Button
+            android:text="Search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/button1"
+            android:paddingRight="10dp"
+            android:background="@null"
+            local:MvxBind="Click SearchCommand"/>
+        <MvvmCross.Binding.Droid.Views.MvxSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner1"
+            local:MvxBind="SelectedItemPosition FilterSelectedIndex, Mode=TwoWay; ItemsSource SearchCategories " />
+    </LinearLayout>
+    <MvvmCross.Binding.Droid.Views.MvxListView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        local:MvxBind="ItemsSource Repositories; ItemClick RepositoryClickCommand; Visibility Visibility(RepositoriesListVisibility)"
+        local:MvxItemTemplate="@layout/repositories_item_template" />
+    <MvvmCross.Binding.Droid.Views.MvxListView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        local:MvxBind="ItemsSource Users; ItemClick UserClickCommand; Visibility Visibility(UsersListVisibility)"
+        local:MvxItemTemplate="@layout/users_item_template" />
+    <MvvmCross.Binding.Droid.Views.MvxListView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        local:MvxBind="ItemsSource Issues; ItemClick IssueClickCommand; Visibility Visibility(IssuesListVisibility)"
+        local:MvxItemTemplate="@layout/issues_item_template" />
+</LinearLayout>

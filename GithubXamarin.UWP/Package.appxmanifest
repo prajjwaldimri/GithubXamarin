@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="34691PrajjwalDimri.GitIt" Publisher="CN=883EF119-9F3F-4348-A873-0DBB7FD085E0" Version="1.1.0.0" />
+  <Identity Name="34691PrajjwalDimri.GitIt" Publisher="CN=883EF119-9F3F-4348-A873-0DBB7FD085E0" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="69e2c252-204f-4154-aedf-9dcc7940df2f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>GitIt</DisplayName>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GithubXamarin.UWP.App">
-      <uap:VisualElements DisplayName="GitIt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="A Github Application" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="GitIt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Go GitIt!" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

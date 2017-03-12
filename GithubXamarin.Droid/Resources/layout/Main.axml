@@ -19,6 +19,11 @@
             android:layout_height="fill_parent"
             android:layout_centerInParent="true"
             android:layout_below="@+id/toolbar" />
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            app:MvxBind="Visibility Visibility(IsLoading)" />
     </RelativeLayout>
 <!-- The menu placeholder -->
     <android.support.design.widget.NavigationView

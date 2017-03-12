@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:padding="5dp">
+  <android.support.v7.widget.CardView
+      android:layout_gravity="center_horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      cardview:cardElevation="4dp"
+      cardview:contentPadding="5dp">
+    <LinearLayout
+        android:id="@+id/UsersItemWrapperLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="8dp">
+      <MvxImageView
+        android:layout_height="32dp"
+        android:layout_width="32dp"
+        cardview:MvxBind="ImageUrl AvatarUrl" />
+      <TextView
+          android:paddingLeft="10dp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:textSize="14sp"
+          android:textColor="@color/abc_primary_text_material_light"
+          cardview:MvxBind="Text Login" />
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+</LinearLayout>

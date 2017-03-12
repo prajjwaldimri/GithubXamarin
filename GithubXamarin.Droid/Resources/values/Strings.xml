@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">GithubXamarin.Droid</string>
+  <string name="Hello">Hello World, Click Me!</string>
+  <string name="ApplicationName">GitIt</string>
   <string name="drawer_open">Open</string>
   <string name="drawer_close">Close</string>
   <string name="Empty"></string>
+
+  <string name="search_array">Choose a category</string>
+  <string-array name="search_array">
+    <item>Issues</item>
+    <item>Users</item>
+    <item>Repositories</item>
+  </string-array>
+  
+  <!-- Font-Awesome Icons-->
+  <string name="fa_bell">&#xf0f3;</string>
+  <string name="fa_check">&#xf00c;</string>
+  <string name="fa_code">&#xf121;</string>
+  <string name="fa_code_fork">&#xf126;</string>
+  <string name="fa_comment">&#xf075;</string>
+  <string name="fa_exclamation">&#xf12a;</string>
+  <string name="fa_file_code">&#xf1c9;</string>
+  <string name="fa_hdd">&#xf0a0;</string>
+  <string name="fa_home">&#xf015;</string>
+  <string name="fa_refresh">&#xf021;</string>
+  <string name="fa_star">&#xf005;</string>
+  <string name="fa_users">&#xf0c0;</string>
 </resources>

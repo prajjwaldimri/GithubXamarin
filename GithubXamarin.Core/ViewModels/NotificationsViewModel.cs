@@ -85,7 +85,7 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {

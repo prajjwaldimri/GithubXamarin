@@ -1,7 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:gravity="center">
+        <MvvmCross.Binding.Droid.Views.MvxImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/mvxImageView1"
+            android:layout_marginRight="10dp" 
+            local:MvxBind="ImageUrl User.AvatarUrl"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout2"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1" 
+                local:MvxBind="Text User.Name"/>
+            <TextView
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                local:MvxBind="Text User.Login"/>
+            <TextView
+                android:text="Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" 
+                local:MvxBind="Text User.Location"/>
+            <TextView
+                android:text="Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                local:MvxBind="Text User.Email"/>
+            <TextView
+                android:text="Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                local:MvxBind="Text User.Bio"/>
+          <TextView
+                android:text="Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                local:MvxBind="Text User.Company"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:text="User Stats:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridLayout1"
+        android:columnCount="2"
+        android:rowCount="9"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:isScrollContainer="true">
+        <TextView
+            android:text="Followers:"
+            android:id="@+id/textView7"
+            android:layout_row="0"
+            android:layout_column="0" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp" 
+            local:MvxBind="Text User.Followers"/>
+      <TextView
+            android:text="Following"
+            android:id="@+id/textView10"
+            android:layout_row="1"
+            android:layout_column="0" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp" 
+            local:MvxBind="Text User.Following"/>
+      <TextView
+            android:text="Plan:"
+            android:id="@+id/textView11"
+            android:layout_row="2"
+            android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView12"
+          android:layout_row="2"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp"
+          local:MvxBind="Text User.Plan.Name"/>
+      <TextView
+          android:text="Type:"
+          android:id="@+id/textView14"
+          android:layout_row="3"
+          android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView13"
+          android:layout_row="3"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp"
+          local:MvxBind="Text User.Type"/>
+      
+      <TextView
+            android:text="Private Repos:"
+            android:id="@+id/textView15"
+            android:layout_row="4"
+            android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView16"
+          android:layout_row="4"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp" 
+          local:MvxBind="Text User.TotalPrivateRepos"/>
+      <TextView
+          android:text="Public Repos:"
+          android:id="@+id/textView18"
+          android:layout_row="5"
+          android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView17"
+          android:layout_row="5"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp" 
+          local:MvxBind="Text User.Public Repos"/>
+      
+      <TextView
+            android:text="Disk Usage:"
+            android:id="@+id/textView19"
+            android:layout_row="6"
+            android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView20"
+          android:layout_row="6"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp" 
+          local:MvxBind="Text User.DiskUsage"/>
+      <TextView
+          android:text="Created At:"
+          android:id="@+id/textView22"
+          android:layout_row="7"
+          android:layout_column="0" />
+      <TextView
+          android:id="@+id/textView21"
+          android:layout_row="7"
+          android:layout_column="1"
+          android:layout_marginLeft="10dp"
+          local:MvxBind="Text User.CreatedAt"/>
+      
+    </GridLayout>
 </LinearLayout>

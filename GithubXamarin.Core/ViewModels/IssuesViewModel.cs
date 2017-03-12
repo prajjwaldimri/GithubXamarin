@@ -24,7 +24,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _issueClickCommand = _issueClickCommand ?? new MvxCommand(NavigateToIssueView);
+                _issueClickCommand = _issueClickCommand ?? new MvxCommand<object>(NavigateToIssueView);
                 return _issueClickCommand;
             }
         }
@@ -68,16 +68,17 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private void NavigateToIssueView()
+        private void NavigateToIssueView(object obj)
         {
+            var issue = obj as Issue ?? Issues[SelectedIssue];
             ShowViewModel<IssueViewModel>(new
             {
-                issueNumber = Issues[SelectedIssue].Number,
-                repositoryId = Issues[SelectedIssue].Repository.Id,
+                issueNumber = issue.Number,
+                repositoryId = issue.Repository.Id,
             });
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {

@@ -104,7 +104,7 @@ namespace GithubXamarin.Core.ViewModels
         /// Navigate to ViewModel based on passed index from a listView
         /// </summary>
         /// <param name="index"></param>
-        private void NavigateToViewModel(int index)
+        public void NavigateToViewModel(int index)
         {
             if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
                 return;
@@ -125,7 +125,8 @@ namespace GithubXamarin.Core.ViewModels
                 case 4:
                     ShowViewModel<GistsViewModel>();
                     break;
-                default:
+                case 5:
+                    ShowViewModel<SettingsViewModel>();
                     break;
             }
         }
@@ -159,6 +160,20 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        public void GoToSearchViewModel(string searchterm)
+        {
+            if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
+                return;
+            if (!string.IsNullOrWhiteSpace(searchterm))
+            {
+                ShowViewModel<SearchViewModel>(new
+                {
+                    searchTerm = searchterm,
+                    searchType = SearchTypeEnumeration.Issues
+                });
+            }
+        }
+
         private void ExecuteSearch()
         {
             if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
@@ -170,29 +185,6 @@ namespace GithubXamarin.Core.ViewModels
                     searchTerm = SearchBoxText,
                     searchType = SearchTypeEnumeration.Issues
                 });
-            }
-        }
-
-        //Android Navigation Drawer
-        public void ShowViewModelByNavigationDrawerMenuItem(int itemId)
-        {
-            switch (itemId)
-            {
-                case 0:
-                    ShowViewModel<MainViewModel>();
-                    break;
-                case 1:
-                    ShowViewModel<NotificationsViewModel>();
-                    break;
-                case 2:
-                    ShowViewModel<RepositoriesViewModel>();
-                    break;
-                case 3:
-                    ShowViewModel<IssuesViewModel>();
-                    break;
-                case 4:
-                    //TODO: Gists ViewModel
-                    break;
             }
         }
     }

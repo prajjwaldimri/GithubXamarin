@@ -34,7 +34,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _repositoryClickCommand = _repositoryClickCommand ?? new MvxCommand(NavigateToRepositoryView);
+                _repositoryClickCommand = _repositoryClickCommand ?? new MvxCommand<object>(NavigateToRepositoryView);
                 return _repositoryClickCommand;
             }
         }
@@ -70,16 +70,13 @@ namespace GithubXamarin.Core.ViewModels
         /// <summary>
         /// Navigates To the repository ViewModel
         /// </summary>
-        private void NavigateToRepositoryView()
+        private void NavigateToRepositoryView(object obj)
         {
-            var repository = Repositories?[SelectedIndex];
-            if (repository != null)
-            {
-                ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
-            }
+            var repository = obj as Repository ?? Repositories[SelectedIndex];
+            ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {

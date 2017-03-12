@@ -36,7 +36,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _userClickCommand = _userClickCommand ?? new MvxCommand(NavigateToUserView);
+                _userClickCommand = _userClickCommand ?? new MvxCommand<object>(NavigateToUserView);
                 return _userClickCommand;
             }
         }
@@ -68,14 +68,13 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private void NavigateToUserView()
+        private void NavigateToUserView(object obj)
         {
-            var user = Users?[SelectedIndex];
-            if (user != null)
-                ShowViewModel<UserViewModel>(new { userLogin = user.Login });
+            var user = obj as User ?? Users[SelectedIndex];
+            ShowViewModel<UserViewModel>(new { userLogin = user.Login });
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {

@@ -22,7 +22,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Gist> _gists;
         public ObservableCollection<Gist> Gists
         {
-            get { return _gists;}
+            get { return _gists; }
             set
             {
                 _gists = value;
@@ -33,7 +33,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex;}
+            get { return _selectedIndex; }
             set
             {
                 _selectedIndex = value;
@@ -56,7 +56,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _gistClickCommand = _gistClickCommand ?? new MvxCommand(NavigateToGist);
+                _gistClickCommand = _gistClickCommand ?? new MvxCommand<object>(NavigateToGist);
                 return _gistClickCommand;
             }
         }
@@ -76,7 +76,7 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
@@ -98,12 +98,10 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
-        private void NavigateToGist()
+        private void NavigateToGist(object obj)
         {
-            if (SelectedIndex != null)
-            {
-                ShowViewModel<GistViewModel>(new {gistId = Gists[SelectedIndex].Id});
-            }
+            var gist = obj as Gist ?? Gists[SelectedIndex];
+            ShowViewModel<GistViewModel>(new { gistId = gist.Id });
         }
     }
 }

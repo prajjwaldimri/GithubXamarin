@@ -134,7 +134,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             //Check if repository is starred
             var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.ToString(), Repository.Name);
+            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login.ToString(), Repository.Name);
         }
 
         /// <summary>
@@ -203,7 +203,6 @@ namespace GithubXamarin.Core.ViewModels
                 Repository = await _repoDataService.GetRepository(_repositoryId,
                     GithubClientService.GetAuthorizedGithubClient());
                 Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Repository.FullName}" });
-                await CheckRepositoryStats();
             }
             catch (HttpRequestException)
             {

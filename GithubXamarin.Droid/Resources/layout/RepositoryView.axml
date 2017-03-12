@@ -1,7 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:gravity="center">
+      <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/toggleButton2"
+            android:textOff="Star"
+            android:textOn="UnStar"
+            local:MvxBind="Checked IsRepositoryStarred, Mode=OneWay; Click StarClickCommand"/>
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/toggleButton1"
+            android:layout_marginRight="10dp"
+            android:textOff="Fork"
+            android:textOn="Fork"/>
+    </LinearLayout>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" 
+        local:MvxBind="Text Repository.Owner.Login"/>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:layout_marginBottom="10dp" 
+        local:MvxBind="Text Repository.Description"/>
+    <Button
+        android:text="Readme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" 
+        local:MvxBind="Click ReadmeClickCommand"/>
+    
+    <Button
+        android:text="Forks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" />
+    
+    <Button
+        android:text="Releases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" />
+    <Button
+        android:text="Recent Acvitity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" />
+  <Button
+        android:text="Collaborators"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        local:MvxBind="Click CollaboratorsClickCommand"/>
+    <Button
+        android:text="Stargazers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button7"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" 
+        local:MvxBind="Click StargazersClickCommand"/>
+    <Button
+        android:text="PullRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button8"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" />
+  <Button
+        android:text="Issues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" 
+        local:MvxBind="Click IssuesClickCommand"/>
 </LinearLayout>

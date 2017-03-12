@@ -69,7 +69,7 @@ namespace GithubXamarin.UWP
             {
                 if (rootFrame.Content == null)
                 {
-                    SetStatusBarVisibility();
+                    await SetStatusBarVisibility();
                     await RegisterBackgroundTask();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
@@ -163,7 +163,7 @@ namespace GithubXamarin.UWP
             }
         }
 
-        private void SetStatusBarVisibility()
+        private async Task SetStatusBarVisibility()
         {
             if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 return;
@@ -178,17 +178,17 @@ namespace GithubXamarin.UWP
                 switch (localSettingsValues["StatusBarVisibility"].ToString())
                 {
                     case "Hidden":
-                        statusBar.HideAsync();
+                        await statusBar.HideAsync();
                         break;
                     case "Visible":
-                        statusBar.ShowAsync();
+                        await statusBar.ShowAsync();
                         break;
                 }
             }
             else
             {
                 localSettingsValues.Add("StatusBarVisibility", "Hidden");
-                statusBar.HideAsync();
+                await statusBar.HideAsync();
             }
         }
 

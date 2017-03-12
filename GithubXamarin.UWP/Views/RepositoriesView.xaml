@@ -28,21 +28,16 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-                <ListView.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel 
                         HorizontalAlignment="Stretch"
                         Padding="15"
                         VerticalAlignment="Center">
-                        
-                        <StackPanel 
-                            Margin="0,0,0,0" 
-                            Orientation="Horizontal">
-                            
-                            <TextBlock
+
+                        <TextBlock
                                 Style="{StaticResource SubtitleTextBlockStyle}" 
                                 Text="{Binding Name}"/>
-                        </StackPanel>
 
                         <TextBlock 
                             Opacity="0.8"
@@ -53,32 +48,32 @@
                         <StackPanel
                             Margin="0,5,0,0" 
                             Orientation="Horizontal">
-                            
+
                             <TextBlock
                                 Opacity="0.6"
                                 Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
                                 Text="{Binding Language}"
                                 Margin="0,0,10,0"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
-                            
+
                             <FontIcon
                                 Opacity="0.6"
                                 FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                                 Glyph="&#xf005;"
                                 Margin="0,0,1,0"
                                 FontSize="15"/>
-                            
+
                             <TextBlock
                                 Opacity="0.6"
                                 Text="{Binding StargazersCount}"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
-                            
+
                             <TextBlock
                                 Opacity="0.6"
                                 Text="Last Updated:"
                                 Margin="10,0,2,0"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
-                            
+
                             <TextBlock
                                 Opacity="0.6"
                                 Text="{Binding UpdatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
@@ -89,7 +84,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </controls:PullToRefreshListView>
-        
+
         <CommandBar
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"

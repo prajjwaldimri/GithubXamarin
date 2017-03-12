@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="square.picasso" is-shell="true">
+  <name>Picasso</name>
+  <publisher>Xamarin Inc</publisher>
+  <publisher-url>http://xamarin.com</publisher-url>
+  <src-url>https://github.com/mattleibow/square-bindings</src-url>
+  <version>2.5.2.2</version>
+  <summary>A powerful image downloading and caching library for Android.</summary>
+  <packages>
+    <package id="Square.OkIO" version="1.5.0.0" framework="android" />
+    <package id="Square.OkHttp" version="2.4.0.1" framework="android" />
+    <package id="Square.Picasso" version="2.5.2.1" framework="android" />
+  </packages>
+  <samples>
+    <sample id="PicassoSample">
+      <name>Android Sample</name>
+      <summary>Android Sample</summary>
+    </sample>
+  </samples>
+</component>

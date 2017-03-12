@@ -9,96 +9,95 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
-    <ScrollViewer>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <Grid Padding="10">
 
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-              Padding="10">
-
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
 
-            <TextBlock 
+                <TextBlock 
                 Text="{Binding Issue.State}"
                 VerticalAlignment="Center"
                 Grid.Row="0"
                 Grid.Column="0"/>
 
-            <StackPanel
+                <StackPanel
                 Orientation="Horizontal"
                 Grid.Row="1" 
                 Grid.Column="0">
-                <TextBlock 
+                    <TextBlock 
                     Text="{Binding Issue.Title}" 
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
                     TextWrapping="WrapWholeWords"/>
 
-                <TextBlock
+                    <TextBlock
                     Text="#"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"/>
 
-                <TextBlock
+                    <TextBlock
                     Text="{Binding Issue.Number}"
                     VerticalAlignment="Center"/>
-            </StackPanel>
+                </StackPanel>
 
-            <StackPanel 
+                <StackPanel 
                 Orientation="Horizontal"
                 Grid.Row="2"
                 Grid.Column="0"
                 VerticalAlignment="Stretch">
-                <Rectangle
+                    <Rectangle
                     Height="40" 
                     Width="40">
-                    <Rectangle.Fill>
-                        <ImageBrush 
+                        <Rectangle.Fill>
+                            <ImageBrush 
                             ImageSource="{Binding Issue.User.AvatarUrl}"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <TextBlock 
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock 
                     Text="{Binding Issue.User.Name}"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"/>
 
-                <TextBlock
-                    Text=" opened this issue at"
+                    <TextBlock
+                    Text=" opened this issue "
                     Margin="0,0,5,0"
                     VerticalAlignment="Center"/>
 
-                <TextBlock 
-                    Text="{Binding Issue.CreatedAt}" 
+                    <TextBlock 
+                    Text="{Binding Issue.CreatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}" 
                     VerticalAlignment="Center"/>
-            </StackPanel>
+                </StackPanel>
 
-            <!--Labels -->
+                <!--Labels -->
 
-            <ListView 
+                <ListView 
                 Grid.Row="3" 
                 ItemsSource="{Binding Issue.Labels}">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel 
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel 
                             Orientation="Horizontal"
                             HorizontalAlignment="Left"
                             IsTapEnabled="False"
                             IsHitTestVisible="False"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBox Text="{Binding Name}" 
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Name}" 
                                  FontSize="14" 
                                  IsReadOnly="True"
                                  SelectionHighlightColor="Transparent" 
@@ -112,27 +111,26 @@
                                  BorderBrush="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
                                  VerticalAlignment="Stretch" 
                                  HorizontalAlignment="Left"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-            <controls:MarkdownTextBlock 
+                <controls:MarkdownTextBlock 
                     Grid.Row="4" 
                     Grid.RowSpan="5"
                     Grid.Column="0" 
                     Text="{Binding Issue.Body}"/>
 
-            <CommandBar
+                <!-- TODO: Add usercontrol for comments here -->
+            </Grid>
+        </ScrollViewer>
+        <CommandBar
             VerticalAlignment="Bottom">
 
-                <AppBarButton Icon="Refresh"
+            <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
-            </CommandBar>
-
-            <!-- TODO: Add usercontrol for comments here -->
-        </Grid>
-
-    </ScrollViewer>
+        </CommandBar>
+    </Grid>
 </views:MvxWindowsPage>
 
