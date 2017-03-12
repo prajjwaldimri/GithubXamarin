@@ -14,12 +14,12 @@ This project adheres to the Contributor Covenant [code of conduct](https://githu
 By participating, you are expected to uphold this code. 
 Please report unacceptable behavior to prajjwaldimri@outlook.com
 
-# Prerequisites for Building Solution
+## Prerequisites for Building Solution
 
 * [Visual Studio 2015](visualstudio.com) (Required)
 * [Supercharger](supercharger.tools) (Optional)
 * [Pencil](https://github.com/evolus/pencil/) (Optional)
 
-# License
+## License
 
 [GNU General Public License](https://github.com/prajjwaldimri/GithubXamarin/blob/master/LICENSE)

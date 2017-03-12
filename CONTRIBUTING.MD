@@ -8,7 +8,7 @@ today! As a contributor, here are the guidelines we would like you to follow:
 - [Issues and Bugs](#found-a-bug)
 - [Feature Requests](#missing-a-feature)
 - [Submission Guidelines](#submission-guidelines)
-- [Programming Guidelines](#progamming-guidelines)
+- [Programming Guidelines](#programming-guidelines)
 - [Git-Flow](git-flow)
 
 
