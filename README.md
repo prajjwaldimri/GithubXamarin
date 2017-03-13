@@ -4,6 +4,7 @@
 
 GithubXamarin(or GitIt) is a cross platform application for https://github.com which is built with Xamarin.
 
+[![Gratipay User](https://img.shields.io/gratipay/user/prajjwaldimri.svg)](https://gratipay.com/prajjwaldimri/)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/GithubUWP/Lobby)
 [![Build status](https://ci.appveyor.com/api/projects/status/ud7on9hsorejkbys?svg=true)](https://ci.appveyor.com/project/prajjwaldimri/githubuwp)
 [![GitHub issues](https://img.shields.io/github/issues/prajjwaldimri/GithubUWP.svg?maxAge=2592000?style=flat-square)](https://github.com/prajjwaldimri/GithubXamarin/issues)
