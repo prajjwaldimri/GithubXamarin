@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:background="@color/colorPrimaryDark"
-    android:orientation="vertical"
-    android:clickable="true"
-    local:MvxBind="Click GoToUserProfileCommand">
+    android:orientation="vertical">
     <MvxImageView
         android:id="@+id/profile_image"
         android:layout_width="76dp"
         android:layout_height="76dp"
-        local:MvxBind="ImageUrl User.AvatarUrl"
+        local:MvxBind="ImageUrl User.AvatarUrl; Click GoToUserProfileCommand"
         android:layout_marginLeft="24dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
@@ -20,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        local:MvxBind="Text User.Name"
+        local:MvxBind="Text User.Name; Click GoToUserProfileCommand"
         android:textSize="14sp"
         android:textColor="#FFF"
         android:textStyle="bold"
@@ -33,7 +31,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        local:MvxBind="Text User.Email"
+        local:MvxBind="Text User.Email; Click GoToUserProfileCommand"
         android:id="@+id/email"
         android:gravity="left"
         android:layout_marginBottom="8dp"

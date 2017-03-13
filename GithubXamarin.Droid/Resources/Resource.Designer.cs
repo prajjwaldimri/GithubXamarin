@@ -2756,47 +2756,47 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06007f
 			public const int textView1 = 2131099775;
 			
-			// aapt resource value: 0x7f0600b0
-			public const int textView10 = 2131099824;
+			// aapt resource value: 0x7f0600af
+			public const int textView10 = 2131099823;
+			
+			// aapt resource value: 0x7f0600b1
+			public const int textView11 = 2131099825;
 			
 			// aapt resource value: 0x7f0600b2
-			public const int textView11 = 2131099826;
-			
-			// aapt resource value: 0x7f0600b3
-			public const int textView12 = 2131099827;
-			
-			// aapt resource value: 0x7f0600b5
-			public const int textView13 = 2131099829;
+			public const int textView12 = 2131099826;
 			
 			// aapt resource value: 0x7f0600b4
-			public const int textView14 = 2131099828;
+			public const int textView13 = 2131099828;
+			
+			// aapt resource value: 0x7f0600b3
+			public const int textView14 = 2131099827;
+			
+			// aapt resource value: 0x7f0600b5
+			public const int textView15 = 2131099829;
 			
 			// aapt resource value: 0x7f0600b6
-			public const int textView15 = 2131099830;
-			
-			// aapt resource value: 0x7f0600b7
-			public const int textView16 = 2131099831;
-			
-			// aapt resource value: 0x7f0600b9
-			public const int textView17 = 2131099833;
+			public const int textView16 = 2131099830;
 			
 			// aapt resource value: 0x7f0600b8
-			public const int textView18 = 2131099832;
+			public const int textView17 = 2131099832;
 			
-			// aapt resource value: 0x7f0600ba
-			public const int textView19 = 2131099834;
+			// aapt resource value: 0x7f0600b7
+			public const int textView18 = 2131099831;
+			
+			// aapt resource value: 0x7f0600b9
+			public const int textView19 = 2131099833;
 			
 			// aapt resource value: 0x7f060083
 			public const int textView2 = 2131099779;
 			
-			// aapt resource value: 0x7f0600bb
-			public const int textView20 = 2131099835;
-			
-			// aapt resource value: 0x7f0600bd
-			public const int textView21 = 2131099837;
+			// aapt resource value: 0x7f0600ba
+			public const int textView20 = 2131099834;
 			
 			// aapt resource value: 0x7f0600bc
-			public const int textView22 = 2131099836;
+			public const int textView21 = 2131099836;
+			
+			// aapt resource value: 0x7f0600bb
+			public const int textView22 = 2131099835;
 			
 			// aapt resource value: 0x7f060085
 			public const int textView3 = 2131099781;
@@ -2810,14 +2810,14 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f0600ac
 			public const int textView6 = 2131099820;
 			
+			// aapt resource value: 0x7f0600bd
+			public const int textView7 = 2131099837;
+			
 			// aapt resource value: 0x7f0600ae
-			public const int textView7 = 2131099822;
+			public const int textView8 = 2131099822;
 			
-			// aapt resource value: 0x7f0600af
-			public const int textView8 = 2131099823;
-			
-			// aapt resource value: 0x7f0600b1
-			public const int textView9 = 2131099825;
+			// aapt resource value: 0x7f0600b0
+			public const int textView9 = 2131099824;
 			
 			// aapt resource value: 0x7f06007a
 			public const int text_input_password_toggle = 2131099770;
