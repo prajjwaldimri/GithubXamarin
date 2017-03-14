@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +30,11 @@ namespace GithubXamarin.UWP
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             NavMenuList.SelectedIndex = 0;
             NavMenuList.SetSelectedItem(NavMenuList.Items[0] as NavMenuItem);
+            if (!(Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported()))
+            {
+                FeedbackNavPaneButton.Visibility = Visibility.Collapsed;
+                FeedbackEmailNavPaneButton.Visibility = Visibility.Visible;
+            }
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -156,6 +162,18 @@ namespace GithubXamarin.UWP
                     ((Frame)sender).CanGoBack
                         ? AppViewBackButtonVisibility.Visible
                         : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private async void FeedbackNavPaneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+            await launcher.LaunchAsync();
+        }
+
+        private async void FeedbackEmailNavPaneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var uri = new Uri(@"mailto: prajjwaldimri@hotmail.com");
+            await Windows.System.Launcher.LaunchUriAsync(uri);
         }
     }
 }
