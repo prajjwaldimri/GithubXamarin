@@ -220,8 +220,20 @@
                         Grid.Column="1"
                         Style="{StaticResource SplitViewPaneButtonStyle}"
                         Content="&#xE76E;"
+                        Click="FeedbackNavPaneButton_OnClick"
                         AutomationProperties.Name="Feedback"
                         ToolTipService.ToolTip="Feedback"/>
+
+                    <Button
+                        x:Name="FeedbackEmailNavPaneButton"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Style="{StaticResource SplitViewPaneButtonStyle}"
+                        Content="&#xE119;"
+                        Click="FeedbackEmailNavPaneButton_OnClick"
+                        AutomationProperties.Name="Feedback"
+                        ToolTipService.ToolTip="Feedback"
+                        Visibility="Collapsed"/>
 
                     <Button
                         x:Name="SettingsNavPaneButton"

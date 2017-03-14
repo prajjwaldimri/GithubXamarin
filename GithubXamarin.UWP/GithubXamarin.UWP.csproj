@@ -312,6 +312,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
     <SDKReference Include="Microsoft.UniversalCRT.Debug, Version=10.0.14393.0">
       <Name>Microsoft Universal CRT Debug Runtime</Name>
     </SDKReference>
