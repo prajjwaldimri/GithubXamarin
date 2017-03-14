@@ -56,4 +56,4 @@ that relates to your submission to avoid duplicate effort. Also, you have to fol
 
 ## Git Flow
 
-Will be added after the first public release of the app.
+This repository uses Git-Flow branching model. Please read about it here: https://github.com/petervanderdoes/gitflow-avh
