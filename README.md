@@ -17,8 +17,8 @@ Please report unacceptable behavior to prajjwaldimri@outlook.com
 
 ## Prerequisites for Building Solution
 
-* [Visual Studio 2015](visualstudio.com) (Required)
-* [Supercharger](supercharger.tools) (Optional)
+* [Visual Studio 2015](visualstudio.com) or greater (Required)
+* [Resharper](https://www.jetbrains.com/resharper/) (Optional)
 * [Pencil](https://github.com/evolus/pencil/) (Optional)
 
 ## License
