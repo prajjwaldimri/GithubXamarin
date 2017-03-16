@@ -18,7 +18,6 @@ namespace GithubXamarin.UWP.Background
         private string _toastTitle;
         private string _toastContent;
         private string _toastLogo;
-        private Credentials _passwordCredential;
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -31,19 +30,19 @@ namespace GithubXamarin.UWP.Background
             var client = new GitHubClient(new ProductHeaderValue("gitit"));
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
-                _passwordCredential = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
-                client.Credentials = new Credentials(_passwordCredential.Password);
+                client.Credentials = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
                 var notificationRequest = new NotificationsRequest
                 {
                     Since =
                         DateTimeOffset.Now.Subtract(new TimeSpan(0,
                             int.Parse(localSettingsValues["BackgroundTaskTime"].ToString()), 0))
                 };
-                var notifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
+                var notifications = await client.Activity.Notifications.GetAllForCurrent();
                 foreach (var notification in notifications)
                 {
                     _toastTitle = $"{notification.Subject.Title}";
                     _toastContent = $"in {notification.Repository.FullName} ({Convert.ToDateTime(notification.UpdatedAt).Humanize()})";
+
                     #region Toast-Notification Payload
                     //Reference: https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/07/08/quickstart-sending-a-local-toast-notification-and-handling-activations-from-it-windows-10/
 
@@ -63,11 +62,13 @@ namespace GithubXamarin.UWP.Background
                     //Interactive buttons to Toast
                     var toastActions = new ToastActionsCustom()
                     {
+                        
                         Buttons =
                             {
                                 new ToastButton("Mark As Read",new QueryString()
                                 {
-                                    {"action", "markAsRead" }
+                                    {"action", "markAsRead" },
+                                    {"notificationId", notification.Id }
                                 }.ToString())
                                 {
                                     ActivationType = ToastActivationType.Background
@@ -78,7 +79,12 @@ namespace GithubXamarin.UWP.Background
                     var toastContent = new ToastContent()
                     {
                         Visual = toastVisual,
-                        Actions = toastActions
+                        Actions = toastActions,
+
+                        Launch = new QueryString()
+                        {
+                            {"notificationId", notification.Id }
+                        }.ToString()
                     };
 
                     #endregion
