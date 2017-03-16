@@ -83,11 +83,110 @@ namespace GithubXamarin.UWP.Background
 
                     #endregion
 
-                    var toast = new ToastNotification(toastContent.GetXml()) {Tag = "1"};
+                    #region Tile Payload
+
+                    // https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/06/30/adaptive-tile-templates-schema-and-documentation/
+
+                    var tileContent = new TileContent()
+                    {
+                        Visual = new TileVisual()
+                        {
+                            Branding = TileBranding.NameAndLogo,
+                            TileMedium = new TileBinding()
+                            {
+                                Content = new TileBindingContentAdaptive()
+                                {
+                                    Children =
+                                    {
+                                        new AdaptiveGroup()
+                                        {
+                                            Children =
+                                            {
+                                                new AdaptiveSubgroup()
+                                                {
+                                                    Children =
+                                                    {
+                                                        new AdaptiveText()
+                                                        {
+                                                            Text = _toastTitle,
+                                                            HintWrap = true,
+                                                            HintStyle = AdaptiveTextStyle.Body
+                                                        },
+                                                        new AdaptiveText()
+                                                        {
+                                                            Text = _toastContent,
+                                                            HintWrap = true,
+                                                            HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            TileWide = new TileBinding()
+                            {
+                                Content = new TileBindingContentAdaptive()
+                                {
+                                    Children =
+                                    {
+                                        CreateGroup(_toastTitle, _toastContent)
+                                    }
+                                }
+                            },
+                            TileLarge = new TileBinding()
+                            {
+                                Content = new TileBindingContentAdaptive()
+                                {
+                                    Children =
+                                    {
+                                        CreateGroup(_toastTitle, _toastContent)
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    #endregion
+
+                    var toast = new ToastNotification(toastContent.GetXml()) { Tag = "1" };
                     ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+                    // Update tile
+                    var tileNotification = new TileNotification(tileContent.GetXml());
+                    TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
                 }
             }
             _deferral.Complete();
+        }
+
+        private static AdaptiveGroup CreateGroup(string title, string body)
+        {
+            return new AdaptiveGroup()
+            {
+                Children =
+                {
+                    new AdaptiveSubgroup()
+                    {
+                        Children =
+                        {
+                            new AdaptiveText()
+                            {
+                                Text = title,
+                                HintWrap = true,
+                                HintStyle = AdaptiveTextStyle.Subtitle
+                            },
+                            new AdaptiveText()
+                            {
+                                Text = body,
+                                HintWrap = true,
+                                HintStyle = AdaptiveTextStyle.CaptionSubtle
+                            }
+                        }
+                    }
+                }
+            };
         }
     }
 }
