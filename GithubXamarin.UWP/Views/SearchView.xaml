@@ -56,8 +56,7 @@
                 IsItemClickEnabled="True" 
                 SelectionMode="Single"
                 SelectedIndex="{Binding RepositoriesSelectedIndex, Mode=TwoWay}"
-                Visibility="Collapsed"
-                IsHitTestVisible="False">
+                Visibility="Collapsed">
                 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">
@@ -123,7 +122,6 @@
                 ItemsSource="{Binding Users}"
                 IsItemClickEnabled="True" 
                 SelectionMode="Single"
-                IsHitTestVisible="False"
                 Visibility="Collapsed"
                 SelectedIndex="{Binding UsersSelectedIndex, Mode=TwoWay}">
                 
@@ -166,8 +164,7 @@
                 IsItemClickEnabled="True" 
                 SelectionMode="Single"
                 SelectedIndex="{Binding IssuesSelectedIndex, Mode=TwoWay}"
-                Visibility="Visible"
-                IsHitTestVisible="True">
+                Visibility="Visible">
                 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">

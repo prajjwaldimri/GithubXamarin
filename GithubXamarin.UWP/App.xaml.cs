@@ -70,7 +70,8 @@ namespace GithubXamarin.UWP
                 if (rootFrame.Content == null)
                 {
                     await SetStatusBarVisibility();
-                    await RegisterBackgroundTask();
+                    await RegisterGithubNotificationsBackgroundTask();
+                    await RegisterMarkNotificationAsReadBackgroundTask();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 
@@ -106,7 +107,7 @@ namespace GithubXamarin.UWP
             deferral.Complete();
         }
 
-        private async Task RegisterBackgroundTask()
+        private async Task RegisterGithubNotificationsBackgroundTask()
         {
             // Register GithubNotificationsBackgroundTask
             const string taskName = "GithubNotificationsBackgroundTask";
@@ -132,6 +133,35 @@ namespace GithubXamarin.UWP
                             typeof(Background.GithubNotificationsBackgroundTask).FullName;
                         var task = builder.Register();
                         localSettingsValues["BackgroundTaskTime"] = 15;
+                        break;
+                }
+            }
+        }
+
+        private async Task RegisterMarkNotificationAsReadBackgroundTask()
+        {
+            // Register GithubNotificationsBackgroundTask
+            const string taskName = "MarkNotificationAsReadBackgroundTask";
+
+            var taskRegistered = BackgroundTaskRegistration.AllTasks.Any(task => task.Value.Name == taskName);
+
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder();
+
+                var access = await BackgroundExecutionManager.RequestAccessAsync();
+                switch (access)
+                {
+                    case BackgroundAccessStatus.DeniedByUser:
+                    case BackgroundAccessStatus.DeniedBySystemPolicy:
+                        break;
+                    default:
+                        builder.Name = taskName;
+                        builder.SetTrigger(new ToastNotificationActionTrigger());
+                        builder.IsNetworkRequested = true;
+                        builder.TaskEntryPoint =
+                            typeof(Background.MarkNotificationAsReadBackgroundTask).FullName;
+                        var task = builder.Register();
                         break;
                 }
             }

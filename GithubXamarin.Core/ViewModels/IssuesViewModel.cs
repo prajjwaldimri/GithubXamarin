@@ -40,7 +40,7 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         //View Properties
-        public int SelectedIssue { get; set; }
+        public int SelectedIndex { get; set; }
 
         private ObservableCollection<Issue> _issues;
         public ObservableCollection<Issue> Issues
@@ -70,7 +70,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private void NavigateToIssueView(object obj)
         {
-            var issue = obj as Issue ?? Issues[SelectedIssue];
+            var issue = obj as Issue ?? Issues[SelectedIndex];
             ShowViewModel<IssueViewModel>(new
             {
                 issueNumber = issue.Number,
