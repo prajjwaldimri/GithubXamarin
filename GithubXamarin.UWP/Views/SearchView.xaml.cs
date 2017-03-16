@@ -29,27 +29,24 @@ namespace GithubXamarin.UWP.Views
             {
                 case "Issues":
                     IssuesListView.Visibility = Visibility.Visible;
-                    IssuesListView.IsHitTestVisible = true;
+                    IssuesListView.SelectionMode = ListViewSelectionMode.None;
+                    IssuesListView.SelectionMode = ListViewSelectionMode.Single;
                     RepositoriesListView.Visibility = Visibility.Collapsed;
-                    RepositoriesListView.IsHitTestVisible = false;
                     UsersListView.Visibility = Visibility.Collapsed;
-                    UsersListView.IsHitTestVisible = false;
                     break;
                 case "Repos":
                     RepositoriesListView.Visibility = Visibility.Visible;
-                    RepositoriesListView.IsHitTestVisible = true;
+                    RepositoriesListView.SelectionMode = ListViewSelectionMode.None;
+                    RepositoriesListView.SelectionMode = ListViewSelectionMode.Single;
                     IssuesListView.Visibility = Visibility.Collapsed;
-                    IssuesListView.IsHitTestVisible = false;
                     UsersListView.Visibility = Visibility.Collapsed;
-                    UsersListView.IsHitTestVisible = false;
                     break;
                 case "Users":
                     UsersListView.Visibility = Visibility.Visible;
-                    UsersListView.IsHitTestVisible = true;
+                    UsersListView.SelectionMode = ListViewSelectionMode.None;
+                    UsersListView.SelectionMode = ListViewSelectionMode.Single;
                     IssuesListView.Visibility = Visibility.Collapsed;
-                    IssuesListView.IsHitTestVisible = false;
                     RepositoriesListView.Visibility = Visibility.Collapsed;
-                    RepositoriesListView.IsHitTestVisible = false;
                     break;
             }
         }

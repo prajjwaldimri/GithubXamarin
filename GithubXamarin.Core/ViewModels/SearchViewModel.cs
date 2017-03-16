@@ -130,10 +130,11 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
 
             SearchCommand = new MvxCommand(ExecuteSearch);
-            IssueClickCommand = new MvxCommand<Issue>(GoToIssue);
-            RepositoryClickCommand = new MvxCommand<Repository>(GoToRepository);
-            
-            UserClickCommand = new MvxCommand<User>(GoToUser);
+
+            IssueClickCommand = new MvxCommand<object>(GoToIssue);
+            RepositoryClickCommand = new MvxCommand<object>(GoToRepository);
+            UserClickCommand = new MvxCommand<object>(GoToUser);
+
             FilterIndexUpdaterCommand = new MvxCommand<string>(UpdateFilterIndex);
         }
 
@@ -163,36 +164,29 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private void GoToIssue(Issue issue)
+        private void GoToIssue(object obj)
         {
-            if (issue == null)
-            {
-                issue = Issues[IssuesSelectedIndex];
-            }
+            if (IssuesSelectedIndex < 0) { return; }
+            var issue = obj as Issue ?? Issues[IssuesSelectedIndex];
             ShowViewModel<IssueViewModel>(new
             {
                 issueNumber = issue.Number,
-                owner = issue.User.Login,
-                repoName = HtmlUrlToRepositoryNameConverter.Convert
-                (issue.HtmlUrl.AbsoluteUri, issue.User.Login)
+                owner = issue.HtmlUrl.Segments[1].Remove(issue.HtmlUrl.Segments[1].Length-1),
+                repoName = issue.HtmlUrl.Segments[2].Remove(issue.HtmlUrl.Segments[2].Length-1)
             });
         }
 
-        private void GoToRepository(Repository repository)
+        private void GoToRepository(object obj)
         {
-            if (repository == null)
-            {
-                repository = Repositories[RepositoriesSelectedIndex];
-            }
+            if (RepositoriesSelectedIndex < 0) { return; }
+            var repository = obj as Repository ?? Repositories[RepositoriesSelectedIndex];
             ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
-        private void GoToUser(User user)
+        private void GoToUser(object obj)
         {
-            if (user == null)
-            {
-                user = Users[UsersSelectedIndex];
-            }
+            if (UsersSelectedIndex < 0) { return; }
+            var user = obj as User ?? Users[UsersSelectedIndex];
             ShowViewModel<UserViewModel>(new { userLogin = user.Login });
         }
 
