@@ -37,7 +37,7 @@ namespace GithubXamarin.UWP.Background
                         DateTimeOffset.Now.Subtract(new TimeSpan(0,
                             int.Parse(localSettingsValues["BackgroundTaskTime"].ToString()), 0))
                 };
-                var notifications = await client.Activity.Notifications.GetAllForCurrent();
+                var notifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
                 foreach (var notification in notifications)
                 {
                     _toastTitle = $"{notification.Subject.Title}";

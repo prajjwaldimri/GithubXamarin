@@ -14,7 +14,7 @@ namespace GithubXamarin.Core.UnitTests
         [TestMethod]
         public void HtmlUrlToRepositoryNameConverterTestForDefaultValues()
         {
-            var result = HtmlUrlToRepositoryNameConverter.Convert("https://github.com/prajjwaldimri/GithubXamarin/issues/24", "prajjwaldimri");
+            var result = HtmlUrlToRepositoryNameConverter.Convert("https://github.com/prajjwaldimri/GithubXamarin/issues/50", "prajjwaldimri");
             Assert.AreEqual("GithubXamarin", result);
         }
 
