@@ -141,8 +141,11 @@ namespace GithubXamarin.Core.ViewModels
         public async void Init(string searchTerm, SearchTypeEnumeration searchType)
         {
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+
+            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Searching For {searchTerm}" });
             SearchBoxText = searchTerm;
             await Search(searchTerm, searchType);
+
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
