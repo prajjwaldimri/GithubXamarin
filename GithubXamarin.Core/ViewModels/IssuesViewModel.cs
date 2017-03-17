@@ -54,6 +54,7 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         private long? _repositoryId;
+        private bool _allIssues;
 
         #endregion
 
@@ -62,9 +63,16 @@ namespace GithubXamarin.Core.ViewModels
             _issueDataService = issueDataService;
         }
 
-        public async void Init(long? repositoryId = null)
+        public async void Init(long repositoryId)
         {
-            _repositoryId = repositoryId;
+            if (repositoryId > 0)
+            {
+                _repositoryId = repositoryId;
+            }
+            else
+            {
+                _repositoryId = null;
+            }
             await Refresh();
         }
 
@@ -74,7 +82,7 @@ namespace GithubXamarin.Core.ViewModels
             ShowViewModel<IssueViewModel>(new
             {
                 issueNumber = issue.Number,
-                repositoryId = issue.Repository.Id,
+                repositoryId = _repositoryId ?? issue.Repository.Id,
             });
         }
 
@@ -92,9 +100,10 @@ namespace GithubXamarin.Core.ViewModels
                 {
                     Issues = await _issueDataService.GetAllIssuesForRepository(_repositoryId.Value,
                         GithubClientService.GetAuthorizedGithubClient());
+                    var repoUrl = Issues[0].HtmlUrl.Segments[2];
                     Messenger.Publish(new AppBarHeaderChangeMessage(this)
                     {
-                        HeaderTitle = $"Issues for {Issues[0]?.Repository.FullName}"
+                        HeaderTitle = $"Issues for {repoUrl.Remove(repoUrl.Length-1)}"
                     });
                 }
                 else
