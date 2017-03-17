@@ -4,6 +4,7 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using GithubXamarin.Core.Utility;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -34,6 +35,16 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
                 return _refreshCommand;
+            }
+        }
+
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewIssue);
+                return _editCommand;
             }
         }
 
@@ -87,6 +98,23 @@ namespace GithubXamarin.Core.ViewModels
                 await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private async Task GoToNewIssue()
+        {
+            if (!IsInternetAvailable())
+            {
+                await DialogService.ShowDialogASync("There is nothing here.", "Edit What?");
+                return;
+            }
+            ShowViewModel<NewIssueViewModel>(new
+            {
+                repositoryId = _repositoryId,
+                issueNumber = Issue.Number,
+                issueTitle = Issue.Title,
+                issueBody = Issue.Body,
+                labels = ListToCommasSeperatedStringConverter.Convert(Issue.Labels)
+            });
         }
     }
 }

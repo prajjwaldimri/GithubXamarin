@@ -100,6 +100,7 @@
     <Compile Include="Services\General\GithubClientService.cs" />
     <Compile Include="Services\General\SecureKeysRetrievingService.cs" />
     <Compile Include="Utility\HtmlUrlToRepositoryNameConverter.cs" />
+    <Compile Include="Utility\ListToCommasSeperatedStringConverter.cs" />
     <Compile Include="Utility\StringToStringArrayConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EventsViewModel.cs" />

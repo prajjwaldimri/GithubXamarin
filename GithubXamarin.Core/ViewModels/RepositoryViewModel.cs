@@ -111,6 +111,16 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _addCommand;
+        public ICommand AddCommand
+        {
+            get
+            {
+                _addCommand = _addCommand ?? new MvxAsyncCommand(GoToNewIssueView);
+                return _addCommand;
+            }
+        }
+
         private long _repositoryId;
 
         #endregion
@@ -191,6 +201,16 @@ namespace GithubXamarin.Core.ViewModels
         private void NavigateToReadme()
         {
             ShowViewModel<FileViewModel>(new {fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id});
+        }
+
+        private async Task GoToNewIssueView()
+        {
+            if (!IsInternetAvailable()) return;
+            ShowViewModel<NewIssueViewModel>(new
+            {
+                repositoryId = Repository.Id
+            });
+
         }
 
         private async Task Refresh()

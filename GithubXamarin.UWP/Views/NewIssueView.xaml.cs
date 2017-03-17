@@ -1,4 +1,7 @@
-﻿using MvvmCross.WindowsUWP.Views;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using MvvmCross.WindowsUWP.Views;
 
 namespace GithubXamarin.UWP.Views
 {
@@ -8,6 +11,16 @@ namespace GithubXamarin.UWP.Views
         public NewIssueView()
         {
             this.InitializeComponent();
+        }
+
+        private void SubmitButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var focusObj = FocusManager.GetFocusedElement();
+            if (focusObj is TextBox)
+            {
+                var binding = (focusObj as TextBox).GetBindingExpression(TextBox.TextProperty);
+                binding.UpdateSource();
+            }
         }
     }
 }

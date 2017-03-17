@@ -127,6 +127,10 @@
         <CommandBar
             VerticalAlignment="Bottom">
 
+            <AppBarButton Icon="Edit"
+                          Label="Edit"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>

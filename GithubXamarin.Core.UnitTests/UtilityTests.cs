@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Octokit;
 
 namespace GithubXamarin.Core.UnitTests
 {
@@ -30,6 +31,19 @@ namespace GithubXamarin.Core.UnitTests
         {
             var result = HtmlUrlToRepositoryNameConverter.Convert("        ", "   ");
             Assert.AreEqual(string.Empty, result);
+        }
+
+        [TestMethod]
+        public void ListToCommasSeperatedStringConverterTestForDefaultValues()
+        {
+            var result = ListToCommasSeperatedStringConverter.Convert(new List<string>(4)
+            {
+                "First",
+                "Second",
+                "Third",
+                "Forth"
+            });
+            Assert.AreEqual("First, Second, Third, Forth", result);
         }
     }
 }
