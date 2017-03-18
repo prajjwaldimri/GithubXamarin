@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
+using GithubXamarin.Core.Utility;
 using Octokit;
 
 namespace GithubXamarin.Core.Services.Data
@@ -38,6 +39,22 @@ namespace GithubXamarin.Core.Services.Data
         public async Task<Issue> GetIssueForRepository(string owner, string repoName, int issueNumber, GitHubClient authorizedGitHubClient)
         {
             return await _issueRepository.GetIssueForRepository(owner, repoName, issueNumber, authorizedGitHubClient);
+        }
+
+        public async Task<Issue> CreateIssue(long repositoryId, NewIssue newIssueDetails, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.CreateIssue(repositoryId, newIssueDetails, authorizedGitHubClient);
+        }
+
+        public async Task<Issue> UpdateIssue(long repositoryId, int issueNumber, IssueUpdate updatedIssueDetails, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.UpdateIssue(repositoryId, issueNumber, updatedIssueDetails,
+                authorizedGitHubClient);
+        }
+
+        public async Task UpdateLabels(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGitHubClient)
+        {
+            await _issueRepository.UpdateLabels(repositoryId, issueNumber, StringToStringArrayConverter.Convert(labels), authorizedGitHubClient);
         }
     }
 }

@@ -49,5 +49,15 @@ namespace GithubXamarin.Core.Services.Data
         {
             return await _repoRepository.UnStarRepository(repositoryOwner, repositoryName, authorizedGithubClient);
         }
+
+        public async Task<Repository> CreateRepository(NewRepository newRepositoryDetails, GitHubClient authorizedGitHubClient)
+        {
+            return await _repoRepository.CreateRepository(newRepositoryDetails, authorizedGitHubClient);
+        }
+
+        public async Task<Repository> UpdateRepository(long repositoryId, RepositoryUpdate updatedRepositoryDetails, GitHubClient authorizedGitHubClient)
+        {
+            return await _repoRepository.UpdateRepository(repositoryId, updatedRepositoryDetails, authorizedGitHubClient);
+        }
     }
 }
