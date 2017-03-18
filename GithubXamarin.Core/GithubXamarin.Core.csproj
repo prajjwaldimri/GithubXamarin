@@ -55,6 +55,7 @@
     <Compile Include="Contracts\Service\IIssueDataService.cs" />
     <Compile Include="Contracts\Service\INotificationDataService.cs" />
     <Compile Include="Contracts\Service\IRepoDataService.cs" />
+    <Compile Include="Contracts\Service\IShareService.cs" />
     <Compile Include="Contracts\Service\IUserDataService.cs" />
     <Compile Include="Contracts\ViewModel\IEventsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IFileViewModel.cs" />

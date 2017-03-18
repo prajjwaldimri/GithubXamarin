@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -18,6 +19,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Commands and Properties
 
         private readonly IRepoDataService _repoDataService;
+        private readonly IShareService _shareService;
 
         private Repository _repository;
         public Repository Repository
@@ -121,13 +123,24 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareRepository);
+                return _shareCommand;
+            }
+        }
+
         private long _repositoryId;
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
+            _shareService = shareService;
         }
 
         public async void Init(long repositoryId)
@@ -230,6 +243,12 @@ namespace GithubXamarin.Core.ViewModels
             }
             await CheckRepositoryStats();
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private async Task ShareRepository()
+        {
+            if (Repository == null) return;
+            _shareService.ShareLinkAsync(new Uri(Repository.HtmlUrl), Repository.FullName);
         }
     }
 }

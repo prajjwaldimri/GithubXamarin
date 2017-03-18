@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:userControls="using:GithubXamarin.UWP.UserControls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -83,37 +84,9 @@
 
                 <!--Labels -->
 
-                <ListView 
-                Grid.Row="3" 
-                ItemsSource="{Binding Issue.Labels}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel 
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            IsTapEnabled="False"
-                            IsHitTestVisible="False"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding Name}" 
-                                 FontSize="14" 
-                                 IsReadOnly="True"
-                                 SelectionHighlightColor="Transparent" 
-                                 AcceptsReturn="False"
-                                 IsHitTestVisible="False" 
-                                 IsTapEnabled="False"
-                                 MinWidth="0"
-                                 MinHeight="0" 
-                                 TextAlignment="Center" 
-                                 Background="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
-                                 BorderBrush="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
-                                 VerticalAlignment="Stretch" 
-                                 HorizontalAlignment="Left"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <userControls:LabelsControl 
+                    Grid.Row="3"
+                    LabelsSource="{Binding Issue.Labels}"/>
 
                 <controls:MarkdownTextBlock 
                     Grid.Row="4" 
@@ -134,6 +107,13 @@
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
+            
+            <AppBarButton Label="Share"
+                          Command="{Binding ShareCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE72d;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>

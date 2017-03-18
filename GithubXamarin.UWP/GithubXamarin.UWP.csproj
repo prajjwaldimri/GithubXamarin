@@ -172,6 +172,10 @@
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ShareService.cs" />
+    <Compile Include="UserControls\LabelsControl.xaml.cs">
+      <DependentUpon>LabelsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FileView.xaml.cs">
       <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
@@ -241,6 +245,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\LabelsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FileView.xaml">
       <SubType>Designer</SubType>
