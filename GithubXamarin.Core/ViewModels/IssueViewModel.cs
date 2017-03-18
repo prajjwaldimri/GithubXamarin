@@ -16,6 +16,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Properties and Commands
 
         private readonly IIssueDataService _issueDataService;
+        private readonly IShareService _shareService;
 
         private Issue _issue;
         public Issue Issue
@@ -48,6 +49,16 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareIssue);
+                return _shareCommand;
+            }
+        }
+
         private int _issueNumber;
         private long _repositoryId;
         private string _owner;
@@ -56,9 +67,10 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
 
-        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _issueDataService = issueDataService;
+            _shareService = shareService;
         }
 
         public async void Init(int issueNumber, long repositoryId, string owner = null, string repoName = null)
@@ -115,6 +127,12 @@ namespace GithubXamarin.Core.ViewModels
                 issueBody = Issue.Body,
                 labels = ListToCommasSeperatedStringConverter.Convert(Issue.Labels)
             });
+        }
+
+        private async Task ShareIssue()
+        {
+            if (Issue == null) return;
+            await _shareService.ShareLinkAsync(Issue.HtmlUrl, Issue.Title);
         }
     }
 }

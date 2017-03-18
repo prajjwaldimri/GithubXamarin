@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Messages;
@@ -13,6 +14,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Properties and Commands
 
         private readonly IGistDataService _gistDataService;
+        private readonly IShareService _shareService;
 
         private Gist _gist;
         public Gist Gist
@@ -31,13 +33,24 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareGist);
+                return _shareCommand;
+            }
+        }
+
         private string _gistId;
 
         #endregion
 
-        public GistViewModel(IGistDataService gistDataService, IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public GistViewModel(IGistDataService gistDataService, IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _gistDataService = gistDataService;
+            _shareService = shareService;
         }
 
         public async void Init(string gistId)
@@ -54,6 +67,12 @@ namespace GithubXamarin.Core.ViewModels
             }
             Gist = await _gistDataService.GetGist(_gistId, GithubClientService.GetAuthorizedGithubClient());
             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Files in {Gist.Description}" });
+        }
+
+        private async Task ShareGist()
+        {
+            if (Gist == null) return;
+            _shareService.ShareLinkAsync(new Uri(Gist.HtmlUrl), Gist.Description);
         }
     }
 }

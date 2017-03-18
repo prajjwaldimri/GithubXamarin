@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -15,6 +16,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Commands and Properties
 
         private readonly IUserDataService _userDataService;
+        private readonly IShareService _shareService;
 
         private User _user;
         public User User
@@ -37,13 +39,24 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareUser);
+                return _shareCommand;
+            }
+        }
+
         private string _userLogin;
 
         #endregion
 
-        public UserViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public UserViewModel(IGithubClientService githubClientService, IUserDataService userDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _userDataService = userDataService;
+            _shareService = shareService;
         }
 
         public async void Init(string userLogin)
@@ -75,6 +88,12 @@ namespace GithubXamarin.Core.ViewModels
                 await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private async Task ShareUser()
+        {
+            if (User == null) return;
+            await _shareService.ShareLinkAsync(new Uri(User.HtmlUrl), User.Name);
         }
     }
 }

@@ -172,6 +172,7 @@
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ShareService.cs" />
     <Compile Include="UserControls\LabelsControl.xaml.cs">
       <DependentUpon>LabelsControl.xaml</DependentUpon>
     </Compile>
