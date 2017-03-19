@@ -49,6 +49,16 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _addCommand;
+        public ICommand AddCommand
+        {
+            get
+            {
+                _addCommand = _addCommand ?? new MvxCommand(GoToNewRepositoryView);
+                return _addCommand;
+            }
+        }
+
         public int SelectedIndex { get; set; }
 
         private string _userLogin;
@@ -66,21 +76,23 @@ namespace GithubXamarin.Core.ViewModels
             _userLogin = userLogin;
             await Refresh();
         }
-
-        /// <summary>
-        /// Navigates To the repository ViewModel
-        /// </summary>
+        
         private void NavigateToRepositoryView(object obj)
         {
             var repository = obj as Repository ?? Repositories[SelectedIndex];
             ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
+        private void GoToNewRepositoryView()
+        {
+            ShowViewModel<NewRepositoryViewModel>();
+        }
+
         public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("No internet, No work :(", "Can't submit update");
+                await DialogService.ShowSimpleDialogAsync("No internet, No work :(", "Can't submit update");
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -102,9 +114,11 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
+
+        
     }
 }

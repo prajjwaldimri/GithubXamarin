@@ -24,5 +24,7 @@ namespace GithubXamarin.Core.Contracts.Repository
 
         Task<Octokit.Repository> UpdateRepository(long repositoryId, RepositoryUpdate updatedRepositoryDetails,
             GitHubClient authorizedGitHubClient);
+
+        Task DeleteRepository(long repositoryId, GitHubClient authorizedGitHubClient);
     }
 }

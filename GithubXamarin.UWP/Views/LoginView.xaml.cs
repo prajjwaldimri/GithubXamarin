@@ -35,7 +35,7 @@ namespace GithubXamarin.UWP.Views
             while(ApiKeysManager.GithubClientId == null) { }
             var loginRequest = new OauthLoginRequest(_clientId)
             {
-                Scopes = { "user", "notifications", "repo", "gist", "read:org" }
+                Scopes = { "user", "notifications", "repo", "delete_repo", "gist", "admin:org" }
             };
 
             var oAuthLoginUrl = _client.Oauth.GetGitHubLoginUrl(loginRequest);

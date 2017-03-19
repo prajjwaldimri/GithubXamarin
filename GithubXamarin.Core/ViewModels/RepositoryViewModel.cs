@@ -121,6 +121,26 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewRepositoryView);
+                return _editCommand;
+            }
+        }
+
+        private ICommand _deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                _deleteCommand = _deleteCommand ?? new MvxAsyncCommand(DeleteRepository);
+                return _deleteCommand;
+            }
+        }
+
         private long _repositoryId;
 
         #endregion
@@ -147,13 +167,36 @@ namespace GithubXamarin.Core.ViewModels
             IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login.ToString(), Repository.Name);
         }
 
-        /// <summary>
-        /// Create a fork of the current repository
-        /// </summary>
         private void ForkRepository()
         {
             var forkClient = new RepositoryForksClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
             forkClient.Create(Repository.Id, new NewRepositoryFork());
+        }
+
+        private async Task DeleteRepository()
+        {
+            if (!IsInternetAvailable() || Repository == null) return;
+
+            if (
+                await DialogService.ShowBooleanDialogAsync(
+                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, wiki, issues, and comments, and remove all collaborator associations.",
+                    "Are you ABSOLUTELY sure?"))
+            {
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+                var result = await _repoDataService.DeleteRepository(Repository.Id,
+                    GithubClientService.GetAuthorizedGithubClient());
+                if (result)
+                {
+                    await DialogService.ShowSimpleDialogAsync("I hope you knew what you were doing.", "Repository deleted!");
+                    Close(this);
+                }
+                else
+                {
+                    await DialogService.ShowSimpleDialogAsync("Well you got a second chance to think this through",
+                        "Error in deleting Repository!");
+                }
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+            }
         }
 
         private async Task StarOrUnstarRepository()
@@ -213,6 +256,21 @@ namespace GithubXamarin.Core.ViewModels
 
         }
 
+        private async Task GoToNewRepositoryView()
+        {
+            if (!IsInternetAvailable()) return;
+            ShowViewModel<NewRepositoryViewModel>(new
+            {
+                repositoryId = Repository.Id,
+                name = Repository.Name,
+                description = Repository.Description,
+                homePage = Repository.Homepage,
+                isPrivate = Repository.Private,
+                hasIssues = Repository.HasIssues,
+                hasWiki = Repository.HasWiki
+            });
+        }
+
         private async Task Refresh()
         {
             if (!IsInternetAvailable()) return;
@@ -226,7 +284,7 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             await CheckRepositoryStats();
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });

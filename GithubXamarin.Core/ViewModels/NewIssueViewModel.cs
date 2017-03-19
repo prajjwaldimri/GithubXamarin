@@ -153,7 +153,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("I am a very PC person! I don't like working on laptops", "Internet not available");
+                await DialogService.ShowSimpleDialogAsync("I am a very PC person! I don't like working on laptops", "Internet not available");
                 return;
             }
 

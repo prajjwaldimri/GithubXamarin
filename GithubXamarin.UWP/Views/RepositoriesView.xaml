@@ -87,6 +87,11 @@
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Add"
+                          Label="Create new repository"
+                          Command="{Binding AddCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>

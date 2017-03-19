@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -58,6 +59,24 @@ namespace GithubXamarin.Core.Services.Data
         public async Task<Repository> UpdateRepository(long repositoryId, RepositoryUpdate updatedRepositoryDetails, GitHubClient authorizedGitHubClient)
         {
             return await _repoRepository.UpdateRepository(repositoryId, updatedRepositoryDetails, authorizedGitHubClient);
+        }
+
+        public async Task<bool> DeleteRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            await _repoRepository.DeleteRepository(repositoryId, authorizedGitHubClient);
+            try
+            {
+                var repo = await _repoRepository.GetRepository(repositoryId, authorizedGitHubClient);
+                if (repo != null)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return true;
+            }
+            return true;
         }
     }
 }

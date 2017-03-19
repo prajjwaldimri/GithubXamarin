@@ -53,7 +53,7 @@ namespace GithubXamarin.Core.ViewModels
             get { return _isPrivate; }
             set
             {
-                _isPrivate = value; 
+                _isPrivate = value;
                 RaisePropertyChanged(() => IsPrivate);
             }
         }
@@ -66,6 +66,26 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _hasIssues = value; 
                 RaisePropertyChanged(() => HasIssues);
+            }
+        }
+
+        private int _repositoryStatusSelectedIndex = 1;
+        public int RepositoryStatusSelectedIndex
+        {
+            get { return _repositoryStatusSelectedIndex; }
+            set
+            {
+                _repositoryStatusSelectedIndex = value;
+                switch (value)
+                {
+                    case 0:
+                        IsPrivate = true;
+                        break;
+                    case 1:
+                        IsPrivate = false;
+                        break;
+                }
+                RaisePropertyChanged(() => RepositoryStatusSelectedIndex);
             }
         }
 
@@ -124,6 +144,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private bool _isNew;
+        public bool IsNew
+        {
+            get { return _isNew; }
+            set
+            {
+                _isNew = value;
+                RaisePropertyChanged(() => IsNew);
+            }
+        }
+
         private long _repositoryId;
         public long RepositoryId
         {
@@ -144,7 +175,6 @@ namespace GithubXamarin.Core.ViewModels
                 return _submitCommand;
             }
         }
-
 
         #endregion
 
@@ -168,16 +198,22 @@ namespace GithubXamarin.Core.ViewModels
                 HasIssues = hasIssues;
                 HasWiki = HasWiki;
                 IsEdit = true;
+                IsNew = false;
             }
             else
             {
                 IsEdit = false;
+                IsNew = true;
+            }
+            if (IsPrivate)
+            {
+                RepositoryStatusSelectedIndex = 0;
             }
         }
 
         private async Task CreateOrEditRepo()
         {
-            if (!IsInternetAvailable()) { await DialogService.ShowDialogASync("Can't fetch the error message from the internet.", "No Internet"); return; }
+            if (!IsInternetAvailable()) { await DialogService.ShowSimpleDialogAsync("Can't fetch the error message from the internet.", "No Internet"); return; }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 

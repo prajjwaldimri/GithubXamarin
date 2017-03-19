@@ -82,5 +82,14 @@ namespace GithubXamarin.Core.Repositories
             }
             return await _repositoriesClient.Edit(repositoryId, updatedRepositoryDetails);
         }
+
+        public async Task DeleteRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_repositoriesClient == null)
+            {
+                _repositoriesClient = new RepositoriesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            await _repositoriesClient.Delete(repositoryId);
+        }
     }
 }
