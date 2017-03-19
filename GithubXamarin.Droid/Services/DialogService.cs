@@ -19,7 +19,7 @@ namespace GithubXamarin.Droid.Services
     {
         protected Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
-        public Task ShowDialogASync(string message, string title)
+        public Task ShowSimpleDialogAsync(string message, string title)
         {
             return Task.Run(() =>
             {
@@ -37,6 +37,11 @@ namespace GithubXamarin.Droid.Services
                 builder.SetPositiveButton("Close", delegate { });
                 builder.Create().Show();
             }, null);
+        }
+
+        public async Task<bool> ShowBooleanDialogAsync(string message, string title)
+        {
+            throw new NotImplementedException();
         }
     }
 }

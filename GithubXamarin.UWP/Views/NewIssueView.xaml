@@ -16,6 +16,7 @@
               RelativePanel.AlignTopWithPanel="True"
               RelativePanel.Above="CommandBar"
               Padding="10">
+            
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -37,6 +38,7 @@
                 Header="Title"
                 PlaceholderText="Title"
                 Grid.Row="1"
+                TextWrapping="Wrap"
                 AcceptsReturn="True"
                 IsColorFontEnabled="True" 
                 Text="{Binding Title, Mode=TwoWay}"
@@ -49,6 +51,7 @@
                 PlaceholderText="Leave a comment"
                 Grid.Row="2"
                 Grid.RowSpan="3"
+                TextWrapping="Wrap"
                 AcceptsReturn="True"
                 IsColorFontEnabled="True" 
                 Text="{Binding Body, Mode=TwoWay}"
@@ -61,6 +64,7 @@
                 PlaceholderText="Labels (seperated with commas)"
                 Grid.Row="5"
                 Grid.RowSpan="2"
+                TextWrapping="Wrap"
                 AcceptsReturn="True"
                 IsColorFontEnabled="True" 
                 Text="{Binding Labels, Mode=TwoWay}"

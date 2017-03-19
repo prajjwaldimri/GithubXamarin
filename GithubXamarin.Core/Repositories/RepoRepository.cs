@@ -11,6 +11,7 @@ namespace GithubXamarin.Core.Repositories
     public class RepoRepository : BaseRepository, IRepoRepository
     {
         private RepositoryForksClient _repositoryForksClient;
+        private RepositoriesClient _repositoriesClient;
 
         public async Task<Repository> GetRepository(long repositoryId, GitHubClient githubClient)
         {
@@ -62,6 +63,33 @@ namespace GithubXamarin.Core.Repositories
                 _StarredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
             }
             return await _StarredClient.RemoveStarFromRepo(repositoryOwner,repositoryName);
+        }
+
+        public async Task<Repository> CreateRepository(NewRepository newRepositoryDetails, GitHubClient authorizedGitHubClient)
+        {
+            if (_repositoriesClient == null)
+            {
+                _repositoriesClient = new RepositoriesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _repositoriesClient.Create(newRepositoryDetails);
+        }
+
+        public async Task<Repository> UpdateRepository(long repositoryId, RepositoryUpdate updatedRepositoryDetails, GitHubClient authorizedGitHubClient)
+        {
+            if (_repositoriesClient == null)
+            {
+                _repositoriesClient = new RepositoriesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _repositoriesClient.Edit(repositoryId, updatedRepositoryDetails);
+        }
+
+        public async Task DeleteRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_repositoriesClient == null)
+            {
+                _repositoriesClient = new RepositoriesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            await _repositoriesClient.Delete(repositoryId);
         }
     }
 }

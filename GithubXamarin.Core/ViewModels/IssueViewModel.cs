@@ -86,7 +86,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
+                await DialogService.ShowSimpleDialogAsync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -107,7 +107,7 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
@@ -116,7 +116,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("There is nothing here.", "Edit What?");
+                await DialogService.ShowSimpleDialogAsync("There is nothing here.", "Edit What?");
                 return;
             }
             ShowViewModel<NewIssueViewModel>(new

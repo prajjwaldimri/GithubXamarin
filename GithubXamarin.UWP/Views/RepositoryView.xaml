@@ -301,6 +301,10 @@
                           Label="Create an issue"
                           Command="{Binding AddCommand}"/>
 
+            <AppBarButton Icon="Edit"
+                          Label="Edit this repository"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
@@ -311,6 +315,11 @@
                     <FontIcon Glyph="&#xE72d;"/>
                 </AppBarButton.Icon>
             </AppBarButton>
+
+            <AppBarButton Icon="Delete"
+                          Foreground="Red"
+                          Label="Delete this repository!"
+                          Command="{Binding DeleteCommand}"/>
         </CommandBar>
     </Grid>
 

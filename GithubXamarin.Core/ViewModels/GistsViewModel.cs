@@ -82,7 +82,7 @@ namespace GithubXamarin.Core.ViewModels
 
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("", "Internet is not available");
+                await DialogService.ShowSimpleDialogAsync("", "Internet is not available");
                 return;
             }
             if (string.IsNullOrWhiteSpace(_userName))

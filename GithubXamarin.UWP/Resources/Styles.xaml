@@ -28,6 +28,7 @@
                     <Grid>
                         <TextBlock 
                             Text="{Binding}" 
+                            FontWeight="SemiBold"
                             Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
                     </Grid>
                 </DataTemplate>

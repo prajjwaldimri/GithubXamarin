@@ -213,7 +213,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("Or is it?", "Internet is not available");
+                await DialogService.ShowSimpleDialogAsync("Or is it?", "Internet is not available");
                 return;
             }
             switch (searchType)

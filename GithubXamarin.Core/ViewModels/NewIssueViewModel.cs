@@ -18,6 +18,8 @@ namespace GithubXamarin.Core.ViewModels
     {
         #region Properties and Commands
 
+        private readonly IIssueDataService _issueDataService;
+
         private ICommand _submitCommand;
         public ICommand SubmitCommand
         {
@@ -60,8 +62,8 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private int _repositoryId;
-        public int RepositoryId
+        private long _repositoryId;
+        public long RepositoryId
         {
             get { return _repositoryId; }
             set
@@ -126,26 +128,35 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion 
 
-        public NewIssueViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public NewIssueViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IIssueDataService issueDataService) : base(githubClientService, messenger, dialogService)
         {
+            _issueDataService = issueDataService;
         }
 
-        public async void Init(int repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null)
+        public async void Init(long repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null)
         {
             RepositoryId = repositoryId;
             IsEdit = false;
             IssueNumber = issueNumber;
+            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Creating a new issue" });
             if (!(string.IsNullOrWhiteSpace(issueTitle)))
             {
                 Title = issueTitle;
                 Body = issueBody;
                 Labels = labels;
                 IsEdit = true;
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Editing {Title}" });
             }
         }
 
         private async Task CreateOrUpdateIssue()
         {
+            if (!IsInternetAvailable())
+            {
+                await DialogService.ShowSimpleDialogAsync("I am a very PC person! I don't like working on laptops", "Internet not available");
+                return;
+            }
+
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
             if (IsEdit)
@@ -160,26 +171,14 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
-
         private async Task CreateIssue()
         {
-            if (!IsInternetAvailable())
-            {
-                await DialogService.ShowDialogASync("I am a very PC person! I don't like working on laptops", "Internet not available");
-                return;
-            }
-
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-
             if (string.IsNullOrWhiteSpace(Title)) { return; }
 
-            var issuesClient = new IssuesClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            var createdIssue = await issuesClient.Create(RepositoryId, new NewIssue(Title) { Body = Body });
+            var createdIssue = await _issueDataService.CreateIssue(RepositoryId, new NewIssue(Title) {Body = Body}, GithubClientService.GetAuthorizedGithubClient());
 
-            await issuesClient.Labels.AddToIssue(RepositoryId, createdIssue.Number,
-                StringToStringArrayConverter.Convert(Labels));
-
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+            await _issueDataService.UpdateLabels(RepositoryId, createdIssue.Number,
+                Labels, GithubClientService.GetAuthorizedGithubClient());
 
             ShowViewModel<IssueViewModel>(new
             {
@@ -190,31 +189,20 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task UpdateIssue()
         {
-            if (!IsInternetAvailable())
-            {
-                await DialogService.ShowDialogASync("No internet, No work :(", "Can't submit update");
-                return;
-            }
-
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-
             if (string.IsNullOrWhiteSpace(Title) || IssueNumber == null) { return; }
 
-            var issuesClient = new IssuesClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            var createdIssue = await issuesClient.Update(RepositoryId, IssueNumber, new IssueUpdate()
+            var createdIssue = await _issueDataService.UpdateIssue(RepositoryId, IssueNumber, new IssueUpdate()
             {
                 Title = Title,
                 Body = Body,
                 State = IssueItemState
-            });
+            }, GithubClientService.GetAuthorizedGithubClient());
 
             if (!(string.IsNullOrWhiteSpace(Labels)))
             {
-                await issuesClient.Labels.AddToIssue(RepositoryId, createdIssue.Number,
-                    StringToStringArrayConverter.Convert(Labels));
+                await _issueDataService.UpdateLabels(RepositoryId, createdIssue.Number,
+                Labels, GithubClientService.GetAuthorizedGithubClient());
             }
-
-            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
 
             ShowViewModel<IssueViewModel>(new
             {
