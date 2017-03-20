@@ -5,6 +5,7 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -29,6 +30,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private bool _isUserCurrent;
+        public bool IsUserCurrent
+        {
+            get { return _isUserCurrent; }
+            set
+            {
+                _isUserCurrent = value; 
+                RaisePropertyChanged(() => IsUserCurrent);
+            }
+        }
+
+
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
@@ -49,6 +62,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                _editCommand = _editCommand ?? new MvxCommand(GoToNewUserView);
+                return _editCommand;
+            }
+            
+        }
+
         private string _userLogin;
 
         #endregion
@@ -61,8 +85,30 @@ namespace GithubXamarin.Core.ViewModels
 
         public async void Init(string userLogin)
         {
-            _userLogin = userLogin;
+            if (!(string.IsNullOrWhiteSpace(userLogin)))
+            {
+                _userLogin = userLogin;
+                IsUserCurrent = false;
+            }
+            else
+            {
+                IsUserCurrent = true;
+            }
             await Refresh();
+        }
+
+        private void GoToNewUserView()
+        {
+            ShowViewModel<NewUserViewModel>(new
+            {
+                name = User.Name,
+                bio = User.Bio,
+                blog = User.Blog,
+                email = User.Email,
+                hireable = User.Hireable.ConvertToBoolean(),
+                location = User.Location,
+                company = User.Company
+            });
         }
 
         private async Task Refresh()

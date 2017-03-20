@@ -44,5 +44,10 @@ namespace GithubXamarin.Core.Services.Data
         {
             return new ObservableCollection<User>(await _userRepository.SearchUsers(searchTerm, gitHubClient));
         }
+
+        public async Task<User> UpdateUser(UserUpdate updatedUserDetails, GitHubClient authorizedGitHubClient)
+        {
+            return await _userRepository.UpdateUser(updatedUserDetails, authorizedGitHubClient);
+        }
     }
 }
