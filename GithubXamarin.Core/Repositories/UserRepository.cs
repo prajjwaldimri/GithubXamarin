@@ -69,6 +69,15 @@ namespace GithubXamarin.Core.Repositories
             }
             return await _repositoriesClient.GetAllContributors(repositoryId);
         }
+
+        public async Task<User> UpdateUser(UserUpdate updatedUserDetails, GitHubClient authorizedGitHubClient)
+        {
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _usersClient.Update(updatedUserDetails);
+        }
         
     }
 }

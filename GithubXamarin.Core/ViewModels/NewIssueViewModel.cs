@@ -130,7 +130,7 @@ namespace GithubXamarin.Core.ViewModels
         {
         }
 
-        public async void Init(int repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null)
+        public void Init(int repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null)
         {
             RepositoryId = repositoryId;
             IsEdit = false;

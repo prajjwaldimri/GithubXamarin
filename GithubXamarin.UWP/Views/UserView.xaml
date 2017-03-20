@@ -373,6 +373,12 @@
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Edit"
+                          Label="Edit"
+                          IsEnabled="{Binding IsUserCurrent}"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>

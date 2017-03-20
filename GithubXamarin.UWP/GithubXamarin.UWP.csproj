@@ -201,6 +201,9 @@
     <Compile Include="Views\NewIssueView.xaml.cs">
       <DependentUpon>NewIssueView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewUserView.xaml.cs">
+      <DependentUpon>NewUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotificationsView.xaml.cs">
       <DependentUpon>NotificationsView.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
     <Page Include="Views\NewIssueView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NewUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NotificationsView.xaml">
       <SubType>Designer</SubType>
