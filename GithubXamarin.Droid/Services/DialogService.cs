@@ -17,31 +17,50 @@ namespace GithubXamarin.Droid.Services
 {
     public class DialogService : IDialogService
     {
-        protected Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+        private Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
         public Task ShowSimpleDialogAsync(string message, string title)
         {
             return Task.Run(() =>
             {
-                Alert(message, title);
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(message);
+                    builder.SetPositiveButton("Close", delegate { });
+                    builder.Create().Show();
+                }, null);
             });
-        }
-
-        private void Alert(string message, string title)
-        {
-            Application.SynchronizationContext.Post(ignored =>
-            {
-                var builder = new AlertDialog.Builder(CurrentActivity);
-                builder.SetTitle(title);
-                builder.SetMessage(message);
-                builder.SetPositiveButton("Close", delegate { });
-                builder.Create().Show();
-            }, null);
         }
 
         public async Task<bool> ShowBooleanDialogAsync(string message, string title)
         {
-            throw new NotImplementedException();
+            bool? result = null;
+            Task.Run(() =>
+            {
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(message);
+                    builder.SetCancelable(true);
+                    builder.SetPositiveButton("Yup", (sender, args) =>
+                    {
+                        result = true;
+                    });
+                    builder.SetNegativeButton("Nope", (sender, args) => { result = false; });
+                    builder.Create().Show();
+                }, null);
+            });
+
+            // HACK: Waits for user to accept any option. Without this delay the method will return null.
+            while (!(result.HasValue))
+            {
+                await Task.Delay(1000);
+            }
+
+            return result.Value;
         }
     }
 }
