@@ -15,12 +15,35 @@ namespace GithubXamarin.Droid.Views
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
+            HasOptionsMenu = true;
             return this.BindingInflate(Resource.Layout.RepositoryView, null);
         }
 
-        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        public override async void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
+            await ViewModel.Refresh();
+        }
+
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.repository_menu, menu);
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.repository_refresh:
+                    ViewModel.Refresh();
+                    break;
+                case Resource.Id.repository_add_issue:
+                    break;
+                case Resource.Id.repository_edit:
+                    break;
+            }
+            return base.OnOptionsItemSelected(item);
         }
     }
 }
