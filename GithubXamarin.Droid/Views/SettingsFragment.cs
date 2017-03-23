@@ -20,6 +20,7 @@ namespace GithubXamarin.Droid.Views
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
+            HasOptionsMenu = true;
             return this.BindingInflate(Resource.Layout.SettingsView, null);
         }
     }

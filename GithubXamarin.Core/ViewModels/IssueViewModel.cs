@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -44,7 +45,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewIssue);
+                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewIssueView);
                 return _editCommand;
             }
         }
@@ -82,7 +83,7 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {
@@ -112,7 +113,7 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
-        private async Task GoToNewIssue()
+        public async Task GoToNewIssueView()
         {
             if (!IsInternetAvailable())
             {

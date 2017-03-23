@@ -9,14 +9,13 @@ using MvvmCross.Droid.Support.V4;
 namespace GithubXamarin.Droid.Views
 {
     [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
-    [Register("githubxamarin.droid.views.GistFragment")]
-    public class GistFragment : MvxFragment<GistViewModel>
+    [Register("githubxamarin.droid.views.NewIssueFragment")]
+    public class NewIssueFragment : MvxFragment<NewIssueViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            HasOptionsMenu = true;
-            return this.BindingInflate(Resource.Layout.GistView, null);
+            return this.BindingInflate(Resource.Layout.NewIssueView, null);
         }
     }
 }

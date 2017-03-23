@@ -126,6 +126,11 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        public List<string> IssueStateCategories { get; } = new List<string>()
+        {
+            "Open", "Closed"
+        };
+
         #endregion 
 
         public NewIssueViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IIssueDataService issueDataService) : base(githubClientService, messenger, dialogService)
