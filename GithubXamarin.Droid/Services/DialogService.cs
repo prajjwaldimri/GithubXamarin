@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using GithubXamarin.Core.Contracts.Service;
@@ -17,6 +18,16 @@ namespace GithubXamarin.Droid.Services
 {
     public class DialogService : IDialogService
     {
+        public async Task ShowPopupAsync(string message)
+        {
+            await Task.Run(() =>
+            {
+                var view = CurrentActivity.FindViewById(Android.Resource.Id.Content);
+                Snackbar.Make(view, message, Snackbar.LengthShort)
+                .Show();
+            });
+        }
+
         private Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
         public Task ShowSimpleDialogAsync(string message, string title)
@@ -61,6 +72,21 @@ namespace GithubXamarin.Droid.Services
             }
 
             return result.Value;
+        }
+
+        public Task ShowMarkdownDialogAsync(string markdown, string title)
+        {
+            return Task.Run(() =>
+            {
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(markdown);
+                    builder.SetPositiveButton("Close", delegate { });
+                    builder.Create().Show();
+                }, null);
+            });
         }
     }
 }

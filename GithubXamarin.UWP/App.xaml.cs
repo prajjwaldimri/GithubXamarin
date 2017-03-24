@@ -10,6 +10,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Services.Store.Engagement;
 using MvvmCross.Platform;
 using Plugin.SecureStorage;
 
@@ -72,6 +73,7 @@ namespace GithubXamarin.UWP
                     await SetStatusBarVisibility();
                     await RegisterGithubNotificationsBackgroundTask();
                     await RegisterMarkNotificationAsReadBackgroundTask();
+                    await RegisterAppForStoreNotifications();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 
@@ -105,6 +107,24 @@ namespace GithubXamarin.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        /// <summary>
+        /// Register App To recieve notifications from Windows Store
+        /// https://docs.microsoft.com/en-us/windows/uwp/monetize/configure-your-app-to-receive-dev-center-notifications
+        /// </summary>
+        private async Task RegisterAppForStoreNotifications()
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (!(localSettingsValues.ContainsKey("IsStoreEngagementEnabled")))
+            {
+                localSettingsValues["IsStoreEngagementEnabled"] = true;
+            }
+            if ((bool) localSettingsValues["IsStoreEngagementEnabled"])
+            {
+                var engagementManager = StoreServicesEngagementManager.GetDefault();
+                await engagementManager.RegisterNotificationChannelAsync();
+            }
         }
 
         private async Task RegisterGithubNotificationsBackgroundTask()

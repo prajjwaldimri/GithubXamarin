@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="34691PrajjwalDimri.GitIt" Publisher="CN=883EF119-9F3F-4348-A873-0DBB7FD085E0" Version="1.0.2.0" />
+  <Identity Name="34691PrajjwalDimri.GitIt" Publisher="CN=883EF119-9F3F-4348-A873-0DBB7FD085E0" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="69e2c252-204f-4154-aedf-9dcc7940df2f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>GitIt</DisplayName>
@@ -16,22 +16,27 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GithubXamarin.UWP.App">
       <uap:VisualElements DisplayName="GitIt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Go GitIt!" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" ShortName="GitIt">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="GithubXamarin.UWP.Background.MarkNotificationAsReadBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="GithubXamarin.UWP.Background.GithubNotificationsBackgroundTask">
           <BackgroundTasks>
             <Task Type="general" />
             <Task Type="systemEvent" />
             <Task Type="timer" />
             <Task Type="pushNotification" />
-          </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="GithubXamarin.UWP.Background.MarkNotificationAsReadBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
       </Extensions>

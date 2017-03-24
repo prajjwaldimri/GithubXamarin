@@ -95,6 +95,11 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="GithubXamarin.UWP_StoreKey.pfx" />
     <None Include="project.json" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\ClientId.txt" />
     <Content Include="Assets\ClientSecret.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -166,6 +171,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Resources\Converters\ColorSwapper.cs" />
     <Compile Include="Resources\Converters\DateTimeHumanizer.cs" />
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
@@ -173,6 +179,7 @@
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ShareService.cs" />
+    <Compile Include="Services\UpdateService.cs" />
     <Compile Include="UserControls\LabelsControl.xaml.cs">
       <DependentUpon>LabelsControl.xaml</DependentUpon>
     </Compile>

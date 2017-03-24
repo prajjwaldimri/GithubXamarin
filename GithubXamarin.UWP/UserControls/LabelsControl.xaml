@@ -11,19 +11,50 @@
 
     <ListView 
         x:Name="MainListView"
-        ItemsSource="{Binding LabelsSource, ElementName=userControl}" >
+        ItemsSource="{Binding LabelsSource, ElementName=userControl}">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="5,0,5,0"/>
+                <Setter Property="MinWidth" Value="0"/>
+            </Style>
+        </ListView.ItemContainerStyle>
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel 
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            IsTapEnabled="False"
-                            IsHitTestVisible="False"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    IsTapEnabled="False"
+                    IsHitTestVisible="False"/>
             </ItemsPanelTemplate>
         </ListView.ItemsPanel>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextBox Text="{Binding Name}" 
+                <Border
+                    x:Name="BackBorder"
+                    CornerRadius="2"
+                    Background="{Binding Color,                        
+                        Converter={StaticResource HexToBrushConverter}}">
+                    <TextBlock
+                        Margin="10,2,10,2"
+                        Text="{Binding Name}"
+                        Foreground="{Binding ElementName=BackBorder,
+                        Path=Background, 
+                        Converter={StaticResource ColorSwapper}}"/>
+                </Border>
+                
+                <!--<Grid>
+                    <Rectangle
+                        Fill="{Binding Color,                        
+                        Converter={StaticResource HexToBrushConverter}}"
+                        Stroke="{Binding Color,                        
+                        Converter={StaticResource HexToBrushConverter}}"/>
+                    <TextBlock
+                        Text="{Binding Name}"
+                        Foreground="FloralWhite"/>
+                </Grid>-->
+                
+                <!--<TextBox Text="{Binding Name}" 
                                  FontSize="14" 
                                  IsReadOnly="True"
                                  SelectionHighlightColor="Transparent" 
@@ -36,7 +67,7 @@
                                  Background="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
                                  BorderBrush="{Binding Color,Converter={StaticResource HexToBrushConverter}}"
                                  VerticalAlignment="Stretch" 
-                                 HorizontalAlignment="Left"/>
+                                 HorizontalAlignment="Left"/>-->
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

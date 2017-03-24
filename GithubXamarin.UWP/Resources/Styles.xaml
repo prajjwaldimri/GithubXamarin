@@ -10,6 +10,7 @@
     <converters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:DateTimeHumanizer x:Key="DateTimeHumanizer"/>
+    <converters:ColorSwapper x:Key="ColorSwapper"/>
 
 
     <!-- Hamburger Menu Resources  

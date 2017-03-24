@@ -133,7 +133,6 @@ namespace GithubXamarin.Core.ViewModels
             }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-
             try
             {
                 if (_repositoryId.HasValue)

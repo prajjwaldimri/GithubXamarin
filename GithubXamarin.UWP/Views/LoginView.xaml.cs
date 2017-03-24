@@ -45,7 +45,6 @@ namespace GithubXamarin.UWP.Views
 
         /// <summary>
         /// Method attached to navigation of the web-browser. It must return void
-        /// TODO: async and void don't go well together. Should be Task
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
