@@ -1,3 +1,6 @@
+
+## Breaking Change: Please logout and login again to get updated OAuth token from Github, otherwise the app will crash on some tasks.
+
 ### Improvements in Windows App:
 
 - Live Tile Support
