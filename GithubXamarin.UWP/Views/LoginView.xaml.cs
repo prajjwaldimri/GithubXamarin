@@ -35,7 +35,7 @@ namespace GithubXamarin.UWP.Views
             while(ApiKeysManager.GithubClientId == null) { }
             var loginRequest = new OauthLoginRequest(_clientId)
             {
-                Scopes = { "user", "notifications", "repo", "gist", "read:org" }
+                Scopes = { "user", "notifications", "repo", "delete_repo", "gist", "admin:org" }
             };
 
             var oAuthLoginUrl = _client.Oauth.GetGitHubLoginUrl(loginRequest);
@@ -45,7 +45,6 @@ namespace GithubXamarin.UWP.Views
 
         /// <summary>
         /// Method attached to navigation of the web-browser. It must return void
-        /// TODO: async and void don't go well together. Should be Task
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>

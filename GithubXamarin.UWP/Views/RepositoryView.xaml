@@ -8,26 +8,26 @@
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     mc:Ignorable="d">
 
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               Margin="0,10,0,0">
-
         <ScrollViewer VerticalScrollMode="Enabled">
+
             <Grid Margin="0,0,0,48">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
+                    <RowDefinition MinHeight="50"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -296,9 +296,30 @@
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Add"
+                          Label="Create an issue"
+                          Command="{Binding AddCommand}"/>
+
+            <AppBarButton Icon="Edit"
+                          Label="Edit this repository"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
+
+            <AppBarButton Label="Share"
+                          Command="{Binding ShareCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE72d;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton Icon="Delete"
+                          Foreground="Red"
+                          Label="Delete this repository!"
+                          Command="{Binding DeleteCommand}"/>
         </CommandBar>
     </Grid>
 

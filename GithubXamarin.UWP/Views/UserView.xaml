@@ -373,9 +373,22 @@
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Edit"
+                          Label="Edit"
+                          IsEnabled="{Binding IsUserCurrent}"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
+
+            <AppBarButton Label="Share"
+                          Command="{Binding ShareCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE72d;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>

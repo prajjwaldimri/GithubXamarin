@@ -19,6 +19,9 @@ namespace GithubXamarin.Core.ViewModels
 
         public IEnumerable<string> MenuItems { get; private set; } = new[] { "Option1", "Option2" };
 
+        private readonly IUpdateService _updateService;
+        private readonly IFileDataService _fileDataService;
+
         private string _pageHeader;
         public string PageHeader
         {
@@ -65,7 +68,7 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public MainViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IUpdateService updateService, IFileDataService fileDataService) : base(githubClientService, messenger, dialogService)
         {
             HamburgerMenuNavigationCommand = new MvxCommand<int>(NavigateToViewModel);
             GoToSettingsCommand = new MvxCommand(ShowSettings);
@@ -76,6 +79,9 @@ namespace GithubXamarin.Core.ViewModels
                 (message => IsLoading = message.IsLoadingIndicatorActive);
             _appBarHeaderChangeMessageToken = Messenger.Subscribe<AppBarHeaderChangeMessage>
                 (message => PageHeader = message.HeaderTitle);
+
+            _updateService = updateService;
+            _fileDataService = fileDataService;
         }
 
 
@@ -83,7 +89,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             //HACK: Delay is added so that the MainViewModel can completely load first before showing other ViewModels.
             //Without the delay the ViewModels were not loading inside of the Frame in MainViewModel
-            await Task.Delay(1000);
+            await Task.Delay(396);
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
@@ -97,6 +103,20 @@ namespace GithubXamarin.Core.ViewModels
             if (CrossSecureStorage.Current.HasKey("OAuthToken") && IsInternetAvailable())
             {
                 User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
+            }
+            await CheckIfUpdated();
+        }
+
+        /// <summary>
+        /// Checks if the app is updated
+        /// </summary>
+        /// <returns></returns>
+        private async Task CheckIfUpdated()
+        {
+            if (_updateService.IsAppUpdated())
+            {
+                var releaseNotes = await _fileDataService.GetFile(73414278, "RELEASE_NOTES", GithubClientService.GetAuthorizedGithubClient());
+                await DialogService.ShowMarkdownDialogAsync(releaseNotes.Content);
             }
         }
 

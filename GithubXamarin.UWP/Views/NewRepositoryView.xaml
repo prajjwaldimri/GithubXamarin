@@ -1,0 +1,141 @@
+﻿<views:MvxWindowsPage
+    x:Class="GithubXamarin.UWP.Views.NewRepositoryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    mc:Ignorable="d">
+
+    <RelativePanel 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <ScrollViewer
+            RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True"
+              RelativePanel.Above="CommandBar"
+              Padding="10">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                    <RowDefinition MinHeight="70"/>
+                </Grid.RowDefinitions>
+
+                <ComboBox 
+                    VerticalAlignment="Center"
+                    SelectedIndex="{Binding RepositoryStatusSelectedIndex, Mode=TwoWay}">
+                    <ComboBoxItem>Private</ComboBoxItem>
+                    <ComboBoxItem>Public</ComboBoxItem>
+                </ComboBox>
+
+                <TextBox 
+                Header="Name"
+                PlaceholderText="Name of Repository"
+                Grid.Row="1"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding Name, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+                <TextBox 
+                Header="Description"
+                PlaceholderText="Description of Repository"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                IsColorFontEnabled="True" 
+                Text="{Binding Description, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+                <TextBox 
+                Header="HomePage"
+                PlaceholderText="Url of homepage of repository"
+                Grid.Row="4"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding HomePage, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+                
+                <TextBox 
+                IsEnabled="{Binding IsNew}"
+                Header=".gitignore Template"
+                PlaceholderText="Enter name of your gitignore template"
+                Grid.Row="5"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding GitignoreTemplate, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+                <TextBox 
+                IsEnabled="{Binding IsNew}"
+                Header="License Template"
+                PlaceholderText="Name of License you want to add to this repository."
+                Grid.Row="6"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding LicenseTemplate, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+                <StackPanel
+                Grid.Row="7"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center">
+
+                    <ToggleSwitch
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Center"
+                        IsOn="{Binding HasIssues, Mode=TwoWay}"
+                        OnContent="Issues Enabled"
+                        OffContent="Issues Disabled"/>
+
+                    <ToggleSwitch
+                        Margin="10,0,0,0"
+                        IsOn="{Binding HasWiki, Mode=TwoWay}"
+                        OnContent="Wiki Enabled"
+                        OffContent="Wiki Disabled"/>
+
+                </StackPanel>
+
+                <CheckBox 
+                    Grid.Row="8"
+                    IsEnabled="{Binding IsNew}"
+                    IsChecked="{Binding CreateWithReadme, Mode=TwoWay}"
+                    Content="Create With Readme"/>
+
+            </Grid>
+
+        </ScrollViewer>
+
+        <CommandBar
+            x:Name="CommandBar"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignBottomWithPanel="True"
+            VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Send"
+                          Label="Submit"
+                          Click="SubmitButtonBase_OnClick"
+                          Command="{Binding SubmitCommand}"/>
+        </CommandBar>
+
+    </RelativePanel>
+</views:MvxWindowsPage>
+

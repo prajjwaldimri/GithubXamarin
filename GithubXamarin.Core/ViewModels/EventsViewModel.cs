@@ -128,12 +128,11 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
+                await DialogService.ShowSimpleDialogAsync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
                 return;
             }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-
             try
             {
                 if (_repositoryId.HasValue)
@@ -164,7 +163,7 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });

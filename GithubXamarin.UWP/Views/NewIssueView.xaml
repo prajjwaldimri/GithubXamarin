@@ -1,0 +1,88 @@
+﻿<views:MvxWindowsPage
+    x:Class="GithubXamarin.UWP.Views.NewIssueView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True"
+              RelativePanel.Above="CommandBar"
+              Padding="10">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ComboBox 
+                SelectedIndex="{Binding IssueStateSelectedIndex, Mode=TwoWay}"
+                IsEnabled="{Binding IsEdit}">
+                <ComboBoxItem>Open</ComboBoxItem>
+                <ComboBoxItem>Closed</ComboBoxItem>
+            </ComboBox>
+            
+            <TextBox 
+                Header="Title"
+                PlaceholderText="Title"
+                Grid.Row="1"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding Title, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+            <TextBox 
+                Header="Body"
+                Margin="0,10,0,0"
+                PlaceholderText="Leave a comment"
+                Grid.Row="2"
+                Grid.RowSpan="3"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                IsColorFontEnabled="True" 
+                Text="{Binding Body, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+            <TextBox 
+                Header="Labels (seperated with commas)"
+                Margin="0,10,0,0"
+                PlaceholderText="Labels (seperated with commas)"
+                Grid.Row="5"
+                Grid.RowSpan="2"
+                TextWrapping="Wrap"
+                IsColorFontEnabled="True" 
+                Text="{Binding Labels, Mode=TwoWay}"
+                BorderThickness="0"
+                Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
+
+        </Grid>
+
+        <CommandBar
+            x:Name="CommandBar"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignBottomWithPanel="True"
+            VerticalAlignment="Bottom">
+            
+            <AppBarButton Icon="Send"
+                          Label="Submit"
+                          Click="SubmitButtonBase_OnClick"
+                          Command="{Binding SubmitCommand}"/>
+        </CommandBar>
+
+    </RelativePanel>
+</views:MvxWindowsPage>

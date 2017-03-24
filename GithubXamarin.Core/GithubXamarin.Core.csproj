@@ -55,6 +55,8 @@
     <Compile Include="Contracts\Service\IIssueDataService.cs" />
     <Compile Include="Contracts\Service\INotificationDataService.cs" />
     <Compile Include="Contracts\Service\IRepoDataService.cs" />
+    <Compile Include="Contracts\Service\IShareService.cs" />
+    <Compile Include="Contracts\Service\IUpdateService.cs" />
     <Compile Include="Contracts\Service\IUserDataService.cs" />
     <Compile Include="Contracts\ViewModel\IEventsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IFileViewModel.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="Services\General\GithubClientService.cs" />
     <Compile Include="Services\General\SecureKeysRetrievingService.cs" />
     <Compile Include="Utility\HtmlUrlToRepositoryNameConverter.cs" />
+    <Compile Include="Utility\ListToCommasSeperatedStringConverter.cs" />
+    <Compile Include="Utility\StringToStringArrayConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EventsViewModel.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
@@ -109,6 +113,9 @@
     <Compile Include="ViewModels\IssueViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NewIssueViewModel.cs" />
+    <Compile Include="ViewModels\NewRepositoryViewModel.cs" />
+    <Compile Include="ViewModels\NewUserViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\RepositoriesViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />

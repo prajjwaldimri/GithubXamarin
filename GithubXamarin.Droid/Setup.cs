@@ -33,6 +33,8 @@ namespace GithubXamarin.Droid
         {
             base.InitializeLastChance();
             Mvx.ConstructAndRegisterSingleton<IDialogService, DialogService>();
+            Mvx.ConstructAndRegisterSingleton<IShareService, ShareService>();
+            Mvx.ConstructAndRegisterSingleton<IUpdateService, UpdateService>();
         }
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()

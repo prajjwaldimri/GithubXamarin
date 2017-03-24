@@ -1,3 +1,4 @@
+using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -15,12 +16,25 @@ namespace GithubXamarin.Droid.Views
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
+            HasOptionsMenu = true;
             return this.BindingInflate(Resource.Layout.EventsView, null);
         }
 
-        public override async void OnViewCreated(View view, Bundle savedInstanceState)
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
-            base.OnViewCreated(view, savedInstanceState);
+            inflater.Inflate(Resource.Menu.events_menu, menu);
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.events_refresh:
+                    ViewModel.Refresh();
+                    break;
+            }
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

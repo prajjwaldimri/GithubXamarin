@@ -4,26 +4,41 @@
     xmlns:local="using:GithubXamarin.UWP.Resources"
     xmlns:converters="using:GithubXamarin.UWP.Resources.Converters">
     <!-- Converters -->
-    
+
     <converters:HexToBrushConverter x:Key="HexToBrushConverter"/>
     <converters:EventToStringConverter x:Key="EventToStringConverter"/>
     <converters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:DateTimeHumanizer x:Key="DateTimeHumanizer"/>
-    
-    
+    <converters:ColorSwapper x:Key="ColorSwapper"/>
+
+
     <!-- Hamburger Menu Resources  
     Reference: https://github.com/Microsoft/Windows-universal-samples/blob/master/Samples/XamlNavigation/shared/Styles.xaml -->
-    
+
     <!-- window width adaptive snap points-->
     <x:Double x:Key="MinWindowSnapPoint">0</x:Double>
     <x:Double x:Key="MediumWindowSnapPoint">641</x:Double>
     <x:Double x:Key="LargeWindowSnapPoint">1008</x:Double>
-    
-    
-    
+
+    <Style x:Key="TextBlockHeaderWithAccentColorStyle"
+           TargetType="TextBox">
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock 
+                            Text="{Binding}" 
+                            FontWeight="SemiBold"
+                            Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <x:Double x:Key="DesktopWindowTopPadding">12</x:Double>
-    
+
     <Style x:Key="SplitViewTogglePaneButtonStyle" TargetType="ToggleButton">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
@@ -117,7 +132,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
         <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
         <Setter Property="Height" Value="48"/>
@@ -144,7 +159,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="SplitViewPaneButtonStyle" TargetType="Button">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Background" Value="Transparent" />
@@ -211,5 +226,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

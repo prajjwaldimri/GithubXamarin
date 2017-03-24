@@ -110,8 +110,8 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         public bool IssuesListVisibility { get; set; } = true;
-        public bool RepositoriesListVisibility { get; set; } = false;
-        public bool UsersListVisibility { get; set; } = false;
+        public bool RepositoriesListVisibility { get; set; }
+        public bool UsersListVisibility { get; set; }
 
         public List<string> SearchCategories { get; } = new List<string>()
         {
@@ -213,7 +213,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("Or is it?", "Internet is not available");
+                await DialogService.ShowSimpleDialogAsync("Or is it?", "Internet is not available");
                 return;
             }
             switch (searchType)

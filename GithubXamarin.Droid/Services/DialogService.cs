@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using GithubXamarin.Core.Contracts.Service;
@@ -17,26 +18,75 @@ namespace GithubXamarin.Droid.Services
 {
     public class DialogService : IDialogService
     {
-        protected Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
-
-        public Task ShowDialogASync(string message, string title)
+        public async Task ShowPopupAsync(string message)
         {
-            return Task.Run(() =>
+            await Task.Run(() =>
             {
-                Alert(message, title);
+                var view = CurrentActivity.FindViewById(Android.Resource.Id.Content);
+                Snackbar.Make(view, message, Snackbar.LengthShort)
+                .Show();
             });
         }
 
-        private void Alert(string message, string title)
+        private Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+
+        public Task ShowSimpleDialogAsync(string message, string title)
         {
-            Application.SynchronizationContext.Post(ignored =>
+            return Task.Run(() =>
             {
-                var builder = new AlertDialog.Builder(CurrentActivity);
-                builder.SetTitle(title);
-                builder.SetMessage(message);
-                builder.SetPositiveButton("Close", delegate { });
-                builder.Create().Show();
-            }, null);
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(message);
+                    builder.SetPositiveButton("Close", delegate { });
+                    builder.Create().Show();
+                }, null);
+            });
+        }
+
+        public async Task<bool> ShowBooleanDialogAsync(string message, string title)
+        {
+            bool? result = null;
+            Task.Run(() =>
+            {
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(message);
+                    builder.SetCancelable(true);
+                    builder.SetPositiveButton("Yup", (sender, args) =>
+                    {
+                        result = true;
+                    });
+                    builder.SetNegativeButton("Nope", (sender, args) => { result = false; });
+                    builder.Create().Show();
+                }, null);
+            });
+
+            // HACK: Waits for user to accept any option. Without this delay the method will return null.
+            while (!(result.HasValue))
+            {
+                await Task.Delay(1000);
+            }
+
+            return result.Value;
+        }
+
+        public Task ShowMarkdownDialogAsync(string markdown, string title)
+        {
+            return Task.Run(() =>
+            {
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(markdown);
+                    builder.SetPositiveButton("Close", delegate { });
+                    builder.Create().Show();
+                }, null);
+            });
         }
     }
 }

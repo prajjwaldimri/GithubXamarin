@@ -13,6 +13,7 @@
     "MvvmCross.Plugin.Network": "4.4.0",
     "MvvmCross.Plugin.Visibility": "4.4.0",
     "Octokit": "0.24.0",
+    "RavinduL.LocalNotifications": "2.0.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1",
     "Xam.Plugin.Connectivity": "2.3.0"
   },

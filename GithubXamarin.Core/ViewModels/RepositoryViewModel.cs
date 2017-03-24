@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -18,6 +19,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Commands and Properties
 
         private readonly IRepoDataService _repoDataService;
+        private readonly IShareService _shareService;
 
         private Repository _repository;
         public Repository Repository
@@ -111,13 +113,54 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _addCommand;
+        public ICommand AddCommand
+        {
+            get
+            {
+                _addCommand = _addCommand ?? new MvxAsyncCommand(GoToNewIssueView);
+                return _addCommand;
+            }
+        }
+
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewRepositoryView);
+                return _editCommand;
+            }
+        }
+
+        private ICommand _deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                _deleteCommand = _deleteCommand ?? new MvxAsyncCommand(DeleteRepository);
+                return _deleteCommand;
+            }
+        }
+
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareRepository);
+                return _shareCommand;
+            }
+        }
+
         private long _repositoryId;
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
+            _shareService = shareService;
         }
 
         public async void Init(long repositoryId)
@@ -137,13 +180,36 @@ namespace GithubXamarin.Core.ViewModels
             IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login.ToString(), Repository.Name);
         }
 
-        /// <summary>
-        /// Create a fork of the current repository
-        /// </summary>
         private void ForkRepository()
         {
             var forkClient = new RepositoryForksClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
             forkClient.Create(Repository.Id, new NewRepositoryFork());
+        }
+
+        private async Task DeleteRepository()
+        {
+            if (!IsInternetAvailable() || Repository == null) return;
+
+            if (
+                await DialogService.ShowBooleanDialogAsync(
+                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, wiki, issues, and comments, and remove all collaborator associations.",
+                    "Are you ABSOLUTELY sure?"))
+            {
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+                var result = await _repoDataService.DeleteRepository(Repository.Id,
+                    GithubClientService.GetAuthorizedGithubClient());
+                if (result)
+                {
+                    await DialogService.ShowSimpleDialogAsync("I hope you knew what you were doing.", "Repository deleted!");
+                    Close(this);
+                }
+                else
+                {
+                    await DialogService.ShowSimpleDialogAsync("Well you got a second chance to think this through",
+                        "Error in deleting Repository!");
+                }
+                Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+            }
         }
 
         private async Task StarOrUnstarRepository()
@@ -193,7 +259,32 @@ namespace GithubXamarin.Core.ViewModels
             ShowViewModel<FileViewModel>(new {fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id});
         }
 
-        private async Task Refresh()
+        private async Task GoToNewIssueView()
+        {
+            if (!IsInternetAvailable()) return;
+            ShowViewModel<NewIssueViewModel>(new
+            {
+                repositoryId = Repository.Id
+            });
+
+        }
+
+        public async Task GoToNewRepositoryView()
+        {
+            if (!IsInternetAvailable()) return;
+            ShowViewModel<NewRepositoryViewModel>(new
+            {
+                repositoryId = Repository.Id,
+                name = Repository.Name,
+                description = Repository.Description,
+                homePage = Repository.Homepage,
+                isPrivate = Repository.Private,
+                hasIssues = Repository.HasIssues,
+                hasWiki = Repository.HasWiki
+            });
+        }
+
+        public async Task Refresh()
         {
             if (!IsInternetAvailable()) return;
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -206,10 +297,16 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             await CheckRepositoryStats();
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private async Task ShareRepository()
+        {
+            if (Repository == null) return;
+            _shareService.ShareLinkAsync(new Uri(Repository.HtmlUrl), Repository.FullName);
         }
     }
 }

@@ -30,8 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
         android:id="@+id/nav_view"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu" 
+        app:itemTextColor="@menu/drawer_item_color"
+        app:itemIconTint="@menu/drawer_item_color"/>
 </android.support.v4.widget.DrawerLayout>

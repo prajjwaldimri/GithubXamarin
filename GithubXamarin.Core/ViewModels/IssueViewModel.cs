@@ -1,9 +1,11 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using GithubXamarin.Core.Utility;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -15,6 +17,7 @@ namespace GithubXamarin.Core.ViewModels
         #region Properties and Commands
 
         private readonly IIssueDataService _issueDataService;
+        private readonly IShareService _shareService;
 
         private Issue _issue;
         public Issue Issue
@@ -37,6 +40,26 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                _editCommand = _editCommand ?? new MvxAsyncCommand(GoToNewIssueView);
+                return _editCommand;
+            }
+        }
+
+        private ICommand _shareCommand;
+        public ICommand ShareCommand
+        {
+            get
+            {
+                _shareCommand = _shareCommand ?? new MvxAsyncCommand(ShareIssue);
+                return _shareCommand;
+            }
+        }
+
         private int _issueNumber;
         private long _repositoryId;
         private string _owner;
@@ -45,9 +68,10 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
 
-        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService, IMvxMessenger messenger, IDialogService dialogService) : base(githubClientService, messenger, dialogService)
+        public IssueViewModel(IGithubClientService githubClientService, IIssueDataService issueDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
         {
             _issueDataService = issueDataService;
+            _shareService = shareService;
         }
 
         public async void Init(int issueNumber, long repositoryId, string owner = null, string repoName = null)
@@ -59,11 +83,11 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private async Task Refresh()
+        public async Task Refresh()
         {
             if (!IsInternetAvailable())
             {
-                await DialogService.ShowDialogASync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
+                await DialogService.ShowSimpleDialogAsync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -84,9 +108,32 @@ namespace GithubXamarin.Core.ViewModels
             }
             catch (HttpRequestException)
             {
-                await DialogService.ShowDialogASync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        public async Task GoToNewIssueView()
+        {
+            if (!IsInternetAvailable())
+            {
+                await DialogService.ShowSimpleDialogAsync("There is nothing here.", "Edit What?");
+                return;
+            }
+            ShowViewModel<NewIssueViewModel>(new
+            {
+                repositoryId = _repositoryId,
+                issueNumber = Issue.Number,
+                issueTitle = Issue.Title,
+                issueBody = Issue.Body,
+                labels = ListToCommasSeperatedStringConverter.Convert(Issue.Labels)
+            });
+        }
+
+        private async Task ShareIssue()
+        {
+            if (Issue == null) return;
+            await _shareService.ShareLinkAsync(Issue.HtmlUrl, Issue.Title);
         }
     }
 }

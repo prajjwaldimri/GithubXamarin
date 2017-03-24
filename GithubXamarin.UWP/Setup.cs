@@ -33,6 +33,8 @@ namespace GithubXamarin.UWP
         protected override void InitializeLastChance()
         {
             Mvx.ConstructAndRegisterSingleton<IDialogService, DialogService>();
+            Mvx.ConstructAndRegisterSingleton<IShareService, ShareService>();
+            Mvx.ConstructAndRegisterSingleton<IUpdateService, UpdateService>();
         }
     }
 }

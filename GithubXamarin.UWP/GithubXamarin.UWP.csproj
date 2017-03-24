@@ -95,6 +95,11 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="GithubXamarin.UWP_StoreKey.pfx" />
     <None Include="project.json" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\ClientId.txt" />
     <Content Include="Assets\ClientSecret.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -166,12 +171,18 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Resources\Converters\ColorSwapper.cs" />
     <Compile Include="Resources\Converters\DateTimeHumanizer.cs" />
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ShareService.cs" />
+    <Compile Include="Services\UpdateService.cs" />
+    <Compile Include="UserControls\LabelsControl.xaml.cs">
+      <DependentUpon>LabelsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FileView.xaml.cs">
       <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
@@ -197,6 +208,15 @@
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewIssueView.xaml.cs">
+      <DependentUpon>NewIssueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewRepositoryView.xaml.cs">
+      <DependentUpon>NewRepositoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewUserView.xaml.cs">
+      <DependentUpon>NewUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NotificationsView.xaml.cs">
       <DependentUpon>NotificationsView.xaml</DependentUpon>
@@ -239,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\LabelsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,6 +293,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewIssueView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NewRepositoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

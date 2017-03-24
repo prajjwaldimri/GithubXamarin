@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:id="@+id/editText1"
             android:paddingLeft="5dp"
-            local:MvxBind="Text SearchBoxText, Mode=TwoWay"/>
+            local:MvxBind="Text SearchBoxText, Mode=TwoWay" />
         <Button
             android:text="Search"
             android:layout_width="wrap_content"
@@ -25,12 +25,11 @@
             android:id="@+id/button1"
             android:paddingRight="10dp"
             android:background="@null"
-            local:MvxBind="Click SearchCommand"/>
+            local:MvxBind="Click SearchCommand" />
         <MvvmCross.Binding.Droid.Views.MvxSpinner
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/spinner1"
-            local:MvxBind="SelectedItemPosition FilterSelectedIndex, Mode=TwoWay; ItemsSource SearchCategories " />
+            local:MvxBind="SelectedItemPosition FilterSelectedIndex, Mode=TwoWay; ItemsSource SearchCategories;  " />
     </LinearLayout>
     <MvvmCross.Binding.Droid.Views.MvxListView
         android:orientation="vertical"
