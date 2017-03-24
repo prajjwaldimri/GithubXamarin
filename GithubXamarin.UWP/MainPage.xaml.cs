@@ -1,27 +1,25 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
 using MvvmCross.WindowsUWP.Views;
 using Plugin.SecureStorage;
+using RavinduL.LocalNotifications;
+using RavinduL.LocalNotifications.Presenters;
 
 namespace GithubXamarin.UWP
 {
     public sealed partial class MainPage : MvxWindowsPage
     {
-        public new MainViewModel ViewModel
-        {
-            get { return (MainViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
-        public Frame AppFrame => (Frame)WrappedFrame.UnderlyingControl;
-
         private bool IsFirstTime = true;
 
         public MainPage()

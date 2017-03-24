@@ -339,6 +339,8 @@
 
         </SplitView>
 
+        <Grid x:Name="NotificationGrid" />
+
     </Grid>
 
 </views:MvxWindowsPage> 
