@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
@@ -8,6 +9,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GithubXamarin.Core.ViewModels;
+using Microsoft.Services.Store.Engagement;
 using MvvmCross.WindowsUWP.Views;
 
 namespace GithubXamarin.UWP.Views
@@ -19,6 +21,8 @@ namespace GithubXamarin.UWP.Views
         /// Checks if the page is opened for the first time.
         /// Used because the toggled event fires automatically on startup and shows a message.
         /// </summary>
+
+        private bool IsFirstTimeOpened = true;
         private bool IsFirstTimeOpenedRadioButton = true;
         private bool IsFirstTimeOpenedComboBox = true;
 
@@ -40,6 +44,8 @@ namespace GithubXamarin.UWP.Views
                 StatusBarVisibilityChecker();
             }
             BackgroundTaskStatusChecker();
+            BroadcastStatusChecker();
+            GetVersionNumber();
         }
 
         private void StatusBarVisibilityChecker()
@@ -91,6 +97,21 @@ namespace GithubXamarin.UWP.Views
                     BackgroundTaskComboBox.SelectedIndex = 3;
                     break;
             }
+        }
+
+        private void BroadcastStatusChecker()
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if ((bool) localSettingsValues["IsStoreEngagementEnabled"])
+            {
+                BroadcastToggle.IsOn = true;
+            }
+        }
+
+        private void GetVersionNumber()
+        {
+            var version = Package.Current.Id.Version;
+            VersionNumberTextBlock.Text = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
 
         private async void StatusBarToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
@@ -217,6 +238,18 @@ namespace GithubXamarin.UWP.Views
                     break;
             }
             var task = builder.Register();
+        }
+
+        private async void BroadcastToggle_OnToggled(object sender, RoutedEventArgs e)
+        {
+            if (IsFirstTimeOpened || BroadcastToggle.IsOn)
+            {
+                IsFirstTimeOpened = false;
+                return;
+            }
+            StoreServicesEngagementManager engagementManager = StoreServicesEngagementManager.GetDefault();
+            await engagementManager.UnregisterNotificationChannelAsync();
+            ApplicationData.Current.LocalSettings.Values["IsStoreEngagementEnabled"] = false;
         }
     }
 }

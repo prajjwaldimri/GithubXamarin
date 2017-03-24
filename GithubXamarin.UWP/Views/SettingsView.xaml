@@ -56,6 +56,28 @@
                             Checked="SystemThemeRadioButton_OnChecked"/>
                         </StackPanel>
 
+                        <StackPanel
+                            x:Name="BroadCast"
+                            Margin="10,10,0,10">
+
+                            <TextBlock
+                            Text="Broadcasts"
+                            Opacity="0.8"
+                            Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                            <TextBlock
+                            Opacity="0.8"
+                            Style="{ThemeResource BodyTextBlockStyle}">
+                                Recieve important notifications from the 
+                                developer of the app.
+                            </TextBlock>
+                            
+                            <ToggleSwitch
+                                x:Name="BroadcastToggle"
+                                Toggled="BroadcastToggle_OnToggled"/>
+
+                        </StackPanel>
+
 
                         <StackPanel
                             x:Name="StatusBarStackPanel"
@@ -165,15 +187,14 @@
 
                     <Image
                         x:Name="GitItLogo"
-                        RelativePanel.AlignVerticalCenterWithPanel="True"
                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                         Width="256" 
                         Height="256"
                         Source="../Assets/Square310x310Logo.scale-200.png" />
 
                     <StackPanel
-                        RelativePanel.Below="GitItLogo"
-                        RelativePanel.AlignHorizontalCenterWithPanel="True">
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True">
 
                         <TextBlock 
                         Text="GitIt"
