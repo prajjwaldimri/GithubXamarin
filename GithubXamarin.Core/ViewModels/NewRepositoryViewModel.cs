@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Messages;
@@ -31,7 +33,7 @@ namespace GithubXamarin.Core.ViewModels
             get { return _description; }
             set
             {
-                _description = value; 
+                _description = value;
                 RaisePropertyChanged(() => Description);
             }
         }
@@ -64,7 +66,7 @@ namespace GithubXamarin.Core.ViewModels
             get { return _hasIssues; }
             set
             {
-                _hasIssues = value; 
+                _hasIssues = value;
                 RaisePropertyChanged(() => HasIssues);
             }
         }
@@ -139,7 +141,7 @@ namespace GithubXamarin.Core.ViewModels
             get { return _isEdit; }
             set
             {
-                _isEdit = value; 
+                _isEdit = value;
                 RaisePropertyChanged(() => IsEdit);
             }
         }
@@ -161,7 +163,7 @@ namespace GithubXamarin.Core.ViewModels
             get { return _repositoryId; }
             set
             {
-                _repositoryId = value; 
+                _repositoryId = value;
                 RaisePropertyChanged(() => RepositoryId);
             }
         }
@@ -175,6 +177,11 @@ namespace GithubXamarin.Core.ViewModels
                 return _submitCommand;
             }
         }
+
+        public List<string> RepositoryStateCategories { get; } = new List<string>()
+        {
+            "Private", "Public"
+        };
 
         #endregion
 
@@ -217,14 +224,16 @@ namespace GithubXamarin.Core.ViewModels
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
-            if (IsEdit)
-            {
-                await EditRepo();
-            }
-            else
-            {
-                await CreateRepo();
-            }
+            
+                if (IsEdit)
+                {
+                    await EditRepo();
+                }
+                else
+                {
+                    await CreateRepo();
+                }
+            
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
@@ -237,16 +246,16 @@ namespace GithubXamarin.Core.ViewModels
             }
 
             var createdRepo = await _repoDataService.CreateRepository(new NewRepository(Name)
-                {
-                    GitignoreTemplate = GitignoreTemplate,
-                    AutoInit = CreateWithReadme,
-                    Description = Description,
-                    HasIssues = HasIssues,
-                    HasWiki = HasWiki,
-                    Homepage = HomePage,
-                    Private = IsPrivate,
-                    LicenseTemplate = LicenseTemplate
-                },
+            {
+                GitignoreTemplate = GitignoreTemplate,
+                AutoInit = CreateWithReadme,
+                Description = Description,
+                HasIssues = HasIssues,
+                HasWiki = HasWiki,
+                Homepage = HomePage,
+                Private = IsPrivate,
+                LicenseTemplate = LicenseTemplate
+            },
                 GithubClientService.GetAuthorizedGithubClient());
 
             ShowViewModel<RepositoryViewModel>(new { repositoryId = createdRepo.Id });
@@ -255,14 +264,13 @@ namespace GithubXamarin.Core.ViewModels
         private async Task EditRepo()
         {
             var updatedRepo = await _repoDataService.UpdateRepository(RepositoryId, new RepositoryUpdate(Name)
-                {
+            {
                 Description = Description,
                 HasIssues = HasIssues,
                 HasWiki = HasWiki,
                 Homepage = HomePage,
                 Private = IsPrivate
-                },
-                GithubClientService.GetAuthorizedGithubClient());
+            },GithubClientService.GetAuthorizedGithubClient());
 
             ShowViewModel<RepositoryViewModel>(new { repositoryId = updatedRepo.Id });
         }

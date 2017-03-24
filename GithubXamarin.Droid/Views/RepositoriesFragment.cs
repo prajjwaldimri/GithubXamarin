@@ -39,6 +39,9 @@ namespace GithubXamarin.Droid.Views
                 case Resource.Id.repositories_refresh:
                     ViewModel.Refresh();
                     break;
+                case Resource.Id.repositories_add:
+                    ViewModel.GoToNewRepositoryView();
+                    break;
             }
             return base.OnOptionsItemSelected(item);
         }

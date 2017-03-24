@@ -83,7 +83,7 @@ namespace GithubXamarin.Core.ViewModels
             ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
-        private void GoToNewRepositoryView()
+        public void GoToNewRepositoryView()
         {
             ShowViewModel<NewRepositoryViewModel>();
         }

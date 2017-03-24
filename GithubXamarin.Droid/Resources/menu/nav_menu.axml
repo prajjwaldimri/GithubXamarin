@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-  <item
-      android:id="@+id/nav_home"
-      android:title="Home"
-      android:icon="@drawable/ic_home_black_24dp"/>
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"/>
     <item
       android:id="@+id/nav_notifications"
-      android:title="Notifications" 
+      android:title="Notifications"
       android:icon="@drawable/ic_notifications_black_24dp"/>
     <item
       android:id="@+id/nav_repositories"
-      android:title="Repositories" 
+      android:title="Repositories"
       android:icon="@drawable/ic_inbox_black_24dp"/>
     <item
       android:id="@+id/nav_issues"
-      android:title="Issues" 
+      android:title="Issues"
       android:icon="@drawable/ic_bug_report_black_24dp"/>
     <item
       android:id="@+id/nav_gists"
-      android:title="Gists" 
+      android:title="Gists"
       android:icon="@drawable/ic_create_black_24dp"/>
-    
+
     <item
       android:id="@+id/nav_settings"
-      android:title="Settings" 
+      android:title="Settings"
       android:icon="@drawable/ic_settings_black_24dp"/>
-
+  </group>
 
 </menu>

@@ -29,7 +29,6 @@
         <MvvmCross.Binding.Droid.Views.MvxSpinner
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/spinner1"
             local:MvxBind="SelectedItemPosition FilterSelectedIndex, Mode=TwoWay; ItemsSource SearchCategories;  " />
     </LinearLayout>
     <MvvmCross.Binding.Droid.Views.MvxListView

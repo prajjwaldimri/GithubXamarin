@@ -269,7 +269,7 @@ namespace GithubXamarin.Core.ViewModels
 
         }
 
-        private async Task GoToNewRepositoryView()
+        public async Task GoToNewRepositoryView()
         {
             if (!IsInternetAvailable()) return;
             ShowViewModel<NewRepositoryViewModel>(new

@@ -6,4 +6,9 @@
         android:title="Refresh">
   </item>
 
+  <item
+        android:id="@+id/repositories_add"
+        android:title="Create new Repository">
+  </item>
+
 </menu>

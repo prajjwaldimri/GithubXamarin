@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+        <MvvmCross.Binding.Droid.Views.MvxSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            local:MvxBind="SelectedItemPosition RepositoryStatusSelectedIndex, Mode=TwoWay; ItemsSource RepositoryStateCategories;         Clickable IsEdit" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Name"
+                android:singleLine="true"
+                android:editable="true"
+                android:hint="Name of Repository"
+                local:MvxBind="Text Name, Mode=TwoWay" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:editable="true"
+                android:hint="Description"
+                local:MvxBind="Text Description, Mode=TwoWay" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="HomePage"
+                android:singleLine="true"
+                android:editable="true"
+                android:hint="HomePage"
+                local:MvxBind="Text HomePage, Mode=TwoWay" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint=".gitignore Template"
+                local:MvxBind="Text GitignoreTemplate, Mode=TwoWay; Focusable IsNew; Enabled IsNew;" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="License Template"
+                local:MvxBind="Text LicenseTemplate, Mode=TwoWay; Focusable IsNew; Enabled IsNew;" />
+        </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1"
+            android:gravity="center">
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Enable Issues?"
+                android:paddingRight="10dp"
+                local:MvxBind="Checked HasIssues, Mode=TwoWay" />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Enable Wiki?"
+                android:paddingLeft="10dp"
+                local:MvxBind="Checked HasWiki, Mode=TwoWay" />
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:elevation="6dp"
+        android:src="@drawable/ic_send_white_24dp"
+        local:MvxBind="Click SubmitCommand" />
+</RelativeLayout>
