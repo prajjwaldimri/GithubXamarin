@@ -73,5 +73,20 @@ namespace GithubXamarin.Droid.Services
 
             return result.Value;
         }
+
+        public Task ShowMarkdownDialogAsync(string markdown, string title)
+        {
+            return Task.Run(() =>
+            {
+                Application.SynchronizationContext.Post(ignored =>
+                {
+                    var builder = new AlertDialog.Builder(CurrentActivity);
+                    builder.SetTitle(title);
+                    builder.SetMessage(markdown);
+                    builder.SetPositiveButton("Close", delegate { });
+                    builder.Create().Show();
+                }, null);
+            });
+        }
     }
 }

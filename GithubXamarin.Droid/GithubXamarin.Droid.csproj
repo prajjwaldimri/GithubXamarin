@@ -294,6 +294,7 @@
     <Compile Include="Services\GithubNotificationsService.cs" />
     <Compile Include="Services\ResourceLoader.cs" />
     <Compile Include="Services\ShareService.cs" />
+    <Compile Include="Services\UpdateService.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\EventsFragment.cs" />
     <Compile Include="Views\FileFragment.cs" />

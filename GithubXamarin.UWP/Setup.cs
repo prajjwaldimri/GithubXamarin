@@ -34,6 +34,7 @@ namespace GithubXamarin.UWP
         {
             Mvx.ConstructAndRegisterSingleton<IDialogService, DialogService>();
             Mvx.ConstructAndRegisterSingleton<IShareService, ShareService>();
+            Mvx.ConstructAndRegisterSingleton<IUpdateService, UpdateService>();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using GithubXamarin.Core.Contracts.Service;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using RavinduL.LocalNotifications.Presenters;
 
 namespace GithubXamarin.UWP.Services
@@ -39,6 +41,22 @@ namespace GithubXamarin.UWP.Services
             };
             var result = await contentDialog.ShowAsync();
             return result == ContentDialogResult.Primary;
+        }
+
+        public async Task ShowMarkdownDialogAsync(string markdown, string title)
+        {
+            var version = Package.Current.Id.Version;
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                title = $"What's new in v.{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            }
+            var contentDialog = new ContentDialog
+            {
+                Title = title,
+                Content = new MarkdownTextBlock() {Text = markdown},
+                PrimaryButtonText = "Cool"
+            };
+            await contentDialog.ShowAsync();
         }
     }
 }
