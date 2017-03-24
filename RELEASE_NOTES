@@ -1,1 +1,15 @@
-## Version 1.1.0.0
+### Improvements in Windows App:
+
+- Live Tile Support
+- Create and Edit Issues
+- Create, edit and delete Repositories
+- Edit your User Profile
+- Fixed Issue Labels Rendering
+- Share issues, repositories and users
+
+### Improvements in Android App:
+
+- Refresh available on all pages using Floating Action Button
+- Create and Edit Issues
+- Create, edit and delete Repositories
+- Edit your User Profile
