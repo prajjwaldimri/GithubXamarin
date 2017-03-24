@@ -304,6 +304,7 @@
     <Compile Include="Views\LoginFragment.cs" />
     <Compile Include="Views\NewIssueFragment.cs" />
     <Compile Include="Views\NewRepositoryFragment.cs" />
+    <Compile Include="Views\NewUserFragment.cs" />
     <Compile Include="Views\NotificationsFragment.cs" />
     <Compile Include="Views\RepositoriesFragment.cs" />
     <Compile Include="Views\RepositoryFragment.cs" />
@@ -400,6 +401,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\NewRepositoryView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NewUserView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
