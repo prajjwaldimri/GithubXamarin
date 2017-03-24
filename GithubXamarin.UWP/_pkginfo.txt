@@ -1,1 +1,0 @@
-C:\Users\prajj\Documents\Visual Studio 2017\Projects\GithubXamarin\GithubXamarin.UWP\AppPackages\GithubXamarin.UWP_1.0.2.0\GithubXamarin.UWP_1.0.2.0_x86_x64_arm.appxbundle

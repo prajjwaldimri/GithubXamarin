@@ -246,3 +246,13 @@ ModelManifest.xml
 /GithubXamarin.UWP/Assets/ClientSecret.txt
 /GithubXamarin.Droid/Resources/ClientSecret.txt
 /GithubXamarin.Droid/Resources/ClientId.txt
+
+GithubXamarin\.UWP/_pkginfo\.txt
+
+GithubXamarin\.UWP/_scale-100\.appx
+
+GithubXamarin\.UWP/_scale-125\.appx
+
+GithubXamarin\.UWP/_scale-150\.appx
+
+GithubXamarin\.UWP/_scale-400\.appx
