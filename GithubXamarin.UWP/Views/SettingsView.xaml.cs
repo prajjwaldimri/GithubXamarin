@@ -242,14 +242,22 @@ namespace GithubXamarin.UWP.Views
 
         private async void BroadcastToggle_OnToggled(object sender, RoutedEventArgs e)
         {
-            if (IsFirstTimeOpened || BroadcastToggle.IsOn)
+            if (IsFirstTimeOpened)
             {
                 IsFirstTimeOpened = false;
                 return;
             }
-            StoreServicesEngagementManager engagementManager = StoreServicesEngagementManager.GetDefault();
-            await engagementManager.UnregisterNotificationChannelAsync();
-            ApplicationData.Current.LocalSettings.Values["IsStoreEngagementEnabled"] = false;
+            var engagementManager = StoreServicesEngagementManager.GetDefault();
+            if (BroadcastToggle.IsOn)
+            {
+                await engagementManager.RegisterNotificationChannelAsync();
+                ApplicationData.Current.LocalSettings.Values["IsStoreEngagementEnabled"] = true;
+            }
+            else
+            {
+                await engagementManager.UnregisterNotificationChannelAsync();
+                ApplicationData.Current.LocalSettings.Values["IsStoreEngagementEnabled"] = false;
+            }
         }
     }
 }
