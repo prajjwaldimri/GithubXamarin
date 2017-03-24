@@ -66,7 +66,7 @@ namespace GithubXamarin.Droid.Activities
                 ViewModel.ShowLogin();
             }
 
-            ScheduleAlarm();
+            //ScheduleAlarm();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)

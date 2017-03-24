@@ -26,7 +26,6 @@ namespace GithubXamarin.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Auth0.SDK.Resource.String.library_name = global::GithubXamarin.Droid.Resource.String.library_name;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::GithubXamarin.Droid.Resource.Attribute.MvxBind;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::GithubXamarin.Droid.Resource.Attribute.MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::GithubXamarin.Droid.Resource.Attribute.MvxGroupItemTemplate;
@@ -2275,8 +2274,11 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f020068
 			public const int navigation_empty_icon = 2130837608;
 			
+			// aapt resource value: 0x7f02006a
+			public const int notification_template_icon_bg = 2130837610;
+			
 			// aapt resource value: 0x7f020069
-			public const int notification_template_icon_bg = 2130837609;
+			public const int web_hi_res_512 = 2130837609;
 			
 			static Drawable()
 			{

@@ -51,7 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
@@ -61,18 +61,16 @@
     <EnableLLVM>False</EnableLLVM>
     <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
     <EnableProguard>False</EnableProguard>
+    <AndroidLinkSkip>--linkskip=alarm</AndroidLinkSkip>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Auth0Client.Android">
-      <HintPath>..\Components\Auth0Client-0.5.0\lib\android\Auth0Client.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Humanizer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\packages\Humanizer.Core.2.1.0\lib\netstandard1.0\Humanizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Java.Interop" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
@@ -164,9 +162,8 @@
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.4.0\lib\MonoAndroid\MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Octokit.0.24.0\lib\portable-net45+wp80+win+wpa81\Octokit.dll</HintPath>
@@ -273,9 +270,6 @@
       <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\lib\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Auth.Android">
-      <HintPath>..\Components\Auth0Client-0.5.0\lib\android\Xamarin.Auth.Android.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainActivity.cs" />
@@ -317,7 +311,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <AndroidAsset Include="Assets\fontawesome-webfont.ttf" />
-    <AndroidAsset Include="Assets\ic_launcher.zip" />
     <AndroidAsset Include="Assets\ic_stat_newstorelogo_scale_400.zip" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
@@ -840,6 +833,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\drawer_item_color.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\web_hi_res_512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
