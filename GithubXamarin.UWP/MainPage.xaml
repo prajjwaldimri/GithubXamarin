@@ -186,7 +186,7 @@
                         Height="1"
                         Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                         Margin="16,0,16,6"/>
-                    
+
                     <Button
                         Grid.Row="2"
                         Grid.Column="0"
@@ -207,7 +207,7 @@
                                         <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                
+
                                 <TextBlock
                                     Text="{Binding User.Name}"/>
                             </StackPanel>
@@ -310,7 +310,7 @@
                                     <SymbolIcon Symbol="Find"/>
                                 </Button.Content>
                             </Button>
-                            
+
 
                         </RelativePanel>
                     </Border>
@@ -323,7 +323,7 @@
 
                         <Frame x:Name="MainFrame"
                                Navigated="MainFrame_OnNavigated"/>
-                        
+
                         <ProgressBar 
                             x:Name="LoadingBar"
                             VerticalAlignment="Top"
@@ -334,13 +334,8 @@
 
                     </Grid>
                 </RelativePanel>
-
             </SplitView.Content>
-
         </SplitView>
-
-        <Grid x:Name="NotificationGrid" />
-
     </Grid>
 
 </views:MvxWindowsPage> 

@@ -83,7 +83,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             //HACK: Delay is added so that the MainViewModel can completely load first before showing other ViewModels.
             //Without the delay the ViewModels were not loading inside of the Frame in MainViewModel
-            await Task.Delay(1000);
+            await Task.Delay(396);
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {

@@ -133,7 +133,6 @@ namespace GithubXamarin.Core.ViewModels
             }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
-            await DialogService.ShowPopupAsync("YOYO");
             try
             {
                 if (_repositoryId.HasValue)
