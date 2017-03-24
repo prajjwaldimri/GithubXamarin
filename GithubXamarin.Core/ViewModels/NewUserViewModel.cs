@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
+using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -124,6 +125,7 @@ namespace GithubXamarin.Core.ViewModels
         private async Task UpdateUser()
         {
             if (!IsInternetAvailable()) return;
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             var updatedUser = await _userDataService.UpdateUser(new UserUpdate()
                 {
                     Bio = Bio,
@@ -135,7 +137,7 @@ namespace GithubXamarin.Core.ViewModels
                     Name = Name
                 },
                 GithubClientService.GetAuthorizedGithubClient());
-
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             Close(this);
         }
     }

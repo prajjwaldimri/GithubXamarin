@@ -128,6 +128,7 @@ namespace GithubXamarin.Droid.Activities
                     DrawerLayout.OpenDrawer(GravityCompat.Start);
                     return true;
             }
+            DrawerLayout.CloseDrawers();
             return base.OnOptionsItemSelected(item);
         }
 
