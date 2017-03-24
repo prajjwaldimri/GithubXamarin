@@ -40,6 +40,7 @@ namespace GithubXamarin.Droid.Views
                     ViewModel.Refresh();
                     break;
                 case Resource.Id.user_edit:
+                    ViewModel.GoToNewUserView();
                     break;
             }
             return base.OnOptionsItemSelected(item);

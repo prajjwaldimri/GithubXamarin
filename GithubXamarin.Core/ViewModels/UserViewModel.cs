@@ -97,7 +97,7 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        private void GoToNewUserView()
+        public void GoToNewUserView()
         {
             ShowViewModel<NewUserViewModel>(new
             {
