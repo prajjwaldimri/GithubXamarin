@@ -24,6 +24,8 @@ namespace GithubXamarin.Droid.Services
             }
             var currentVersion = new Version(current);
             var storedVersion = new Version(prefs.GetString("VersionNumber","999999"));
+            prefsEditor.PutString("VersionNumber", current);
+            prefsEditor.Apply();
             return currentVersion.CompareTo(storedVersion) > 0;
         }
     }

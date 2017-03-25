@@ -18,6 +18,7 @@ namespace GithubXamarin.UWP.Services
             }
             var currentVersion = new Version($"{current.Major}.{current.Minor}.{current.Build}.{current.Revision}");
             var storedVersion = new Version(localSettingValues["VersionNumber"].ToString());
+            localSettingValues["VersionNumber"] = $"{current.Major}.{current.Minor}.{current.Build}.{current.Revision}";
             return currentVersion.CompareTo(storedVersion) > 0;
         }
     }
