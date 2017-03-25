@@ -84,13 +84,9 @@ namespace GithubXamarin.Core.ViewModels
             _fileDataService = fileDataService;
         }
 
-
-        public override async void Start()
+        public async Task LoadFragments()
         {
-            //HACK: Delay is added so that the MainViewModel can completely load first before showing other ViewModels.
-            //Without the delay the ViewModels were not loading inside of the Frame in MainViewModel
-            await Task.Delay(396);
-
+            await Task.Delay(10);
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 ShowViewModel<EventsViewModel>();

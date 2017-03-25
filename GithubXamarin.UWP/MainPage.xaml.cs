@@ -21,6 +21,12 @@ namespace GithubXamarin.UWP
 {
     public sealed partial class MainPage : MvxWindowsPage
     {
+        private new MainViewModel ViewModel
+        {
+            get { return (MainViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         private bool IsFirstTime = true;
 
         public MainPage()
@@ -46,6 +52,8 @@ namespace GithubXamarin.UWP
             {
                 await ApiKeysManager.KeyRetriever();
             }
+
+            await ViewModel.LoadFragments();
         }
 
         private void TogglePaneButton_Toggle(object sender, RoutedEventArgs e)
