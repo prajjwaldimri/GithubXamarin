@@ -7,7 +7,6 @@ using MvvmCross.Platform;
 using System.Reflection;
 using System.Collections.Generic;
 using GithubXamarin.Core.Contracts.Service;
-using GithubXamarin.Droid.Activities;
 using GithubXamarin.Droid.Services;
 
 namespace GithubXamarin.Droid

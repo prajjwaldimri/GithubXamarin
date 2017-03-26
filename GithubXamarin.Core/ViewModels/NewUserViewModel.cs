@@ -124,7 +124,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task UpdateUser()
         {
-            if (!IsInternetAvailable()) return;
+            if (!(await IsInternetAvailable())) return;
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             var updatedUser = await _userDataService.UpdateUser(new UserUpdate()
                 {

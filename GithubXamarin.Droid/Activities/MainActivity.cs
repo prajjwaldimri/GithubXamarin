@@ -14,12 +14,13 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Plugin.SecureStorage;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.Droid.Services;
+using HockeyApp.Android.Metrics;
+using CrashManager = HockeyApp.Android.CrashManager;
 using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace GithubXamarin.Droid.Activities
 {
-    [Activity(MainLauncher = true,
-        Label = "@string/ApplicationName",
+    [Activity(Label = "@string/ApplicationName",
         Icon = "@drawable/ic_launcher",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         Theme = "@style/MyTheme",
@@ -38,6 +39,11 @@ namespace GithubXamarin.Droid.Activities
         {
             SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
+
+            //HockeyApp Registration
+            CrashManager.Register(this, "c901aab98d2a42e0bba6fdd06be0c89f");
+            MetricsManager.Register(Application, "c901aab98d2a42e0bba6fdd06be0c89f");
+
             SetContentView(Resource.Layout.Main);
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
@@ -51,6 +57,7 @@ namespace GithubXamarin.Droid.Activities
             SupportActionBar.SetDisplayShowHomeEnabled(true);
 
             _navigationView.NavigationItemSelected += _navigationView_NavigationItemSelected;
+            _navigationView.SetCheckedItem(Resource.Id.nav_home);
 
             //Animating Hamburger Icon. 
             _drawerToggle = setupDrawerToggle();
@@ -58,7 +65,11 @@ namespace GithubXamarin.Droid.Activities
 
             ViewModel.LoadFragments();
 
-            ScheduleAlarm();
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                ScheduleAlarm();
+            }
+            SetStatusBarTheme();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -144,6 +155,12 @@ namespace GithubXamarin.Droid.Activities
                 PendingIntentFlags.UpdateCurrent);
             var alarm = (AlarmManager) this.GetSystemService(Context.AlarmService);
             alarm.SetInexactRepeating(AlarmType.RtcWakeup, Java.Lang.JavaSystem.CurrentTimeMillis(), AlarmManager.IntervalFifteenMinutes, pendingIntent);
+        }
+
+        private void SetStatusBarTheme()
+        {
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
         }
     }
 }

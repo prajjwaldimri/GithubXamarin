@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "HockeySDK.UWP": "4.1.6",
     "Humanizer": "2.1.0",
     "Microsoft.Bcl": "1.1.10",
     "Microsoft.Net.Http": "2.2.29",

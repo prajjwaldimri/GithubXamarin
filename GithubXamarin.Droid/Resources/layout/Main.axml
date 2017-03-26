@@ -9,16 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <!-- ToolBar -->
+      <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar">
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
+      </android.support.design.widget.AppBarLayout>
     <!-- Actual content of the screen -->
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_centerInParent="true"
-            android:layout_below="@+id/toolbar" />
+            android:layout_below="@+id/appbar" />
         <ProgressBar
             android:layout_width="48dp"
             android:layout_height="48dp"

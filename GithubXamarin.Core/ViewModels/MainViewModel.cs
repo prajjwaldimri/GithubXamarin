@@ -6,7 +6,6 @@ using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.UI;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 using Plugin.SecureStorage;
@@ -87,6 +86,7 @@ namespace GithubXamarin.Core.ViewModels
         public async Task LoadFragments()
         {
             await Task.Delay(10);
+
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 ShowViewModel<EventsViewModel>();
@@ -96,7 +96,7 @@ namespace GithubXamarin.Core.ViewModels
                 ShowViewModel<LoginViewModel>();
             }
 
-            if (CrossSecureStorage.Current.HasKey("OAuthToken") && IsInternetAvailable())
+            if (CrossSecureStorage.Current.HasKey("OAuthToken") && await IsInternetAvailable())
             {
                 User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }

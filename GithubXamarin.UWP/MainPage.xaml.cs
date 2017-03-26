@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
+using Microsoft.Services.Store.Engagement;
 using MvvmCross.WindowsUWP.Views;
 using Plugin.SecureStorage;
-using RavinduL.LocalNotifications;
-using RavinduL.LocalNotifications.Presenters;
 
 namespace GithubXamarin.UWP
 {
@@ -32,6 +28,11 @@ namespace GithubXamarin.UWP
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             NavMenuList.SelectedIndex = 0;
             NavMenuList.SetSelectedItem(NavMenuList.Items[0] as NavMenuItem);
@@ -40,20 +41,16 @@ namespace GithubXamarin.UWP
                 FeedbackNavPaneButton.Visibility = Visibility.Collapsed;
                 FeedbackEmailNavPaneButton.Visibility = Visibility.Visible;
             }
-        }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
             NavPaneDivider.Visibility = Visibility.Collapsed;
             //ViewModel handles the navigation to the 0 index on startup so have to manually set this here.
-            
+
             if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 await ApiKeysManager.KeyRetriever();
             }
-
             await ViewModel.LoadFragments();
+            await RegisterAppForStoreNotifications();
         }
 
         private void TogglePaneButton_Toggle(object sender, RoutedEventArgs e)
@@ -181,6 +178,24 @@ namespace GithubXamarin.UWP
         {
             var uri = new Uri(@"mailto: prajjwaldimri@hotmail.com");
             await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        /// <summary>
+        /// Register App To recieve notifications from Windows Store
+        /// https://docs.microsoft.com/en-us/windows/uwp/monetize/configure-your-app-to-receive-dev-center-notifications
+        /// </summary>
+        private async Task RegisterAppForStoreNotifications()
+        {
+            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
+            if (!(localSettingsValues.ContainsKey("IsStoreEngagementEnabled")))
+            {
+                localSettingsValues["IsStoreEngagementEnabled"] = true;
+            }
+            if ((bool)localSettingsValues["IsStoreEngagementEnabled"])
+            {
+                var engagementManager = StoreServicesEngagementManager.GetDefault();
+                await engagementManager.RegisterNotificationChannelAsync();
+            }
         }
     }
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Messages;
-using GithubXamarin.Core.Utility;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
@@ -156,7 +151,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task CreateOrUpdateIssue()
         {
-            if (!IsInternetAvailable())
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("I am a very PC person! I don't like working on laptops", "Internet not available");
                 return;
