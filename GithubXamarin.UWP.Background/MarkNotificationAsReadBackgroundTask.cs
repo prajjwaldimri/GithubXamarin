@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
-using Windows.Storage;
+﻿using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 using Octokit;
 using Plugin.SecureStorage;

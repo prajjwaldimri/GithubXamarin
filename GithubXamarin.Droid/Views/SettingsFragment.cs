@@ -1,13 +1,8 @@
-using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.Droid.Shared.Attributes;
 using GithubXamarin.Core.ViewModels;
-using GithubXamarin.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V4;
 

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
-using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Plugin.Connectivity;

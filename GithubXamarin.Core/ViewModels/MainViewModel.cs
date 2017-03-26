@@ -6,7 +6,6 @@ using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.UI;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 using Plugin.SecureStorage;
