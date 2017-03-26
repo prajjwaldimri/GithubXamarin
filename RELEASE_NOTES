@@ -3,6 +3,7 @@
 
 ### Improvements in Windows App:
 
+- Added HockeyApp Integration
 - Live Tile Support
 - Create and Edit Issues
 - Create, edit and delete Repositories
@@ -12,6 +13,11 @@
 
 ### Improvements in Android App:
 
+- Added Splash Screen
+- Fixed Back Button Not closing app
+- Added HockeyApp Integration
+- Fixed crashes on startup
+- Updated All ListViews to RecyclerViews
 - Refresh available on all pages using Floating Action Button
 - Create and Edit Issues
 - Create, edit and delete Repositories

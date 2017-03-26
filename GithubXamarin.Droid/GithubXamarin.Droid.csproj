@@ -322,6 +322,9 @@
     <AndroidAsset Include="Assets\ic_stat_newstorelogo_scale_400.zip" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
+    <ProguardConfiguration Include="proguard.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProguardConfiguration>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\NotificationsView.axml">
