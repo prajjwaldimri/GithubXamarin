@@ -35,7 +35,7 @@ namespace GithubXamarin.Droid.Services
 
         protected override void OnHandleIntent(Intent intent)
         {
-            if (!CrossConnectivity.Current.IsRemoteReachable("www.google.com").Result)
+            if (!CrossConnectivity.Current.IsConnected)
                 return;
             try
             {
@@ -68,7 +68,7 @@ namespace GithubXamarin.Droid.Services
                     }
                 }
             }
-            catch (HttpRequestException e)
+            catch (Exception e)
             {
                 
             }
