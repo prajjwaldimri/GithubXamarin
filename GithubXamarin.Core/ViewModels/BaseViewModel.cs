@@ -26,7 +26,8 @@ namespace GithubXamarin.Core.ViewModels
         protected static async Task<bool> IsInternetAvailable()
         {
             //https://github.com/jamesmontemagno/ConnectivityPlugin
-            return CrossConnectivity.Current.IsConnected && await CrossConnectivity.Current.IsRemoteReachable("www.google.com");
+            return CrossConnectivity.Current.IsConnected ;
+            // && await CrossConnectivity.Current.IsReachable("www.google.com")
         }
 
         public void Dispose()

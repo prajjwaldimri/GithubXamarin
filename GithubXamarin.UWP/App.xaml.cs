@@ -10,15 +10,13 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.HockeyApp;
 using Microsoft.Services.Store.Engagement;
 using MvvmCross.Platform;
 using Plugin.SecureStorage;
 
 namespace GithubXamarin.UWP
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
         /// <summary>
@@ -30,6 +28,9 @@ namespace GithubXamarin.UWP
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             SetTheme();
+
+            //HockeyApp Integration
+            HockeyClient.Current.Configure("0fc1c4757f2f41a8b88fcf2dc1603f5b");
         }
 
         /// <summary>

@@ -2,21 +2,20 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
-using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.V4.Content;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Plugin.SecureStorage;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.Droid.Services;
+using HockeyApp.Android.Metrics;
+using CrashManager = HockeyApp.Android.CrashManager;
 using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace GithubXamarin.Droid.Activities
@@ -40,6 +39,11 @@ namespace GithubXamarin.Droid.Activities
         {
             SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
+
+            //HockeyApp Registration
+            CrashManager.Register(this, "c901aab98d2a42e0bba6fdd06be0c89f");
+            MetricsManager.Register(Application, "c901aab98d2a42e0bba6fdd06be0c89f");
+
             SetContentView(Resource.Layout.Main);
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
