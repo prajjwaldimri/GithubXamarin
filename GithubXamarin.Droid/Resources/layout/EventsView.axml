@@ -9,8 +9,9 @@
         android:layout_height="wrap_content"
         android:minWidth="25px"
         android:minHeight="25px">
-        <Mvx.MvxListView
+      <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
             android:orientation="vertical"
+            android:scrollbars="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             local:MvxBind="ItemsSource Events; ItemClick EventClickCommand;"

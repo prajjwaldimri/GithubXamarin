@@ -156,7 +156,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task CreateOrUpdateIssue()
         {
-            if (!IsInternetAvailable())
+            if (!!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("I am a very PC person! I don't like working on laptops", "Internet not available");
                 return;

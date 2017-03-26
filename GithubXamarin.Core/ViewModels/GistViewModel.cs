@@ -61,7 +61,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task Refresh()
         {
-            if (!IsInternetAvailable() || string.IsNullOrWhiteSpace(_gistId))
+            if (!!(await IsInternetAvailable()) || string.IsNullOrWhiteSpace(_gistId))
             {
                 return;
             }

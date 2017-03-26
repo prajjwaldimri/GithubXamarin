@@ -1,7 +1,9 @@
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using Android.Transitions;
 using Android.Views;
+using Android.Views.Animations;
 using MvvmCross.Droid.Shared.Attributes;
 using GithubXamarin.Core.ViewModels;
 using MvvmCross.Binding.Droid.BindingContext;

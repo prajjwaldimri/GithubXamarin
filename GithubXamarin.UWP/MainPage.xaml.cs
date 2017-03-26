@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
 using MvvmCross.WindowsUWP.Views;
 using Plugin.SecureStorage;
-using RavinduL.LocalNotifications;
-using RavinduL.LocalNotifications.Presenters;
 
 namespace GithubXamarin.UWP
 {
@@ -32,6 +25,11 @@ namespace GithubXamarin.UWP
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             NavMenuList.SelectedIndex = 0;
             NavMenuList.SetSelectedItem(NavMenuList.Items[0] as NavMenuItem);
@@ -40,19 +38,14 @@ namespace GithubXamarin.UWP
                 FeedbackNavPaneButton.Visibility = Visibility.Collapsed;
                 FeedbackEmailNavPaneButton.Visibility = Visibility.Visible;
             }
-        }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
             NavPaneDivider.Visibility = Visibility.Collapsed;
             //ViewModel handles the navigation to the 0 index on startup so have to manually set this here.
-            
+
             if (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 await ApiKeysManager.KeyRetriever();
             }
-
             await ViewModel.LoadFragments();
         }
 

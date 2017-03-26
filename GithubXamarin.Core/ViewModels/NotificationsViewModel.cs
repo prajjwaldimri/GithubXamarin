@@ -87,7 +87,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable())
+            if (!!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("What is better ? To be born good or to overcome your evil nature through great effort ?", "No Internet Connection!");
                 return;

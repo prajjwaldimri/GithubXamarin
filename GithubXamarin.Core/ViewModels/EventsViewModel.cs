@@ -126,7 +126,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable())
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
                 return;
