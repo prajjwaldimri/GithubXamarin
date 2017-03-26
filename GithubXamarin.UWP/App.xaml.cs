@@ -19,10 +19,6 @@ namespace GithubXamarin.UWP
 {
     sealed partial class App : Application
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
         public App()
         {
             this.InitializeComponent();
@@ -74,7 +70,6 @@ namespace GithubXamarin.UWP
                     await SetStatusBarVisibility();
                     await RegisterGithubNotificationsBackgroundTask();
                     await RegisterMarkNotificationAsReadBackgroundTask();
-                    await RegisterAppForStoreNotifications();
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 
@@ -110,23 +105,7 @@ namespace GithubXamarin.UWP
             deferral.Complete();
         }
 
-        /// <summary>
-        /// Register App To recieve notifications from Windows Store
-        /// https://docs.microsoft.com/en-us/windows/uwp/monetize/configure-your-app-to-receive-dev-center-notifications
-        /// </summary>
-        private async Task RegisterAppForStoreNotifications()
-        {
-            var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if (!(localSettingsValues.ContainsKey("IsStoreEngagementEnabled")))
-            {
-                localSettingsValues["IsStoreEngagementEnabled"] = true;
-            }
-            if ((bool) localSettingsValues["IsStoreEngagementEnabled"])
-            {
-                var engagementManager = StoreServicesEngagementManager.GetDefault();
-                await engagementManager.RegisterNotificationChannelAsync();
-            }
-        }
+        
 
         private async Task RegisterGithubNotificationsBackgroundTask()
         {

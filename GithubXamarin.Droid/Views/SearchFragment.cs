@@ -1,12 +1,9 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.Droid.Shared.Attributes;
 using GithubXamarin.Core.ViewModels;
-using GithubXamarin.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V4;
 
 namespace GithubXamarin.Droid.Views

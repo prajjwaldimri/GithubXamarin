@@ -1,10 +1,7 @@
 using System;
 using Android.App;
-using Android.Content;
-using Android.Content.PM;
 using Android.Preferences;
 using GithubXamarin.Core.Contracts.Service;
-using Java.Lang;
 
 namespace GithubXamarin.Droid.Services
 {

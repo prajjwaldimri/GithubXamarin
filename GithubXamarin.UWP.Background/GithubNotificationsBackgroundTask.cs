@@ -1,12 +1,10 @@
 ﻿using Octokit;
 using System;
 using Windows.ApplicationModel.Background;
-using Windows.Security.Credentials;
 using Windows.Storage;
 using Microsoft.QueryStringDotNET;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
-using System.Threading.Tasks;
 using Humanizer;
 using Plugin.SecureStorage;
 
