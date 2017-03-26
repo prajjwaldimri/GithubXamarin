@@ -76,7 +76,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable())
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("So for the time being, here is an interesting fact: If each dead person became a ghost, there’d be more than 100 billion of them haunting us all. Creepy, but cool!", "No Internet Connection!");
                 return;

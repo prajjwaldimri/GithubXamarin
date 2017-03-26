@@ -97,7 +97,15 @@ namespace GithubXamarin.Core.ViewModels
                     break;
                 case "IssuesEvent":
                     var issueEventPayload = activity.Payload as IssueEventPayload;
-                    ShowViewModel<IssueViewModel>(new {issueNumber = issueEventPayload.Issue.Number, repositoryId = issueEventPayload.Repository.Id});
+                    if (issueEventPayload != null)
+                    {
+                        ShowViewModel<IssueViewModel>(
+                            new
+                            {
+                                issueNumber = issueEventPayload.Issue.Number,
+                                repositoryId = issueEventPayload.Repository.Id
+                            });
+                    }
                     break;
                 case "IssueCommentEvent":
                     break;
@@ -126,7 +134,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable())
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("Use this moment to look up from your screen and enjoy life.", "No Internet Connection!");
                 return;

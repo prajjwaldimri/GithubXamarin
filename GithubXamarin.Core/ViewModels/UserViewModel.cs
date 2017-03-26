@@ -113,7 +113,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable()) return;
+            if (!(await IsInternetAvailable())) return;
             try
             {
                 Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });

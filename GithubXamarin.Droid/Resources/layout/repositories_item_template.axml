@@ -2,23 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    android:padding="5dp">
-    <android.support.v7.widget.CardView
-        android:layout_gravity="center_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        cardview:cardElevation="4dp"
-        cardview:contentPadding="5dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="1dp">
+  <android.support.v7.widget.CardView
+      android:layout_gravity="center_horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      cardview:cardCornerRadius="4dp">
         <LinearLayout
             android:id="@+id/RepositoriesItemWrapperLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="14dp">
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -41,16 +38,19 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
                     cardview:MvxBind="Text Language" />
                 <FontAwesome
                     android:paddingLeft="10dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
                     android:text="&#xF005;" />
                 <TextView
                     android:paddingLeft="3dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
                     cardview:MvxBind="Text StargazersCount" />
                 <TextView
                     android:paddingLeft="10dp"

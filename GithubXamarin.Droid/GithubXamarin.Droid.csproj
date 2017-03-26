@@ -838,6 +838,15 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\web_hi_res_512.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\fade_out.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\fade_in.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\push_left_in.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

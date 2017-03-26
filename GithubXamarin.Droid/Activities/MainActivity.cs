@@ -58,7 +58,10 @@ namespace GithubXamarin.Droid.Activities
 
             ViewModel.LoadFragments();
 
-            ScheduleAlarm();
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                ScheduleAlarm();
+            }
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)

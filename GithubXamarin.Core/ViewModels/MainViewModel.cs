@@ -87,6 +87,7 @@ namespace GithubXamarin.Core.ViewModels
         public async Task LoadFragments()
         {
             await Task.Delay(10);
+
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
             {
                 ShowViewModel<EventsViewModel>();
@@ -96,7 +97,7 @@ namespace GithubXamarin.Core.ViewModels
                 ShowViewModel<LoginViewModel>();
             }
 
-            if (CrossSecureStorage.Current.HasKey("OAuthToken") && IsInternetAvailable())
+            if (CrossSecureStorage.Current.HasKey("OAuthToken") && await IsInternetAvailable())
             {
                 User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
             }

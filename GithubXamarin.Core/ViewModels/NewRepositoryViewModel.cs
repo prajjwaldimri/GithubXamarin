@@ -220,7 +220,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task CreateOrEditRepo()
         {
-            if (!IsInternetAvailable()) { await DialogService.ShowSimpleDialogAsync("Can't fetch the error message from the internet.", "No Internet"); return; }
+            if (!(await IsInternetAvailable())) { await DialogService.ShowSimpleDialogAsync("Can't fetch the error message from the internet.", "No Internet"); return; }
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 

@@ -90,9 +90,9 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!IsInternetAvailable())
+            if (!(await IsInternetAvailable()))
             {
-                await DialogService.ShowSimpleDialogAsync("No internet, No work :(", "Can't submit update");
+                await DialogService.ShowSimpleDialogAsync("No internet, No work :(", "No Internet Connection");
                 return;
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });

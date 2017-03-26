@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
+using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Plugin.Connectivity;
@@ -20,10 +23,10 @@ namespace GithubXamarin.Core.ViewModels
             DialogService = dialogService;
         }
 
-        protected static bool IsInternetAvailable()
+        protected static async Task<bool> IsInternetAvailable()
         {
             //https://github.com/jamesmontemagno/ConnectivityPlugin
-            return CrossConnectivity.Current.IsConnected;
+            return CrossConnectivity.Current.IsConnected && await CrossConnectivity.Current.IsRemoteReachable("www.google.com");
         }
 
         public void Dispose()
