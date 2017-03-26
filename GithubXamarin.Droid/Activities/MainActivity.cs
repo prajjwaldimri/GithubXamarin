@@ -11,6 +11,7 @@ using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Plugin.SecureStorage;

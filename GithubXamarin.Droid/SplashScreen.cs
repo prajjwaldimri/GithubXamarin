@@ -9,6 +9,7 @@ namespace GithubXamarin.Droid
         Icon = "@drawable/ic_launcher",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         Theme = "@style/MyTheme.Splash",
+        NoHistory = true,
         Name = "github.droid.activities.SplashActivity")]
     public class SplashScreen : MvxSplashScreenActivity
     {
