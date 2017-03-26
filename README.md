@@ -20,7 +20,7 @@ Please report unacceptable behavior to prajjwaldimri@outlook.com
 
 ## Prerequisites for Building Solution
 
-* [Visual Studio 2015](visualstudio.com) or greater (Required)
+* [Visual Studio 2015](visualstudio.com) or greater (Recommended)
 * [Resharper](https://www.jetbrains.com/resharper/) (Optional)
 * [Pencil](https://github.com/evolus/pencil/) (Optional)
 

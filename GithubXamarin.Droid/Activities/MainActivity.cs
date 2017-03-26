@@ -57,6 +57,7 @@ namespace GithubXamarin.Droid.Activities
             SupportActionBar.SetDisplayShowHomeEnabled(true);
 
             _navigationView.NavigationItemSelected += _navigationView_NavigationItemSelected;
+            _navigationView.SetCheckedItem(Resource.Id.nav_home);
 
             //Animating Hamburger Icon. 
             _drawerToggle = setupDrawerToggle();

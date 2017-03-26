@@ -7,6 +7,8 @@
   <color name="colorPrimaryLight">#B3E5FC</color>
   <color name="colorAccent" type="color">#4CAF50</color>
   <color name="primaryText" type="color">#212121</color>
+  <color name="secondaryText" type="color">#757575</color>
+  <color name="defaultText" type="color">#838383</color>
   <color name="divider" type="color">#BDBDBD</color>
   <color name="white" type="color">#FFFFFF</color>
   <color name="splash_background" type="color">#512DA8</color>
