@@ -2,9 +2,11 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V4.Content;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
@@ -18,8 +20,7 @@ using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace GithubXamarin.Droid.Activities
 {
-    [Activity(MainLauncher = true,
-        Label = "@string/ApplicationName",
+    [Activity(Label = "@string/ApplicationName",
         Icon = "@drawable/ic_launcher",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         Theme = "@style/MyTheme",
@@ -62,6 +63,7 @@ namespace GithubXamarin.Droid.Activities
             {
                 ScheduleAlarm();
             }
+            SetStatusBarTheme();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -147,6 +149,12 @@ namespace GithubXamarin.Droid.Activities
                 PendingIntentFlags.UpdateCurrent);
             var alarm = (AlarmManager) this.GetSystemService(Context.AlarmService);
             alarm.SetInexactRepeating(AlarmType.RtcWakeup, Java.Lang.JavaSystem.CurrentTimeMillis(), AlarmManager.IntervalFifteenMinutes, pendingIntent);
+        }
+
+        private void SetStatusBarTheme()
+        {
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
         }
     }
 }
