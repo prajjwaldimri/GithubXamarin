@@ -29,11 +29,12 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@color/primaryText"
                     cardview:MvxBind="Text Description" />
             </LinearLayout>
           
           <TextView
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="15dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     cardview:MvxBind="Text DateTimeHumanizer(CreatedAt.DateTime)" />
