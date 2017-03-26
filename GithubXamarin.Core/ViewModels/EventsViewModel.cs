@@ -97,7 +97,15 @@ namespace GithubXamarin.Core.ViewModels
                     break;
                 case "IssuesEvent":
                     var issueEventPayload = activity.Payload as IssueEventPayload;
-                    ShowViewModel<IssueViewModel>(new {issueNumber = issueEventPayload.Issue.Number, repositoryId = issueEventPayload.Repository.Id});
+                    if (issueEventPayload != null)
+                    {
+                        ShowViewModel<IssueViewModel>(
+                            new
+                            {
+                                issueNumber = issueEventPayload.Issue.Number,
+                                repositoryId = issueEventPayload.Repository.Id
+                            });
+                    }
                     break;
                 case "IssueCommentEvent":
                     break;

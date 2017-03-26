@@ -2,23 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:padding="5dp">
+    android:paddingBottom="1dp">
   <android.support.v7.widget.CardView
       android:layout_gravity="center_horizontal"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      cardview:cardElevation="4dp"
-      cardview:contentPadding="5dp">
+      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        cardview:cardCornerRadius="4dp">
     <LinearLayout
         android:id="@+id/UsersItemWrapperLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="14dp">
       <MvxImageView
         android:layout_height="32dp"
         android:layout_width="32dp"

@@ -88,7 +88,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!!(await IsInternetAvailable()))
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("Or is it?", "Internet is not available");
                 return;

@@ -188,7 +188,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task DeleteRepository()
         {
-            if (!!(await IsInternetAvailable()) || Repository == null) return;
+            if (!(await IsInternetAvailable()) || Repository == null) return;
 
             if (
                 await DialogService.ShowBooleanDialogAsync(
@@ -261,7 +261,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task GoToNewIssueView()
         {
-            if (!!(await IsInternetAvailable())) return;
+            if (!(await IsInternetAvailable())) return;
             ShowViewModel<NewIssueViewModel>(new
             {
                 repositoryId = Repository.Id
@@ -271,7 +271,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task GoToNewRepositoryView()
         {
-            if (!!(await IsInternetAvailable())) return;
+            if (!(await IsInternetAvailable())) return;
             ShowViewModel<NewRepositoryViewModel>(new
             {
                 repositoryId = Repository.Id,
@@ -286,7 +286,7 @@ namespace GithubXamarin.Core.ViewModels
 
         public async Task Refresh()
         {
-            if (!!(await IsInternetAvailable())) return;
+            if (!(await IsInternetAvailable())) return;
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
             try

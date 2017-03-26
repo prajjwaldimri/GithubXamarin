@@ -211,7 +211,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task Search(string searchTerm, SearchTypeEnumeration searchType)
         {
-            if (!!(await IsInternetAvailable()))
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("Or is it?", "Internet is not available");
                 return;

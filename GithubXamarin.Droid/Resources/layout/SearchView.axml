@@ -31,20 +31,20 @@
             android:layout_height="match_parent"
             local:MvxBind="SelectedItemPosition FilterSelectedIndex, Mode=TwoWay; ItemsSource SearchCategories;  " />
     </LinearLayout>
-    <MvvmCross.Binding.Droid.Views.MvxListView
-        android:orientation="vertical"
+  <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+      android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         local:MvxBind="ItemsSource Repositories; ItemClick RepositoryClickCommand; Visibility Visibility(RepositoriesListVisibility)"
         local:MvxItemTemplate="@layout/repositories_item_template" />
-    <MvvmCross.Binding.Droid.Views.MvxListView
-        android:orientation="vertical"
+  <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+      android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         local:MvxBind="ItemsSource Users; ItemClick UserClickCommand; Visibility Visibility(UsersListVisibility)"
         local:MvxItemTemplate="@layout/users_item_template" />
-    <MvvmCross.Binding.Droid.Views.MvxListView
-        android:orientation="vertical"
+  <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+      android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         local:MvxBind="ItemsSource Issues; ItemClick IssueClickCommand; Visibility Visibility(IssuesListVisibility)"

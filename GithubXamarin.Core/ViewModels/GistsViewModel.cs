@@ -80,7 +80,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
-            if (!!(await IsInternetAvailable()))
+            if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("", "Internet is not available");
                 return;
