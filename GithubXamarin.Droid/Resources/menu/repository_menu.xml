@@ -3,17 +3,20 @@
 
   <item
         android:id="@+id/repository_refresh"
-        android:title="Refresh">
+        android:title="Refresh"
+        android:showAsAction="never">
   </item>
 
   <item
         android:id="@+id/repository_edit"
-        android:title="Edit">
+        android:title="Edit"
+        android:showAsAction="never">
   </item>
 
   <item
         android:id="@+id/repository_add_issue"
-        android:title="Add Issue">
+        android:title="Add Issue"
+        android:showAsAction="never">
   </item>
 
 </menu>
