@@ -1,5 +1,7 @@
 ﻿using Octokit;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Microsoft.QueryStringDotNET;
@@ -7,6 +9,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
 using Humanizer;
 using Plugin.SecureStorage;
+using Notification = Octokit.Notification;
 
 namespace GithubXamarin.UWP.Background
 {
@@ -16,6 +19,8 @@ namespace GithubXamarin.UWP.Background
         private string _toastTitle;
         private string _toastContent;
         private string _toastLogo;
+        private const string _tokenKey = "OAuthToken";
+        private const string _lastShowedNotificationKey = "LastShowedNotificationUpdationTime";
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -26,16 +31,30 @@ namespace GithubXamarin.UWP.Background
 
             //Octokit
             var client = new GitHubClient(new ProductHeaderValue("gitit"));
-            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            if (CrossSecureStorage.Current.HasKey(_tokenKey))
             {
-                client.Credentials = new Credentials(CrossSecureStorage.Current.GetValue("OAuthToken"));
+                client.Credentials = new Credentials(CrossSecureStorage.Current.GetValue(_tokenKey));
                 var notificationRequest = new NotificationsRequest
                 {
                     Since =
-                        DateTimeOffset.Now.Subtract(new TimeSpan(0,
-                            int.Parse(localSettingsValues["BackgroundTaskTime"].ToString()), 0))
+                        DateTimeOffset.Now.Subtract(new TimeSpan(1, 0, 0, 0))
                 };
-                var notifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
+
+                var serverNotifications = await client.Activity.Notifications.GetAllForCurrent(notificationRequest);
+                if (serverNotifications.Count <= 0) return;
+
+                var latestUpdatedAt = DateTime.Parse(serverNotifications[0].UpdatedAt);
+                IEnumerable<Octokit.Notification> notifications = new List<Notification>(0);
+
+
+                if (localSettingsValues.ContainsKey(_lastShowedNotificationKey))
+                {
+                    var localUpdatedAt = DateTime.Parse(localSettingsValues[_lastShowedNotificationKey].ToString());
+                    notifications = from notification in serverNotifications
+                                    where latestUpdatedAt > localUpdatedAt
+                                    select notification;
+                }
+                localSettingsValues[_lastShowedNotificationKey] = latestUpdatedAt.ToString();
                 foreach (var notification in notifications)
                 {
                     _toastTitle = $"{notification.Subject.Title}";
@@ -60,7 +79,7 @@ namespace GithubXamarin.UWP.Background
                     //Interactive buttons to Toast
                     var toastActions = new ToastActionsCustom()
                     {
-                        
+
                         Buttons =
                             {
                                 new ToastButton("Mark As Read",new QueryString()

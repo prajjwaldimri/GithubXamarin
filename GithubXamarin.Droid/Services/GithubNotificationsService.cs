@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Preferences;
 using Android.Support.V4.App;
 using Humanizer;
 using Octokit;
 using Plugin.Connectivity;
 using Plugin.SecureStorage;
 using Credentials = Octokit.Credentials;
+using Notification = Octokit.Notification;
 
 namespace GithubXamarin.Droid.Services
 {
@@ -17,6 +21,7 @@ namespace GithubXamarin.Droid.Services
         private string _text;
         private string _toastLogo;
         private Credentials _passwordCredential;
+        private const string _lastShowedNotificationKey = "LastShowedNotificationUpdationTime";
 
         public GithubNotificationsService() : base("GithubNotificationsService")
         {
@@ -38,10 +43,26 @@ namespace GithubXamarin.Droid.Services
                     var notificationRequest = new NotificationsRequest
                     {
                         Since =
-                            DateTimeOffset.Now.Subtract(new TimeSpan(0,
-                                15, 0))
+                        DateTimeOffset.Now.Subtract(new TimeSpan(1, 0, 0, 0))
                     };
-                    var notifications = client.Activity.Notifications.GetAllForCurrent(notificationRequest).Result;
+
+                    var serverNotifications = client.Activity.Notifications.GetAllForCurrent(notificationRequest).Result;
+                    if (serverNotifications.Count <= 0) return;
+
+                    var latestUpdatedAt = DateTime.Parse(serverNotifications[0].UpdatedAt);
+                    IEnumerable<Octokit.Notification> notifications = new List<Notification>(0);
+
+                    var prefs = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
+                    var prefsEditor = prefs.Edit();
+                    if (prefs.Contains(_lastShowedNotificationKey))
+                    {
+                        var localUpdatedAt = DateTime.Parse(prefs.GetString(_lastShowedNotificationKey, "null"));
+                        notifications = from notification in serverNotifications
+                                        where latestUpdatedAt > localUpdatedAt
+                                        select notification;
+                    }
+                    prefsEditor.PutString(_lastShowedNotificationKey, latestUpdatedAt.ToString());
+                    prefsEditor.Apply();
                     foreach (var notification in notifications)
                     {
                         _title = $"{notification.Subject.Title}";
