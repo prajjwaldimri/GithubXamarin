@@ -177,6 +177,7 @@
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\UpdateService.cs" />

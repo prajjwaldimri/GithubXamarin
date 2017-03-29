@@ -10,6 +10,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GithubXamarin.UWP.Services;
 using Microsoft.HockeyApp;
 using Microsoft.Services.Store.Engagement;
 using MvvmCross.Platform;
@@ -78,6 +79,7 @@ namespace GithubXamarin.UWP
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                AuthenticationService.Authenticate();
             }
         }
 
