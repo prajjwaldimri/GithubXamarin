@@ -2488,8 +2488,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f0600bb
 			public const int RepositoriesItemWrapperLayout = 2131099835;
 			
-			// aapt resource value: 0x7f0600c7
-			public const int UsersItemWrapperLayout = 2131099847;
+			// aapt resource value: 0x7f0600ca
+			public const int UsersItemWrapperLayout = 2131099850;
 			
 			// aapt resource value: 0x7f0600ad
 			public const int action0 = 2131099821;
@@ -2536,8 +2536,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060043
 			public const int action_mode_close_button = 2131099715;
 			
-			// aapt resource value: 0x7f0600e2
-			public const int action_search = 2131099874;
+			// aapt resource value: 0x7f0600e5
+			public const int action_search = 2131099877;
 			
 			// aapt resource value: 0x7f060044
 			public const int activity_chooser_view_content = 2131099716;
@@ -2566,29 +2566,29 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060028
 			public const int bottom = 2131099688;
 			
-			// aapt resource value: 0x7f0600be
-			public const int button1 = 2131099838;
+			// aapt resource value: 0x7f0600c1
+			public const int button1 = 2131099841;
 			
-			// aapt resource value: 0x7f0600c5
-			public const int button2 = 2131099845;
-			
-			// aapt resource value: 0x7f0600bf
-			public const int button3 = 2131099839;
+			// aapt resource value: 0x7f0600c8
+			public const int button2 = 2131099848;
 			
 			// aapt resource value: 0x7f0600c2
-			public const int button4 = 2131099842;
+			public const int button3 = 2131099842;
 			
-			// aapt resource value: 0x7f0600c0
-			public const int button5 = 2131099840;
-			
-			// aapt resource value: 0x7f0600c1
-			public const int button6 = 2131099841;
+			// aapt resource value: 0x7f0600c5
+			public const int button4 = 2131099845;
 			
 			// aapt resource value: 0x7f0600c3
-			public const int button7 = 2131099843;
+			public const int button5 = 2131099843;
 			
 			// aapt resource value: 0x7f0600c4
-			public const int button8 = 2131099844;
+			public const int button6 = 2131099844;
+			
+			// aapt resource value: 0x7f0600c6
+			public const int button7 = 2131099846;
+			
+			// aapt resource value: 0x7f0600c7
+			public const int button8 = 2131099847;
 			
 			// aapt resource value: 0x7f06004b
 			public const int buttonPanel = 2131099723;
@@ -2704,8 +2704,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06002b
 			public const int enterAlwaysCollapsed = 2131099691;
 			
-			// aapt resource value: 0x7f0600de
-			public const int events_refresh = 2131099870;
+			// aapt resource value: 0x7f0600e1
+			public const int events_refresh = 2131099873;
 			
 			// aapt resource value: 0x7f06002c
 			public const int exitUntilCollapsed = 2131099692;
@@ -2728,11 +2728,11 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06003f
 			public const int @fixed = 2131099711;
 			
-			// aapt resource value: 0x7f0600cd
-			public const int gridLayout1 = 2131099853;
+			// aapt resource value: 0x7f0600d0
+			public const int gridLayout1 = 2131099856;
 			
-			// aapt resource value: 0x7f0600e9
-			public const int help_menu = 2131099881;
+			// aapt resource value: 0x7f0600ec
+			public const int help_menu = 2131099884;
 			
 			// aapt resource value: 0x7f060005
 			public const int home = 2131099653;
@@ -2767,14 +2767,14 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060087
 			public const int input_subject = 2131099783;
 			
-			// aapt resource value: 0x7f0600e0
-			public const int issue_edit = 2131099872;
+			// aapt resource value: 0x7f0600e3
+			public const int issue_edit = 2131099875;
 			
-			// aapt resource value: 0x7f0600df
-			public const int issue_refresh = 2131099871;
+			// aapt resource value: 0x7f0600e2
+			public const int issue_refresh = 2131099874;
 			
-			// aapt resource value: 0x7f0600e1
-			public const int issues_refresh = 2131099873;
+			// aapt resource value: 0x7f0600e4
+			public const int issues_refresh = 2131099876;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -2812,8 +2812,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f0600a0
 			public const int linearLayout1 = 2131099808;
 			
-			// aapt resource value: 0x7f0600c9
-			public const int linearLayout2 = 2131099849;
+			// aapt resource value: 0x7f0600cc
+			public const int linearLayout2 = 2131099852;
 			
 			// aapt resource value: 0x7f06000f
 			public const int listMode = 2131099663;
@@ -2830,8 +2830,8 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f0600a2
 			public const int login_webview = 2131099810;
 			
-			// aapt resource value: 0x7f0600e3
-			public const int main_menu = 2131099875;
+			// aapt resource value: 0x7f0600e6
+			public const int main_menu = 2131099878;
 			
 			// aapt resource value: 0x7f0600b0
 			public const int media_actions = 2131099824;
@@ -2845,29 +2845,29 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06001a
 			public const int multiply = 2131099674;
 			
-			// aapt resource value: 0x7f0600c8
-			public const int mvxImageView1 = 2131099848;
+			// aapt resource value: 0x7f0600cb
+			public const int mvxImageView1 = 2131099851;
 			
 			// aapt resource value: 0x7f0600a8
 			public const int mvxSpinner1 = 2131099816;
 			
-			// aapt resource value: 0x7f0600e8
-			public const int nav_gists = 2131099880;
-			
-			// aapt resource value: 0x7f0600e4
-			public const int nav_home = 2131099876;
+			// aapt resource value: 0x7f0600eb
+			public const int nav_gists = 2131099883;
 			
 			// aapt resource value: 0x7f0600e7
-			public const int nav_issues = 2131099879;
-			
-			// aapt resource value: 0x7f0600e5
-			public const int nav_notifications = 2131099877;
-			
-			// aapt resource value: 0x7f0600e6
-			public const int nav_repositories = 2131099878;
+			public const int nav_home = 2131099879;
 			
 			// aapt resource value: 0x7f0600ea
-			public const int nav_settings = 2131099882;
+			public const int nav_issues = 2131099882;
+			
+			// aapt resource value: 0x7f0600e8
+			public const int nav_notifications = 2131099880;
+			
+			// aapt resource value: 0x7f0600e9
+			public const int nav_repositories = 2131099881;
+			
+			// aapt resource value: 0x7f0600ed
+			public const int nav_settings = 2131099885;
 			
 			// aapt resource value: 0x7f0600a7
 			public const int nav_view = 2131099815;
@@ -2905,20 +2905,26 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06005b
 			public const int radio = 2131099739;
 			
-			// aapt resource value: 0x7f0600ec
-			public const int repositories_add = 2131099884;
+			// aapt resource value: 0x7f0600bd
+			public const int repoLayout = 2131099837;
 			
-			// aapt resource value: 0x7f0600eb
-			public const int repositories_refresh = 2131099883;
+			// aapt resource value: 0x7f0600bc
+			public const int repoTabLayout = 2131099836;
 			
 			// aapt resource value: 0x7f0600ef
-			public const int repository_add_issue = 2131099887;
+			public const int repositories_add = 2131099887;
 			
 			// aapt resource value: 0x7f0600ee
-			public const int repository_edit = 2131099886;
+			public const int repositories_refresh = 2131099886;
 			
-			// aapt resource value: 0x7f0600ed
-			public const int repository_refresh = 2131099885;
+			// aapt resource value: 0x7f0600f2
+			public const int repository_add_issue = 2131099890;
+			
+			// aapt resource value: 0x7f0600f1
+			public const int repository_edit = 2131099889;
+			
+			// aapt resource value: 0x7f0600f0
+			public const int repository_refresh = 2131099888;
 			
 			// aapt resource value: 0x7f060035
 			public const int right = 2131099701;
@@ -3010,6 +3016,9 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06001e
 			public const int src_over = 2131099678;
 			
+			// aapt resource value: 0x7f0600be
+			public const int starredRepoLayout = 2131099838;
+			
 			// aapt resource value: 0x7f060036
 			public const int start = 2131099702;
 			
@@ -3037,68 +3046,68 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06007f
 			public const int textView1 = 2131099775;
 			
-			// aapt resource value: 0x7f0600cf
-			public const int textView10 = 2131099855;
-			
-			// aapt resource value: 0x7f0600d1
-			public const int textView11 = 2131099857;
-			
 			// aapt resource value: 0x7f0600d2
-			public const int textView12 = 2131099858;
+			public const int textView10 = 2131099858;
 			
 			// aapt resource value: 0x7f0600d4
-			public const int textView13 = 2131099860;
-			
-			// aapt resource value: 0x7f0600d3
-			public const int textView14 = 2131099859;
+			public const int textView11 = 2131099860;
 			
 			// aapt resource value: 0x7f0600d5
-			public const int textView15 = 2131099861;
-			
-			// aapt resource value: 0x7f0600d6
-			public const int textView16 = 2131099862;
-			
-			// aapt resource value: 0x7f0600d8
-			public const int textView17 = 2131099864;
+			public const int textView12 = 2131099861;
 			
 			// aapt resource value: 0x7f0600d7
-			public const int textView18 = 2131099863;
+			public const int textView13 = 2131099863;
+			
+			// aapt resource value: 0x7f0600d6
+			public const int textView14 = 2131099862;
+			
+			// aapt resource value: 0x7f0600d8
+			public const int textView15 = 2131099864;
 			
 			// aapt resource value: 0x7f0600d9
-			public const int textView19 = 2131099865;
+			public const int textView16 = 2131099865;
+			
+			// aapt resource value: 0x7f0600db
+			public const int textView17 = 2131099867;
+			
+			// aapt resource value: 0x7f0600da
+			public const int textView18 = 2131099866;
+			
+			// aapt resource value: 0x7f0600dc
+			public const int textView19 = 2131099868;
 			
 			// aapt resource value: 0x7f06009f
 			public const int textView2 = 2131099807;
 			
-			// aapt resource value: 0x7f0600da
-			public const int textView20 = 2131099866;
+			// aapt resource value: 0x7f0600dd
+			public const int textView20 = 2131099869;
 			
-			// aapt resource value: 0x7f0600dc
-			public const int textView21 = 2131099868;
+			// aapt resource value: 0x7f0600df
+			public const int textView21 = 2131099871;
 			
-			// aapt resource value: 0x7f0600db
-			public const int textView22 = 2131099867;
+			// aapt resource value: 0x7f0600de
+			public const int textView22 = 2131099870;
 			
 			// aapt resource value: 0x7f0600a1
 			public const int textView3 = 2131099809;
 			
-			// aapt resource value: 0x7f0600ca
-			public const int textView4 = 2131099850;
-			
-			// aapt resource value: 0x7f0600cb
-			public const int textView5 = 2131099851;
-			
-			// aapt resource value: 0x7f0600cc
-			public const int textView6 = 2131099852;
-			
-			// aapt resource value: 0x7f0600dd
-			public const int textView7 = 2131099869;
+			// aapt resource value: 0x7f0600cd
+			public const int textView4 = 2131099853;
 			
 			// aapt resource value: 0x7f0600ce
-			public const int textView8 = 2131099854;
+			public const int textView5 = 2131099854;
 			
-			// aapt resource value: 0x7f0600d0
-			public const int textView9 = 2131099856;
+			// aapt resource value: 0x7f0600cf
+			public const int textView6 = 2131099855;
+			
+			// aapt resource value: 0x7f0600e0
+			public const int textView7 = 2131099872;
+			
+			// aapt resource value: 0x7f0600d1
+			public const int textView8 = 2131099857;
+			
+			// aapt resource value: 0x7f0600d3
+			public const int textView9 = 2131099859;
 			
 			// aapt resource value: 0x7f060092
 			public const int text_headline = 2131099794;
@@ -3118,17 +3127,17 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f06004f
 			public const int title_template = 2131099727;
 			
-			// aapt resource value: 0x7f0600bd
-			public const int toggleButton1 = 2131099837;
+			// aapt resource value: 0x7f0600c0
+			public const int toggleButton1 = 2131099840;
 			
-			// aapt resource value: 0x7f0600bc
-			public const int toggleButton2 = 2131099836;
+			// aapt resource value: 0x7f0600bf
+			public const int toggleButton2 = 2131099839;
 			
 			// aapt resource value: 0x7f0600a5
 			public const int toolbar = 2131099813;
 			
-			// aapt resource value: 0x7f0600c6
-			public const int toolbar_title = 2131099846;
+			// aapt resource value: 0x7f0600c9
+			public const int toolbar_title = 2131099849;
 			
 			// aapt resource value: 0x7f060029
 			public const int top = 2131099689;
@@ -3151,17 +3160,17 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060018
 			public const int useLogo = 2131099672;
 			
-			// aapt resource value: 0x7f0600f1
-			public const int user_edit = 2131099889;
+			// aapt resource value: 0x7f0600f4
+			public const int user_edit = 2131099892;
 			
-			// aapt resource value: 0x7f0600f0
-			public const int user_refresh = 2131099888;
+			// aapt resource value: 0x7f0600f3
+			public const int user_refresh = 2131099891;
 			
 			// aapt resource value: 0x7f06007c
 			public const int username = 2131099772;
 			
-			// aapt resource value: 0x7f0600f2
-			public const int users_refresh = 2131099890;
+			// aapt resource value: 0x7f0600f5
+			public const int users_refresh = 2131099893;
 			
 			// aapt resource value: 0x7f060095
 			public const int view_header = 2131099797;

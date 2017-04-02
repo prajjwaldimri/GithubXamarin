@@ -10,7 +10,11 @@ namespace GithubXamarin.Core.Contracts.Repository
 
         Task<IEnumerable<Octokit.Repository>> GetAllRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient);
 
+        Task<IEnumerable<Octokit.Repository>> GetAllStarredRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient);
+
         Task<IEnumerable<Octokit.Repository>> GetAllRepositoriesForUser(string login, GitHubClient gitHubClient);
+
+        Task<IEnumerable<Octokit.Repository>> GetAllStarredRepositoriesForUser(string login, GitHubClient gitHubClient);
 
         Task<IEnumerable<Octokit.Repository>> SearchRepositories(string searchTerm, GitHubClient githubClient);
 

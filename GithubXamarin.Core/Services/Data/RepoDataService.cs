@@ -26,7 +26,17 @@ namespace GithubXamarin.Core.Services.Data
             return new ObservableCollection<Repository>(await _repoRepository.GetAllRepositoriesForCurrentUser(authorizedGitHubClient));
         }
 
+        public async Task<ObservableCollection<Repository>> GetAllStarredRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient)
+        {
+            return new ObservableCollection<Repository>(await _repoRepository.GetAllStarredRepositoriesForCurrentUser(authorizedGitHubClient));
+        }
+
         public async Task<ObservableCollection<Repository>> GetAllRepositoriesForUser(string login, GitHubClient gitHubClient)
+        {
+            return new ObservableCollection<Repository>(await _repoRepository.GetAllStarredRepositoriesForUser(login, gitHubClient));
+        }
+
+        public async Task<ObservableCollection<Repository>> GetAllStarredRepositoriesForUser(string login, GitHubClient gitHubClient)
         {
             return new ObservableCollection<Repository>(await _repoRepository.GetAllRepositoriesForUser(login, gitHubClient));
         }
