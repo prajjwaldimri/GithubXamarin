@@ -16,14 +16,24 @@ namespace GithubXamarin.Core.Services.Data
             _issueRepository = issueRepository;
         }
 
-        public async Task<ObservableCollection<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGithubClient)
+        public async Task<ObservableCollection<Issue>> GetAllOpenIssuesForCurrentUser(GitHubClient authorizedGithubClient)
         {
-            return new ObservableCollection<Issue>(await _issueRepository.GetAllIssuesForCurrentUser(authorizedGithubClient));
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllOpenIssuesForCurrentUser(authorizedGithubClient));
         }
 
-        public async Task<ObservableCollection<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        public async Task<ObservableCollection<Issue>> GetAllClosedIssuesForCurrentUser(GitHubClient authorizedGithubClient)
         {
-            return new ObservableCollection<Issue>(await _issueRepository.GetAllIssuesForRepository(repositoryId, authorizedGitHubClient));
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllClosedIssuesForCurrentUser(authorizedGithubClient));
+        }
+
+        public async Task<ObservableCollection<Issue>> GetAllOpenIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllOpenIssuesForRepository(repositoryId, authorizedGitHubClient));
+        }
+
+        public async Task<ObservableCollection<Issue>> GetAllClosedIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            return new ObservableCollection<Issue>(await _issueRepository.GetAllClosedIssuesForRepository(repositoryId, authorizedGitHubClient));
         }
 
         public async Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient)
