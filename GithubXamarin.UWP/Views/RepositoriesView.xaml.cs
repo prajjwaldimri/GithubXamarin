@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.ViewModels;
+﻿using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -18,6 +19,24 @@ namespace GithubXamarin.UWP.Views
         {
             this.InitializeComponent();
             DataContext = ViewModel;
+        }
+
+        private void MainPivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainPivot.SelectedIndex == 1)
+            {
+                ViewModel.RefreshStarred();
+            }
+        }
+
+        private void YourRepositoriesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.NavigateToRepositoryView(null);
+        }
+
+        private void StarredRepositoriesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.NavigateToRepositoryViewStarred(null);
         }
     }
 }

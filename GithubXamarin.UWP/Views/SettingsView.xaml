@@ -11,18 +11,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Pivot>
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock
-                        Margin="0,0,-10,0"
-                        Text="{Binding}"
-                        Style="{ThemeResource BaseTextBlockStyle}"
-                        FontWeight="SemiBold"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-
-
+        <Pivot Style="{ThemeResource PivotSmallHeaderStyle}">
             <PivotItem Header="SETTINGS">
                 <ScrollViewer>
                     <StackPanel>

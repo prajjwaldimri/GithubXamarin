@@ -12,7 +12,7 @@ namespace GithubXamarin.Core.Repositories
     {
         private RepositoryForksClient _repositoryForksClient;
         private RepositoriesClient _repositoriesClient;
-
+        
         public async Task<Repository> GetRepository(long repositoryId, GitHubClient githubClient)
         {
             return await githubClient.Repository.Get(repositoryId);
@@ -23,9 +23,19 @@ namespace GithubXamarin.Core.Repositories
             return await authorizedGitHubClient.Repository.GetAllForCurrent();
         }
 
+        public async Task<IEnumerable<Repository>> GetAllStarredRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient)
+        {
+            return await authorizedGitHubClient.Activity.Starring.GetAllForCurrent();
+        }
+
         public async Task<IEnumerable<Repository>> GetAllRepositoriesForUser(string login, GitHubClient gitHubClient)
         {
             return await gitHubClient.Repository.GetAllForUser(login);
+        }
+
+        public async Task<IEnumerable<Repository>> GetAllStarredRepositoriesForUser(string login, GitHubClient gitHubClient)
+        {
+            return await gitHubClient.Activity.Starring.GetAllForUser(login);
         }
 
         public async Task<IEnumerable<Repository>> SearchRepositories(string searchTerm, GitHubClient githubClient)
