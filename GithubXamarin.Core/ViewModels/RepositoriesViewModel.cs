@@ -65,7 +65,11 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () =>
+                {
+                    await Refresh();
+                    await RefreshStarred();
+                });
                 return _refreshCommand;
             }
         }
