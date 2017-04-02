@@ -37,7 +37,7 @@ namespace GithubXamarin.Droid.Views
             _repoLinearLayout = Activity.FindViewById<LinearLayout>(Resource.Id.repoLayout);
             _starredRepoLinearLayout = Activity.FindViewById<LinearLayout>(Resource.Id.starredRepoLayout);
 
-            _tabLayout.TabSelected += (sender, args) =>
+            _tabLayout.TabSelected += async (sender, args) =>
             {
                 switch (args.Tab.Text)
                 {
@@ -48,7 +48,7 @@ namespace GithubXamarin.Droid.Views
                     case "Starred":
                         _repoLinearLayout.Visibility = ViewStates.Gone;
                         _starredRepoLinearLayout.Visibility = ViewStates.Visible;
-                        ViewModel.RefreshStarred();
+                        await ViewModel.RefreshStarred();
                         break;
                 }
             };
