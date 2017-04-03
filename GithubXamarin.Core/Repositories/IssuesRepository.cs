@@ -31,18 +31,32 @@ namespace GithubXamarin.Core.Repositories
             return await _issuesClient.Get(owner, repoName, issueNumber);
         }
 
-        public async Task<IEnumerable<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllOpenIssuesForCurrentUser(GitHubClient authorizedGitHubClient)
         {
             return await authorizedGitHubClient.Issue.GetAllForCurrent();
         }
 
-        public async Task<IEnumerable<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        public async Task<IEnumerable<Issue>> GetAllClosedIssuesForCurrentUser(GitHubClient authorizedGitHubClient)
+        {
+            return await authorizedGitHubClient.Issue.GetAllForCurrent(new IssueRequest { State = ItemStateFilter.Closed });
+        }
+
+        public async Task<IEnumerable<Issue>> GetAllOpenIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
             if (_issuesClient == null)
             {
                 _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
             }
             return await _issuesClient.GetAllForRepository(repositoryId);
+        }
+
+        public async Task<IEnumerable<Issue>> GetAllClosedIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.GetAllForRepository(repositoryId, new RepositoryIssueRequest{State = ItemStateFilter.Closed});
         }
 
         public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)

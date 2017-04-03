@@ -21,11 +21,11 @@ namespace GithubXamarin.UWP.Views
             DataContext = ViewModel;
         }
 
-        private void MainPivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void MainPivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainPivot.SelectedIndex == 1)
             {
-                ViewModel.RefreshStarred();
+                await ViewModel.RefreshStarred();
             }
         }
 

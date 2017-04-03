@@ -11,9 +11,13 @@ namespace GithubXamarin.Core.Contracts.Service
 
         Task<Issue> GetIssueForRepository(long repositoryId, int issueNumber, GitHubClient authorizedGitHubClient);
 
-        Task<ObservableCollection<Issue>> GetAllIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+        Task<ObservableCollection<Issue>> GetAllOpenIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient);
 
-        Task<ObservableCollection<Issue>> GetAllIssuesForCurrentUser(GitHubClient authorizedGithubClient);
+        Task<ObservableCollection<Issue>> GetAllClosedIssuesForRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+
+        Task<ObservableCollection<Issue>> GetAllOpenIssuesForCurrentUser(GitHubClient authorizedGithubClient);
+
+        Task<ObservableCollection<Issue>> GetAllClosedIssuesForCurrentUser(GitHubClient authorizedGithubClient);
 
         Task<ObservableCollection<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient);
 

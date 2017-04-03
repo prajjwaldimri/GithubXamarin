@@ -1,6 +1,8 @@
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Droid.Shared.Attributes;
 using GithubXamarin.Core.ViewModels;
 using MvvmCross.Binding.Droid.BindingContext;
@@ -12,6 +14,10 @@ namespace GithubXamarin.Droid.Views
     [Register("githubxamarin.droid.views.IssuesFragment")]
     public class IssuesFragment : MvxFragment<IssuesViewModel>
     {
+        private TabLayout _tabLayout;
+        private LinearLayout _issuesLinearLayout;
+        private LinearLayout _closedIssuesLinearLayout;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
@@ -31,6 +37,26 @@ namespace GithubXamarin.Droid.Views
         {
             base.OnViewCreated(view, savedInstanceState);
             await ViewModel.Refresh();
+
+            _tabLayout = Activity.FindViewById<TabLayout>(Resource.Id.issuesTabLayout);
+            _issuesLinearLayout = Activity.FindViewById<LinearLayout>(Resource.Id.issuesLayout);
+            _closedIssuesLinearLayout = Activity.FindViewById<LinearLayout>(Resource.Id.closedIssuesLayout);
+
+            _tabLayout.TabSelected += async (sender, args) =>
+            {
+                switch (args.Tab.Text)
+                {
+                    case "Open":
+                        _issuesLinearLayout.Visibility = ViewStates.Visible;
+                        _closedIssuesLinearLayout.Visibility = ViewStates.Gone;
+                        break;
+                    case "Closed":
+                        _issuesLinearLayout.Visibility = ViewStates.Gone;
+                        _closedIssuesLinearLayout.Visibility = ViewStates.Visible;
+                        await ViewModel.RefreshClosed();
+                        break;
+                }
+            };
         }
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
