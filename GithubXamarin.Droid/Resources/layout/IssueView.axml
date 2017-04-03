@@ -49,6 +49,16 @@ android:layout_height="match_parent"
           android:id="@+id/textView3"
           local:MvxBind="Text DateTimeHumanizer(Issue.CreatedAt.DateTime)"/>
   </LinearLayout>
+    
+   <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+    android:orientation="horizontal"
+    android:id="@+id/issueLabelContainer"
+            android:scrollbars="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            local:MvxBind="ItemsSource Issue.Labels"
+            local:MvxItemTemplate="@layout/labels_item_template"
+    local:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
   <TextView
           android:layout_width="match_parent"
