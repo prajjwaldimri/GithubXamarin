@@ -16,11 +16,14 @@ namespace GithubXamarin.Core.Contracts.Repository
 
         Task<IEnumerable<Octokit.Repository>> GetAllStarredRepositoriesForUser(string login, GitHubClient gitHubClient);
 
+        Task<IEnumerable<RepositoryContent>> GetContentsOfRepository(long repoId, GitHubClient authorizedGitHubClient,
+            string path = null);
+
         Task<IEnumerable<Octokit.Repository>> SearchRepositories(string searchTerm, GitHubClient githubClient);
 
         Task<Octokit.Repository> ForkRepository(long repositoryId, GitHubClient authorizedGithubClient);
 
-        Task<bool> StarRepository(string repositoryOwner,string repositoryName, GitHubClient authorizedGithubClient);
+        Task<bool> StarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGithubClient);
 
         Task<bool> UnStarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGithubClient);
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Activity> _events;
         public ObservableCollection<Activity> Events
         {
-            get { return _events; }
+            get => _events;
             set
             {
                 _events = value;
@@ -31,7 +32,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex;}
+            get => _selectedIndex;
             set
             {
                 _selectedIndex = value;
@@ -85,7 +86,7 @@ namespace GithubXamarin.Core.ViewModels
                 case "CommitCommentEvent":
                     break;
                 case "CreateEvent":
-                    ShowViewModel<RepositoryViewModel>(new {repositoryId = activity.Repo.Id});
+                    ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
                     break;
                 case "DeleteEvent":
                     break;
@@ -96,15 +97,27 @@ namespace GithubXamarin.Core.ViewModels
                 case "GollumEvent":
                     break;
                 case "IssuesEvent":
-                    var issueEventPayload = activity.Payload as IssueEventPayload;
-                    if (issueEventPayload != null)
+                    try
                     {
-                        ShowViewModel<IssueViewModel>(
-                            new
-                            {
-                                issueNumber = issueEventPayload.Issue.Number,
-                                repositoryId = issueEventPayload.Repository.Id
-                            });
+                        var issueEventPayload = activity.Payload as IssueEventPayload;
+
+                        if (issueEventPayload != null)
+                        {
+                            ShowViewModel<IssueViewModel>(
+                                new
+                                {
+                                    issueNumber = issueEventPayload.Issue.Number,
+                                    repositoryId = issueEventPayload.Repository.Id
+                                });
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                        ShowViewModel<RepositoryViewModel>(
+                                new
+                                {
+                                    repositoryId = activity.Repo.Id
+                                });
                     }
                     break;
                 case "IssueCommentEvent":

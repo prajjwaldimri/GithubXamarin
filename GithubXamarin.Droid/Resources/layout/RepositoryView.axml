@@ -58,6 +58,16 @@ android:layout_height="match_parent">
         local:MvxBind="Click ReadmeClickCommand"/>
     
     <Button
+        android:text="Contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button15"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp" 
+        local:MvxBind="Click ContentClickCommand"/>
+    
+    <Button
         android:text="Forks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

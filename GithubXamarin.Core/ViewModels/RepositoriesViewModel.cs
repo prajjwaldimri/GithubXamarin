@@ -21,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Repository> _repositories;
         public ObservableCollection<Repository> Repositories
         {
-            get { return _repositories; }
+            get => _repositories;
             set
             {
                 _repositories = value;
@@ -32,7 +32,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Repository> _starredRepositories;
         public ObservableCollection<Repository> StarredRepositories
         {
-            get { return _starredRepositories; }
+            get => _starredRepositories;
             set
             {
                 _starredRepositories = value;
@@ -103,7 +103,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isNotCurrentUser;
         public bool IsNotCurrentUser
         {
-            get { return _isNotCurrentUser; }
+            get => _isNotCurrentUser;
             set
             {
                 _isNotCurrentUser = value;
@@ -126,7 +126,7 @@ namespace GithubXamarin.Core.ViewModels
             IsNotCurrentUser = !string.IsNullOrWhiteSpace(userLogin);
             await Refresh();
         }
-        
+
         public void NavigateToRepositoryView(object obj)
         {
             var repository = obj as Repository ?? Repositories[SelectedIndex];
@@ -187,7 +187,7 @@ namespace GithubXamarin.Core.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(_userLogin))
                 {
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"Your Repositories"});
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Your Repositories" });
                     StarredRepositories =
                         await _repoDataService.GetAllStarredRepositoriesForCurrentUser(
                             GithubClientService.GetAuthorizedGithubClient());

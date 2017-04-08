@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+        android:id="@+id/repository_contents_refresh"
+        android:title="Refresh"
+        android:showAsAction="never">
+  </item>
+
+  <item
+        android:id="@+id/repository_contents_add"
+        android:title="Create new File"
+        android:showAsAction="never">
+  </item>
+
+</menu>

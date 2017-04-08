@@ -71,7 +71,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Issue> _issues;
         public ObservableCollection<Issue> Issues
         {
-            get { return _issues; }
+            get => _issues;
             set
             {
                 _issues = value;
@@ -82,7 +82,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Issue> _closedIssues;
         public ObservableCollection<Issue> ClosedIssues
         {
-            get { return _closedIssues; }
+            get => _closedIssues;
             set
             {
                 _closedIssues = value;
@@ -149,7 +149,7 @@ namespace GithubXamarin.Core.ViewModels
                     var repoUrl = Issues[0].HtmlUrl.Segments[2];
                     Messenger.Publish(new AppBarHeaderChangeMessage(this)
                     {
-                        HeaderTitle = $"Open Issues for {repoUrl.Remove(repoUrl.Length-1)}"
+                        HeaderTitle = $"Open Issues for {repoUrl.Remove(repoUrl.Length - 1)}"
                     });
                 }
                 else

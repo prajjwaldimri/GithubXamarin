@@ -12,14 +12,7 @@ namespace GithubXamarin.Core.Repositories
     public class FileRepository : BaseRepository, IFileRepository
     {
         private RepositoriesClient _repositoriesClient;
-        /// <summary>
-        /// Returns the content of a file or a directory path inside repository.
-        /// https://developer.github.com/v3/repos/contents/#get-contents
-        /// </summary>
-        /// <param name="repositoryId"></param>
-        /// <param name="path"></param>
-        /// <param name="gitHubClient"></param>
-        /// <returns></returns>
+
         public async Task<IEnumerable<RepositoryContent>> GetContentForRepository(long repositoryId, string path, GitHubClient gitHubClient)
         {
             if (_repositoriesClient == null)
@@ -29,13 +22,7 @@ namespace GithubXamarin.Core.Repositories
             return await _repositoriesClient.Content.GetAllContents(repositoryId, path);
         }
 
-        /// <summary>
-        /// Returns the contents from root of repo.
-        /// https://developer.github.com/v3/repos/contents/#get-contents
-        /// </summary>
-        /// <param name="repositoryId"></param>
-        /// <param name="githubClient"></param>
-        /// <returns></returns>
+
         public async Task<IEnumerable<RepositoryContent>> GetRootContentForRepository(long repositoryId,
             GitHubClient githubClient)
         {

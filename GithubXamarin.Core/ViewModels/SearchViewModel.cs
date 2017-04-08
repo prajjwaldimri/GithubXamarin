@@ -29,7 +29,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _filterSelectedIndex;
         public int FilterSelectedIndex
         {
-            get { return _filterSelectedIndex;}
+            get => _filterSelectedIndex;
             set
             {
                 _filterSelectedIndex = value;
@@ -61,49 +61,49 @@ namespace GithubXamarin.Core.ViewModels
         private string _searchBoxText;
         public string SearchBoxText
         {
-            get { return _searchBoxText;}
+            get => _searchBoxText;
             set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
         }
 
         private ObservableCollection<User> _users;
         public ObservableCollection<User> Users
         {
-            get { return _users;}
+            get => _users;
             set { _users = value; RaisePropertyChanged(() => Users); }
         }
 
         private ObservableCollection<Issue> _issues;
         public ObservableCollection<Issue> Issues
         {
-            get { return _issues; }
+            get => _issues;
             set { _issues = value; RaisePropertyChanged(() => Issues); }
         }
 
         private ObservableCollection<Repository> _repositories;
         public ObservableCollection<Repository> Repositories
         {
-            get { return _repositories; }
+            get => _repositories;
             set { _repositories = value; RaisePropertyChanged(() => Repositories); }
         }
 
         private int _issuesSelectedIndex;
         public int IssuesSelectedIndex
         {
-            get { return _issuesSelectedIndex; }
+            get => _issuesSelectedIndex;
             set { _issuesSelectedIndex = value; RaisePropertyChanged(() => IssuesSelectedIndex); }
         }
 
         private int _repositoriesSelectedIndex;
         public int RepositoriesSelectedIndex
         {
-            get { return _repositoriesSelectedIndex;}
+            get => _repositoriesSelectedIndex;
             set { _repositoriesSelectedIndex = value; RaisePropertyChanged(() => RepositoriesSelectedIndex); }
         }
 
         private int _usersSelectedIndex;
         public int UsersSelectedIndex
         {
-            get { return _usersSelectedIndex;}
+            get => _usersSelectedIndex;
             set { _usersSelectedIndex = value; RaisePropertyChanged(() => UsersSelectedIndex); }
         }
 
@@ -119,8 +119,8 @@ namespace GithubXamarin.Core.ViewModels
         #endregion
 
         public SearchViewModel(IRepoDataService repoDataService, IUserDataService userDataService,
-            IIssueDataService issueDataService, IGithubClientService githubClientService, 
-            IMvxMessenger messenger, IDialogService dialogService) 
+            IIssueDataService issueDataService, IGithubClientService githubClientService,
+            IMvxMessenger messenger, IDialogService dialogService)
             : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
@@ -172,8 +172,8 @@ namespace GithubXamarin.Core.ViewModels
             ShowViewModel<IssueViewModel>(new
             {
                 issueNumber = issue.Number,
-                owner = issue.HtmlUrl.Segments[1].Remove(issue.HtmlUrl.Segments[1].Length-1),
-                repoName = issue.HtmlUrl.Segments[2].Remove(issue.HtmlUrl.Segments[2].Length-1)
+                owner = issue.HtmlUrl.Segments[1].Remove(issue.HtmlUrl.Segments[1].Length - 1),
+                repoName = issue.HtmlUrl.Segments[2].Remove(issue.HtmlUrl.Segments[2].Length - 1)
             });
         }
 

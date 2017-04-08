@@ -172,10 +172,12 @@
     </Compile>
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\ColorSwapper.cs" />
+    <Compile Include="Resources\Converters\ContentToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\DateTimeHumanizer.cs" />
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
+    <Compile Include="Resources\Converters\ReverseBoolToVisibilityConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -210,6 +212,9 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewFileView.xaml.cs">
+      <DependentUpon>NewFileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewIssueView.xaml.cs">
       <DependentUpon>NewIssueView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +229,9 @@
     </Compile>
     <Compile Include="Views\RepositoriesView.xaml.cs">
       <DependentUpon>RepositoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepositoryContentsView.xaml.cs">
+      <DependentUpon>RepositoryContentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RepositoryView.xaml.cs">
       <DependentUpon>RepositoryView.xaml</DependentUpon>
@@ -302,6 +310,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewIssueView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -319,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RepositoriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepositoryContentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

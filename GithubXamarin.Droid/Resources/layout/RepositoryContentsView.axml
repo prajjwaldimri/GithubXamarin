@@ -3,21 +3,23 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minWidth="25px"
-        android:minHeight="25px">
-        <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minWidth="25px"
+      android:minHeight="25px">
+    <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
             android:orientation="vertical"
             android:scrollbars="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            local:MvxBind="ItemsSource Events; ItemClick EventClickCommand;"
-            local:MvxItemTemplate="@layout/events_item_template" />
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
+            local:MvxBind="ItemsSource Content; ItemClick ContentClickCommand;"
+            local:MvxItemTemplate="@layout/contents_item_template" />
+  
+  </LinearLayout>
+
+<android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
