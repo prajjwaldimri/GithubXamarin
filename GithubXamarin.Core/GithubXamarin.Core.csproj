@@ -114,6 +114,7 @@
     <Compile Include="ViewModels\IssueViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NewFileViewModel.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />
     <Compile Include="ViewModels\NewRepositoryViewModel.cs" />
     <Compile Include="ViewModels\NewUserViewModel.cs" />

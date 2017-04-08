@@ -56,6 +56,11 @@
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Add"
+                          Label="Add File"
+                          Command="{Binding AddFileCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>

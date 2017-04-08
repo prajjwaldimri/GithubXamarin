@@ -32,42 +32,42 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<RepositoryContributor> _contributors;
         public ObservableCollection<RepositoryContributor> Contributors
         {
-            get { return _contributors; }
+            get => _contributors;
             set { _contributors = value; RaisePropertyChanged(() => Contributors); }
         }
 
         private string _license;
         public string License
         {
-            get { return _license;}
+            get => _license;
             set { _license = value; RaisePropertyChanged(() => License); }
         }
 
         private string _loginButtonContent;
         public string LoginButtonContent
         {
-            get { return _loginButtonContent;}
+            get => _loginButtonContent;
             set { _loginButtonContent = value; RaisePropertyChanged(() => LoginButtonContent); }
         }
 
         private string _coreLimit;
         public string CoreLimit
         {
-            get { return _coreLimit;}
+            get => _coreLimit;
             set { _coreLimit = value; RaisePropertyChanged(() => CoreLimit); }
         }
 
         private string _coreRemaining;
         public string CoreRemaining
         {
-            get { return _coreRemaining;}
+            get => _coreRemaining;
             set { _coreRemaining = value; RaisePropertyChanged(() => CoreRemaining); }
         }
 
         private string _coreReset;
         public string CoreReset
         {
-            get { return _coreReset;}
+            get => _coreReset;
             set
             {
                 _coreReset = value;
@@ -78,21 +78,21 @@ namespace GithubXamarin.Core.ViewModels
         private string _searchLimit;
         public string SearchLimit
         {
-            get { return _searchLimit; }
+            get => _searchLimit;
             set { _searchLimit = value; RaisePropertyChanged(() => SearchLimit); }
         }
 
         private string _searchRemaining;
         public string SearchRemaining
         {
-            get { return _searchRemaining; }
+            get => _searchRemaining;
             set { _searchRemaining = value; RaisePropertyChanged(() => SearchRemaining); }
         }
 
         private string _searchReset;
         public string SearchReset
         {
-            get { return _searchReset; }
+            get => _searchReset;
             set
             {
                 _searchReset = value;
@@ -103,7 +103,7 @@ namespace GithubXamarin.Core.ViewModels
 
 
         public SettingsViewModel(IUserDataService userDataService, IFileDataService fileDataService,
-            IGithubClientService githubClientService, IMvxMessenger messenger, 
+            IGithubClientService githubClientService, IMvxMessenger messenger,
             IDialogService dialogService) : base(githubClientService, messenger, dialogService)
         {
             _userDataService = userDataService;
@@ -116,7 +116,7 @@ namespace GithubXamarin.Core.ViewModels
             if (!(await IsInternetAvailable()))
                 return;
 
-            Messenger.Publish(new LoadingStatusMessage(this) {IsLoadingIndicatorActive = true});
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
             Contributors = await _userDataService.GetContributorsForRepository(GithubXamarinRepositoryId,
                 GithubClientService.GetAuthorizedGithubClient());

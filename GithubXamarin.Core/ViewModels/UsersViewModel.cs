@@ -21,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<User> _users;
         public ObservableCollection<User> Users
         {
-            get { return _users; }
+            get => _users;
             set
             {
                 _users = value;

@@ -20,7 +20,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Notification> _notifications;
         public ObservableCollection<Notification> Notifications
         {
-            get { return _notifications; }
+            get => _notifications;
             set
             {
                 _notifications = value;
@@ -31,7 +31,7 @@ namespace GithubXamarin.Core.ViewModels
         private Notification _markedNotification;
         public Notification MarkedNotification
         {
-            get { return _markedNotification; }
+            get => _markedNotification;
             set
             {
                 _markedNotification = value;

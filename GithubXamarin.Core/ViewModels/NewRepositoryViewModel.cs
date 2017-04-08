@@ -18,7 +18,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _name;
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 _name = value;
@@ -29,7 +29,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _description;
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
                 _description = value;
@@ -40,7 +40,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _homePage;
         public string HomePage
         {
-            get { return _homePage; }
+            get => _homePage;
             set
             {
                 _homePage = value;
@@ -51,7 +51,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isPrivate;
         public bool IsPrivate
         {
-            get { return _isPrivate; }
+            get => _isPrivate;
             set
             {
                 _isPrivate = value;
@@ -62,7 +62,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _hasIssues = true;
         public bool HasIssues
         {
-            get { return _hasIssues; }
+            get => _hasIssues;
             set
             {
                 _hasIssues = value;
@@ -73,7 +73,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _repositoryStatusSelectedIndex = 1;
         public int RepositoryStatusSelectedIndex
         {
-            get { return _repositoryStatusSelectedIndex; }
+            get => _repositoryStatusSelectedIndex;
             set
             {
                 _repositoryStatusSelectedIndex = value;
@@ -93,7 +93,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _hasWiki = true;
         public bool HasWiki
         {
-            get { return _hasWiki; }
+            get => _hasWiki;
             set
             {
                 _hasWiki = value;
@@ -104,7 +104,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _createWithReadme;
         public bool CreateWithReadme
         {
-            get { return _createWithReadme; }
+            get => _createWithReadme;
             set
             {
                 _createWithReadme = value;
@@ -115,7 +115,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _gitignoreTemplate;
         public string GitignoreTemplate
         {
-            get { return _gitignoreTemplate; }
+            get => _gitignoreTemplate;
             set
             {
                 _gitignoreTemplate = value;
@@ -126,7 +126,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _licenseTemplate;
         public string LicenseTemplate
         {
-            get { return _licenseTemplate; }
+            get => _licenseTemplate;
             set
             {
                 _licenseTemplate = value;
@@ -137,7 +137,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isEdit;
         public bool IsEdit
         {
-            get { return _isEdit; }
+            get => _isEdit;
             set
             {
                 _isEdit = value;
@@ -148,7 +148,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isNew;
         public bool IsNew
         {
-            get { return _isNew; }
+            get => _isNew;
             set
             {
                 _isNew = value;
@@ -159,7 +159,7 @@ namespace GithubXamarin.Core.ViewModels
         private long _repositoryId;
         public long RepositoryId
         {
-            get { return _repositoryId; }
+            get => _repositoryId;
             set
             {
                 _repositoryId = value;
@@ -223,16 +223,16 @@ namespace GithubXamarin.Core.ViewModels
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
 
-            
-                if (IsEdit)
-                {
-                    await EditRepo();
-                }
-                else
-                {
-                    await CreateRepo();
-                }
-            
+
+            if (IsEdit)
+            {
+                await EditRepo();
+            }
+            else
+            {
+                await CreateRepo();
+            }
+
 
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
@@ -269,7 +269,7 @@ namespace GithubXamarin.Core.ViewModels
                 HasWiki = HasWiki,
                 Homepage = HomePage,
                 Private = IsPrivate
-            },GithubClientService.GetAuthorizedGithubClient());
+            }, GithubClientService.GetAuthorizedGithubClient());
 
             ShowViewModel<RepositoryViewModel>(new { repositoryId = updatedRepo.Id });
         }

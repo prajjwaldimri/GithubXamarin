@@ -27,7 +27,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _pageHeader;
         public string PageHeader
         {
-            get { return _pageHeader; }
+            get => _pageHeader;
             set
             {
                 _pageHeader = value;
@@ -43,7 +43,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isLoading;
         public bool IsLoading
         {
-            get { return _isLoading; }
+            get => _isLoading;
             set
             {
                 _isLoading = value;
@@ -54,14 +54,14 @@ namespace GithubXamarin.Core.ViewModels
         private string _searchBoxText;
         public string SearchBoxText
         {
-            get { return _searchBoxText; }
+            get => _searchBoxText;
             set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
         }
 
         private User _user;
         public User User
         {
-            get { return _user; }
+            get => _user;
             set { _user = value; RaisePropertyChanged(() => User); }
         }
 

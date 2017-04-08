@@ -20,10 +20,10 @@ namespace GithubXamarin.Core.ViewModels
         private string _name;
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
-                _name = value; 
+                _name = value;
                 RaisePropertyChanged(() => Name);
             }
         }
@@ -31,7 +31,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _email;
         public string Email
         {
-            get { return _email; }
+            get => _email;
             set
             {
                 _email = value;
@@ -42,10 +42,10 @@ namespace GithubXamarin.Core.ViewModels
         private string _blogUrl;
         public string BlogUrl
         {
-            get { return _blogUrl; }
+            get => _blogUrl;
             set
             {
-                _blogUrl = value; 
+                _blogUrl = value;
                 RaisePropertyChanged(() => BlogUrl);
             }
         }
@@ -53,7 +53,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _company;
         public string Company
         {
-            get { return _company; }
+            get => _company;
             set
             {
                 _company = value;
@@ -64,10 +64,10 @@ namespace GithubXamarin.Core.ViewModels
         private string _location;
         public string Location
         {
-            get { return _location; }
+            get => _location;
             set
             {
-                _location = value; 
+                _location = value;
                 RaisePropertyChanged(() => Location);
             }
         }
@@ -75,7 +75,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _hireable;
         public bool Hireable
         {
-            get { return _hireable; }
+            get => _hireable;
             set
             {
                 _hireable = value;
@@ -86,7 +86,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _bio;
         public string Bio
         {
-            get { return _bio; }
+            get => _bio;
             set
             {
                 _bio = value;
@@ -127,15 +127,15 @@ namespace GithubXamarin.Core.ViewModels
             if (!(await IsInternetAvailable())) return;
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             var updatedUser = await _userDataService.UpdateUser(new UserUpdate()
-                {
-                    Bio = Bio,
-                    Blog = BlogUrl,
-                    Company = Company,
-                    Email = Email,
-                    Hireable = Hireable,
-                    Location = Location,
-                    Name = Name
-                },
+            {
+                Bio = Bio,
+                Blog = BlogUrl,
+                Company = Company,
+                Email = Email,
+                Hireable = Hireable,
+                Location = Location,
+                Name = Name
+            },
                 GithubClientService.GetAuthorizedGithubClient());
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
             Close(this);

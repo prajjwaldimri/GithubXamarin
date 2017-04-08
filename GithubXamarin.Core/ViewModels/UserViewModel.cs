@@ -22,7 +22,7 @@ namespace GithubXamarin.Core.ViewModels
         private User _user;
         public User User
         {
-            get { return _user; }
+            get => _user;
             set
             {
                 _user = value;
@@ -33,10 +33,10 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isUserCurrent;
         public bool IsUserCurrent
         {
-            get { return _isUserCurrent; }
+            get => _isUserCurrent;
             set
             {
-                _isUserCurrent = value; 
+                _isUserCurrent = value;
                 RaisePropertyChanged(() => IsUserCurrent);
             }
         }
@@ -70,7 +70,7 @@ namespace GithubXamarin.Core.ViewModels
                 _editCommand = _editCommand ?? new MvxCommand(GoToNewUserView);
                 return _editCommand;
             }
-            
+
         }
 
         private string _userLogin;

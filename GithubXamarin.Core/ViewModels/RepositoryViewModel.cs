@@ -24,7 +24,7 @@ namespace GithubXamarin.Core.ViewModels
         private Repository _repository;
         public Repository Repository
         {
-            get { return _repository; }
+            get => _repository;
             set
             {
                 _repository = value;
@@ -35,7 +35,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isRepositoryStarred;
         public bool IsRepositoryStarred
         {
-            get { return _isRepositoryStarred; }
+            get => _isRepositoryStarred;
             set
             {
                 _isRepositoryStarred = value;

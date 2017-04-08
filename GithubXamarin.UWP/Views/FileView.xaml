@@ -11,16 +11,34 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <ScrollViewer>
+        <ScrollViewer
+            Margin="0,0,0,48"
+            HorizontalScrollMode="Enabled">
 
-            <controls:MarkdownTextBlock
-                Text="{Binding FileContent}"
-                Padding="10"
-                Margin="0,0,0,48"/>
+            <Grid>
+
+                <controls:MarkdownTextBlock
+                    Visibility="{Binding IsReadme, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Text="{Binding FileContent}"
+                    Padding="10"/>
+
+                <TextBlock
+                    IsColorFontEnabled="True"
+                    IsTextSelectionEnabled="True"
+                    Visibility="{Binding IsReadme, Converter={StaticResource ReverseBoolToVisibilityConverter}}"
+                    Text="{Binding FileContent}"
+                    Padding="10"/>
+
+            </Grid>
         </ScrollViewer>
 
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Edit"
+                          Label="Edit"
+                          Command="{Binding EditCommand}"/>
+
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>

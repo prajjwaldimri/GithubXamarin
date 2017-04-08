@@ -21,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private Issue _issue;
         public Issue Issue
         {
-            get { return _issue; }
+            get => _issue;
             set
             {
                 _issue = value;

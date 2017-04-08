@@ -21,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Activity> _events;
         public ObservableCollection<Activity> Events
         {
-            get { return _events; }
+            get => _events;
             set
             {
                 _events = value;
@@ -32,7 +32,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex; }
+            get => _selectedIndex;
             set
             {
                 _selectedIndex = value;

@@ -1,10 +1,11 @@
-﻿using System;
+﻿
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace GithubXamarin.UWP.Resources.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    class ReverseBoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -15,9 +16,9 @@ namespace GithubXamarin.UWP.Resources.Converters
             switch (boolValue)
             {
                 case true:
-                    return Visibility.Visible;
-                default:
                     return Visibility.Collapsed;
+                default:
+                    return Visibility.Visible;
             }
         }
 
@@ -30,9 +31,9 @@ namespace GithubXamarin.UWP.Resources.Converters
             switch (visibilityValue)
             {
                 case Visibility.Visible:
-                    return true;
-                case Visibility.Collapsed:
                     return false;
+                case Visibility.Collapsed:
+                    return true;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -18,7 +18,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Gist> _gists;
         public ObservableCollection<Gist> Gists
         {
-            get { return _gists; }
+            get => _gists;
             set
             {
                 _gists = value;
@@ -29,7 +29,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex; }
+            get => _selectedIndex;
             set
             {
                 _selectedIndex = value;

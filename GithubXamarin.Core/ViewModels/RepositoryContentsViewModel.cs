@@ -86,6 +86,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _addFileCommand;
+        public ICommand AddFileCommand
+        {
+            get
+            {
+                _addFileCommand = _addFileCommand ?? new MvxCommand(GoToNewFileView);
+                return _addFileCommand;
+            }
+        }
+
+
         #endregion
 
         public RepositoryContentsViewModel(IGithubClientService githubClientService, IMvxMessenger messenger,
@@ -136,6 +147,15 @@ namespace GithubXamarin.Core.ViewModels
                 default:
                     break;
             }
+        }
+
+        private void GoToNewFileView()
+        {
+            ShowViewModel<NewFileViewModel>(new
+            {
+                repositoryId = RepoId,
+                filePath = Path
+            });
         }
 
         public async Task Refresh()

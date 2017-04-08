@@ -177,6 +177,7 @@
     <Compile Include="Resources\Converters\EventToGlyphConverter.cs" />
     <Compile Include="Resources\Converters\EventToStringConverter.cs" />
     <Compile Include="Resources\Converters\HexToBrushConverter.cs" />
+    <Compile Include="Resources\Converters\ReverseBoolToVisibilityConverter.cs" />
     <Compile Include="Services\APIKeysManager.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -210,6 +211,9 @@
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewFileView.xaml.cs">
+      <DependentUpon>NewFileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewIssueView.xaml.cs">
       <DependentUpon>NewIssueView.xaml</DependentUpon>
@@ -303,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,7 +18,8 @@ namespace GithubXamarin.Core.ViewModels
         private ICommand _submitCommand;
         public ICommand SubmitCommand
         {
-            get {
+            get
+            {
                 _submitCommand = _submitCommand ?? new MvxAsyncCommand(CreateOrUpdateIssue);
                 return _submitCommand;
             }
@@ -27,7 +28,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _title;
         public string Title
         {
-            get { return _title; }
+            get => _title;
             set
             {
                 _title = value;
@@ -38,7 +39,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _body;
         public string Body
         {
-            get { return _body; }
+            get => _body;
             set
             {
                 _body = value;
@@ -49,7 +50,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _labels;
         public string Labels
         {
-            get { return _labels; }
+            get => _labels;
             set
             {
                 _labels = value;
@@ -60,7 +61,7 @@ namespace GithubXamarin.Core.ViewModels
         private long _repositoryId;
         public long RepositoryId
         {
-            get { return _repositoryId; }
+            get => _repositoryId;
             set
             {
                 _repositoryId = value;
@@ -71,7 +72,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _issueNumber;
         public int IssueNumber
         {
-            get { return _issueNumber; }
+            get => _issueNumber;
             set
             {
                 _issueNumber = value;
@@ -82,7 +83,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _issueStateSelectedIndex;
         public int IssueStateSelectedIndex
         {
-            get { return _issueStateSelectedIndex; }
+            get => _issueStateSelectedIndex;
             set
             {
                 _issueStateSelectedIndex = value;
@@ -102,7 +103,7 @@ namespace GithubXamarin.Core.ViewModels
         private ItemState _issueItemState;
         public ItemState IssueItemState
         {
-            get { return _issueItemState; }
+            get => _issueItemState;
             set
             {
                 _issueItemState = value;
@@ -113,7 +114,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isEdit;
         public bool IsEdit
         {
-            get { return _isEdit; }
+            get => _isEdit;
             set
             {
                 _isEdit = value;
@@ -175,7 +176,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Title)) { return; }
 
-            var createdIssue = await _issueDataService.CreateIssue(RepositoryId, new NewIssue(Title) {Body = Body}, GithubClientService.GetAuthorizedGithubClient());
+            var createdIssue = await _issueDataService.CreateIssue(RepositoryId, new NewIssue(Title) { Body = Body }, GithubClientService.GetAuthorizedGithubClient());
 
             await _issueDataService.UpdateLabels(RepositoryId, createdIssue.Number,
                 Labels, GithubClientService.GetAuthorizedGithubClient());
