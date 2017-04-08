@@ -71,6 +71,7 @@
     <Compile Include="Contracts\ViewModel\ISettingsViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUsersViewModel.cs" />
     <Compile Include="Contracts\ViewModel\IUserViewModel.cs" />
+    <Compile Include="Converters\ContentToGlyphConverter.cs" />
     <Compile Include="Converters\EventToGlyphConverter.cs" />
     <Compile Include="Converters\EventToStringConverter.cs" />
     <Compile Include="Messages\AppBarHeaderChangeMessage.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="ViewModels\NewUserViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\RepositoriesViewModel.cs" />
+    <Compile Include="ViewModels\RepositoryContentsViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

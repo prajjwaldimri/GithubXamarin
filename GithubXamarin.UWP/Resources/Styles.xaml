@@ -8,6 +8,7 @@
     <converters:HexToBrushConverter x:Key="HexToBrushConverter"/>
     <converters:EventToStringConverter x:Key="EventToStringConverter"/>
     <converters:EventToGlyphConverter x:Key="EventToGlyphConverter"/>
+    <converters:ContentToGlyphConverter x:Key="ContentToGlyphConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:DateTimeHumanizer x:Key="DateTimeHumanizer"/>
     <converters:ColorSwapper x:Key="ColorSwapper"/>

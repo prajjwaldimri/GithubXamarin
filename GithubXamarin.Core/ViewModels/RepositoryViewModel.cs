@@ -24,7 +24,7 @@ namespace GithubXamarin.Core.ViewModels
         private Repository _repository;
         public Repository Repository
         {
-            get { return _repository;}
+            get { return _repository; }
             set
             {
                 _repository = value;
@@ -35,7 +35,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isRepositoryStarred;
         public bool IsRepositoryStarred
         {
-            get { return _isRepositoryStarred;}
+            get { return _isRepositoryStarred; }
             set
             {
                 _isRepositoryStarred = value;
@@ -103,6 +103,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _contentClickCommand;
+        public ICommand ContentClickCommand
+        {
+            get
+            {
+                _contentClickCommand = _contentClickCommand ?? new MvxAsyncCommand(async () => await GoToContentView());
+                return _contentClickCommand;
+            }
+        }
+
+
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
@@ -157,7 +168,9 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService,
+            IMvxMessenger messenger, IDialogService dialogService, IShareService shareService)
+            : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
             _shareService = shareService;
@@ -170,7 +183,7 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         /// <summary>
-        /// Checks for repository stats which are not directly available in
+        /// Checks for repository stats which are not directly available when using Refresh Function
         /// </summary>
         /// <returns></returns>
         private async Task CheckRepositoryStats()
@@ -192,7 +205,8 @@ namespace GithubXamarin.Core.ViewModels
 
             if (
                 await DialogService.ShowBooleanDialogAsync(
-                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, wiki, issues, and comments, and remove all collaborator associations.",
+                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, " +
+                    $"wiki, issues, and comments, and remove all collaborator associations.",
                     "Are you ABSOLUTELY sure?"))
             {
                 Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -232,7 +246,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowCollaboratorsOfRepository()
         {
-            ShowViewModel<UsersViewModel>(new {repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Collaborators});
+            ShowViewModel<UsersViewModel>(new { repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Collaborators });
         }
 
         /// <summary>
@@ -248,7 +262,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowIssuesOfRepository()
         {
-            ShowViewModel<IssuesViewModel>(new {repositoryId = Repository.Id});
+            ShowViewModel<IssuesViewModel>(new { repositoryId = Repository.Id });
         }
 
         /// <summary>
@@ -256,7 +270,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void NavigateToReadme()
         {
-            ShowViewModel<FileViewModel>(new {fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id});
+            ShowViewModel<FileViewModel>(new { fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id });
         }
 
         private async Task GoToNewIssueView()
@@ -281,6 +295,15 @@ namespace GithubXamarin.Core.ViewModels
                 isPrivate = Repository.Private,
                 hasIssues = Repository.HasIssues,
                 hasWiki = Repository.HasWiki
+            });
+        }
+
+        public async Task GoToContentView()
+        {
+            if (!(await IsInternetAvailable())) return;
+            ShowViewModel<RepositoryContentsViewModel>(new
+            {
+                repositoryId = Repository.Id
             });
         }
 

@@ -17,7 +17,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _fileContent;
         public string FileContent
         {
-            get { return _fileContent;}
+            get { return _fileContent; }
             set { _fileContent = value; RaisePropertyChanged(() => FileContent); }
         }
 
@@ -43,6 +43,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (!(await IsInternetAvailable()))
             {
+                await DialogService.ShowSimpleDialogAsync("I got nothing here.", "Internet Not Available!");
                 return;
             }
 
@@ -53,16 +54,16 @@ namespace GithubXamarin.Core.ViewModels
                     var readme = await _fileDataService.GetReadme(_repositoryId,
                         GithubClientService.GetAuthorizedGithubClient());
                     FileContent = readme.Content;
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{readme.Name}"});
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{readme.Name}" });
 
                     break;
 
                 case FileTypeEnumeration.Encoded:
-                    
+
                     break;
 
                 case FileTypeEnumeration.Nonencoded:
-                    Messenger.Publish(new AppBarHeaderChangeMessage(this) {HeaderTitle = $"{_filePath}"});
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{_filePath}" });
                     FileContent = (await _fileDataService.GetFile(_repositoryId, _filePath,
                         GithubClientService.GetAuthorizedGithubClient())).Content;
 
