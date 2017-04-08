@@ -149,7 +149,7 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private void GoToNewFileView()
+        public void GoToNewFileView()
         {
             ShowViewModel<NewFileViewModel>(new
             {

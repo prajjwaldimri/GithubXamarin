@@ -43,7 +43,7 @@
                 IsEnabled="{Binding IsNew}"
                 TextWrapping="Wrap"
                 IsColorFontEnabled="True" 
-                Text="{Binding Path, Mode=TwoWay}"
+                Text="{Binding FilePath, Mode=TwoWay}"
                 BorderThickness="0"
                 Style="{StaticResource TextBlockHeaderWithAccentColorStyle}"/>
 

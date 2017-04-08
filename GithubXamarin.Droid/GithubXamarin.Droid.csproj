@@ -313,6 +313,7 @@
     <Compile Include="Views\IssueFragment.cs" />
     <Compile Include="Views\IssuesFragment.cs" />
     <Compile Include="Views\LoginFragment.cs" />
+    <Compile Include="Views\NewFileFragment.cs" />
     <Compile Include="Views\NewIssueFragment.cs" />
     <Compile Include="Views\NewRepositoryFragment.cs" />
     <Compile Include="Views\NewUserFragment.cs" />
@@ -424,6 +425,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\contents_item_template.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NewFileView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -886,6 +890,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\file_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\repository_contents_menu.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

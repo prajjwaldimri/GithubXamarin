@@ -40,14 +40,14 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private string _path;
-        public string Path
+        private string _filePath;
+        public string FilePath
         {
-            get => _path;
+            get => _filePath;
             set
             {
-                _path = value;
-                RaisePropertyChanged(() => Path);
+                _filePath = value;
+                RaisePropertyChanged(() => FilePath);
             }
         }
 
@@ -62,7 +62,7 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        private bool _isNew = true;
+        private bool _isNew;
         public bool IsNew
         {
             get => _isNew;
@@ -100,8 +100,9 @@ namespace GithubXamarin.Core.ViewModels
         public async void Init(long repositoryId, string filePath, string content, string sha)
         {
             _repositoryid = repositoryId;
-            Path = filePath;
+            FilePath = filePath;
             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Creating new file" });
+            IsNew = true;
 
             if (!string.IsNullOrWhiteSpace(content) && !string.IsNullOrWhiteSpace(sha))
             {
@@ -109,7 +110,7 @@ namespace GithubXamarin.Core.ViewModels
                 _sha = sha;
                 IsEdit = true;
                 IsNew = false;
-                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Editing {Path}" });
+                Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Editing {FilePath}" });
             }
         }
 
@@ -118,12 +119,12 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             if (IsEdit)
             {
-                await _fileDataService.UpdateFile(_repositoryid, Path, Message, Content, _sha,
+                await _fileDataService.UpdateFile(_repositoryid, FilePath, Message, Content, _sha,
                     GithubClientService.GetAuthorizedGithubClient());
             }
             else
             {
-                await _fileDataService.CreateFile(_repositoryid, Path, _message, Content,
+                await _fileDataService.CreateFile(_repositoryid, FilePath, _message, Content,
                     GithubClientService.GetAuthorizedGithubClient());
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
