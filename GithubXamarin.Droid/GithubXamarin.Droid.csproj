@@ -318,6 +318,7 @@
     <Compile Include="Views\NewUserFragment.cs" />
     <Compile Include="Views\NotificationsFragment.cs" />
     <Compile Include="Views\RepositoriesFragment.cs" />
+    <Compile Include="Views\RepositoryContentsFragment.cs" />
     <Compile Include="Views\RepositoryFragment.cs" />
     <Compile Include="Views\SearchFragment.cs" />
     <Compile Include="Views\SettingsFragment.cs" />
@@ -417,6 +418,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\labels_item_template.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RepositoryContentsView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\contents_item_template.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

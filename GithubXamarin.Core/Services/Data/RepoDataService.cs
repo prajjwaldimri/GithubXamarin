@@ -103,7 +103,7 @@ namespace GithubXamarin.Core.Services.Data
                     return false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return true;
             }

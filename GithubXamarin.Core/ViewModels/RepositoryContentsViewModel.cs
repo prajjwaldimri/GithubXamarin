@@ -35,7 +35,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex; }
+            get => _selectedIndex;
             set
             {
                 _selectedIndex = value;
@@ -81,7 +81,7 @@ namespace GithubXamarin.Core.ViewModels
         {
             get
             {
-                _contentClickCommand = _contentClickCommand ?? new MvxAsyncCommand<object>(ContentClick);
+                _contentClickCommand = _contentClickCommand ?? new MvxCommand<object>(ContentClick);
                 return _contentClickCommand;
             }
         }
@@ -106,7 +106,7 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        public async Task ContentClick(object selectedContent)
+        private void ContentClick(object selectedContent)
         {
             var content = selectedContent as RepositoryContent ?? Content[SelectedIndex];
 
