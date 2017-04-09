@@ -246,7 +246,12 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowCollaboratorsOfRepository()
         {
-            ShowViewModel<UsersViewModel>(new { repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Collaborators });
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Collaborators
+                });
         }
 
         /// <summary>
@@ -254,7 +259,12 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowStargazersOfRepository()
         {
-            ShowViewModel<UsersViewModel>(new { repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Stargazers });
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Stargazers
+                });
         }
 
         /// <summary>
@@ -262,7 +272,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowIssuesOfRepository()
         {
-            ShowViewModel<IssuesViewModel>(new { repositoryId = Repository.Id });
+            if (Repository != null) ShowViewModel<IssuesViewModel>(new { repositoryId = Repository.Id });
         }
 
         /// <summary>
@@ -270,41 +280,44 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void NavigateToReadme()
         {
-            ShowViewModel<FileViewModel>(new { fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id });
+            if (Repository != null)
+                ShowViewModel<FileViewModel>(new { fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id });
         }
 
         private async Task GoToNewIssueView()
         {
             if (!(await IsInternetAvailable())) return;
-            ShowViewModel<NewIssueViewModel>(new
-            {
-                repositoryId = Repository.Id
-            });
-
+            if (Repository != null)
+                ShowViewModel<NewIssueViewModel>(new
+                {
+                    repositoryId = Repository.Id
+                });
         }
 
         public async Task GoToNewRepositoryView()
         {
             if (!(await IsInternetAvailable())) return;
-            ShowViewModel<NewRepositoryViewModel>(new
-            {
-                repositoryId = Repository.Id,
-                name = Repository.Name,
-                description = Repository.Description,
-                homePage = Repository.Homepage,
-                isPrivate = Repository.Private,
-                hasIssues = Repository.HasIssues,
-                hasWiki = Repository.HasWiki
-            });
+            if (Repository != null)
+                ShowViewModel<NewRepositoryViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    name = Repository.Name,
+                    description = Repository.Description,
+                    homePage = Repository.Homepage,
+                    isPrivate = Repository.Private,
+                    hasIssues = Repository.HasIssues,
+                    hasWiki = Repository.HasWiki
+                });
         }
 
         public async Task GoToContentView()
         {
             if (!(await IsInternetAvailable())) return;
-            ShowViewModel<RepositoryContentsViewModel>(new
-            {
-                repositoryId = Repository.Id
-            });
+            if (Repository != null)
+                ShowViewModel<RepositoryContentsViewModel>(new
+                {
+                    repositoryId = Repository.Id
+                });
         }
 
         public async Task Refresh()

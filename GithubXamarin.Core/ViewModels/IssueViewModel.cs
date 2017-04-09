@@ -41,7 +41,6 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
