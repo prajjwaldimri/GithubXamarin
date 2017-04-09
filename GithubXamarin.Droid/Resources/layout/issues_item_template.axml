@@ -23,7 +23,8 @@
                 <FontAwesome
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="&#xF06A;" />
+                    android:text="&#xF06A;" 
+              android:textColor="@color/colorAccent"/>
                 <TextView
                     android:paddingLeft="10dp"
                     android:layout_height="wrap_content"
@@ -40,25 +41,54 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="#" />
+                    android:text="#" 
+              android:textColor="@color/colorAccent"/>
                 <TextView
                     android:paddingLeft="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     cardview:MvxBind="Text Number" />
+              
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF0C0;" 
+                android:textColor="@color/colorAccent"/>
+              
                 <TextView
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="in" />
+                    cardview:MvxBind="Text Assignees.Count" />
+              
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF086;" 
+                android:textColor="@color/colorAccent"/>
+              
                 <TextView
-                    android:paddingLeft="2dp"
+                    android:paddingLeft="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    cardview:MvxBind="Text Repository.FullName" />
+                    cardview:MvxBind="Text Comments" />
+              
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF277;" 
+                android:textColor="@color/colorAccent"/>
+              
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    cardview:MvxBind="Text Milestone.Title" />
             </LinearLayout>
-
-          <!--<MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+        <!--<MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
             android:orientation="horizontal"
             android:id="@+id/issuesLabelContainer"
             android:scrollbars="horizontal"

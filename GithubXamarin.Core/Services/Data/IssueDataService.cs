@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using GithubXamarin.Core.Contracts.Service;
@@ -66,5 +67,45 @@ namespace GithubXamarin.Core.Services.Data
         {
             await _issueRepository.UpdateLabels(repositoryId, issueNumber, StringToStringArrayConverter.Convert(labels), authorizedGitHubClient);
         }
+
+        #region Issue Comments
+
+        public async Task<ObservableCollection<IssueComment>> GetCommentsForIssue(long repositoryId, int issueNumber, GitHubClient authorizedGithubClient)
+        {
+            return new ObservableCollection<IssueComment>(await _issueRepository.GetCommentsForIssue(repositoryId, issueNumber, authorizedGithubClient));
+        }
+
+        public async Task<IssueComment> GetComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.GetComment(repositoryId, commentId, authorizedGitHubClient);
+        }
+
+        public async Task<IssueComment> CreateComment(long repositoryId, int issueNumber, string newComment, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.CreateComment(repositoryId, issueNumber, newComment, authorizedGitHubClient);
+        }
+
+        public async Task<IssueComment> UpdateComment(long repositoryId, int issueNumber, string updatedComment, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.UpdateComment(repositoryId, issueNumber, updatedComment,
+                authorizedGitHubClient);
+        }
+
+        public async Task<bool> DeleteComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient)
+        {
+            await _issueRepository.DeleteComment(repositoryId, commentId, authorizedGitHubClient);
+
+            try
+            {
+                await _issueRepository.GetComment(repositoryId, commentId, authorizedGitHubClient);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
     }
 }

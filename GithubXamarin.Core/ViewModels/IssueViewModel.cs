@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -26,6 +27,17 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _issue = value;
                 RaisePropertyChanged(() => Issue);
+            }
+        }
+
+        private ObservableCollection<IssueComment> _comments;
+        public ObservableCollection<IssueComment> Comments
+        {
+            get => _comments;
+            set
+            {
+                _comments = value;
+                RaisePropertyChanged(() => Comments);
             }
         }
 
@@ -109,7 +121,16 @@ namespace GithubXamarin.Core.ViewModels
             {
                 await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
+
+            await GetCommentsForIssues();
+
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        private async Task GetCommentsForIssues()
+        {
+            Comments = await _issueDataService.GetCommentsForIssue(_repositoryId, _issueNumber,
+                GithubClientService.GetAuthorizedGithubClient());
         }
 
         public async Task GoToNewIssueView()

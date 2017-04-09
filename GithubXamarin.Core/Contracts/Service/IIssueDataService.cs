@@ -26,5 +26,16 @@ namespace GithubXamarin.Core.Contracts.Service
         Task<Issue> UpdateIssue(long repositoryId, int issueNumber, IssueUpdate updatedIssueDetails, GitHubClient authorizedGithubClient);
 
         Task UpdateLabels(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGithubClient);
+
+        Task<ObservableCollection<IssueComment>> GetCommentsForIssue(long repositoryId, int issueNumber,
+            GitHubClient authorizedGithubClient);
+
+        Task<IssueComment> GetComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient);
+
+        Task<IssueComment> CreateComment(long repositoryId, int issueNumber, string newComment, GitHubClient authorizedGitHubClient);
+
+        Task<IssueComment> UpdateComment(long repositoryId, int issueNumber, string updatedComment, GitHubClient authorizedGitHubClient);
+
+        Task<bool> DeleteComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient);
     }
 }

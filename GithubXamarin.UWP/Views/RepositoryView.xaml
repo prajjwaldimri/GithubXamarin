@@ -246,14 +246,14 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
-                Command="{Binding CollaboratorsClickCommand}"
+                Command="{Binding ContributorsClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon 
                             FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
                             Glyph="&#xf0c0;"/>
-                            <TextBlock Text="Collaborators" Margin="10,0,0,0" />
+                            <TextBlock Text="Contributors" Margin="10,0,0,0" />
                         </StackPanel>
                     </Button.Content>
                 </Button>

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GithubXamarin.UWP.UserControls">
+    xmlns:local="using:GithubXamarin.UWP.UserControls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
     <DataTemplate x:Key="RepositoriesListViewTemplate">
         <StackPanel 
@@ -98,26 +99,56 @@
 
                 <TextBlock 
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Opacity="0.6"
+                    Opacity="0.8"
                     Text="#"/>
 
                 <TextBlock
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Opacity="0.6"
+                    Opacity="0.8"
                     Text="{Binding Number}"
                     Margin="2,0,0,0"/>
 
-                <TextBlock 
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Opacity="0.6"
-                    Text="in"
-                    Margin="5,0,0,0"/>
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf0c0;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
 
-                <TextBlock 
+                <TextBlock
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Opacity="0.6"
-                    Text="{Binding Repository.FullName}"
-                    Margin="5,0,0,0"/>
+                    Opacity="0.8"
+                    Text="{Binding Assignees.Count}"
+                    Margin="2,0,0,0"/>
+
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf086;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Comments}"
+                    Margin="2,0,0,0"/>
+
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf277;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Milestone.Title}"
+                    Margin="2,0,0,0"/>
             </StackPanel>
 
             <local:LabelsControl
@@ -128,4 +159,81 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="CommentsListViewTemplate">
+        <Grid x:Name="ItemGrid" 
+              Margin="0,10,0,10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="14*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle
+                    Grid.Column="0"
+                    Height="24"
+                    Width="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,0">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <Grid Grid.Column="1"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"
+                      Margin="10,10,0,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Text="{Binding User.Login}"
+                        Style="{ThemeResource BaseTextBlockStyle}"/>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="commented"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Opacity="0.6"
+                            Margin="0,0,2,0"/>
+
+                        <TextBlock
+                            Text="{Binding UpdatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Opacity="0.6"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="10,10,0,0">
+
+                <controls:MarkdownTextBlock Text="{Binding Body}"/>
+
+            </Grid>
+
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
+
+    
+
+
+    
