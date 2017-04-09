@@ -13,14 +13,15 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PullToRefreshListView 
+            Name="NotificationsListView"
             ItemsSource="{Binding Notifications}" 
             RefreshCommand="{Binding RefreshCommand}"
             SelectionMode="None"
-            IsItemClickEnabled="True" 
             HorizontalAlignment="Stretch"
             Padding="5"
+            Holding="NotificationsListView_OnHolding"
             Margin="0,0,0,48">
-            
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5,10,0,0">
@@ -56,7 +57,7 @@
                             Text="{Binding Reason}"
                             Opacity="0.6"
                             Margin="15,0,0,0"/>
-                        
+
                         <HyperlinkButton
                             Grid.Row="2" 
                             Grid.Column="1"
@@ -68,12 +69,41 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </controls:PullToRefreshListView>
-        
+
         <CommandBar
             VerticalAlignment="Bottom">
+
+            <AppBarButton 
+                Name="MarkButton"
+                Icon="Accept"
+                Visibility="Collapsed"
+                Label="Refresh"
+                Click="MarkButton_OnClick"/>
+
+            <AppBarButton 
+                Name="CancelButton"
+                Icon="Cancel"
+                Visibility="Collapsed"
+                Label="Refresh"
+                Click="CancelButton_OnClick"/>
+
+            <AppBarButton 
+                Name="SelectButton"
+                Label="Select"
+                Icon="Bullets"
+                Click="Select_OnClick"/>
+
             <AppBarButton Icon="Refresh"
+                          Name="RefreshButton"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
+
+            <AppBarButton 
+                Name="SelectAllButton"
+                Label="Mark all notifications as read"
+                Icon="ShowResults"
+                Foreground="Yellow"
+                Command="{Binding MarkAllNotificationsAsReadCommand}"/>
         </CommandBar>
 
         <!--TODO: Add image or text that says no unread notifications -->

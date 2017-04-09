@@ -12,7 +12,7 @@ namespace GithubXamarin.Core.Repositories
     {
         public async Task<IEnumerable<Notification>> GetAllNotificationsForCurrentUser(GitHubClient authorizedGitHubClient)
         {
-            return await authorizedGitHubClient.Activity.Notifications.GetAllForCurrent();
+            return await authorizedGitHubClient.Activity.Notifications.GetAllForCurrent(new NotificationsRequest() { Participating = true });
         }
 
         public async Task<IEnumerable<Notification>> GetAllNotificationsForRepository(long repositoryId, GitHubClient gitHubClient)
