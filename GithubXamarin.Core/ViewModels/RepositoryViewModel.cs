@@ -83,6 +83,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _contributorsClickCommand;
+        public ICommand ContributorsClickCommand
+        {
+            get
+            {
+                _contributorsClickCommand = _contributorsClickCommand ?? new MvxCommand(ShowContributorsOfRepository);
+                return _contributorsClickCommand;
+            }
+        }
+
+
         private ICommand _stargazersClickCommand;
         public ICommand StargazersClickCommand
         {
@@ -241,9 +252,6 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        /// <summary>
-        /// Navigates To UsersView and shows all the collaborators of current Repository
-        /// </summary>
         private void ShowCollaboratorsOfRepository()
         {
             if (Repository != null)
@@ -251,6 +259,16 @@ namespace GithubXamarin.Core.ViewModels
                 {
                     repositoryId = Repository.Id,
                     usersType = UsersTypeEnumeration.Collaborators
+                });
+        }
+
+        private void ShowContributorsOfRepository()
+        {
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Contributors
                 });
         }
 

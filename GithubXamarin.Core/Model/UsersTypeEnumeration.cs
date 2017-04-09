@@ -3,6 +3,7 @@
     public enum UsersTypeEnumeration
     {
         Stargazers,
-        Collaborators
+        Collaborators,
+        Contributors
     }
 }

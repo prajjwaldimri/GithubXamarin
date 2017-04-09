@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:local="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:fillViewport="true">
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:local="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-  <LinearLayout
-      android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:gravity="center">
-      <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/toggleButton2"
-            android:textOff="Star"
-            android:textOn="UnStar"
-            local:MvxBind="Checked IsRepositoryStarred, Mode=OneWay; Click StarClickCommand"/>
+        android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/linearLayout1"
+          android:gravity="center">
+        <ToggleButton
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:id="@+id/toggleButton2"
+              android:textOff="Star"
+              android:textOn="UnStar"
+              local:MvxBind="Checked IsRepositoryStarred, Mode=OneWay; Click StarClickCommand"/>
         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -28,116 +33,221 @@ android:layout_height="match_parent">
             android:layout_marginRight="10dp"
             android:textOff="Fork"
             android:textOn="Fork"/>
-    </LinearLayout>
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" 
-        local:MvxBind="Text Repository.Owner.Login"/>
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:gravity="center"
-        android:layout_marginBottom="10dp" 
-        local:MvxBind="Text Repository.Description"/>
-    <Button
-        android:text="Readme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" 
-        local:MvxBind="Click ReadmeClickCommand"/>
-    
-    <Button
-        android:text="Contents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button15"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" 
-        local:MvxBind="Click ContentClickCommand"/>
-    
-    <Button
-        android:text="Forks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" />
-    
-    <Button
-        android:text="Releases"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button5"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" />
-    <Button
-        android:text="Recent Acvitity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button6"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" />
-  <Button
-        android:text="Collaborators"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button4"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        local:MvxBind="Click CollaboratorsClickCommand"/>
-    <Button
-        android:text="Stargazers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button7"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" 
-        local:MvxBind="Click StargazersClickCommand"/>
-    <Button
-        android:text="PullRequests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button8"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" />
-  <Button
-        android:text="Issues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp" 
-        local:MvxBind="Click IssuesClickCommand"/>
-</LinearLayout>
+      </LinearLayout>
 
-<android.support.design.widget.FloatingActionButton
-        android:layout_width = "wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:elevation="6dp"
-        android:src="@drawable/ic_refresh_white_24dp"
-        local:MvxBind="Click RefreshCommand"/>
-</RelativeLayout>
+      <TextView
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView1"
+          android:textAlignment="center"
+          android:gravity="center_horizontal"
+          android:layout_marginTop="10dp"
+          android:layout_marginBottom="10dp"
+          local:MvxBind="Text Repository.Owner.Login"/>
+      <TextView
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textView2"
+          android:gravity="center"
+          android:layout_marginBottom="10dp"
+          local:MvxBind="Text Repository.Description"/>
+
+      <LinearLayout
+          android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf02d;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+            android:text="Readme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            local:MvxBind="Click ReadmeClickCommand"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf07b;"
+                    android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:text="Contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button15"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            local:MvxBind="Click ContentClickCommand"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+      android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf126;"
+                    android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:text="Forks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp" />
+      </LinearLayout>
+      <LinearLayout
+    android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf209;"
+                    android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:text="Releases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button5"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp" />
+      </LinearLayout>
+      <LinearLayout
+  android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf1ea;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+            android:text="Recent Acvitity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp" />
+      </LinearLayout>
+      <LinearLayout
+android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf0c0;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+              android:text="Contributors"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/button4"
+              android:background="@null"
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              local:MvxBind="Click ContributorsClickCommand"/>
+      </LinearLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf0c0;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+            android:text="Stargazers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button7"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            local:MvxBind="Click StargazersClickCommand"/>
+      </LinearLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf2b5;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+            android:text="PullRequests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button8"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp" />
+      </LinearLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <FontAwesome
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xf06a;"
+                    android:textColor="@color/colorAccent"/>
+        <Button
+              android:text="Issues"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/button2"
+              android:background="@null"
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              local:MvxBind="Click IssuesClickCommand"/>
+      </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width = "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:src="@drawable/ic_refresh_white_24dp"
+            local:MvxBind="Click RefreshCommand"/>
+  </RelativeLayout>
+</ScrollView>

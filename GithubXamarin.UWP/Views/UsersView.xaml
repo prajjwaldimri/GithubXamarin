@@ -12,46 +12,87 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
+
         <controls:PullToRefreshListView 
             ItemsSource="{Binding Users}"
             SelectionMode="Single"
             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
             RefreshCommand="{Binding RefreshCommand}"
-            Margin="0,0,0,48">
+            Margin="0,0,0,48"
+            Visibility="{Binding IsUser, Converter={StaticResource BoolToVisibilityConverter}}">
 
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="SelectionChanged">
-                        <core:InvokeCommandAction Command="{Binding UserClickCommand, Mode=TwoWay}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding UserClickCommand, Mode=TwoWay}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        
-                        <StackPanel
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel
                             HorizontalAlignment="Stretch"
                             Orientation="Horizontal"
                             Padding="0,5,0,5">
-                            <Rectangle 
+                        <Rectangle 
                                 Height="32" 
                                 Width="32"
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{Binding AvatarUrl}"/>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <TextBlock 
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock 
                                 Margin="10,0,0,0"
                                 Text="{Binding Login}"
                                 VerticalAlignment="Center"/>
 
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </controls:PullToRefreshListView>
-        
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </controls:PullToRefreshListView>
+
+        <controls:PullToRefreshListView 
+            ItemsSource="{Binding Contributors}"
+            SelectionMode="Single"
+            SelectedIndex="{Binding SelectedContributorIndex, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}"
+            Margin="0,0,0,48"
+            Visibility="{Binding IsContributor, Converter={StaticResource BoolToVisibilityConverter}}">
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding ContributorClickCommand, Mode=TwoWay}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal"
+                            Padding="0,5,0,5">
+                        <Rectangle 
+                                Height="32" 
+                                Width="32"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding AvatarUrl}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock 
+                                Margin="10,0,0,0"
+                                Text="{Binding Login}"
+                                VerticalAlignment="Center"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </controls:PullToRefreshListView>
+
         <CommandBar
             VerticalAlignment="Bottom">
             <AppBarButton Icon="Refresh"
