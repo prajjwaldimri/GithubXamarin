@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
-     android:fillViewport="true">
-  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:local="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:local="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -57,9 +58,10 @@
       <LinearLayout
           android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+          android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf02d;"
@@ -78,9 +80,10 @@
       <LinearLayout
         android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+        android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf07b;"
@@ -101,9 +104,10 @@
       <LinearLayout
       android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+      android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf126;"
@@ -121,9 +125,10 @@
       <LinearLayout
     android:orientation="horizontal"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+    android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf209;"
@@ -141,9 +146,10 @@
       <LinearLayout
   android:orientation="horizontal"
 android:layout_width="match_parent"
-android:layout_height="match_parent">
+android:layout_height="match_parent"
+  android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf1ea;"
@@ -160,9 +166,10 @@ android:layout_height="match_parent">
       <LinearLayout
 android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf0c0;"
@@ -180,9 +187,10 @@ android:orientation="horizontal"
       <LinearLayout
         android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+        android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf0c0;"
@@ -200,9 +208,10 @@ android:orientation="horizontal"
       <LinearLayout
         android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+        android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf2b5;"
@@ -219,9 +228,10 @@ android:orientation="horizontal"
       <LinearLayout
         android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+        android:paddingLeft="10dp">
         <FontAwesome
-                    android:paddingRight="5dp"
+                    android:paddingRight="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="&#xf06a;"
@@ -237,17 +247,17 @@ android:orientation="horizontal"
               local:MvxBind="Click IssuesClickCommand"/>
       </LinearLayout>
     </LinearLayout>
+  </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-            android:layout_width = "wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:elevation="6dp"
-            android:src="@drawable/ic_refresh_white_24dp"
-            local:MvxBind="Click RefreshCommand"/>
-  </RelativeLayout>
-</ScrollView>
+  <android.support.design.widget.FloatingActionButton
+          android:layout_width = "wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentRight="true"
+          android:layout_margin="16dp"
+          android:clickable="true"
+          android:elevation="6dp"
+          android:src="@drawable/ic_refresh_white_24dp"
+          local:MvxBind="Click RefreshCommand"/>
+</RelativeLayout>
