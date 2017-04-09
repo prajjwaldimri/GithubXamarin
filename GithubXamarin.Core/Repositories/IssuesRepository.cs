@@ -56,7 +56,7 @@ namespace GithubXamarin.Core.Repositories
             {
                 _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
             }
-            return await _issuesClient.GetAllForRepository(repositoryId, new RepositoryIssueRequest{State = ItemStateFilter.Closed});
+            return await _issuesClient.GetAllForRepository(repositoryId, new RepositoryIssueRequest { State = ItemStateFilter.Closed });
         }
 
         public async Task<IEnumerable<Issue>> SearchIssues(string searchTerm, GitHubClient gitHubClient)
@@ -96,5 +96,54 @@ namespace GithubXamarin.Core.Repositories
             }
             await _issuesClient.Labels.AddToIssue(repositoryId, issueNumber, labels);
         }
+
+        #region IssueComments https://developer.github.com/v3/issues/comments/
+
+        public async Task<IEnumerable<IssueComment>> GetCommentsForIssue(long repositoryId, int issueNumber, GitHubClient authorizedGithubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGithubClient.Connection));
+            }
+            return await _issuesClient.Comment.GetAllForIssue(repositoryId, issueNumber);
+        }
+
+        public async Task<IssueComment> GetComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Comment.Get(repositoryId, commentId);
+        }
+
+        public async Task<IssueComment> CreateComment(long repositoryId, int issueNumber, string newComment, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Comment.Create(repositoryId, issueNumber, newComment);
+        }
+
+        public async Task<IssueComment> UpdateComment(long repositoryId, int issueNumber, string updatedComment, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Comment.Update(repositoryId, issueNumber, updatedComment);
+        }
+
+        public async Task DeleteComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            await _issuesClient.Comment.Delete(repositoryId, commentId);
+        }
+
+        #endregion
     }
 }
