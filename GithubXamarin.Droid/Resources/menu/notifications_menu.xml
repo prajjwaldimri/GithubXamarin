@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <item
+        android:id="@+id/notifications_refresh"
+        android:title="Refresh"
+    android:showAsAction="never" >
+    </item>
+
+    <item
+        android:id="@+id/notifications_mark_all_read"
+        android:title="Mark All Notifications As Read"
+    android:showAsAction="never" >
+    </item>
+  
+</menu>

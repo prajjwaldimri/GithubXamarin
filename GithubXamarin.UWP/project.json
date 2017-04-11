@@ -14,6 +14,7 @@
     "MvvmCross.Plugin.Messenger": "4.4.0",
     "MvvmCross.Plugin.Network": "4.4.0",
     "MvvmCross.Plugin.Visibility": "4.4.0",
+    "Newtonsoft.Json": "10.0.2",
     "Octokit": "0.24.0",
     "RichTextBlock.Html2Xaml": "1.2.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1",

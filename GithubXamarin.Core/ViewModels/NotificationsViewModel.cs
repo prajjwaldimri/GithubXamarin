@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -85,6 +86,34 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
+        public async Task MarkNotificationAsRead(Notification notification)
+        {
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            await _notificationDataService.MarkNotificationAsRead(Convert.ToInt32(notification.Id),
+                GithubClientService.GetAuthorizedGithubClient());
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
+        public async Task MarkAllNotificationsAsRead()
+        {
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            try
+            {
+                await _notificationDataService.MarkAllNotificationsAsRead(
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            catch (ApiException)
+            {
+                foreach (var notification in Notifications)
+                {
+                    await _notificationDataService.MarkNotificationAsRead(Convert.ToInt32(notification.Id),
+                        GithubClientService.GetAuthorizedGithubClient());
+                }
+            }
+            await Refresh();
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
+
         public async Task Refresh()
         {
             if (!(await IsInternetAvailable()))
@@ -114,23 +143,6 @@ namespace GithubXamarin.Core.ViewModels
                 await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
-        }
-
-        private async Task MarkNotificationAsRead(Notification notification)
-        {
-            if (MarkedNotification == null)
-                return;
-            var notificationsClient = new NotificationsClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-
-            await notificationsClient.MarkAsRead(int.Parse(MarkedNotification.Id));
-        }
-
-        private async Task MarkAllNotificationsAsRead()
-        {
-            var notificationsClient = new NotificationsClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-
-            await notificationsClient.MarkAsRead();
-            await Refresh();
         }
     }
 }

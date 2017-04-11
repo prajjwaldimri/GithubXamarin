@@ -24,15 +24,7 @@ namespace GithubXamarin.Droid.Views
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             HasOptionsMenu = true;
-            //SetUpWindowAnimations();
             return this.BindingInflate(Resource.Layout.IssuesView, null);
-        }
-
-        private void SetUpWindowAnimations()
-        {
-            //var fade = TransitionInflater.From(Application.Context).InflateTransition(Resource.Transition.activity_fade);
-            //Activity.Window.ExitTransition = fade;
-            //Activity.Window.EnterTransition = fade;
         }
 
         public override async void OnViewCreated(View view, Bundle savedInstanceState)
