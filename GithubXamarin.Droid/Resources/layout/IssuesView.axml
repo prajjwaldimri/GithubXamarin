@@ -42,7 +42,6 @@
             android:layout_height="fill_parent"
             local:MvxBind="ItemsSource ClosedIssues; ItemClick ClosedIssueClickCommand"
             local:MvxItemTemplate="@layout/issues_item_template" />
-      
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

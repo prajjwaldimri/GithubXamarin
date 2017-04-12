@@ -15,8 +15,7 @@
             android:layout_height="fill_parent"
             local:MvxBind="ItemsSource Users; ItemClick UserClickCommand; Visibility Visibility(IsUser)"
             local:MvxItemTemplate="@layout/users_item_template" />
-      
-      <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+        <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
