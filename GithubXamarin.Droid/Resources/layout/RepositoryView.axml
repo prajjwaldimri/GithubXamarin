@@ -32,8 +32,9 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:id="@+id/toggleButton1"
             android:layout_marginRight="10dp"
-            android:textOff="Fork"
-            android:textOn="Fork"/>
+            android:textOff="Watch"
+            android:textOn="UnWatch"
+            local:MvxBind="Checked IsRepositoryWatched, Mode=OneWay; Click WatchClickCommand"/>
       </LinearLayout>
 
       <TextView
