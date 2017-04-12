@@ -12,6 +12,7 @@ namespace GithubXamarin.Core.Repositories
     {
         private RepositoryForksClient _repositoryForksClient;
         private RepositoriesClient _repositoriesClient;
+        private WatchedClient _watchedClient;
 
         public async Task<Repository> GetRepository(long repositoryId, GitHubClient githubClient)
         {
@@ -87,6 +88,24 @@ namespace GithubXamarin.Core.Repositories
                 _StarredClient = new StarredClient(new ApiConnection(authorizedGitHubClient.Connection));
             }
             return await _StarredClient.RemoveStarFromRepo(repositoryOwner, repositoryName);
+        }
+
+        public async Task<Subscription> WatchRepository(long repositoryId, NewSubscription subscription, GitHubClient authorizedGitHubClient)
+        {
+            if (_watchedClient == null)
+            {
+                _watchedClient = new WatchedClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _watchedClient.WatchRepo(repositoryId, subscription);
+        }
+
+        public async Task<bool> UnWatchRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_watchedClient == null)
+            {
+                _watchedClient = new WatchedClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _watchedClient.UnwatchRepo(repositoryId);
         }
 
         public async Task<Repository> CreateRepository(NewRepository newRepositoryDetails, GitHubClient authorizedGitHubClient)

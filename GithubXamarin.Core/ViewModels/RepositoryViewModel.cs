@@ -43,6 +43,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private bool _isRepositoryWatched;
+        public bool IsRepositoryWatched
+        {
+            get => _isRepositoryWatched;
+            set
+            {
+                _isRepositoryWatched = value;
+                RaisePropertyChanged(() => IsRepositoryWatched);
+            }
+        }
+
+
         private ICommand _forkClickCommand;
         public ICommand ForkClickCommand
         {
@@ -60,6 +72,16 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _starClickCommand = _starClickCommand ?? new MvxAsyncCommand(async () => await StarOrUnstarRepository());
                 return _starClickCommand;
+            }
+        }
+
+        private ICommand _watchClickCommand;
+        public ICommand WatchClickCommand
+        {
+            get
+            {
+                _watchClickCommand = _watchClickCommand ?? new MvxAsyncCommand(async () => await WatchOrUnwatchRepository());
+                return _watchClickCommand;
             }
         }
 
@@ -201,13 +223,24 @@ namespace GithubXamarin.Core.ViewModels
         {
             //Check if repository is starred
             var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login.ToString(), Repository.Name);
+            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login, Repository.Name);
+
+            //Check if repository is watched
+            var watchedClient = new WatchedClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
+            IsRepositoryWatched = await watchedClient.CheckWatched(Repository.Id);
         }
 
         private void ForkRepository()
         {
             var forkClient = new RepositoryForksClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            forkClient.Create(Repository.Id, new NewRepositoryFork());
+            var forkedRepo = forkClient.Create(Repository.Id, new NewRepositoryFork());
+            if (forkedRepo != null)
+            {
+                ShowViewModel<RepositoryViewModel>(new
+                {
+                    repositoryId = forkedRepo.Id
+                });
+            }
         }
 
         private async Task DeleteRepository()
@@ -248,6 +281,24 @@ namespace GithubXamarin.Core.ViewModels
             {
                 await _repoDataService.StarRepository(Repository.Owner.Login, Repository.Name,
                     GithubClientService.GetAuthorizedGithubClient());
+            }
+            await Refresh();
+        }
+
+        private async Task WatchOrUnwatchRepository()
+        {
+            if (IsRepositoryWatched)
+            {
+                await _repoDataService.UnWatchRepository(Repository.Id,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                await _repoDataService.WatchRepository(Repository.Id, new NewSubscription()
+                {
+                    Subscribed = true,
+                    Ignored = false
+                }, GithubClientService.GetAuthorizedGithubClient());
             }
             await Refresh();
         }

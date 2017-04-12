@@ -68,6 +68,7 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
                 </StackPanel>
 
+
                 <StackPanel 
                 Grid.Row="0"
                 Grid.Column="1" 
@@ -75,12 +76,14 @@
 
                     <ToggleButton
                     HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch">
+                    VerticalAlignment="Stretch"
+                    IsChecked="{Binding IsRepositoryWatched}" 
+                    Command="{Binding WatchClickCommand}">
                         <ToggleButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                                      Glyph="&#xf126;"/>
-                                <TextBlock Text="Fork" Margin="5,0,0,0"/>
+                                      Glyph="&#xf06e;"/>
+                                <TextBlock Text="Watch" Margin="5,0,0,0"/>
                             </StackPanel>
                         </ToggleButton.Content>
                     </ToggleButton>
@@ -88,7 +91,7 @@
                     <TextBlock 
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Text="{Binding Repository.ForksCount}" 
+                    Text="{Binding Repository.SubscribersCount}" 
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                 </StackPanel>
@@ -321,6 +324,15 @@
             <AppBarButton Icon="Add"
                           Label="Create an issue"
                           Command="{Binding AddCommand}"/>
+
+            <AppBarButton Label="Create a fork"
+                          Command="{Binding ForkClickCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon 
+                        FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                        Glyph="&#xf126;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
 
             <AppBarButton Icon="Edit"
                           Label="Edit this repository"
