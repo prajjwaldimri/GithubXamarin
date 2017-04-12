@@ -5,6 +5,7 @@ using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
+using GithubXamarin.Core.Model;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
@@ -38,6 +39,48 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _isUserCurrent = value;
                 RaisePropertyChanged(() => IsUserCurrent);
+            }
+        }
+
+        private bool _isUserFollowed;
+        public bool IsUserFollowed
+        {
+            get => _isUserFollowed;
+            set
+            {
+                _isUserFollowed = value;
+                RaisePropertyChanged(() => IsUserFollowed);
+            }
+        }
+
+
+        private ICommand _followClickCommand;
+        public ICommand FollowClickCommand
+        {
+            get
+            {
+                _followClickCommand = _followClickCommand ?? new MvxAsyncCommand(FollowOrUnfollowUser);
+                return _followClickCommand;
+            }
+        }
+
+        private ICommand _followersClickCommand;
+        public ICommand FollowersClickCommand
+        {
+            get
+            {
+                _followersClickCommand = _followersClickCommand ?? new MvxCommand(ShowFollowers);
+                return _followersClickCommand;
+            }
+        }
+
+        private ICommand _followingClickCommand;
+        public ICommand FollowingClickCommand
+        {
+            get
+            {
+                _followingClickCommand = _followingClickCommand ?? new MvxCommand(ShowFollowing);
+                return _followingClickCommand;
             }
         }
 
@@ -111,6 +154,52 @@ namespace GithubXamarin.Core.ViewModels
             });
         }
 
+        private async Task CheckUserStats()
+        {
+            if (!IsUserCurrent)
+            {
+                var userClient = new FollowersClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
+                IsUserFollowed = await userClient.IsFollowingForCurrent(User.Login);
+            }
+        }
+
+        public async Task FollowOrUnfollowUser()
+        {
+            if (IsUserFollowed)
+            {
+                await _userDataService.UnfollowUser(User.Login, GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                await _userDataService.FollowUser(User.Login, GithubClientService.GetAuthorizedGithubClient());
+            }
+            await Refresh();
+        }
+
+        private void ShowFollowers()
+        {
+            if (User != null)
+            {
+                ShowViewModel<UsersViewModel>(new
+                {
+                    usersType = UsersTypeEnumeration.Followers,
+                    userLogin = User.Login
+                });
+            }
+        }
+
+        private void ShowFollowing()
+        {
+            if (User != null)
+            {
+                ShowViewModel<UsersViewModel>(new
+                {
+                    usersType = UsersTypeEnumeration.Following,
+                    userLogin = User.Login
+                });
+            }
+        }
+
         public async Task Refresh()
         {
             if (!(await IsInternetAvailable())) return;
@@ -133,6 +222,9 @@ namespace GithubXamarin.Core.ViewModels
             {
                 await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
+
+            await CheckUserStats();
+
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 

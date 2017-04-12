@@ -49,7 +49,7 @@ namespace GithubXamarin.Droid.Activities
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            
+
             //Coupling Toolbar and Drawer
             _toolbar.SetTitle(Resource.String.Empty);
             SetSupportActionBar(_toolbar);
@@ -62,14 +62,6 @@ namespace GithubXamarin.Droid.Activities
             //Animating Hamburger Icon. 
             _drawerToggle = setupDrawerToggle();
             DrawerLayout.AddDrawerListener(_drawerToggle);
-
-            ViewModel.LoadFragments();
-
-            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
-            {
-                ScheduleAlarm();
-            }
-            SetStatusBarTheme();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -141,6 +133,18 @@ namespace GithubXamarin.Droid.Activities
             _drawerToggle.SyncState();
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ViewModel.LoadFragments();
+
+            if (CrossSecureStorage.Current.HasKey("OAuthToken"))
+            {
+                ScheduleAlarm();
+            }
+            SetStatusBarTheme();
+        }
+
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
@@ -153,7 +157,7 @@ namespace GithubXamarin.Droid.Activities
             var intent = new Intent(ApplicationContext.ApplicationContext, typeof(AlarmBroadcastReciever));
             var pendingIntent = PendingIntent.GetBroadcast(this, AlarmBroadcastReciever.RequestCode, intent,
                 PendingIntentFlags.UpdateCurrent);
-            var alarm = (AlarmManager) this.GetSystemService(Context.AlarmService);
+            var alarm = (AlarmManager)this.GetSystemService(Context.AlarmService);
             alarm.SetInexactRepeating(AlarmType.RtcWakeup, Java.Lang.JavaSystem.CurrentTimeMillis(), AlarmManager.IntervalFifteenMinutes, pendingIntent);
         }
 

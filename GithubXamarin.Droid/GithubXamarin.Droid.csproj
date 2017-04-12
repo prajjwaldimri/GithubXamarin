@@ -872,9 +872,6 @@
     <AndroidResource Include="Resources\drawable\web_hi_res_512.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\background.png" />
   </ItemGroup>
   <ItemGroup>
@@ -903,6 +900,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\notifications_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\background_splash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

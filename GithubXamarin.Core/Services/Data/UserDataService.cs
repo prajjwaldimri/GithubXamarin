@@ -49,5 +49,25 @@ namespace GithubXamarin.Core.Services.Data
         {
             return await _userRepository.UpdateUser(updatedUserDetails, authorizedGitHubClient);
         }
+
+        public async Task<bool> FollowUser(string userLogin, GitHubClient authorizedGitHubClient)
+        {
+            return await _userRepository.FollowUser(userLogin, authorizedGitHubClient);
+        }
+
+        public async Task UnfollowUser(string userLogin, GitHubClient authorizedGitHubClient)
+        {
+            await _userRepository.UnfollowUser(userLogin, authorizedGitHubClient);
+        }
+
+        public async Task<ObservableCollection<User>> GetFollowersForUser(string login, GitHubClient authorizedGithubClient)
+        {
+            return new ObservableCollection<User>(await _userRepository.GetFollowersForUser(login, authorizedGithubClient));
+        }
+
+        public async Task<ObservableCollection<User>> GetFollowingForUser(string login, GitHubClient authorizedGithubClient)
+        {
+            return new ObservableCollection<User>(await _userRepository.GetFollowingForUser(login, authorizedGithubClient));
+        }
     }
 }

@@ -14,6 +14,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition/>
+                <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
 
@@ -59,7 +60,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="5"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
 
@@ -131,8 +132,29 @@
                 </StackPanel>
             </ScrollViewer>
 
+            <ToggleButton 
+                Visibility="{Binding IsUserCurrent, Converter={StaticResource ReverseBoolToVisibilityConverter}}"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsChecked="{Binding IsUserFollowed}" 
+                Command="{Binding FollowClickCommand}">
+
+                <ToggleButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon 
+                                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                Glyph="&#xf234;"/>
+                        <TextBlock 
+                                Text="Follow"
+                                Margin="5,0,0,0"/>
+                    </StackPanel>
+                </ToggleButton.Content>
+            </ToggleButton>
+
             <ScrollViewer 
-            Grid.Row="2" 
+            Grid.Row="3" 
             Grid.Column="1"
             Margin="0,0,0,48">
                 <StackPanel VerticalAlignment="Stretch">
@@ -159,51 +181,125 @@
                             <ColumnDefinition Width="6*"/>
                         </Grid.ColumnDefinitions>
 
-                        <FontIcon 
-                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                        Glyph="&#xf0c0;"
-                        Opacity="0.6"
-                        Margin="10,0,0,5"
-                        Grid.Row="0"
-                        Grid.Column="0"/>
 
-                        <TextBlock 
-                        Text="Followers:" 
-                        Style="{ThemeResource BodyTextBlockStyle}"
-                        Margin="10,0,0,5"
-                        Opacity="0.6"
-                        Grid.Row="0" 
-                        Grid.Column="1"/>
 
-                        <TextBlock 
-                        Style="{ThemeResource BodyTextBlockStyle}"
-                        Text="{Binding User.Followers}" 
-                        Margin="10,0,0,5"
-                        Grid.Row="0" 
-                        Grid.Column="2"/>
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Background="Transparent"
+                            Command="{Binding FollowersClickCommand}">
 
-                        <FontIcon 
-                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                        Glyph="&#xf0c0;"
-                        Opacity="0.6"
-                        Margin="10,0,0,5"
-                        Grid.Row="1"
-                        Grid.Column="0"/>
+                            <Button.Content>
 
-                        <TextBlock 
-                        Style="{ThemeResource BodyTextBlockStyle}"
-                        Text="Following:" 
-                        Margin="10,0,0,5"
-                        Grid.Row="1" 
-                        Opacity="0.6"
-                        Grid.Column="1"/>
+                                <FontIcon 
+                                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                        Glyph="&#xf0c0;"
+                                        Opacity="0.6"
+                                        Margin="10,0,0,5"
+                                        
+                                        Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                            </Button.Content>
+                        </Button>
 
-                        <TextBlock 
-                        Style="{ThemeResource BodyTextBlockStyle}"
-                        Text="{Binding User.Following}" 
-                        Margin="10,0,0,5"
-                        Grid.Row="1" 
-                        Grid.Column="2"/>
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Background="Transparent"
+                            Command="{Binding FollowersClickCommand}">
+
+                            <Button.Content>
+
+                                <TextBlock 
+                                        Text="Followers:" 
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Margin="0,0,0,5"
+                                        Opacity="0.6"
+                                        Grid.Column="1"/>
+
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Background="Transparent"
+                            Command="{Binding FollowersClickCommand}">
+
+                            <Button.Content>
+
+                                <TextBlock 
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="{Binding User.Followers}" 
+                                        Margin="0,0,0,5"
+                                        Grid.Column="2"/>
+
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Background="Transparent"
+                            Command="{Binding FollowingClickCommand}">
+
+                            <Button.Content>
+
+                                <FontIcon 
+                                        FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                                        Glyph="&#xf0c0;"
+                                        Opacity="0.6"
+                                        Margin="10,0,0,5"
+                                        
+                                        Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Background="Transparent"
+                            Command="{Binding FollowingClickCommand}">
+
+                            <Button.Content>
+
+                                <TextBlock 
+                                        Text="Following:" 
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Margin="0,0,0,5"
+                                        Opacity="0.6"
+                                        Grid.Column="1"/>
+
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Background="Transparent"
+                            Command="{Binding FollowingClickCommand}">
+
+                            <Button.Content>
+
+                                <TextBlock 
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="{Binding User.Following}" 
+                                        Margin="0,0,0,5"
+                                        Grid.Column="2"/>
+
+                            </Button.Content>
+                        </Button>
 
                         <FontIcon 
                         FontFamily="Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
@@ -392,4 +488,6 @@
         </CommandBar>
     </Grid>
 </views:MvxWindowsPage>
+
+
 
