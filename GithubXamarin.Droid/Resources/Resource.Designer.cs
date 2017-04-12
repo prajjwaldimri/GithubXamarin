@@ -2908,6 +2908,12 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060010
 			public const int normal = 2131099664;
 			
+			// aapt resource value: 0x7f0600f7
+			public const int notifications_mark_all_read = 2131099895;
+			
+			// aapt resource value: 0x7f0600f6
+			public const int notifications_refresh = 2131099894;
+			
 			// aapt resource value: 0x7f060037
 			public const int parallax = 2131099703;
 			
@@ -2935,26 +2941,26 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f0600c0
 			public const int repoTabLayout = 2131099840;
 			
-			// aapt resource value: 0x7f0600f7
-			public const int repositories_add = 2131099895;
-			
-			// aapt resource value: 0x7f0600f6
-			public const int repositories_refresh = 2131099894;
-			
-			// aapt resource value: 0x7f0600fc
-			public const int repository_add_issue = 2131099900;
-			
 			// aapt resource value: 0x7f0600f9
-			public const int repository_contents_add = 2131099897;
+			public const int repositories_add = 2131099897;
 			
 			// aapt resource value: 0x7f0600f8
-			public const int repository_contents_refresh = 2131099896;
+			public const int repositories_refresh = 2131099896;
+			
+			// aapt resource value: 0x7f0600fe
+			public const int repository_add_issue = 2131099902;
 			
 			// aapt resource value: 0x7f0600fb
-			public const int repository_edit = 2131099899;
+			public const int repository_contents_add = 2131099899;
 			
 			// aapt resource value: 0x7f0600fa
-			public const int repository_refresh = 2131099898;
+			public const int repository_contents_refresh = 2131099898;
+			
+			// aapt resource value: 0x7f0600fd
+			public const int repository_edit = 2131099901;
+			
+			// aapt resource value: 0x7f0600fc
+			public const int repository_refresh = 2131099900;
 			
 			// aapt resource value: 0x7f060035
 			public const int right = 2131099701;
@@ -3190,17 +3196,17 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 0x7f060018
 			public const int useLogo = 2131099672;
 			
-			// aapt resource value: 0x7f0600fe
-			public const int user_edit = 2131099902;
+			// aapt resource value: 0x7f060100
+			public const int user_edit = 2131099904;
 			
-			// aapt resource value: 0x7f0600fd
-			public const int user_refresh = 2131099901;
+			// aapt resource value: 0x7f0600ff
+			public const int user_refresh = 2131099903;
 			
 			// aapt resource value: 0x7f06007d
 			public const int username = 2131099773;
 			
-			// aapt resource value: 0x7f0600ff
-			public const int users_refresh = 2131099903;
+			// aapt resource value: 0x7f060101
+			public const int users_refresh = 2131099905;
 			
 			// aapt resource value: 0x7f060095
 			public const int view_header = 2131099797;
@@ -3581,19 +3587,22 @@ namespace GithubXamarin.Droid
 			public const int nav_menu = 2131558406;
 			
 			// aapt resource value: 0x7f0d0007
-			public const int repositories_menu = 2131558407;
+			public const int notifications_menu = 2131558407;
 			
 			// aapt resource value: 0x7f0d0008
-			public const int repository_contents_menu = 2131558408;
+			public const int repositories_menu = 2131558408;
 			
 			// aapt resource value: 0x7f0d0009
-			public const int repository_menu = 2131558409;
+			public const int repository_contents_menu = 2131558409;
 			
 			// aapt resource value: 0x7f0d000a
-			public const int user_menu = 2131558410;
+			public const int repository_menu = 2131558410;
 			
 			// aapt resource value: 0x7f0d000b
-			public const int users_menu = 2131558411;
+			public const int user_menu = 2131558411;
+			
+			// aapt resource value: 0x7f0d000c
+			public const int users_menu = 2131558412;
 			
 			static Menu()
 			{

@@ -28,6 +28,11 @@ namespace GithubXamarin.Core.Contracts.Service
 
         Task<bool> UnStarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGithubClient);
 
+        Task<Subscription> WatchRepository(long repositoryId, NewSubscription subscription,
+            GitHubClient authorizedGitHubClient);
+
+        Task<bool> UnWatchRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+
         Task<Octokit.Repository> CreateRepository(NewRepository newRepositoryDetails, GitHubClient authorizedGitHubClient);
 
         Task<Octokit.Repository> UpdateRepository(long repositoryId, RepositoryUpdate updatedRepositoryDetails,

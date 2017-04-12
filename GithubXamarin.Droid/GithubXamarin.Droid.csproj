@@ -901,6 +901,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\menu\repository_contents_menu.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\notifications_menu.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
