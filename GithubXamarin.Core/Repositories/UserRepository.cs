@@ -78,6 +78,42 @@ namespace GithubXamarin.Core.Repositories
             }
             return await _usersClient.Update(updatedUserDetails);
         }
-        
+
+        public async Task<bool> FollowUser(string userLogin, GitHubClient authorizedGitHubClient)
+        {
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _usersClient.Followers.Follow(userLogin);
+        }
+
+        public async Task UnfollowUser(string userLogin, GitHubClient authorizedGithubClient)
+        {
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(authorizedGithubClient.Connection));
+            }
+            await _usersClient.Followers.Unfollow(userLogin);
+        }
+
+        public async Task<IEnumerable<User>> GetFollowersForUser(string login, GitHubClient authorizedGithubClient)
+        {
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(authorizedGithubClient.Connection));
+            }
+            return await _usersClient.Followers.GetAll(login);
+        }
+
+        public async Task<IEnumerable<User>> GetFollowingForUser(string login, GitHubClient authorizedGithubClient)
+        {
+            if (_usersClient == null)
+            {
+                _usersClient = new UsersClient(new ApiConnection(authorizedGithubClient.Connection));
+            }
+            return await _usersClient.Followers.GetAllFollowing(login);
+        }
+
     }
 }

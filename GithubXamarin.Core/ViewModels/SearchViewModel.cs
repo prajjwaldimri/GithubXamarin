@@ -149,6 +149,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async void ExecuteSearch()
         {
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             switch (FilterSelectedIndex)
             {
                 case 0:
@@ -163,6 +164,7 @@ namespace GithubXamarin.Core.ViewModels
                 default:
                     break;
             }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
         }
 
         private void GoToIssue(object obj)
@@ -209,6 +211,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private async Task Search(string searchTerm, SearchTypeEnumeration searchType)
         {
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
             if (!(await IsInternetAvailable()))
             {
                 await DialogService.ShowSimpleDialogAsync("Or is it?", "Internet is not available");
@@ -233,6 +236,7 @@ namespace GithubXamarin.Core.ViewModels
                 default:
                     break;
             }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
         }
     }
 }

@@ -4,6 +4,8 @@
     {
         Stargazers,
         Collaborators,
-        Contributors
+        Contributors,
+        Followers,
+        Following
     }
 }

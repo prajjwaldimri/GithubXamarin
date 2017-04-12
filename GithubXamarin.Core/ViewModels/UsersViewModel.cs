@@ -98,6 +98,7 @@ namespace GithubXamarin.Core.ViewModels
 
         private long _repositoryId;
         private UsersTypeEnumeration? _usersType;
+        private string _userLogin;
 
         public int SelectedIndex { get; set; }
         public int SelectedContributorIndex { get; set; }
@@ -109,10 +110,11 @@ namespace GithubXamarin.Core.ViewModels
             _userDataService = userDataService;
         }
 
-        public async void Init(long repositoryId, UsersTypeEnumeration usersType)
+        public async void Init(long repositoryId, UsersTypeEnumeration usersType, string userLogin)
         {
             _repositoryId = repositoryId;
             _usersType = usersType;
+            _userLogin = userLogin;
             await Refresh();
         }
 
@@ -161,6 +163,18 @@ namespace GithubXamarin.Core.ViewModels
                             Contributors = await _userDataService.GetContributorsForRepository(_repositoryId,
                                 GithubClientService.GetAuthorizedGithubClient());
                             IsContributor = true;
+                            break;
+                        case UsersTypeEnumeration.Followers:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Followers of {_userLogin}" });
+                            Users = await _userDataService.GetFollowersForUser(_userLogin,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = false;
+                            break;
+                        case UsersTypeEnumeration.Following:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Users followed by {_userLogin}" });
+                            Users = await _userDataService.GetFollowingForUser(_userLogin,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = false;
                             break;
                         default:
                             Users = await _userDataService.GetCollaboratorsForRepository(_repositoryId,
