@@ -97,7 +97,7 @@ namespace GithubXamarin.Core.ViewModels
             _fileDataService = fileDataService;
         }
 
-        public async void Init(long repositoryId, string filePath, string content, string sha)
+        public void Init(long repositoryId, string filePath, string content, string sha)
         {
             _repositoryid = repositoryId;
             FilePath = filePath;
