@@ -335,29 +335,29 @@ namespace GithubXamarin.Droid
 		public partial class Attribute
 		{
 			
+			// aapt resource value: 0x7f010143
+			public const int MvxBind = 2130772291;
+			
 			// aapt resource value: 0x7f010147
-			public const int MvxBind = 2130772295;
-			
-			// aapt resource value: 0x7f01014b
-			public const int MvxDropDownItemTemplate = 2130772299;
-			
-			// aapt resource value: 0x7f01014c
-			public const int MvxGroupItemTemplate = 2130772300;
-			
-			// aapt resource value: 0x7f01014a
-			public const int MvxItemTemplate = 2130772298;
+			public const int MvxDropDownItemTemplate = 2130772295;
 			
 			// aapt resource value: 0x7f010148
-			public const int MvxLang = 2130772296;
-			
-			// aapt resource value: 0x7f01014d
-			public const int MvxSource = 2130772301;
-			
-			// aapt resource value: 0x7f010149
-			public const int MvxTemplate = 2130772297;
+			public const int MvxGroupItemTemplate = 2130772296;
 			
 			// aapt resource value: 0x7f010146
-			public const int MvxTemplateSelector = 2130772294;
+			public const int MvxItemTemplate = 2130772294;
+			
+			// aapt resource value: 0x7f010144
+			public const int MvxLang = 2130772292;
+			
+			// aapt resource value: 0x7f010149
+			public const int MvxSource = 2130772297;
+			
+			// aapt resource value: 0x7f010145
+			public const int MvxTemplate = 2130772293;
+			
+			// aapt resource value: 0x7f010142
+			public const int MvxTemplateSelector = 2130772290;
 			
 			// aapt resource value: 0x7f01004f
 			public const int actionBarDivider = 2130772047;
@@ -589,18 +589,6 @@ namespace GithubXamarin.Droid
 			
 			// aapt resource value: 0x7f0100a1
 			public const int checkedTextViewStyle = 2130772129;
-			
-			// aapt resource value: 0x7f010143
-			public const int civ_border_color = 2130772291;
-			
-			// aapt resource value: 0x7f010144
-			public const int civ_border_overlay = 2130772292;
-			
-			// aapt resource value: 0x7f010142
-			public const int civ_border_width = 2130772290;
-			
-			// aapt resource value: 0x7f010145
-			public const int civ_fill_color = 2130772293;
 			
 			// aapt resource value: 0x7f0100c6
 			public const int closeIcon = 2130772166;
@@ -5909,24 +5897,6 @@ namespace GithubXamarin.Droid
 			// aapt resource value: 11
 			public const int CardView_contentPaddingTop = 11;
 			
-			public static int[] CircleImageView = new int[] {
-					2130772290,
-					2130772291,
-					2130772292,
-					2130772293};
-			
-			// aapt resource value: 1
-			public const int CircleImageView_civ_border_color = 1;
-			
-			// aapt resource value: 2
-			public const int CircleImageView_civ_border_overlay = 2;
-			
-			// aapt resource value: 0
-			public const int CircleImageView_civ_border_width = 0;
-			
-			// aapt resource value: 3
-			public const int CircleImageView_civ_fill_color = 3;
-			
 			public static int[] CollapsingToolbarLayout = new int[] {
 					2130771986,
 					2130772216,
@@ -6374,8 +6344,8 @@ namespace GithubXamarin.Droid
 			public const int MenuView_subMenuArrow = 8;
 			
 			public static int[] MvxBinding = new int[] {
-					2130772295,
-					2130772296};
+					2130772291,
+					2130772292};
 			
 			// aapt resource value: 0
 			public const int MvxBinding_MvxBind = 0;
@@ -6384,26 +6354,26 @@ namespace GithubXamarin.Droid
 			public const int MvxBinding_MvxLang = 1;
 			
 			public static int[] MvxControl = new int[] {
-					2130772297};
+					2130772293};
 			
 			// aapt resource value: 0
 			public const int MvxControl_MvxTemplate = 0;
 			
 			public static int[] MvxExpandableListView = new int[] {
-					2130772300};
+					2130772296};
 			
 			// aapt resource value: 0
 			public const int MvxExpandableListView_MvxGroupItemTemplate = 0;
 			
 			public static int[] MvxImageView = new int[] {
-					2130772301};
+					2130772297};
 			
 			// aapt resource value: 0
 			public const int MvxImageView_MvxSource = 0;
 			
 			public static int[] MvxListView = new int[] {
-					2130772298,
-					2130772299};
+					2130772294,
+					2130772295};
 			
 			// aapt resource value: 1
 			public const int MvxListView_MvxDropDownItemTemplate = 1;
@@ -6412,7 +6382,7 @@ namespace GithubXamarin.Droid
 			public const int MvxListView_MvxItemTemplate = 0;
 			
 			public static int[] MvxRecyclerView = new int[] {
-					2130772294};
+					2130772290};
 			
 			// aapt resource value: 0
 			public const int MvxRecyclerView_MvxTemplateSelector = 0;

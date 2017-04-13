@@ -89,6 +89,7 @@ namespace GithubXamarin.Core.ViewModels
         /// <exception cref="HttpRequestException">On line 103</exception>
         public async Task LoadFragments()
         {
+            //HACK: This delay is required to give the main layout a little bit of time to completely load
             await Task.Delay(10);
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
