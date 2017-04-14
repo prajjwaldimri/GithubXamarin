@@ -28,6 +28,7 @@
                     <RowDefinition MinHeight="60"/>
                     <RowDefinition MinHeight="60"/>
                     <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
                 </Grid.RowDefinitions>
 
 
@@ -85,20 +86,69 @@
                     VerticalAlignment="Center"/>
                 </StackPanel>
 
+                <!-- Milestones and Assignees -->
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="3">
+                    <FontIcon 
+                        FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf277;"
+                        Margin="10,0,0,0"
+                        Opacity="0.8"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                    <TextBlock
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        VerticalAlignment="Center"
+                        Opacity="0.8"
+                        Text="{Binding Issue.Milestone.Title, FallbackValue=No Milestone Assigned}"
+                        Margin="5,0,0,0"/>
+
+                    <FontIcon 
+                        FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf2bd;"
+                        Margin="20,0,0,0"
+                        Opacity="0.8"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                    <ScrollViewer HorizontalScrollMode="Enabled">
+
+                        <ListView
+                        ItemsSource="{Binding Issue.Assignees}"
+                        SelectionMode="None"
+                        IsItemClickEnabled="False"
+                        ItemTemplate="{StaticResource AssigneesListViewTemplate}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    IsTapEnabled="False"
+                                    IsHitTestVisible="False"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+
+                    </ScrollViewer>
+
+                </StackPanel>
+
                 <!--Labels -->
 
                 <userControls:LabelsControl 
-                    Grid.Row="3"
+                    Grid.Row="4"
                     LabelsSource="{Binding Issue.Labels}"/>
 
                 <controls:MarkdownTextBlock 
-                    Grid.Row="4" 
+                    Grid.Row="5" 
                     Grid.RowSpan="3"
                     Grid.Column="0" 
                     Text="{Binding Issue.Body}"/>
 
                 <ScrollViewer
-                    Grid.Row="7"
+                    Grid.Row="8"
                     Grid.RowSpan="5">
 
                     <ListView

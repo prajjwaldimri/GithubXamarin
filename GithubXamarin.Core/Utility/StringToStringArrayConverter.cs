@@ -17,11 +17,22 @@ namespace GithubXamarin.Core.Utility
             var stringArray = new List<string>();
             str = str.Trim();
             var i = 0;
+
+            if (str[0] == ',')
+            {
+                str = str.Remove(0, 1);
+            }
+
+            if (str[str.Length - 1] == ',')
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+
             while (str.Contains(","))
             {
                 var index = str.IndexOf(',');
                 stringArray.Add(str.Substring(0, index));
-                str = str.Remove(0, index+1);
+                str = str.Remove(0, index + 1);
                 str = str.Trim();
                 i++;
             }

@@ -40,5 +40,19 @@ namespace GithubXamarin.Core.UnitTests
             });
             Assert.AreEqual("First, Second, Third, Forth", result);
         }
+
+        [TestMethod]
+        public void StringToStringArrayConverterForDefaultValues()
+        {
+            var result = StringToStringArrayConverter.Convert("prajjwal, ayushpant1, yoyoman, r$3221, %343sdas");
+            CollectionAssert.AreEqual(new[] { "prajjwal", "ayushpant1", "yoyoman", "r$3221", "%343sdas" }, result);
+        }
+
+        [TestMethod]
+        public void StringToStringArrayConverterForIrregularValues()
+        {
+            var result = StringToStringArrayConverter.Convert(" ,prajjwal,ayushpant1, yoyoman,r$3221,%343sdas, ");
+            CollectionAssert.AreEqual(new[] { "prajjwal", "ayushpant1", "yoyoman", "r$3221", "%343sdas" }, result);
+        }
     }
 }

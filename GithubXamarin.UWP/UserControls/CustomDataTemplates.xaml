@@ -231,7 +231,32 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="AssigneesListViewTemplate">
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center">
+            <Rectangle
+                Height="16"
+                Width="16"
+                Margin="0,0,0,0">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding AvatarUrl}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TextBlock
+                Text="{Binding Login}"
+                Margin="5,0,0,0"/>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>
+
+    
+
+
+    
+
+    
 
     
 

@@ -25,7 +25,13 @@ namespace GithubXamarin.Core.Contracts.Service
 
         Task<Issue> UpdateIssue(long repositoryId, int issueNumber, IssueUpdate updatedIssueDetails, GitHubClient authorizedGithubClient);
 
-        Task UpdateLabels(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGithubClient);
+        Task<ObservableCollection<Label>> GetLabelsForRepository(long repositoryId,
+            GitHubClient authorizedGitHubClient);
+
+        Task AddLabelsToIssue(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGithubClient);
+
+        Task ReplaceLabelsForIssue(long repositoryId, int issueNumber, string labels,
+            GitHubClient authorizedGitHubClient);
 
         Task<ObservableCollection<IssueComment>> GetCommentsForIssue(long repositoryId, int issueNumber,
             GitHubClient authorizedGithubClient);
@@ -37,5 +43,22 @@ namespace GithubXamarin.Core.Contracts.Service
         Task<IssueComment> UpdateComment(long repositoryId, int issueNumber, string updatedComment, GitHubClient authorizedGitHubClient);
 
         Task<bool> DeleteComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient);
+
+        Task<ObservableCollection<Milestone>> GetMilestonesForRepository(long repoId, GitHubClient authorizedGitHubClient);
+
+        Task<Milestone> CreateMilestone(long repoId, NewMilestone newMilestone, GitHubClient authorizedGitHubClient);
+
+        Task<Milestone> UpdateMilestone(long repoId, int number, MilestoneUpdate milestoneUpdate,
+            GitHubClient authorizedGitHubClient);
+
+        Task<bool> DeleteMilestone(long repoId, int number, GitHubClient authorizedGitHubClient);
+
+        Task<ObservableCollection<User>> GetAllPossibleAssignees(long repositoryId, GitHubClient authorizedGitHubClient);
+
+        Task<Issue> AddAssigneesToIssue(string owner, string name, int number, string assignees,
+            GitHubClient authorizedGitHubClient);
+
+        Task<Issue> RemoveAssigneesFromIssue(string owner, string name, int number, string assignees,
+            GitHubClient authorizedGitHubClient);
     }
 }

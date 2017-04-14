@@ -25,7 +25,12 @@ namespace GithubXamarin.Core.Contracts.Repository
 
         Task<Issue> UpdateIssue(long repositoryId, int issueNumber, IssueUpdate updatedIssueDetails, GitHubClient authorizedGitHubClient);
 
-        Task UpdateLabels(long repositoryId, int issueNumber, string[] labels, GitHubClient authorizedGitHubClient);
+        Task<IEnumerable<Label>> GetLabelsForRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+
+        Task AddLabelsToIssue(long repositoryId, int issueNumber, string[] labels, GitHubClient authorizedGitHubClient);
+
+        Task ReplaceLabelsForIssue(long repositoryId, int issueNumber, string[] labels,
+            GitHubClient authorizedGitHubClient);
 
         Task<IEnumerable<IssueComment>> GetCommentsForIssue(long repositoryId, int issueNumber,
             GitHubClient authorizedGithubClient);
@@ -37,5 +42,24 @@ namespace GithubXamarin.Core.Contracts.Repository
         Task<IssueComment> UpdateComment(long repositoryId, int issueNumber, string updatedComment, GitHubClient authorizedGitHubClient);
 
         Task DeleteComment(long repositoryId, int commentId, GitHubClient authorizedGitHubClient);
+
+        Task<IEnumerable<Milestone>> GetMilestonesForRepository(long repoId, GitHubClient authorizedGitHubClient);
+
+        Task<Milestone> GetMilestone(long repoId, int number, GitHubClient authorizedGitHubClient);
+
+        Task<Milestone> CreateMilestone(long repoId, NewMilestone newMilestone, GitHubClient authorizedGitHubClient);
+
+        Task<Milestone> UpdateMilestone(long repoId, int number, MilestoneUpdate milestoneUpdate,
+            GitHubClient authorizedGitHubClient);
+
+        Task DeleteMilestone(long repoId, int number, GitHubClient authorizedGitHubClient);
+
+        Task<IEnumerable<User>> GetAllPossibleAssignees(long repositoryId, GitHubClient authorizedGitHubClient);
+
+        Task<Issue> AddAssigneesToIssue(string owner, string name, int number, AssigneesUpdate assigneesUpdate,
+            GitHubClient authorizedGitHubClient);
+
+        Task<Issue> RemoveAssigneesFromIssue(string owner, string name, int number, AssigneesUpdate assigneesUpdate,
+            GitHubClient authorizedGitHubClient);
     }
 }

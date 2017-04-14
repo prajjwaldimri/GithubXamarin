@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
 using Octokit;
+// ReSharper disable PossibleNullReferenceException
 
 namespace GithubXamarin.Core.Repositories
 {
     /// <summary>
     /// https://developer.github.com/v3/issues/
     /// </summary>
-    public class IssuesRepository : BaseRepository, IIssueRepository
+    public class IssueRepository : BaseRepository, IIssueRepository
     {
         private IssuesClient _issuesClient;
 
@@ -88,13 +89,31 @@ namespace GithubXamarin.Core.Repositories
             return await _issuesClient.Update(repositoryId, issueNumber, updatedIssueDetails);
         }
 
-        public async Task UpdateLabels(long repositoryId, int issueNumber, string[] labels, GitHubClient authorizedGitHubClient)
+        public async Task<IEnumerable<Label>> GetLabelsForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Labels.GetAllForRepository(repositoryId);
+        }
+
+        public async Task AddLabelsToIssue(long repositoryId, int issueNumber, string[] labels, GitHubClient authorizedGitHubClient)
         {
             if (_issuesClient == null)
             {
                 _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
             }
             await _issuesClient.Labels.AddToIssue(repositoryId, issueNumber, labels);
+        }
+
+        public async Task ReplaceLabelsForIssue(long repositoryId, int issueNumber, string[] labels, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            await _issuesClient.Labels.ReplaceAllForIssue(repositoryId, issueNumber, labels);
         }
 
         #region IssueComments https://developer.github.com/v3/issues/comments/
@@ -145,5 +164,87 @@ namespace GithubXamarin.Core.Repositories
         }
 
         #endregion
+
+        #region IssueMileStones https://developer.github.com/v3/issues/milestones
+
+        public async Task<IEnumerable<Milestone>> GetMilestonesForRepository(long repoId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Milestone.GetAllForRepository(repoId);
+        }
+
+        public async Task<Milestone> GetMilestone(long repoId, int number, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Milestone.Get(repoId, number);
+        }
+
+        public async Task<Milestone> CreateMilestone(long repoId, NewMilestone newMilestone, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Milestone.Create(repoId, newMilestone);
+        }
+
+        public async Task<Milestone> UpdateMilestone(long repoId, int number, MilestoneUpdate milestoneUpdate, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Milestone.Update(repoId, number, milestoneUpdate);
+        }
+
+        public async Task DeleteMilestone(long repoId, int number, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            await _issuesClient.Milestone.Delete(repoId, number);
+        }
+
+        #endregion
+
+        #region IssueAssignees https://developer.github.com/v3/issues/assignees
+
+        public async Task<IEnumerable<User>> GetAllPossibleAssignees(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Assignee.GetAllForRepository(repositoryId);
+        }
+
+        public async Task<Issue> AddAssigneesToIssue(string owner, string name, int number, AssigneesUpdate assigneesUpdate, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Assignee.AddAssignees(owner, name, number, assigneesUpdate);
+        }
+
+        public async Task<Issue> RemoveAssigneesFromIssue(string owner, string name, int number, AssigneesUpdate assigneesUpdate, GitHubClient authorizedGitHubClient)
+        {
+            if (_issuesClient == null)
+            {
+                _issuesClient = new IssuesClient(new ApiConnection(authorizedGitHubClient.Connection));
+            }
+            return await _issuesClient.Assignee.RemoveAssignees(owner, name, number, assigneesUpdate);
+        }
+
+        #endregion
+
+
     }
 }

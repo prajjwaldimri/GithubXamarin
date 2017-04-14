@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GithubXamarin.Core.Contracts.Repository;
@@ -63,9 +64,20 @@ namespace GithubXamarin.Core.Services.Data
                 authorizedGitHubClient);
         }
 
-        public async Task UpdateLabels(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGitHubClient)
+        public async Task<ObservableCollection<Label>> GetLabelsForRepository(long repositoryId, GitHubClient authorizedGitHubClient)
         {
-            await _issueRepository.UpdateLabels(repositoryId, issueNumber, StringToStringArrayConverter.Convert(labels), authorizedGitHubClient);
+            return new ObservableCollection<Label>(await _issueRepository.GetLabelsForRepository(repositoryId, authorizedGitHubClient));
+        }
+
+        public async Task AddLabelsToIssue(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGitHubClient)
+        {
+            await _issueRepository.AddLabelsToIssue(repositoryId, issueNumber, StringToStringArrayConverter.Convert(labels), authorizedGitHubClient);
+        }
+
+        public async Task ReplaceLabelsForIssue(long repositoryId, int issueNumber, string labels, GitHubClient authorizedGitHubClient)
+        {
+            await _issueRepository.ReplaceLabelsForIssue(repositoryId, issueNumber,
+                StringToStringArrayConverter.Convert(labels), authorizedGitHubClient);
         }
 
         #region Issue Comments
@@ -104,6 +116,62 @@ namespace GithubXamarin.Core.Services.Data
                 return false;
             }
             return true;
+        }
+        #endregion
+
+        #region Issue Milestones
+
+        public async Task<ObservableCollection<Milestone>> GetMilestonesForRepository(long repoId, GitHubClient authorizedGitHubClient)
+        {
+            return new ObservableCollection<Milestone>(await _issueRepository.GetMilestonesForRepository(repoId, authorizedGitHubClient));
+        }
+
+        public async Task<Milestone> CreateMilestone(long repoId, NewMilestone newMilestone, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.CreateMilestone(repoId, newMilestone, authorizedGitHubClient);
+        }
+
+        public async Task<Milestone> UpdateMilestone(long repoId, int number, MilestoneUpdate milestoneUpdate, GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.UpdateMilestone(repoId, number, milestoneUpdate, authorizedGitHubClient);
+        }
+
+        public async Task<bool> DeleteMilestone(long repoId, int number, GitHubClient authorizedGitHubClient)
+        {
+            await _issueRepository.DeleteMilestone(repoId, number, authorizedGitHubClient);
+
+            try
+            {
+                await _issueRepository.GetMilestone(repoId, number, authorizedGitHubClient);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region Issue Assignees
+
+        public async Task<ObservableCollection<User>> GetAllPossibleAssignees(long repositoryId, GitHubClient authorizedGitHubClient)
+        {
+            return new ObservableCollection<User>(await _issueRepository.GetAllPossibleAssignees(repositoryId, authorizedGitHubClient));
+        }
+
+        public async Task<Issue> AddAssigneesToIssue(string owner, string name, int number, string assignees,
+            GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.AddAssigneesToIssue(owner, name, number, new AssigneesUpdate(StringToStringArrayConverter.Convert(assignees)),
+                authorizedGitHubClient);
+        }
+
+        public async Task<Issue> RemoveAssigneesFromIssue(string owner, string name, int number, string assignees,
+            GitHubClient authorizedGitHubClient)
+        {
+            return await _issueRepository.RemoveAssigneesFromIssue(owner, name, number, new AssigneesUpdate(StringToStringArrayConverter.Convert(assignees)),
+                authorizedGitHubClient);
         }
 
         #endregion
