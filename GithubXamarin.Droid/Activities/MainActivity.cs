@@ -1,3 +1,4 @@
+using System;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -44,6 +45,8 @@ namespace GithubXamarin.Droid.Activities
             CrashManager.Register(this, "c901aab98d2a42e0bba6fdd06be0c89f");
             MetricsManager.Register(Application, "c901aab98d2a42e0bba6fdd06be0c89f");
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             SetContentView(Resource.Layout.Main);
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
@@ -62,6 +65,15 @@ namespace GithubXamarin.Droid.Activities
             //Animating Hamburger Icon. 
             _drawerToggle = setupDrawerToggle();
             DrawerLayout.AddDrawerListener(_drawerToggle);
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var builder = new Android.Support.V7.App.AlertDialog.Builder(this);
+            builder.SetTitle("Uh-Oh! An error has occured");
+            builder.SetMessage(e.ExceptionObject.ToString());
+            builder.SetPositiveButton("Close", delegate { });
+            builder.Create().Show();
         }
 
         private void _navigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)

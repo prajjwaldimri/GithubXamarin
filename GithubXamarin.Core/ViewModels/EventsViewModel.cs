@@ -97,10 +97,10 @@ namespace GithubXamarin.Core.ViewModels
                 case "GollumEvent":
                     break;
                 case "IssuesEvent":
+
+                    var issueEventPayload = activity.Payload as IssueEventPayload;
                     try
                     {
-                        var issueEventPayload = activity.Payload as IssueEventPayload;
-
                         if (issueEventPayload != null)
                         {
                             ShowViewModel<IssueViewModel>(

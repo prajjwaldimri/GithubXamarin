@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -28,6 +30,25 @@ namespace GithubXamarin.UWP
 
             //HockeyApp Integration
             HockeyClient.Current.Configure("0fc1c4757f2f41a8b88fcf2dc1603f5b");
+
+            Current.UnhandledException += Current_UnhandledException;
+        }
+
+        private async void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+#if DEBUG
+            e.Handled = false;
+#else
+            e.Handled = true;
+#endif
+            var contentDialog = new ContentDialog()
+            {
+                Title = "Uh-oh. An error has occured :(",
+                Content = e.Message,
+                PrimaryButtonText = "No Problem!",
+                SecondaryButtonText = ""
+            };
+            await contentDialog.ShowAsync();
         }
 
         /// <summary>
@@ -107,7 +128,7 @@ namespace GithubXamarin.UWP
             deferral.Complete();
         }
 
-        
+
 
         private async Task RegisterGithubNotificationsBackgroundTask()
         {
