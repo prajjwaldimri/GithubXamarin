@@ -60,7 +60,7 @@
                                 Recieve important notifications from the 
                                 developer of the app.
                             </TextBlock>
-                            
+
                             <ToggleSwitch
                                 x:Name="BroadcastToggle"
                                 Toggled="BroadcastToggle_OnToggled"/>
@@ -177,9 +177,11 @@
                     <Image
                         x:Name="GitItLogo"
                         RelativePanel.AlignHorizontalCenterWithPanel="True"
-                        Width="256" 
-                        Height="256"
-                        Source="../Assets/Square310x310Logo.scale-200.png" />
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Margin="0,-64,0,0"
+                        Width="64" 
+                        Height="64"
+                        Source="../Assets/NewStoreLogo.scale-400.png" />
 
                     <StackPanel
                         RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -187,15 +189,16 @@
 
                         <TextBlock 
                         Text="GitIt"
-                        FontWeight="Bold"                        
+                        FontWeight="Bold"        
+                            FontSize="32"
                         HorizontalAlignment="Center"
                         Style="{ThemeResource TitleTextBlockStyle}"/>
 
                         <TextBlock
                                 FontStyle="Italic"
-                                Text="Developer: Prajjwal Dimri"                                
+                                Text="Created by: Prajjwal Dimri"                                
                                 Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                        
+
                         <TextBlock
                         x:Name="VersionNumberTextBlock"
                         HorizontalAlignment="Center"
@@ -209,6 +212,7 @@
                                 NavigateUri="https://github.com/prajjwaldimri">
                                 <FontIcon 
                                     FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                    FontSize="32"
                                     Glyph="&#xf092;"
                                     Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
                             </HyperlinkButton>
@@ -219,9 +223,26 @@
                                 <FontIcon 
                                     FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
                                     Glyph="&#xf081;"
+                                    FontSize="32"
+                                    Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+                            </HyperlinkButton>
+
+                            <HyperlinkButton
+                                Margin="0,0,10,0"
+                                NavigateUri="https://gratipay.com/prajjwaldimri/">
+                                <FontIcon 
+                                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                                    Glyph="&#xf184;"
+                                    FontSize="32"
                                     Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
                             </HyperlinkButton>
                         </StackPanel>
+
+                        <Button HorizontalAlignment="Center"
+                                Name="RateButton"
+                                Content="Rate on Store!"
+                                Margin="0,20,0,10"
+                                Click="RateButton_OnClick"/>
                     </StackPanel>
                 </RelativePanel>
             </PivotItem>

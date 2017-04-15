@@ -1,0 +1,292 @@
+﻿<views:MvxWindowsPage
+    x:Class="GithubXamarin.UWP.Views.UserOnboardingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+
+        <!--View, Edit, Code, Star, Notifications, Open-sourced -->
+
+        <FlipView 
+            Name="MainFlipView"
+            SelectionChanged="MainFlipView_OnSelectionChanged">
+            <RelativePanel Background="MidnightBlue">
+                <FontIcon
+                    Name="MainIcon1"
+                    FontSize="64"
+                    Glyph="&#xf259;"
+                    RelativePanel.Above="HeaderTextBlock1"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock1"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="Welcome!"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock1"
+                    RelativePanel.Below="HeaderTextBlock1"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        Lets get familiar with some of the features of GitIt.
+                    </Paragraph>
+                    <Paragraph FontWeight="SemiBold">
+                        Swipe right to get started ->
+                    </Paragraph>
+                </RichTextBlock>
+            </RelativePanel>
+
+            <RelativePanel Background="Maroon">
+                <FontIcon
+                    Name="MainIcon2"
+                    FontSize="64"
+                    Glyph="&#xf06e;"
+                    RelativePanel.Above="HeaderTextBlock2"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock2"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="View"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock2"
+                    RelativePanel.Below="HeaderTextBlock2"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        Using GitIt you can view all users, repositories, files, issues and gists available on Github in detail.
+                    </Paragraph>
+                </RichTextBlock>
+            </RelativePanel>
+
+            <RelativePanel Background="DarkSlateGray">
+                <FontIcon
+                    Name="MainIcon3"
+                    FontSize="64"
+                    Glyph="&#xf044;"
+                    RelativePanel.Above="HeaderTextBlock3"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock3"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="Edit"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock3"
+                    RelativePanel.Below="HeaderTextBlock3"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        Edit your issues, repositories, profiles, gists easily.
+                    </Paragraph>
+                </RichTextBlock>
+            </RelativePanel>
+
+            <RelativePanel Background="ForestGreen">
+                <FontIcon
+                    Name="MainIcon4"
+                    FontSize="64"
+                    Glyph="&#xf121;"
+                    RelativePanel.Above="HeaderTextBlock4"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock4"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="Code"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock4"
+                    RelativePanel.Below="HeaderTextBlock4"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        GitIt also provides a little editor to edit or create new files in repositories. I say little because it doesn't have any syntax highlighting or line numbers etc.
+                    </Paragraph>
+                    <Paragraph>
+                        But if you like coding on Notepad, you will quite like working on GitIt.
+                    </Paragraph>
+                </RichTextBlock>
+            </RelativePanel>
+
+            <RelativePanel Background="DarkOrange">
+                <FontIcon
+                    Name="MainIcon5"
+                    FontSize="64"
+                    Glyph="&#xf0f3;"
+                    RelativePanel.Above="HeaderTextBlock5"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock5"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="Notifications"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock5"
+                    RelativePanel.Below="HeaderTextBlock5"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        Get notified of all the notifications from Github by live tile and push notifications.
+                    </Paragraph>
+                </RichTextBlock>
+            </RelativePanel>
+
+            <RelativePanel Background="DarkGoldenrod">
+                <FontIcon
+                    Name="MainIcon6"
+                    FontSize="64"
+                    Glyph="&#xf126;"
+                    RelativePanel.Above="HeaderTextBlock6"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                <TextBlock
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Name="HeaderTextBlock6"
+                    Margin="0,20,0,0"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    IsTextSelectionEnabled="False"
+                    Text="Open-Sourced"/>
+
+                <RichTextBlock
+                    Name="BodyTextBlock6"
+                    RelativePanel.Below="HeaderTextBlock6"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="10,10,10,0"
+                    FontSize="20"
+                    IsTextSelectionEnabled="False"
+                    TextWrapping="WrapWholeWords"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        GitIt is completely open-sourced which means you can help shape-up the future of the app itself.
+                    </Paragraph>
+                </RichTextBlock>
+
+                <Button Content="Fire it up!"
+                        RelativePanel.Below="BodyTextBlock6"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        Margin="0,40,0,0"
+                        FontSize="24"
+                        Command="{Binding GoToMainViewCommand}"
+                        FontWeight="Bold"/>
+            </RelativePanel>
+        </FlipView>
+
+        <StackPanel
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            Orientation="Horizontal">
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="FirstRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         IsChecked="True"
+                         Padding="0,0,0,0"/>
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="SecondRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         Padding="0,0,0,0"/>
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="ThirdRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         Padding="0,0,0,0"/>
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="ForthRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         Padding="0,0,0,0"/>
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="FifthRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         Padding="0,0,0,0"/>
+
+            <RadioButton GroupName="ProgressButtons"
+                         Name="SixthRadioButton"
+                         MinWidth="0"
+                         Margin="5,0,5,0"
+                         Padding="0,0,0,0"/>
+
+
+        </StackPanel>
+
+    </RelativePanel>
+</views:MvxWindowsPage>
+
+
+    
+
+
+
+
+    
+

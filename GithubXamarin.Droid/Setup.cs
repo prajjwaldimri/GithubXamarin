@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using GithubXamarin.Core.Contracts.Service;
 using GithubXamarin.Droid.Services;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Droid
 {
@@ -15,6 +16,7 @@ namespace GithubXamarin.Droid
     {
         public Setup(Context applicationContext) : base(applicationContext)
         {
+            SecureStorageImplementation.StoragePassword = "12345";
         }
 
         protected override IMvxApplication CreateApp()

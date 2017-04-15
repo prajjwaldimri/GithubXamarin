@@ -9,6 +9,7 @@ using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels
 {
@@ -142,6 +143,21 @@ namespace GithubXamarin.Core.ViewModels
                 case "WatchEvent":
                     ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
                     break;
+            }
+        }
+
+        public override async void Start()
+        {
+            base.Start();
+            if (!CrossSecureStorage.Current.HasKey("AskForStarring"))
+            {
+                CrossSecureStorage.Current.SetValue("AskForStarring", "asked");
+                var result = await DialogService.ShowBooleanDialogAsync("", "Star GithubXamarin repository?");
+                if (result)
+                {
+                    var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
+                    await starredClient.StarRepo("prajjwaldimri", "GithubXamarin");
+                }
             }
         }
 

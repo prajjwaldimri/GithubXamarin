@@ -38,7 +38,6 @@ namespace GithubXamarin.Droid.Activities
 
         protected override void OnCreate(Bundle bundle)
         {
-            SecureStorageImplementation.StoragePassword = "12345";
             base.OnCreate(bundle);
 
             //HockeyApp Registration

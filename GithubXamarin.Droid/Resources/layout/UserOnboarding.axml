@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:gravity="center_vertical"
+    android:background="@color/colorPrimarySuperDark">
+    <GithubXamarin.Droid.Services.FontAwesome
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fontAwesome1"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="&#xF259;" />
+    <TextView
+        android:text="Welcome!"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:text="GitIt is an 3rd party application for Github using which you can view and edit issues, repositories, users, files and gists on your Android phone!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:gravity="center_horizontal" />
+    <Button
+        android:text="Fire It Up!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_marginTop="40dp" 
+        local:MvxBind="Click GoToMainViewCommand"/>
+</LinearLayout>
