@@ -194,7 +194,6 @@
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
-                Command="{Binding ForkClickCommand}"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
