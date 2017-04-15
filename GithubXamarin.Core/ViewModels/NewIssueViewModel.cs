@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -184,6 +185,14 @@ namespace GithubXamarin.Core.ViewModels
             "Open", "Closed"
         };
 
+        private List<string> _milestoneNamesList = new List<string>();
+        public List<string> MilestoneNamesList
+        {
+            get => _milestoneNamesList;
+            set => _milestoneNamesList = value;
+        }
+
+
         private string _milestone;
         private Repository _repository;
         private string _originalAssignees;
@@ -292,7 +301,15 @@ namespace GithubXamarin.Core.ViewModels
             int? milestoneNumber = null;
             if (SelectedMilestoneIndex > 0)
             {
-                milestoneNumber = Milestones[SelectedMilestoneIndex].Number;
+                try
+                {
+                    milestoneNumber = Milestones[SelectedMilestoneIndex].Number;
+                }
+                //Android Problems :P
+                catch (ArgumentOutOfRangeException)
+                {
+                    milestoneNumber = Milestones[SelectedMilestoneIndex - 1].Number;
+                }
             }
 
             var createdIssue = await _issueDataService.UpdateIssue(RepositoryId, IssueNumber, new IssueUpdate()
@@ -331,13 +348,18 @@ namespace GithubXamarin.Core.ViewModels
             Milestones = await _issueDataService.GetMilestonesForRepository(RepositoryId,
                 GithubClientService.GetAuthorizedGithubClient());
 
+            MilestoneNamesList = new List<string>(Milestones.Count);
+            MilestoneNamesList.Add("No Milestone");
+
             for (var i = 0; i < Milestones.Count; i++)
             {
+                MilestoneNamesList.Add(Milestones[i].Title);
                 if (Milestones[i].Title.Equals(_milestone))
                 {
                     SelectedMilestoneIndex = i;
                 }
             }
+            RaisePropertyChanged(() => MilestoneNamesList);
         }
 
         private async Task GetRepositoryDetails()

@@ -116,13 +116,12 @@ namespace GithubXamarin.Core.ViewModels
                         GithubClientService.GetAuthorizedGithubClient());
                 }
                 Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
+                await GetCommentsForIssues();
             }
             catch (HttpRequestException)
             {
                 await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
-
-            await GetCommentsForIssues();
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 

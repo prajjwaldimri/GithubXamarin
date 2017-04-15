@@ -1,94 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
-     android:fillViewport="true">
-  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:local="http://schemas.android.com/apk/res-auto"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:padding="14dp">
-    <LinearLayout
-        android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:local="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-      <TextView
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          local:MvxBind="Text Issue.State" />
-      <TextView
-          android:textAppearance="?android:attr/textAppearanceMedium"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          local:MvxBind="Text Issue.Title" />
-      <LinearLayout
-          android:orientation="horizontal"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/linearLayout1"
-          android:paddingTop="10dp"
-          android:paddingBottom="10dp"
-          android:paddingLeft="2dp">
-        <MvxImageView
-            android:layout_height="32dp"
-            android:layout_width="32dp"
-            local:MvxBind="ImageUrl Issue.User.AvatarUrl" />
-        <TextView
+        android:layout_height="match_parent"
+        android:padding="14dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                local:MvxBind="Text Issue.State" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                local:MvxBind="Text Issue.Title" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="2dp">
+                <MvxImageView
+                    android:layout_height="32dp"
+                    android:layout_width="32dp"
+                    local:MvxBind="ImageUrl Issue.User.AvatarUrl" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    local:MvxBind="Text Issue.User.Name" />
+                <TextView
+                    android:text=" opened this issue "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    local:MvxBind="Text DateTimeHumanizer(Issue.CreatedAt.DateTime)" />
+            </LinearLayout>
+            <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+                android:orientation="horizontal"
+                android:id="@+id/issueLabelContainer"
+                android:scrollbars="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                local:MvxBind="ItemsSource Issue.Labels"
+                local:MvxItemTemplate="@layout/labels_item_template"
+                local:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+          
+          <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <FontAwesome
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF277;" 
+              android:textColor="@color/colorAccent"/>
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/abc_primary_text_material_light"
+                    cardview:MvxBind="Text Issue.Milestone.Title" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                local:MvxBind="Text Issue.Body" />
+            <TextView
+                android:paddingTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COMMENTS" />
+            <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+                android:paddingTop="10dp"
+                android:id="@+id/issueCommentsLabelContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                local:MvxBind="ItemsSource Comments"
+                local:MvxItemTemplate="@layout/issue_comments_item_template" />
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            local:MvxBind="Text Issue.User.Name" />
-        <TextView
-            android:text=" opened this issue "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            local:MvxBind="Text DateTimeHumanizer(Issue.CreatedAt.DateTime)" />
-      </LinearLayout>
-      <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
-          android:orientation="horizontal"
-          android:id="@+id/issueLabelContainer"
-          android:scrollbars="horizontal"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          local:MvxBind="ItemsSource Issue.Labels"
-          local:MvxItemTemplate="@layout/labels_item_template"
-          local:layoutManager="android.support.v7.widget.LinearLayoutManager" />
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/textView3"
-          local:MvxBind="Text Issue.Body" />
-      
-        <TextView
-          android:paddingTop="10dp"
-          android:textColor="@color/colorAccent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-      android:text="COMMENTS"/>
-              
-      <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
-        android:paddingTop="10dp"
-              android:id="@+id/issueCommentsLabelContainer"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              local:MvxBind="ItemsSource Comments"
-              local:MvxItemTemplate="@layout/issue_comments_item_template" />
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:elevation="6dp"
-        android:src="@drawable/ic_refresh_white_24dp"
-        local:MvxBind="Click RefreshCommand" />
-  </RelativeLayout>
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:src="@drawable/ic_refresh_white_24dp"
+            local:MvxBind="Click RefreshCommand" />
+    </RelativeLayout>
 </ScrollView>

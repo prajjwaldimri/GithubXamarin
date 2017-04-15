@@ -11,8 +11,8 @@
         <MvvmCross.Binding.Droid.Views.MvxSpinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mvxSpinner1"
             local:MvxBind="SelectedItemPosition IssueStateSelectedIndex, Mode=TwoWay; ItemsSource IssueStateCategories;         Clickable IsEdit" />
+      
         <android.support.design.widget.TextInputLayout
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
@@ -20,7 +20,6 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText1"
                 android:singleLine="true"
                 android:contentDescription="Title"
                 android:editable="true"
@@ -35,9 +34,37 @@
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
                 android:hint="Content"
                 local:MvxBind="Text Body, Mode=TwoWay" />
+        </android.support.design.widget.TextInputLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+        <TextView
+          android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+        android:text="Milestone:"
+          android:paddingRight="5dp"/>
+        <MvvmCross.Binding.Droid.Views.MvxSpinner
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            local:MvxBind="SelectedItemPosition SelectedMilestoneIndex, Mode=TwoWay; ItemsSource MilestoneNamesList, Mode=TwoWay"/>
+        </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="Labels (Seperated with Commas)"
+                local:MvxBind="Text Labels, Mode=TwoWay" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/title_layout"
@@ -47,9 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:id="@+id/editText3"
-                android:hint="Labels (Seperated with Commas)"
-                local:MvxBind="Text Labels, Mode=TwoWay" />
+                android:hint="Assignees (Seperated with Commas)"
+                local:MvxBind="Text Assignees, Mode=TwoWay" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
