@@ -88,7 +88,7 @@
     <Compile Include="Repositories\FeedRepository.cs" />
     <Compile Include="Repositories\FileRepository.cs" />
     <Compile Include="Repositories\GistRepository.cs" />
-    <Compile Include="Repositories\IssuesRepository.cs" />
+    <Compile Include="Repositories\IssueRepository.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\RepoRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

@@ -38,5 +38,6 @@ namespace GithubXamarin.Core.Contracts.Repository
             GitHubClient authorizedGitHubClient);
 
         Task DeleteRepository(long repositoryId, GitHubClient authorizedGitHubClient);
+
     }
 }

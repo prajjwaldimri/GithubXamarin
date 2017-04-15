@@ -22,10 +22,14 @@ namespace GithubXamarin.Core.ViewModels
 
         public override async void Start()
         {
-            await Task.Delay(500);
+            if (await IsInternetAvailable())
+            {
+                await Task.Delay(500);
 
-            var privacyPolicy = await _fileDataService.GetFile(73414278, "PRIVACY_POLICY.md", GithubClientService.GetUnAuthorizedGithubClient());
-            await DialogService.ShowMarkdownDialogAsync(privacyPolicy.Content, "Privacy Policy");
+                var privacyPolicy = await _fileDataService.GetFile(73414278, "PRIVACY_POLICY.md",
+                    GithubClientService.GetUnAuthorizedGithubClient());
+                await DialogService.ShowMarkdownDialogAsync(privacyPolicy.Content, "Privacy Policy");
+            }
 
             while (!CrossSecureStorage.Current.HasKey("OAuthToken"))
             {

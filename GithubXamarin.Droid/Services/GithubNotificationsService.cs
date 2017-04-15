@@ -74,14 +74,14 @@ namespace GithubXamarin.Droid.Services
                             .SetContentTitle(_title)
                             .SetContentText(_text);
 
-                        var notificationManager = (NotificationManager) GetSystemService(Context.NotificationService);
+                        var notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
                         notificationManager.Notify(1, builder.Build());
                     }
                 }
             }
             catch (Exception e)
             {
-                
+
             }
         }
     }

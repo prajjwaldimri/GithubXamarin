@@ -116,14 +116,12 @@ namespace GithubXamarin.Core.ViewModels
                         GithubClientService.GetAuthorizedGithubClient());
                 }
                 Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"{Issue.Title}" });
+                await GetCommentsForIssues();
             }
             catch (HttpRequestException)
             {
                 await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
             }
-
-            await GetCommentsForIssues();
-
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
@@ -140,13 +138,23 @@ namespace GithubXamarin.Core.ViewModels
                 await DialogService.ShowSimpleDialogAsync("There is nothing here.", "Edit What?");
                 return;
             }
+
+            string milestoneTitle = null;
+
+            if (Issue.Milestone != null)
+            {
+                milestoneTitle = Issue.Milestone.Title;
+            }
+
             ShowViewModel<NewIssueViewModel>(new
             {
                 repositoryId = _repositoryId,
                 issueNumber = Issue.Number,
                 issueTitle = Issue.Title,
                 issueBody = Issue.Body,
-                labels = ListToCommasSeperatedStringConverter.Convert(Issue.Labels)
+                labels = ListToCommasSeperatedStringConverter.Convert(Issue.Labels),
+                assignees = ListToCommasSeperatedStringConverter.Convert(Issue.Assignees),
+                milestone = milestoneTitle
             });
         }
 
