@@ -13,5 +13,6 @@ namespace GithubXamarin.Droid
         Name = "github.droid.activities.SplashActivity")]
     public class SplashScreen : MvxSplashScreenActivity
     {
+
     }
 }

@@ -4,6 +4,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -28,7 +29,7 @@ namespace GithubXamarin.UWP.Views
 
         public new SettingsViewModel ViewModel
         {
-            get { return (SettingsViewModel) base.ViewModel; }
+            get { return (SettingsViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 
@@ -102,7 +103,7 @@ namespace GithubXamarin.UWP.Views
         private void BroadcastStatusChecker()
         {
             var localSettingsValues = ApplicationData.Current.LocalSettings.Values;
-            if ((bool) localSettingsValues["IsStoreEngagementEnabled"])
+            if ((bool)localSettingsValues["IsStoreEngagementEnabled"])
             {
                 BroadcastToggle.IsOn = true;
             }
@@ -178,7 +179,7 @@ namespace GithubXamarin.UWP.Views
 
         private async Task AfterThemeChangedMessageDialog()
         {
-            var msgDialog = new MessageDialog("The new theme can only be applied after an app restart. Do you want to restart the app?","Theme Changed!");
+            var msgDialog = new MessageDialog("The new theme can only be applied after an app restart. Do you want to restart the app?", "Theme Changed!");
             msgDialog.Commands.Add(new UICommand("Yes", command => App.Current.Exit()));
             msgDialog.Commands.Add(new UICommand("No"));
             msgDialog.CancelCommandIndex = 1;
@@ -194,7 +195,7 @@ namespace GithubXamarin.UWP.Views
             }
             var localSettings = ApplicationData.Current.LocalSettings.Values;
             var builder = new BackgroundTaskBuilder();
-            
+
             var access = await BackgroundExecutionManager.RequestAccessAsync();
             switch (access)
             {
@@ -258,6 +259,11 @@ namespace GithubXamarin.UWP.Views
                 await engagementManager.UnregisterNotificationChannelAsync();
                 ApplicationData.Current.LocalSettings.Values["IsStoreEngagementEnabled"] = false;
             }
+        }
+
+        private async void RateButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"ms-windows-store://review/?PFN={Package.Current.Id.FamilyName}"));
         }
     }
 }

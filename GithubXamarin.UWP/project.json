@@ -18,6 +18,7 @@
     "Octokit": "0.24.0",
     "RichTextBlock.Html2Xaml": "1.2.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1",
+    "UniversalRateReminder": "2.2.0",
     "Xam.Plugin.Connectivity": "2.3.0"
   },
   "frameworks": {

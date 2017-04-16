@@ -17,18 +17,20 @@ namespace GithubXamarin.UWP.Services
             var dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
         }
-        public async Task ShareTextAsync(string text, string title)
+        public Task ShareTextAsync(string text, string title)
         {
             PlainText = text;
             Title = title;
             DataTransferManager.ShowShareUI();
+            return Task.CompletedTask;
         }
 
-        public async Task ShareLinkAsync(Uri link, string title)
+        public Task ShareLinkAsync(Uri link, string title)
         {
             Link = link;
             Title = title;
             DataTransferManager.ShowShareUI();
+            return Task.CompletedTask;
         }
 
         private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
@@ -39,7 +41,7 @@ namespace GithubXamarin.UWP.Services
             }
             else if (!(string.IsNullOrWhiteSpace(Link.ToString())))
             {
-                args.Request.Data.SetUri(Link);
+                args.Request.Data.SetWebLink(Link);
             }
 
             args.Request.Data.Properties.Title = Title;
