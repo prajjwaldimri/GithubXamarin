@@ -1,0 +1,70 @@
+﻿<views:MvxWindowsPage
+    x:Class="GithubXamarin.UWP.Views.RepositoryContentsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <controls:PullToRefreshListView
+            Name="ContentListView"
+            ItemsSource="{Binding Content}"
+            SelectionMode="Single"
+            IsItemClickEnabled="True"
+            HorizontalAlignment="Stretch"
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}"
+            Margin="0,0,0,48">
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding ContentClickCommand, Mode=TwoWay}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+
+            <controls:PullToRefreshListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <FontIcon Grid.Column="0" 
+                                  Glyph="{Binding Converter={StaticResource 
+                            ContentToGlyphConverter}}"
+                                  Foreground="{StaticResource
+                            SystemControlForegroundAccentBrush}"
+                                  FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+
+                        <TextBlock Grid.Column="1"
+                                   Margin="10,0,0,0"
+                                   TextWrapping="WrapWholeWords"
+                                   Text="{Binding Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </controls:PullToRefreshListView.ItemTemplate>
+
+        </controls:PullToRefreshListView>
+
+        <CommandBar
+            VerticalAlignment="Bottom">
+
+            <AppBarButton Icon="Add"
+                          Label="Add File"
+                          Command="{Binding AddFileCommand}"/>
+
+            <AppBarButton Icon="Refresh"
+                          Label="Refresh"
+                          Command="{Binding RefreshCommand}"/>
+        </CommandBar>
+
+    </Grid>
+</views:MvxWindowsPage>

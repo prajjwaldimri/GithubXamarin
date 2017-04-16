@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -10,10 +12,12 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GithubXamarin.UWP.Services;
 using Microsoft.HockeyApp;
 using Microsoft.Services.Store.Engagement;
 using MvvmCross.Platform;
 using Plugin.SecureStorage;
+using UniversalRateReminder;
 
 namespace GithubXamarin.UWP
 {
@@ -27,6 +31,25 @@ namespace GithubXamarin.UWP
 
             //HockeyApp Integration
             HockeyClient.Current.Configure("0fc1c4757f2f41a8b88fcf2dc1603f5b");
+
+            Current.UnhandledException += Current_UnhandledException;
+        }
+
+        private async void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+#if DEBUG
+            e.Handled = false;
+#else
+            e.Handled = true;
+#endif
+            var contentDialog = new ContentDialog()
+            {
+                Title = "Uh-oh. An error has occured :(",
+                Content = e.Message,
+                PrimaryButtonText = "No Problem!",
+                SecondaryButtonText = ""
+            };
+            await contentDialog.ShowAsync();
         }
 
         /// <summary>
@@ -78,6 +101,22 @@ namespace GithubXamarin.UWP
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                AuthenticationService.Authenticate();
+
+                //Ask user to rate app
+                RatePopup.Title = "Rate GitIt!";
+                var result = await RatePopup.CheckRateReminderAsync();
+                if (result == RateReminderResult.Dismissed)
+                {
+                    FeedbackPopup.ContactEmail = "prajjwaldimri@outlook.com";
+                    FeedbackPopup.EmailSubject = "Feedback for GitIt";
+                    FeedbackPopup.EmailBody = "";
+                    FeedbackPopup.Title = "Would you like to send feedback?";
+                    FeedbackPopup.Content = "Maybe you want to send me an email with feedback regarding your experience with GitIt?";
+                    FeedbackPopup.SendFeedbackButtonText = "yes, send feedback";
+                    FeedbackPopup.CancelButtonText = "no, thanks";
+                    await FeedbackPopup.ShowFeedbackDialogAsync();
+                }
             }
         }
 
@@ -105,7 +144,7 @@ namespace GithubXamarin.UWP
             deferral.Complete();
         }
 
-        
+
 
         private async Task RegisterGithubNotificationsBackgroundTask()
         {

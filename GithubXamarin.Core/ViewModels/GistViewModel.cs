@@ -19,7 +19,7 @@ namespace GithubXamarin.Core.ViewModels
         private Gist _gist;
         public Gist Gist
         {
-            get { return _gist; }
+            get => _gist;
             set { _gist = value; RaisePropertyChanged(() => Gist); }
         }
 

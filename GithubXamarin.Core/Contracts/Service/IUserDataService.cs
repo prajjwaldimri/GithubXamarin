@@ -19,5 +19,13 @@ namespace GithubXamarin.Core.Contracts.Service
         Task<ObservableCollection<User>> GetStargazersForRepository(long repositoryId, GitHubClient gitHubClient);
 
         Task<User> UpdateUser(UserUpdate updatedUserDetails, GitHubClient authorizedGitHubClient);
+
+        Task<bool> FollowUser(string userLogin, GitHubClient authorizedGitHubClient);
+
+        Task UnfollowUser(string userLogin, GitHubClient authorizedGitHubClient);
+
+        Task<ObservableCollection<User>> GetFollowersForUser(string login, GitHubClient authorizedGithubClient);
+
+        Task<ObservableCollection<User>> GetFollowingForUser(string login, GitHubClient authorizedGithubClient);
     }
 }

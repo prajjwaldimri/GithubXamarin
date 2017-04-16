@@ -11,7 +11,14 @@ namespace GithubXamarin.Core.Contracts.Service
 
         Task<ObservableCollection<Octokit.Repository>> GetAllRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient);
 
+        Task<ObservableCollection<Octokit.Repository>> GetAllStarredRepositoriesForCurrentUser(GitHubClient authorizedGitHubClient);
+
         Task<ObservableCollection<Octokit.Repository>> GetAllRepositoriesForUser(string login, GitHubClient gitHubClient);
+
+        Task<ObservableCollection<Octokit.Repository>> GetAllStarredRepositoriesForUser(string login, GitHubClient gitHubClient);
+
+        Task<ObservableCollection<RepositoryContent>> GetContentsOfRepository(long repoId, GitHubClient authorizedGitHubClient,
+            string path = null);
 
         Task<ObservableCollection<Octokit.Repository>> SearchRepositories(string searchTerm, GitHubClient githubClient);
 
@@ -20,6 +27,11 @@ namespace GithubXamarin.Core.Contracts.Service
         Task<bool> StarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGithubClient);
 
         Task<bool> UnStarRepository(string repositoryOwner, string repositoryName, GitHubClient authorizedGithubClient);
+
+        Task<Subscription> WatchRepository(long repositoryId, NewSubscription subscription,
+            GitHubClient authorizedGitHubClient);
+
+        Task<bool> UnWatchRepository(long repositoryId, GitHubClient authorizedGitHubClient);
 
         Task<Octokit.Repository> CreateRepository(NewRepository newRepositoryDetails, GitHubClient authorizedGitHubClient);
 

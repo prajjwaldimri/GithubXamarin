@@ -1,10 +1,12 @@
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using GithubXamarin.Core.ViewModels;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace GithubXamarin.Droid.Views
 {
@@ -23,6 +25,9 @@ namespace GithubXamarin.Droid.Views
         {
             base.OnViewCreated(view, savedInstanceState);
             await ViewModel.Refresh();
+
+            var issueLabelsContainer = Activity.FindViewById<MvxRecyclerView>(Resource.Id.issueLabelContainer);
+            issueLabelsContainer.SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false));
         }
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)

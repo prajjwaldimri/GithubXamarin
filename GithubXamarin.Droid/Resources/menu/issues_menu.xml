@@ -3,7 +3,8 @@
 
   <item
         android:id="@+id/issues_refresh"
-        android:title="Refresh">
+        android:title="Refresh"
+        android:showAsAction="never">
   </item>
 
 </menu>

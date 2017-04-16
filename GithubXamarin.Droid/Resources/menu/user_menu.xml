@@ -3,12 +3,14 @@
 
   <item
         android:id="@+id/user_refresh"
-        android:title="Refresh">
+        android:title="Refresh"
+        android:showAsAction="never">
   </item>
 
   <item
         android:id="@+id/user_edit"
-        android:title="Edit">
+        android:title="Edit"
+        android:showAsAction="never">
   </item>
 
 </menu>

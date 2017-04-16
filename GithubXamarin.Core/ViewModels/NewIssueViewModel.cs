@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -14,11 +16,13 @@ namespace GithubXamarin.Core.ViewModels
         #region Properties and Commands
 
         private readonly IIssueDataService _issueDataService;
+        private readonly IRepoDataService _repoDataService;
 
         private ICommand _submitCommand;
         public ICommand SubmitCommand
         {
-            get {
+            get
+            {
                 _submitCommand = _submitCommand ?? new MvxAsyncCommand(CreateOrUpdateIssue);
                 return _submitCommand;
             }
@@ -27,7 +31,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _title;
         public string Title
         {
-            get { return _title; }
+            get => _title;
             set
             {
                 _title = value;
@@ -38,7 +42,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _body;
         public string Body
         {
-            get { return _body; }
+            get => _body;
             set
             {
                 _body = value;
@@ -49,7 +53,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _labels;
         public string Labels
         {
-            get { return _labels; }
+            get => _labels;
             set
             {
                 _labels = value;
@@ -57,10 +61,65 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ObservableCollection<Label> _availableLabels;
+        public ObservableCollection<Label> AvailableLabels
+        {
+            get => _availableLabels;
+            set
+            {
+                _availableLabels = value;
+                RaisePropertyChanged(() => AvailableLabels);
+            }
+        }
+
+        private string _assignees;
+        public string Assignees
+        {
+            get => _assignees;
+            set
+            {
+                _assignees = value;
+                RaisePropertyChanged(() => Assignees);
+            }
+        }
+
+        private ObservableCollection<User> _availableAssignees;
+        public ObservableCollection<User> AvailableAssignees
+        {
+            get => _availableAssignees;
+            set
+            {
+                _availableAssignees = value;
+                RaisePropertyChanged(() => AvailableAssignees);
+            }
+        }
+
+        private ObservableCollection<Milestone> _milestones;
+        public ObservableCollection<Milestone> Milestones
+        {
+            get => _milestones;
+            set
+            {
+                _milestones = value;
+                RaisePropertyChanged(() => Milestones);
+            }
+        }
+
+        private int _selectedMilestoneIndex;
+        public int SelectedMilestoneIndex
+        {
+            get => _selectedMilestoneIndex;
+            set
+            {
+                _selectedMilestoneIndex = value;
+                RaisePropertyChanged(() => SelectedMilestoneIndex);
+            }
+        }
+
         private long _repositoryId;
         public long RepositoryId
         {
-            get { return _repositoryId; }
+            get => _repositoryId;
             set
             {
                 _repositoryId = value;
@@ -71,7 +130,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _issueNumber;
         public int IssueNumber
         {
-            get { return _issueNumber; }
+            get => _issueNumber;
             set
             {
                 _issueNumber = value;
@@ -82,7 +141,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _issueStateSelectedIndex;
         public int IssueStateSelectedIndex
         {
-            get { return _issueStateSelectedIndex; }
+            get => _issueStateSelectedIndex;
             set
             {
                 _issueStateSelectedIndex = value;
@@ -102,7 +161,7 @@ namespace GithubXamarin.Core.ViewModels
         private ItemState _issueItemState;
         public ItemState IssueItemState
         {
-            get { return _issueItemState; }
+            get => _issueItemState;
             set
             {
                 _issueItemState = value;
@@ -113,7 +172,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isEdit;
         public bool IsEdit
         {
-            get { return _isEdit; }
+            get => _isEdit;
             set
             {
                 _isEdit = value;
@@ -126,27 +185,56 @@ namespace GithubXamarin.Core.ViewModels
             "Open", "Closed"
         };
 
-        #endregion 
-
-        public NewIssueViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IIssueDataService issueDataService) : base(githubClientService, messenger, dialogService)
+        private List<string> _milestoneNamesList = new List<string>();
+        public List<string> MilestoneNamesList
         {
-            _issueDataService = issueDataService;
+            get => _milestoneNamesList;
+            set => _milestoneNamesList = value;
         }
 
-        public async void Init(long repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null)
+
+        private string _milestone;
+        private Repository _repository;
+        private string _originalAssignees;
+
+        #endregion 
+
+        public NewIssueViewModel(IGithubClientService githubClientService, IMvxMessenger messenger, IDialogService dialogService, IIssueDataService issueDataService, IRepoDataService repoDataService) : base(githubClientService, messenger, dialogService)
         {
+            _issueDataService = issueDataService;
+            _repoDataService = repoDataService;
+        }
+
+        public async void Init(long repositoryId, int issueNumber, string issueTitle = null, string issueBody = null, string labels = null, string assignees = null, string milestone = null)
+        {
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+
             RepositoryId = repositoryId;
             IsEdit = false;
             IssueNumber = issueNumber;
+            _milestone = milestone;
             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Creating a new issue" });
             if (!(string.IsNullOrWhiteSpace(issueTitle)))
             {
                 Title = issueTitle;
                 Body = issueBody;
                 Labels = labels;
+                Assignees = assignees;
+                _originalAssignees = assignees;
                 IsEdit = true;
                 Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Editing {Title}" });
             }
+            await GetMilestones();
+            await GetRepositoryDetails();
+
+            AvailableLabels =
+                await _issueDataService.GetLabelsForRepository(RepositoryId, GithubClientService.GetAuthorizedGithubClient());
+
+            AvailableAssignees =
+                await _issueDataService.GetAllPossibleAssignees(repositoryId,
+                    GithubClientService.GetAuthorizedGithubClient());
+
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
         private async Task CreateOrUpdateIssue()
@@ -175,10 +263,29 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Title)) { return; }
 
-            var createdIssue = await _issueDataService.CreateIssue(RepositoryId, new NewIssue(Title) {Body = Body}, GithubClientService.GetAuthorizedGithubClient());
+            int? milestoneNumber = null;
+            if (SelectedMilestoneIndex > 0)
+            {
+                milestoneNumber = Milestones[SelectedMilestoneIndex].Number;
+            }
 
-            await _issueDataService.UpdateLabels(RepositoryId, createdIssue.Number,
-                Labels, GithubClientService.GetAuthorizedGithubClient());
+            var createdIssue = await _issueDataService.CreateIssue(RepositoryId, new NewIssue(Title)
+            {
+                Body = Body,
+                Milestone = milestoneNumber
+            }, GithubClientService.GetAuthorizedGithubClient());
+
+            if (Labels != null)
+            {
+                await _issueDataService.AddLabelsToIssue(RepositoryId, createdIssue.Number,
+                    Labels, GithubClientService.GetAuthorizedGithubClient());
+            }
+
+            if (Assignees != null)
+            {
+                await _issueDataService.AddAssigneesToIssue(_repository.Owner.Login, _repository.Name, _issueNumber,
+                    Assignees, GithubClientService.GetAuthorizedGithubClient());
+            }
 
             ShowViewModel<IssueViewModel>(new
             {
@@ -191,17 +298,42 @@ namespace GithubXamarin.Core.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Title) || IssueNumber == null) { return; }
 
+            int? milestoneNumber = null;
+            if (SelectedMilestoneIndex > 0)
+            {
+                try
+                {
+                    milestoneNumber = Milestones[SelectedMilestoneIndex].Number;
+                }
+                //Android Problems :P
+                catch (ArgumentOutOfRangeException)
+                {
+                    milestoneNumber = Milestones[SelectedMilestoneIndex - 1].Number;
+                }
+            }
+
             var createdIssue = await _issueDataService.UpdateIssue(RepositoryId, IssueNumber, new IssueUpdate()
             {
                 Title = Title,
                 Body = Body,
-                State = IssueItemState
+                State = IssueItemState,
+                Milestone = milestoneNumber
             }, GithubClientService.GetAuthorizedGithubClient());
 
-            if (!(string.IsNullOrWhiteSpace(Labels)))
+            if (Labels != null)
             {
-                await _issueDataService.UpdateLabels(RepositoryId, createdIssue.Number,
-                Labels, GithubClientService.GetAuthorizedGithubClient());
+                await _issueDataService.ReplaceLabelsForIssue(RepositoryId, createdIssue.Number,
+                    Labels, GithubClientService.GetAuthorizedGithubClient());
+            }
+
+            if (string.IsNullOrWhiteSpace(Assignees))
+            {
+                await _issueDataService.RemoveAssigneesFromIssue(_repository.Owner.Login, _repository.Name, _issueNumber, _originalAssignees, GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                await _issueDataService.AddAssigneesToIssue(_repository.Owner.Login, _repository.Name, _issueNumber,
+                    Assignees, GithubClientService.GetAuthorizedGithubClient());
             }
 
             ShowViewModel<IssueViewModel>(new
@@ -209,6 +341,31 @@ namespace GithubXamarin.Core.ViewModels
                 issueNumber = createdIssue.Number,
                 repositoryId = RepositoryId,
             });
+        }
+
+        private async Task GetMilestones()
+        {
+            Milestones = await _issueDataService.GetMilestonesForRepository(RepositoryId,
+                GithubClientService.GetAuthorizedGithubClient());
+
+            MilestoneNamesList = new List<string>(Milestones.Count);
+            MilestoneNamesList.Add("No Milestone");
+
+            for (var i = 0; i < Milestones.Count; i++)
+            {
+                MilestoneNamesList.Add(Milestones[i].Title);
+                if (Milestones[i].Title.Equals(_milestone))
+                {
+                    SelectedMilestoneIndex = i;
+                }
+            }
+            RaisePropertyChanged(() => MilestoneNamesList);
+        }
+
+        private async Task GetRepositoryDetails()
+        {
+            _repository =
+                await _repoDataService.GetRepository(RepositoryId, GithubClientService.GetAuthorizedGithubClient());
         }
     }
 }

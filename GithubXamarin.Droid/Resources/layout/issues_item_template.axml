@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="1dp">
-  <android.support.v7.widget.CardView
-      android:layout_gravity="center_horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      cardview:cardCornerRadius="4dp">
+    <android.support.v7.widget.CardView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        cardview:cardCornerRadius="4dp">
         <LinearLayout
             android:id="@+id/IssuesItemWrapperLayout"
             android:layout_width="fill_parent"
@@ -23,7 +23,8 @@
                 <FontAwesome
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="&#xf06a;" />
+                    android:text="&#xF06A;" 
+              android:textColor="@color/colorAccent"/>
                 <TextView
                     android:paddingLeft="10dp"
                     android:layout_height="wrap_content"
@@ -37,27 +38,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#"/>
-              <TextView
-                android:paddingLeft="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                cardview:MvxBind="Text Number"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#" 
+              android:textColor="@color/colorAccent"/>
+                <TextView
+                    android:paddingLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    cardview:MvxBind="Text Number" />
               
-              <TextView
-                android:paddingLeft="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="in"/>
-              <TextView
-                android:paddingLeft="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                cardview:MvxBind="Text Repository.FullName"/>
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF0C0;" 
+                android:textColor="@color/colorAccent"/>
+              
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    cardview:MvxBind="Text Assignees.Count" />
+              
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF086;" 
+                android:textColor="@color/colorAccent"/>
+              
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    cardview:MvxBind="Text Comments" />
+              
+              <FontAwesome
+                android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="&#xF277;" 
+                android:textColor="@color/colorAccent"/>
+              
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    cardview:MvxBind="Text Milestone.Title" />
             </LinearLayout>
+        <!--<MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+            android:orientation="horizontal"
+            android:id="@+id/issuesLabelContainer"
+            android:scrollbars="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            cardview:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            cardview:MvxBind="ItemsSource Labels"
+            cardview:MvxItemTemplate="@layout/labels_item_template"/>-->
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

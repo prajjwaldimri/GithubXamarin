@@ -1,0 +1,264 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GithubXamarin.UWP.UserControls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+
+    <DataTemplate x:Key="RepositoriesListViewTemplate">
+        <StackPanel 
+            HorizontalAlignment="Stretch"
+            Padding="15"
+            VerticalAlignment="Center">
+
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}" 
+                Text="{Binding Name}"/>
+
+            <TextBlock 
+                Opacity="0.8"
+                Text="{Binding Description}"
+                Margin="0,5,0,0"
+                Style="{StaticResource BaseTextBlockStyle}"/>
+
+            <StackPanel
+                Margin="0,5,0,0"
+                Orientation="Horizontal">
+
+                <TextBlock
+                    Opacity="0.6"
+                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                    Text="{Binding Language}"
+                    Margin="0,0,10,0"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+
+                <FontIcon
+                    Opacity="0.6"
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                    Glyph="&#xf005;"
+                    Margin="0,0,1,0"
+                    FontSize="15"/>
+
+                <TextBlock
+                    Opacity="0.6"
+                    Text="{Binding StargazersCount}"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+
+                <TextBlock
+                    Opacity="0.6"
+                    Text="Last Updated:"
+                    Margin="10,0,2,0"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+
+                <TextBlock
+                    Opacity="0.6"
+                    Text="{Binding UpdatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+            </StackPanel>
+
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="IssuesListViewTemplate">
+        <Grid x:Name="ItemGrid"
+              Padding="0,10,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+
+            <FontIcon 
+                FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                Glyph="&#xf06a;"
+                Foreground="{StaticResource SystemControlForegroundAccentBrush}"
+                x:Name="IssueIcon"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                VerticalAlignment="Center"
+                FontSize="24"/>
+
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Title}"
+                Style="{StaticResource BaseTextBlockStyle}"
+                Margin="10,0,0,0" 
+                TextWrapping="Wrap"/>
+
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                Margin="10,2,0,0">
+
+                <TextBlock 
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="#"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Number}"
+                    Margin="2,0,0,0"/>
+
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf0c0;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Assignees.Count}"
+                    Margin="2,0,0,0"/>
+
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf086;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Comments}"
+                    Margin="2,0,0,0"/>
+
+                <FontIcon 
+                    FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf277;"
+                    Margin="10,0,0,0"
+                    Opacity="0.8"
+                    FontSize="12"
+                    Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="0.8"
+                    Text="{Binding Milestone.Title}"
+                    Margin="2,0,0,0"/>
+            </StackPanel>
+
+            <local:LabelsControl
+                Grid.Row="2"
+                Grid.Column="1"
+                LabelsSource="{Binding Labels}"/>
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CommentsListViewTemplate">
+        <Grid x:Name="ItemGrid" 
+              Margin="0,10,0,10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="14*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle
+                    Grid.Column="0"
+                    Height="24"
+                    Width="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,0">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding User.AvatarUrl}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <Grid Grid.Column="1"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"
+                      Margin="10,10,0,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Text="{Binding User.Login}"
+                        Style="{ThemeResource BaseTextBlockStyle}"/>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="commented"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Opacity="0.6"
+                            Margin="0,0,2,0"/>
+
+                        <TextBlock
+                            Text="{Binding UpdatedAt.DateTime, Converter={StaticResource DateTimeHumanizer}}"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Opacity="0.6"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="10,10,0,0">
+
+                <controls:MarkdownTextBlock Text="{Binding Body}"/>
+
+            </Grid>
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AssigneesListViewTemplate">
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center">
+            <Rectangle
+                Height="16"
+                Width="16"
+                Margin="0,0,0,0">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding AvatarUrl}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TextBlock
+                Text="{Binding Login}"
+                Margin="5,0,0,0"/>
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>
+
+    
+
+
+    
+
+    
+
+    
+
+
+    

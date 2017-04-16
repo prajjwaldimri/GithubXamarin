@@ -24,7 +24,7 @@ namespace GithubXamarin.Core.ViewModels
         private Repository _repository;
         public Repository Repository
         {
-            get { return _repository;}
+            get => _repository;
             set
             {
                 _repository = value;
@@ -35,13 +35,25 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isRepositoryStarred;
         public bool IsRepositoryStarred
         {
-            get { return _isRepositoryStarred;}
+            get => _isRepositoryStarred;
             set
             {
                 _isRepositoryStarred = value;
                 RaisePropertyChanged(() => IsRepositoryStarred);
             }
         }
+
+        private bool _isRepositoryWatched;
+        public bool IsRepositoryWatched
+        {
+            get => _isRepositoryWatched;
+            set
+            {
+                _isRepositoryWatched = value;
+                RaisePropertyChanged(() => IsRepositoryWatched);
+            }
+        }
+
 
         private ICommand _forkClickCommand;
         public ICommand ForkClickCommand
@@ -60,6 +72,16 @@ namespace GithubXamarin.Core.ViewModels
             {
                 _starClickCommand = _starClickCommand ?? new MvxAsyncCommand(async () => await StarOrUnstarRepository());
                 return _starClickCommand;
+            }
+        }
+
+        private ICommand _watchClickCommand;
+        public ICommand WatchClickCommand
+        {
+            get
+            {
+                _watchClickCommand = _watchClickCommand ?? new MvxAsyncCommand(async () => await WatchOrUnwatchRepository());
+                return _watchClickCommand;
             }
         }
 
@@ -83,6 +105,17 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _contributorsClickCommand;
+        public ICommand ContributorsClickCommand
+        {
+            get
+            {
+                _contributorsClickCommand = _contributorsClickCommand ?? new MvxCommand(ShowContributorsOfRepository);
+                return _contributorsClickCommand;
+            }
+        }
+
+
         private ICommand _stargazersClickCommand;
         public ICommand StargazersClickCommand
         {
@@ -102,6 +135,17 @@ namespace GithubXamarin.Core.ViewModels
                 return _issuesClickCommand;
             }
         }
+
+        private ICommand _contentClickCommand;
+        public ICommand ContentClickCommand
+        {
+            get
+            {
+                _contentClickCommand = _contentClickCommand ?? new MvxAsyncCommand(async () => await GoToContentView());
+                return _contentClickCommand;
+            }
+        }
+
 
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
@@ -157,7 +201,9 @@ namespace GithubXamarin.Core.ViewModels
 
         #endregion
 
-        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService, IMvxMessenger messenger, IDialogService dialogService, IShareService shareService) : base(githubClientService, messenger, dialogService)
+        public RepositoryViewModel(IGithubClientService githubClientService, IRepoDataService repoDataService,
+            IMvxMessenger messenger, IDialogService dialogService, IShareService shareService)
+            : base(githubClientService, messenger, dialogService)
         {
             _repoDataService = repoDataService;
             _shareService = shareService;
@@ -170,20 +216,31 @@ namespace GithubXamarin.Core.ViewModels
         }
 
         /// <summary>
-        /// Checks for repository stats which are not directly available in
+        /// Checks for repository stats which are not directly available when using Refresh Function
         /// </summary>
         /// <returns></returns>
         private async Task CheckRepositoryStats()
         {
             //Check if repository is starred
             var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login.ToString(), Repository.Name);
+            IsRepositoryStarred = await starredClient.CheckStarred(Repository.Owner.Login, Repository.Name);
+
+            //Check if repository is watched
+            var watchedClient = new WatchedClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
+            IsRepositoryWatched = await watchedClient.CheckWatched(Repository.Id);
         }
 
         private void ForkRepository()
         {
             var forkClient = new RepositoryForksClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
-            forkClient.Create(Repository.Id, new NewRepositoryFork());
+            var forkedRepo = forkClient.Create(Repository.Id, new NewRepositoryFork());
+            if (forkedRepo != null)
+            {
+                ShowViewModel<RepositoryViewModel>(new
+                {
+                    repositoryId = forkedRepo.Id
+                });
+            }
         }
 
         private async Task DeleteRepository()
@@ -192,7 +249,8 @@ namespace GithubXamarin.Core.ViewModels
 
             if (
                 await DialogService.ShowBooleanDialogAsync(
-                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, wiki, issues, and comments, and remove all collaborator associations.",
+                    $"This action CANNOT be undone. This will permanently delete the {Repository.FullName} repository, " +
+                    $"wiki, issues, and comments, and remove all collaborator associations.",
                     "Are you ABSOLUTELY sure?"))
             {
                 Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
@@ -227,12 +285,42 @@ namespace GithubXamarin.Core.ViewModels
             await Refresh();
         }
 
-        /// <summary>
-        /// Navigates To UsersView and shows all the collaborators of current Repository
-        /// </summary>
+        private async Task WatchOrUnwatchRepository()
+        {
+            if (IsRepositoryWatched)
+            {
+                await _repoDataService.UnWatchRepository(Repository.Id,
+                    GithubClientService.GetAuthorizedGithubClient());
+            }
+            else
+            {
+                await _repoDataService.WatchRepository(Repository.Id, new NewSubscription()
+                {
+                    Subscribed = true,
+                    Ignored = false
+                }, GithubClientService.GetAuthorizedGithubClient());
+            }
+            await Refresh();
+        }
+
         private void ShowCollaboratorsOfRepository()
         {
-            ShowViewModel<UsersViewModel>(new {repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Collaborators});
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Collaborators
+                });
+        }
+
+        private void ShowContributorsOfRepository()
+        {
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Contributors
+                });
         }
 
         /// <summary>
@@ -240,7 +328,12 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowStargazersOfRepository()
         {
-            ShowViewModel<UsersViewModel>(new { repositoryId = Repository.Id, usersType = UsersTypeEnumeration.Stargazers });
+            if (Repository != null)
+                ShowViewModel<UsersViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    usersType = UsersTypeEnumeration.Stargazers
+                });
         }
 
         /// <summary>
@@ -248,7 +341,7 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void ShowIssuesOfRepository()
         {
-            ShowViewModel<IssuesViewModel>(new {repositoryId = Repository.Id});
+            if (Repository != null) ShowViewModel<IssuesViewModel>(new { repositoryId = Repository.Id });
         }
 
         /// <summary>
@@ -256,32 +349,44 @@ namespace GithubXamarin.Core.ViewModels
         /// </summary>
         private void NavigateToReadme()
         {
-            ShowViewModel<FileViewModel>(new {fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id});
+            if (Repository != null)
+                ShowViewModel<FileViewModel>(new { fileType = FileTypeEnumeration.Readme, repositoryId = Repository.Id });
         }
 
         private async Task GoToNewIssueView()
         {
             if (!(await IsInternetAvailable())) return;
-            ShowViewModel<NewIssueViewModel>(new
-            {
-                repositoryId = Repository.Id
-            });
-
+            if (Repository != null)
+                ShowViewModel<NewIssueViewModel>(new
+                {
+                    repositoryId = Repository.Id
+                });
         }
 
         public async Task GoToNewRepositoryView()
         {
             if (!(await IsInternetAvailable())) return;
-            ShowViewModel<NewRepositoryViewModel>(new
-            {
-                repositoryId = Repository.Id,
-                name = Repository.Name,
-                description = Repository.Description,
-                homePage = Repository.Homepage,
-                isPrivate = Repository.Private,
-                hasIssues = Repository.HasIssues,
-                hasWiki = Repository.HasWiki
-            });
+            if (Repository != null)
+                ShowViewModel<NewRepositoryViewModel>(new
+                {
+                    repositoryId = Repository.Id,
+                    name = Repository.Name,
+                    description = Repository.Description,
+                    homePage = Repository.Homepage,
+                    isPrivate = Repository.Private,
+                    hasIssues = Repository.HasIssues,
+                    hasWiki = Repository.HasWiki
+                });
+        }
+
+        public async Task GoToContentView()
+        {
+            if (!(await IsInternetAvailable())) return;
+            if (Repository != null)
+                ShowViewModel<RepositoryContentsViewModel>(new
+                {
+                    repositoryId = Repository.Id
+                });
         }
 
         public async Task Refresh()

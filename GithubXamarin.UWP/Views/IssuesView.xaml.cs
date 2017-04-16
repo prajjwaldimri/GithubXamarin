@@ -1,4 +1,5 @@
-﻿using GithubXamarin.Core.ViewModels;
+﻿using Windows.UI.Xaml.Controls;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
 
 namespace GithubXamarin.UWP.Views
@@ -16,6 +17,24 @@ namespace GithubXamarin.UWP.Views
         {
             this.InitializeComponent();
             DataContext = ViewModel;
+        }
+
+        private async void MainPivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainPivot.SelectedIndex == 1)
+            {
+                await ViewModel.RefreshClosed();
+            }
+        }
+
+        private void OpenIssuesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.NavigateToIssueView(null);
+        }
+
+        private void ClosedIssuesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.NavigateToIssueViewClosed(null);
         }
     }
 }

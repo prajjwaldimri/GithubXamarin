@@ -21,7 +21,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<User> _users;
         public ObservableCollection<User> Users
         {
-            get { return _users; }
+            get => _users;
             set
             {
                 _users = value;
@@ -29,7 +29,16 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
-        public int SelectedIndex { get; set; }
+        private ObservableCollection<RepositoryContributor> _contributors;
+        public ObservableCollection<RepositoryContributor> Contributors
+        {
+            get => _contributors;
+            set
+            {
+                _contributors = value;
+                RaisePropertyChanged(() => Contributors);
+            }
+        }
 
         private ICommand _userClickCommand;
         public ICommand UserClickCommand
@@ -41,6 +50,18 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _contributorClickCommand;
+        public ICommand ContributorClickCommand
+        {
+            get
+            {
+                _contributorClickCommand = _contributorClickCommand ??
+                                           new MvxCommand<object>(NavigateToContributorView);
+                return _contributorClickCommand;
+            }
+        }
+
+
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
@@ -51,8 +72,36 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private bool _isContributor;
+        public bool IsContributor
+        {
+            get => _isContributor;
+            set
+            {
+                IsUser = !value;
+                _isContributor = value;
+                RaisePropertyChanged(() => IsContributor);
+            }
+        }
+
+        private bool _isUser;
+        public bool IsUser
+        {
+            get => _isUser; set
+            {
+                _isUser = value;
+                RaisePropertyChanged(() => IsUser);
+            }
+        }
+
+
+
         private long _repositoryId;
         private UsersTypeEnumeration? _usersType;
+        private string _userLogin;
+
+        public int SelectedIndex { get; set; }
+        public int SelectedContributorIndex { get; set; }
 
         #endregion
 
@@ -61,17 +110,24 @@ namespace GithubXamarin.Core.ViewModels
             _userDataService = userDataService;
         }
 
-        public async void Init(long repositoryId, UsersTypeEnumeration? usersType = null)
+        public async void Init(long repositoryId, UsersTypeEnumeration usersType, string userLogin)
         {
             _repositoryId = repositoryId;
             _usersType = usersType;
+            _userLogin = userLogin;
             await Refresh();
         }
 
         private void NavigateToUserView(object obj)
         {
             var user = obj as User ?? Users[SelectedIndex];
-            ShowViewModel<UserViewModel>(new { userLogin = user.Login });
+            if (user != null) ShowViewModel<UserViewModel>(new { userLogin = user.Login });
+        }
+
+        private void NavigateToContributorView(object obj)
+        {
+            var user = obj as RepositoryContributor ?? Contributors[SelectedContributorIndex];
+            if (user != null) ShowViewModel<UserViewModel>(new { userLogin = user.Login });
         }
 
         public async Task Refresh()
@@ -92,11 +148,33 @@ namespace GithubXamarin.Core.ViewModels
                             Users = await _userDataService.GetStargazersForRepository(_repositoryId,
                                 GithubClientService.GetAuthorizedGithubClient());
                             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Stargazers" });
+                            IsContributor = false;
                             break;
+
                         case UsersTypeEnumeration.Collaborators:
                             Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Collaborators" });
                             Users = await _userDataService.GetCollaboratorsForRepository(_repositoryId,
                                 GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = false;
+                            break;
+
+                        case UsersTypeEnumeration.Contributors:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = "Contributors" });
+                            Contributors = await _userDataService.GetContributorsForRepository(_repositoryId,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = true;
+                            break;
+                        case UsersTypeEnumeration.Followers:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Followers of {_userLogin}" });
+                            Users = await _userDataService.GetFollowersForUser(_userLogin,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = false;
+                            break;
+                        case UsersTypeEnumeration.Following:
+                            Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Users followed by {_userLogin}" });
+                            Users = await _userDataService.GetFollowingForUser(_userLogin,
+                                GithubClientService.GetAuthorizedGithubClient());
+                            IsContributor = false;
                             break;
                         default:
                             Users = await _userDataService.GetCollaboratorsForRepository(_repositoryId,

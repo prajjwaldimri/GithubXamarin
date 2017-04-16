@@ -11,20 +11,24 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer>
+        <ScrollViewer
+            Margin="0,0,0,48">
             <Grid Padding="10">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
+                    <RowDefinition MinHeight="60"/>
                 </Grid.RowDefinitions>
 
 
@@ -82,19 +86,104 @@
                     VerticalAlignment="Center"/>
                 </StackPanel>
 
+                <!-- Milestones and Assignees -->
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="3">
+                    <FontIcon 
+                        FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf277;"
+                        Margin="10,0,0,0"
+                        Opacity="0.8"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                    <TextBlock
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        VerticalAlignment="Center"
+                        Opacity="0.8"
+                        Text="{Binding Issue.Milestone.Title, FallbackValue=No Milestone Assigned}"
+                        Margin="5,0,0,0"/>
+
+                    <FontIcon 
+                        FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
+                    Glyph="&#xf2bd;"
+                        Margin="20,0,0,0"
+                        Opacity="0.8"
+                        VerticalAlignment="Center"
+                        Foreground="{StaticResource SystemControlForegroundAccentBrush}"/>
+
+                    <ScrollViewer HorizontalScrollMode="Enabled">
+
+                        <ListView
+                        ItemsSource="{Binding Issue.Assignees}"
+                        SelectionMode="None"
+                        IsItemClickEnabled="False"
+                        ItemTemplate="{StaticResource AssigneesListViewTemplate}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    IsTapEnabled="False"
+                                    IsHitTestVisible="False"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+
+                    </ScrollViewer>
+
+                </StackPanel>
+
                 <!--Labels -->
 
                 <userControls:LabelsControl 
-                    Grid.Row="3"
+                    Grid.Row="4"
                     LabelsSource="{Binding Issue.Labels}"/>
 
                 <controls:MarkdownTextBlock 
-                    Grid.Row="4" 
-                    Grid.RowSpan="5"
+                    Grid.Row="5" 
+                    Grid.RowSpan="3"
                     Grid.Column="0" 
                     Text="{Binding Issue.Body}"/>
 
-                <!-- TODO: Add usercontrol for comments here -->
+                <ScrollViewer
+                    Grid.Row="8"
+                    Grid.RowSpan="5">
+
+                    <ListView
+                        Header="COMMENTS"
+                        ItemsSource="{Binding Comments}"
+                        ItemTemplate="{StaticResource CommentsListViewTemplate}">
+
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" 
+                                           FontWeight="Bold"
+                                           Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border BorderThickness="0,0,0,0.4">
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush 
+                                                        Color="{ThemeResource SystemChromeMediumColor}"/>
+                                                </Border.BorderBrush>
+                                                <ContentPresenter/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                </ScrollViewer>
             </Grid>
         </ScrollViewer>
         <CommandBar
@@ -107,7 +196,7 @@
             <AppBarButton Icon="Refresh"
                           Label="Refresh"
                           Command="{Binding RefreshCommand}"/>
-            
+
             <AppBarButton Label="Share"
                           Command="{Binding ShareCommand}">
                 <AppBarButton.Icon>

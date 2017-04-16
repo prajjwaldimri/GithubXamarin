@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:minWidth="25px"
         android:minHeight="25px">
-      <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+        <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
             android:orientation="vertical"
             android:scrollbars="vertical"
             android:layout_width="fill_parent"

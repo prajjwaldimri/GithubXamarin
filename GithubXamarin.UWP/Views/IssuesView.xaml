@@ -13,95 +13,45 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <controls:PullToRefreshListView 
-            ItemsSource="{Binding Issues}"
-            SelectionMode="Single"
-            SelectedIndex="{Binding SelectedIssue, Mode=TwoWay}"
-            HorizontalAlignment="Stretch"
-            RefreshCommand="{Binding RefreshCommand}"
-            HorizontalContentAlignment="Stretch"
-            Margin="0,0,0,48">
+        <Pivot 
+            Name="MainPivot"
+            Style="{ThemeResource PivotSmallHeaderStyle}"
+            Margin="0,0,0,48"
+            SelectionChanged="MainPivot_OnSelectionChanged">
 
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding IssueClickCommand}"/>
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
+            <PivotItem
+                Header="OPEN ISSUES">
 
-            <!--UI of an item in List-->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid x:Name="ItemGrid"
-                                  Padding="0,10,0,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+                <controls:PullToRefreshListView 
+                    Name="OpenIssuesList"
+                    ItemsSource="{Binding Issues}"
+                    SelectionMode="Single"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                    HorizontalAlignment="Stretch"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    HorizontalContentAlignment="Stretch"
+                    SelectionChanged="OpenIssuesList_OnSelectionChanged"
+                    ItemTemplate="{StaticResource IssuesListViewTemplate}"/>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="8*"/>
-                        </Grid.ColumnDefinitions>
+            </PivotItem>
 
-                        <FontIcon 
-                            FontFamily="ms-appx:/Resources/Fonts/fontawesome-webfont.ttf#FontAwesome" 
-                            Glyph="&#xf06a;"
-                            Foreground="{StaticResource SystemControlForegroundAccentBrush}"
-                            x:Name="IssueIcon"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Grid.RowSpan="2"
-                            VerticalAlignment="Center"
-                            FontSize="24"/>
+            <PivotItem
+                Header="CLOSED ISSUES">
 
-                        <TextBlock 
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding Title}"
-                            Style="{StaticResource BaseTextBlockStyle}"
-                            Margin="10,0,0,0" 
-                            TextWrapping="Wrap"/>
+                <controls:PullToRefreshListView 
+                    Name="ClosedIssuesList"
+                    ItemsSource="{Binding ClosedIssues}"
+                    SelectionMode="Single"
+                    SelectedIndex="{Binding ClosedSelectedIssue, Mode=TwoWay}"
+                    HorizontalAlignment="Stretch"
+                    RefreshCommand="{Binding ClosedRefreshCommand}"
+                    HorizontalContentAlignment="Stretch"
+                    SelectionChanged="ClosedIssuesList_OnSelectionChanged"
+                    ItemTemplate="{StaticResource IssuesListViewTemplate}"/>
 
-                        <StackPanel
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Orientation="Horizontal"
-                            Margin="10,2,0,0">
+            </PivotItem>
 
-                            <TextBlock 
-                                Style="{StaticResource CaptionTextBlockStyle}"
-                                Opacity="0.6"
-                                Text="#"/>
-
-                            <TextBlock
-                                Style="{StaticResource CaptionTextBlockStyle}"
-                                Opacity="0.6"
-                                Text="{Binding Number}"
-                                Margin="2,0,0,0"/>
-
-                            <TextBlock 
-                                Style="{StaticResource CaptionTextBlockStyle}"
-                                Opacity="0.6"
-                                Text="in"
-                                Margin="5,0,0,0"/>
-
-                            <TextBlock 
-                                Style="{StaticResource CaptionTextBlockStyle}"
-                                Opacity="0.6"
-                                Text="{Binding Repository.FullName}"
-                                Margin="5,0,0,0"/>
-                        </StackPanel>
-                        
-                        <userControls:LabelsControl
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            LabelsSource="{Binding Labels}"/>
-
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </controls:PullToRefreshListView>
+        </Pivot>
 
         <CommandBar
             VerticalAlignment="Bottom">

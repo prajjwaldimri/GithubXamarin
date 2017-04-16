@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="1dp">
+    <android.support.v7.widget.CardView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        cardview:cardCornerRadius="4dp">
+        <LinearLayout
+            android:id="@+id/EventsItemWrapperLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:orientation="horizontal">
+                <FontAwesome
+                    android:paddingLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    cardview:MvxBind="Text ContentToGlyph()" />
+              <TextView
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:scrollHorizontally="false"
+                    android:ellipsize="none"
+                    android:textColor="@color/abc_primary_text_material_light"
+                    cardview:MvxBind="Text Name" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

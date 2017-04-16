@@ -1,5 +1,7 @@
-﻿using GithubXamarin.Core.ViewModels;
+﻿using System.IO;
+using GithubXamarin.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core
 {
@@ -7,7 +9,22 @@ namespace GithubXamarin.Core
     {
         public void Start(object hint = null)
         {
-            ShowViewModel<MainViewModel>();
+            try
+            {
+                if (CrossSecureStorage.Current.HasKey("UserOnBoard"))
+                {
+                    ShowViewModel<MainViewModel>();
+                }
+                else
+                {
+                    ShowViewModel<UserOnboardingViewModel>();
+                    CrossSecureStorage.Current.SetValue("UserOnBoard", "Boarded");
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                ShowViewModel<MainViewModel>();
+            }
         }
     }
 }

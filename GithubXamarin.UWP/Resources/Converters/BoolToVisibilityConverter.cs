@@ -11,15 +11,13 @@ namespace GithubXamarin.UWP.Resources.Converters
             if (value == null)
                 return null;
 
-            var boolValue = (bool) value;
+            var boolValue = (bool)value;
             switch (boolValue)
             {
                 case true:
                     return Visibility.Visible;
-                    break;
                 default:
                     return Visibility.Collapsed;
-                    break;
             }
         }
 
@@ -28,15 +26,13 @@ namespace GithubXamarin.UWP.Resources.Converters
             if (value == null)
                 return null;
 
-            var visibilityValue = (Visibility) value;
+            var visibilityValue = (Visibility)value;
             switch (visibilityValue)
             {
                 case Visibility.Visible:
                     return true;
-                    break;
                 case Visibility.Collapsed:
                     return false;
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

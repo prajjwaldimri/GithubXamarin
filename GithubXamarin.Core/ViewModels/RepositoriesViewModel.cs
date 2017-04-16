@@ -21,11 +21,22 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Repository> _repositories;
         public ObservableCollection<Repository> Repositories
         {
-            get { return _repositories; }
+            get => _repositories;
             set
             {
                 _repositories = value;
                 RaisePropertyChanged(() => Repositories);
+            }
+        }
+
+        private ObservableCollection<Repository> _starredRepositories;
+        public ObservableCollection<Repository> StarredRepositories
+        {
+            get => _starredRepositories;
+            set
+            {
+                _starredRepositories = value;
+                RaisePropertyChanged(() => StarredRepositories);
             }
         }
 
@@ -39,13 +50,37 @@ namespace GithubXamarin.Core.ViewModels
             }
         }
 
+        private ICommand _starredRepositoryClickCommand;
+        public ICommand StarredRepositoryClickCommand
+        {
+            get
+            {
+                _starredRepositoryClickCommand = _starredRepositoryClickCommand ?? new MvxCommand<object>(NavigateToRepositoryViewStarred);
+                return _starredRepositoryClickCommand;
+            }
+        }
+
         private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
             get
             {
-                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () => await Refresh());
+                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(async () =>
+                {
+                    await Refresh();
+                    await RefreshStarred();
+                });
                 return _refreshCommand;
+            }
+        }
+
+        private ICommand _starredRefreshCommand;
+        public ICommand StarredRefreshCommand
+        {
+            get
+            {
+                _starredRefreshCommand = _starredRefreshCommand ?? new MvxAsyncCommand(async () => await RefreshStarred());
+                return _starredRefreshCommand;
             }
         }
 
@@ -61,7 +96,21 @@ namespace GithubXamarin.Core.ViewModels
 
         public int SelectedIndex { get; set; }
 
+        public int StarredSelectedIndex { get; set; }
+
         private string _userLogin;
+
+        private bool _isNotCurrentUser;
+        public bool IsNotCurrentUser
+        {
+            get => _isNotCurrentUser;
+            set
+            {
+                _isNotCurrentUser = value;
+                RaisePropertyChanged(() => IsNotCurrentUser);
+            }
+        }
+
 
         #endregion
 
@@ -74,12 +123,19 @@ namespace GithubXamarin.Core.ViewModels
         public async void Init(string userLogin)
         {
             _userLogin = userLogin;
+            IsNotCurrentUser = !string.IsNullOrWhiteSpace(userLogin);
             await Refresh();
         }
-        
-        private void NavigateToRepositoryView(object obj)
+
+        public void NavigateToRepositoryView(object obj)
         {
             var repository = obj as Repository ?? Repositories[SelectedIndex];
+            ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
+        }
+
+        public void NavigateToRepositoryViewStarred(object obj)
+        {
+            var repository = obj as Repository ?? StarredRepositories[StarredSelectedIndex];
             ShowViewModel<RepositoryViewModel>(new { repositoryId = repository.Id });
         }
 
@@ -119,6 +175,35 @@ namespace GithubXamarin.Core.ViewModels
             Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
         }
 
-        
+        public async Task RefreshStarred()
+        {
+            if (!(await IsInternetAvailable()))
+            {
+                await DialogService.ShowSimpleDialogAsync("No internet, No work :(", "No Internet Connection");
+                return;
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = true });
+            try
+            {
+                if (string.IsNullOrWhiteSpace(_userLogin))
+                {
+                    Messenger.Publish(new AppBarHeaderChangeMessage(this) { HeaderTitle = $"Your Repositories" });
+                    StarredRepositories =
+                        await _repoDataService.GetAllStarredRepositoriesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+                else
+                {
+                    StarredRepositories =
+                        await _repoDataService.GetAllStarredRepositoriesForCurrentUser(
+                            GithubClientService.GetAuthorizedGithubClient());
+                }
+            }
+            catch (HttpRequestException)
+            {
+                await DialogService.ShowSimpleDialogAsync("The internet seems to be working but the code threw an HttpRequestException. Try again.", "Hmm, this is weird!");
+            }
+            Messenger.Publish(new LoadingStatusMessage(this) { IsLoadingIndicatorActive = false });
+        }
     }
 }

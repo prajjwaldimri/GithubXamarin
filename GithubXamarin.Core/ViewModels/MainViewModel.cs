@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GithubXamarin.Core.Contracts.Service;
@@ -6,6 +8,7 @@ using GithubXamarin.Core.Contracts.ViewModel;
 using GithubXamarin.Core.Messages;
 using GithubXamarin.Core.Model;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
 using Plugin.SecureStorage;
@@ -24,7 +27,7 @@ namespace GithubXamarin.Core.ViewModels
         private string _pageHeader;
         public string PageHeader
         {
-            get { return _pageHeader; }
+            get => _pageHeader;
             set
             {
                 _pageHeader = value;
@@ -40,7 +43,7 @@ namespace GithubXamarin.Core.ViewModels
         private bool _isLoading;
         public bool IsLoading
         {
-            get { return _isLoading; }
+            get => _isLoading;
             set
             {
                 _isLoading = value;
@@ -51,14 +54,14 @@ namespace GithubXamarin.Core.ViewModels
         private string _searchBoxText;
         public string SearchBoxText
         {
-            get { return _searchBoxText; }
+            get => _searchBoxText;
             set { _searchBoxText = value; RaisePropertyChanged(() => SearchBoxText); }
         }
 
         private User _user;
         public User User
         {
-            get { return _user; }
+            get => _user;
             set { _user = value; RaisePropertyChanged(() => User); }
         }
 
@@ -83,8 +86,10 @@ namespace GithubXamarin.Core.ViewModels
             _fileDataService = fileDataService;
         }
 
+        /// <exception cref="HttpRequestException">On line 103</exception>
         public async Task LoadFragments()
         {
+            //HACK: This delay is required to give the main layout a little bit of time to completely load
             await Task.Delay(10);
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken"))
@@ -98,7 +103,14 @@ namespace GithubXamarin.Core.ViewModels
 
             if (CrossSecureStorage.Current.HasKey("OAuthToken") && await IsInternetAvailable())
             {
-                User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
+                try
+                {
+                    User = await GithubClientService.GetAuthorizedGithubClient().User.Current();
+                }
+                catch (HttpRequestException e)
+                {
+                    Debug.WriteLine(e);
+                }
             }
             await CheckIfUpdated();
         }

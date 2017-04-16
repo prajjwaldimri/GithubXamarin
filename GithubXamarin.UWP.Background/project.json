@@ -4,8 +4,8 @@
     "Humanizer": "2.1.0",
     "Microsoft.Bcl": "1.1.10",
     "Microsoft.Net.Http": "2.2.29",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
-    "Microsoft.Toolkit.Uwp.Notifications": "1.3.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
+    "Microsoft.Toolkit.Uwp.Notifications": "1.4.0",
     "Octokit": "0.24.0",
     "QueryString.NET": "1.0.0",
     "sameerIOTApps.Plugin.SecureStorage": "1.2.1"

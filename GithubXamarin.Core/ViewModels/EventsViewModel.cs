@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ using GithubXamarin.Core.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 using Octokit;
+using Plugin.SecureStorage;
 
 namespace GithubXamarin.Core.ViewModels
 {
@@ -20,7 +22,7 @@ namespace GithubXamarin.Core.ViewModels
         private ObservableCollection<Activity> _events;
         public ObservableCollection<Activity> Events
         {
-            get { return _events; }
+            get => _events;
             set
             {
                 _events = value;
@@ -31,7 +33,7 @@ namespace GithubXamarin.Core.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex;}
+            get => _selectedIndex;
             set
             {
                 _selectedIndex = value;
@@ -85,7 +87,7 @@ namespace GithubXamarin.Core.ViewModels
                 case "CommitCommentEvent":
                     break;
                 case "CreateEvent":
-                    ShowViewModel<RepositoryViewModel>(new {repositoryId = activity.Repo.Id});
+                    ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
                     break;
                 case "DeleteEvent":
                     break;
@@ -96,15 +98,27 @@ namespace GithubXamarin.Core.ViewModels
                 case "GollumEvent":
                     break;
                 case "IssuesEvent":
+
                     var issueEventPayload = activity.Payload as IssueEventPayload;
-                    if (issueEventPayload != null)
+                    try
                     {
-                        ShowViewModel<IssueViewModel>(
-                            new
-                            {
-                                issueNumber = issueEventPayload.Issue.Number,
-                                repositoryId = issueEventPayload.Repository.Id
-                            });
+                        if (issueEventPayload != null)
+                        {
+                            ShowViewModel<IssueViewModel>(
+                                new
+                                {
+                                    issueNumber = issueEventPayload.Issue.Number,
+                                    repositoryId = issueEventPayload.Repository.Id
+                                });
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                        ShowViewModel<RepositoryViewModel>(
+                                new
+                                {
+                                    repositoryId = activity.Repo.Id
+                                });
                     }
                     break;
                 case "IssueCommentEvent":
@@ -129,6 +143,21 @@ namespace GithubXamarin.Core.ViewModels
                 case "WatchEvent":
                     ShowViewModel<RepositoryViewModel>(new { repositoryId = activity.Repo.Id });
                     break;
+            }
+        }
+
+        public override async void Start()
+        {
+            base.Start();
+            if (!CrossSecureStorage.Current.HasKey("AskForStarring"))
+            {
+                CrossSecureStorage.Current.SetValue("AskForStarring", "asked");
+                var result = await DialogService.ShowBooleanDialogAsync("", "Star GithubXamarin repository?");
+                if (result)
+                {
+                    var starredClient = new StarredClient(new ApiConnection(GithubClientService.GetAuthorizedGithubClient().Connection));
+                    await starredClient.StarRepo("prajjwaldimri", "GithubXamarin");
+                }
             }
         }
 
