@@ -1,24 +1,14 @@
 
-## Breaking Change: Please logout and login again to get updated OAuth token from Github, otherwise the app will crash on some tasks.
+### V1.2.0.0
 
-### Improvements in Windows App:
-
-- Added HockeyApp Integration
-- Live Tile Support
-- Create and Edit Issues
-- Create, edit and delete Repositories
-- Edit your User Profile
-- Fixed Issue Labels Rendering
-- Share issues, repositories and users
-
-### Improvements in Android App:
-
-- Added Splash Screen
-- Fixed Back Button Not closing app
-- Added HockeyApp Integration
-- Fixed crashes on startup
-- Updated All ListViews to RecyclerViews
-- Refresh available on all pages using Floating Action Button
-- Create and Edit Issues
-- Create, edit and delete Repositories
-- Edit your User Profile
+- View contents of any repository on Github
+- Add and edit any file on Github
+- View Comments on Issues
+- See starred repositories
+- See closed issues
+- Windows Hello Authentication
+- See followers and following of any user
+- Watch Repositories
+- Issue Labels For Android App
+- Mark Notifications As Read inside app
+- Numerous Bug Fixes
