@@ -11,11 +11,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
+
         <controls:PullToRefreshListView
             x:Name="ListView" 
             ItemsSource="{Binding Events}"
-            SelectedIndex="{Binding SelectedEvent, Mode=TwoWay}"
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
             RefreshCommand="{Binding RefreshCommand}"
             HorizontalAlignment="Stretch" 
             IsItemClickEnabled="True" 

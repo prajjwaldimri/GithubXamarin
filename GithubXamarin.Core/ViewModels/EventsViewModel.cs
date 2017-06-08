@@ -71,9 +71,9 @@ namespace GithubXamarin.Core.ViewModels
             _eventDataService = eventDataService;
         }
 
-        public async void Init(long? repositoryId = null, string userLogin = null)
+        public async void Init(long repositoryId, string userLogin = null)
         {
-            _repositoryId = repositoryId;
+            _repositoryId = repositoryId == 0 ? (long?)null : repositoryId;
             _userLogin = userLogin;
             await Refresh();
         }
