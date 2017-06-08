@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Security.Cryptography;
-using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace GithubXamarin.UWP.Services
@@ -42,7 +37,7 @@ namespace GithubXamarin.UWP.Services
                     KeyCredentialCreationOption.ReplaceExisting);
                 return creationResult.Status == KeyCredentialStatus.Success;
             }
-            return false;
+            return true;
         }
 
     }

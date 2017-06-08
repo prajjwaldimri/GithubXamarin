@@ -5,6 +5,8 @@
     "Microsoft.Bcl": "1.1.10",
     "Microsoft.Net.Http": "2.2.29",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
+    "Microsoft.Services.Store.Engagement": "10.1610.0",
+    "Microsoft.Services.Store.SDK": "10.1705.16001",
     "Microsoft.Toolkit.Uwp": "1.4.1",
     "Microsoft.Toolkit.Uwp.Notifications": "1.4.0",
     "Microsoft.Toolkit.Uwp.UI": "1.4.0",

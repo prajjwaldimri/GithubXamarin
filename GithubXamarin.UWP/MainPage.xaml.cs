@@ -9,9 +9,9 @@ using Windows.UI.Xaml.Navigation;
 using GithubXamarin.Core.ViewModels;
 using GithubXamarin.UWP.Services;
 using GithubXamarin.UWP.UserControls;
-using Microsoft.Services.Store.Engagement;
 using MvvmCross.WindowsUWP.Views;
 using Plugin.SecureStorage;
+using Microsoft.Services.Store.Engagement;
 
 namespace GithubXamarin.UWP
 {

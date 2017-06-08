@@ -10,8 +10,8 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GithubXamarin.Core.ViewModels;
-using Microsoft.Services.Store.Engagement;
 using MvvmCross.WindowsUWP.Views;
+using Microsoft.Services.Store.Engagement;
 
 namespace GithubXamarin.UWP.Views
 {

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -14,7 +12,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using GithubXamarin.UWP.Services;
 using Microsoft.HockeyApp;
-using Microsoft.Services.Store.Engagement;
 using MvvmCross.Platform;
 using Plugin.SecureStorage;
 using UniversalRateReminder;
